@@ -1,0 +1,38 @@
+{
+  "site": {
+    "name": "DualGrid",
+    "tagline": "Websites that convert visitors into clients"
+  },
+  "nav": {
+    "plans": "Plans",
+    "process": "Process",
+    "cta": "Start a project"
+  },
+  "hero": {
+    "eyebrow": "Web development agency",
+    "title": "Websites that convert visitors into clients",
+    "subtitle": "We combine artistic design with precise engineering to create unique digital presences.",
+    "cta_primary": "Find my ideal plan",
+    "cta_secondary": "See plans & pricing"
+  },
+  "questionnaire": {
+    "title": "Project questionnaire",
+    "subtitle": "Answer a few questions so we can recommend the best plan.",
+    "next": "Next",
+    "back": "Back",
+    "submit": "See my recommendation",
+    "result_title": "Your recommendation",
+    "result_cta": "Request a custom proposal"
+  },
+  "plans": {
+    "title": "Plans & pricing",
+    "subtitle": "Solutions for every type of business"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "contracts": "Contracts",
+    "invoices": "Invoices",
+    "questionnaires": "Questionnaires"
+  }
+}

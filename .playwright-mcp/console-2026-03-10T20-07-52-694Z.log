@@ -1,0 +1,111 @@
+[  304068ms] [WARNING] Image with src "/hero.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2302
+[  304083ms] [WARNING] Image with src "/hero.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2302
+[  407263ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=H0WhTBmIj-e8_B6KMpzDj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  408267ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=H0WhTBmIj-e8_B6KMpzDj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  409269ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=H0WhTBmIj-e8_B6KMpzDj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  414343ms] [WARNING] Image with src "/hero.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2302
+[  414346ms] [WARNING] Image with src "/hero.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2302
+[  520951ms] [ERROR] ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/rolandocutie/Development/Poryectos a Sacar adelante/rentacar/ride4go/app/globals.css:131:10: Missed semicolon
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.checkMissedSemicolon (turbopack:///[project]/node_modules/postcss/lib/parser.js:138:22)]
+    [at Parser.decl (turbopack:///[project]/node_modules/postcss/lib/parser.js:296:12)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:401:18)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3132
+[  587556ms] [ERROR] ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/rolandocutie/Development/Poryectos a Sacar adelante/rentacar/ride4go/app/globals.css:134:3: Unknown word width
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.unknownWord (turbopack:///[project]/node_modules/postcss/lib/parser.js:595:22)]
+    [at Parser.decl (turbopack:///[project]/node_modules/postcss/lib/parser.js:236:16)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:401:18)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3132
+[  588976ms] [ERROR] ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/rolandocutie/Development/Poryectos a Sacar adelante/rentacar/ride4go/app/globals.css:134:3: Unknown word width
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.unknownWord (turbopack:///[project]/node_modules/postcss/lib/parser.js:595:22)]
+    [at Parser.decl (turbopack:///[project]/node_modules/postcss/lib/parser.js:236:16)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:401:18)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3132
+[  593295ms] [ERROR] ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/rolandocutie/Development/Poryectos a Sacar adelante/rentacar/ride4go/app/globals.css:134:8: Missed semicolon
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.checkMissedSemicolon (turbopack:///[project]/node_modules/postcss/lib/parser.js:138:22)]
+    [at Parser.decl (turbopack:///[project]/node_modules/postcss/lib/parser.js:296:12)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:401:18)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3132
+[  608018ms] [ERROR] ./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/rolandocutie/Development/Poryectos a Sacar adelante/rentacar/ride4go/app/globals.css:134:8: Missed semicolon
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.checkMissedSemicolon (turbopack:///[project]/node_modules/postcss/lib/parser.js:138:22)]
+    [at Parser.decl (turbopack:///[project]/node_modules/postcss/lib/parser.js:296:12)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:401:18)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3132
+[  621142ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  622143ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  623146ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  624149ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  625166ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  630182ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  635197ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  640224ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  645275ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  650318ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  655417ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
+[  660742ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=s3-zdFqopZsBEkMEhvkMf' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10877
