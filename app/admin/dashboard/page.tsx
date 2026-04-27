@@ -32,6 +32,13 @@ const MENU_ITEMS = [
     emoji: '📊',
     color: 'text-amber-500',
   },
+  {
+    title: 'Proyectos',
+    description: 'Gestiona el portafolio de proyectos del sitio.',
+    href: '/admin/dashboard/projects',
+    emoji: '🖥️',
+    color: 'text-indigo-500',
+  },
 ];
 
 export default async function AdminDashboard() {

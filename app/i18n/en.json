@@ -7,6 +7,7 @@
     "why": "Why us?",
     "plans": "Plans",
     "process": "Process",
+    "portfolio": "Portfolio",
     "cta": "Start a project"
   },
   "hero": {
@@ -141,11 +142,29 @@
     "tagline": "Design with purpose, code with precision.",
     "rights": "All rights reserved."
   },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "Unexpected error",
+    "somethingWentWrongLoadThePage": "Something went wrong while loading this page. Our team has been notified.",
+    "code": "Code",
+    "tryAgain": "Try again",
+    "goHome": "Go home"
+  },
   "admin": {
     "dashboard": "Dashboard",
     "clients": "Clients",
     "contracts": "Contracts",
     "invoices": "Invoices",
-    "questionnaires": "Questionnaires"
+    "questionnaires": "Questionnaires",
+    "projects": "Projects"
+  },
+  "portfolio": {
+    "eyebrow": "Our work",
+    "title": "Projects we've built",
+    "subtitle": "Real sites we've designed and developed for clients. Every project is custom, unique, and delivered on time.",
+    "filter_all": "All",
+    "visit_site": "Visit site",
+    "technologies": "Technologies",
+    "no_projects": "No projects yet. Check back soon!"
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -18,22 +18,24 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-const FIXED_THEME_COLOR = '#8dc63f';
+const FIXED_THEME_COLOR = '#6366f1';
 
-function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener('storage', callback);
+  return () => window.removeEventListener('storage', callback);
+}
 
+function getThemeSnapshot(): Theme {
   const stored = localStorage.getItem('theme');
-  if (stored === 'light' || stored === 'dark') {
-    return stored;
-  }
+  return stored === 'dark' ? 'dark' : 'light';
+}
 
+function getServerThemeSnapshot(): Theme {
   return 'light';
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
-
+  const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -42,16 +44,14 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     } else {
       root.classList.remove('dark');
     }
-
     document.querySelectorAll('meta[name="theme-color"]').forEach((tag) => {
       tag.setAttribute('content', FIXED_THEME_COLOR);
     });
-
-    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const setTheme = (t: Theme) => {
-    setThemeState(t);
+    localStorage.setItem('theme', t);
+    window.dispatchEvent(new StorageEvent('storage', { key: 'theme', newValue: t }));
   };
 
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;

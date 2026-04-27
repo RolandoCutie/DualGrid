@@ -11,7 +11,7 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    console.error('[CubaWay Error]', error);
+    console.error('[DualGrid Error]', error);
   }, [error]);
   const { t } = useLanguage();
 
@@ -50,9 +50,12 @@ export default function Error({ error, reset }: ErrorProps) {
         </div>
 
         {/* Brand */}
-        <div className="flex items-center justify-center gap-1 mb-3">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-black">
+            DG
+          </span>
           <span className="text-2xl font-extrabold tracking-tight text-foreground">
-            Cuba<span className="text-primary">Way</span>
+            Dual<span className="text-primary">Grid</span>
           </span>
         </div>
 

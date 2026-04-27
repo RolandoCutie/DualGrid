@@ -47,6 +47,7 @@ export default function NavBarClient() {
 
   const NAV_LINKS = [
     { href: '#por-que', labelKey: 'nav.why' },
+    { href: '#portafolio', labelKey: 'nav.portfolio' },
     { href: '#planes', labelKey: 'nav.plans' },
     { href: '#proceso', labelKey: 'nav.process' },
   ];

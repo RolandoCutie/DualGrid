@@ -63,7 +63,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans min-h-screen antialiased bg-background text-foreground`}>
+      <head>
+        {/* Prevent flash of wrong theme — runs before paint, suppressed from hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body
+        className={`${inter.variable} font-sans min-h-screen antialiased bg-background text-foreground`}
+      >
         <ThemeProvider>
           <LanguageProvider>
             <NavBar />

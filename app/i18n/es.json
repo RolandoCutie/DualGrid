@@ -7,6 +7,7 @@
     "why": "¿Por qué?",
     "plans": "Planes",
     "process": "Proceso",
+    "portfolio": "Portafolio",
     "cta": "Comenzar proyecto"
   },
   "hero": {
@@ -141,11 +142,29 @@
     "tagline": "Diseño con propósito, código con precisión.",
     "rights": "Todos los derechos reservados."
   },
+  "error": {
+    "somethingWentWrong": "Algo salió mal",
+    "unexpectedError": "Error inesperado",
+    "somethingWentWrongLoadThePage": "Algo salió mal al cargar esta página. Nuestro equipo ha sido notificado.",
+    "code": "Código",
+    "tryAgain": "Intentar de nuevo",
+    "goHome": "Ir al inicio"
+  },
   "admin": {
     "dashboard": "Panel de control",
     "clients": "Clientes",
     "contracts": "Contratos",
     "invoices": "Facturas",
-    "questionnaires": "Cuestionarios"
+    "questionnaires": "Cuestionarios",
+    "projects": "Proyectos"
+  },
+  "portfolio": {
+    "eyebrow": "Nuestro trabajo",
+    "title": "Proyectos que hemos construido",
+    "subtitle": "Sitios reales que hemos diseñado y desarrollado para clientes. Cada proyecto es personalizado, único y entregado a tiempo.",
+    "filter_all": "Todos",
+    "visit_site": "Ver sitio",
+    "technologies": "Tecnologías",
+    "no_projects": "No hay proyectos todavía. ¡Vuelve pronto!"
   }
 }
