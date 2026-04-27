@@ -1,6 +1,7 @@
 'use client';
 
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import { PLANS } from '@/lib/plans';
 import type { Plan } from '@/types';
 import { useState } from 'react';
@@ -8,6 +9,7 @@ import PlanCard from './PlanCard';
 
 export default function PlansSection() {
   const [wizardOpen, setWizardOpen] = useState(false);
+  const { t } = useLanguage();
 
   const handleSelectPlan = (_plan: Plan) => {
     setWizardOpen(true);
@@ -19,15 +21,12 @@ export default function PlansSection() {
         {/* Section header */}
         <div className="text-center mb-14">
           <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-            Planes y precios
+            {t('plans.eyebrow')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-card-foreground mt-2 mb-4">
-            Soluciones para cada tipo de negocio
+            {t('plans.title')}
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único,
-            código limpio y soporte post-lanzamiento.
-          </p>
+          <p className="text-muted-foreground max-w-xl mx-auto">{t('plans.subtitle')}</p>
         </div>
 
         {/* Plans grid */}
@@ -40,14 +39,14 @@ export default function PlansSection() {
         {/* Custom note */}
         <div className="mt-12 text-center p-6 rounded-2xl border border-dashed border-border">
           <p className="text-muted-foreground text-sm">
-            ¿No encuentras lo que buscas?{' '}
+            {t('plans.custom_note')}{' '}
             <button
               onClick={() => setWizardOpen(true)}
               className="text-primary font-semibold hover:underline cursor-pointer"
             >
-              Completa el cuestionario
+              {t('plans.custom_link')}
             </button>{' '}
-            y te prepararemos una propuesta a medida.
+            {t('plans.custom_suffix')}
           </p>
         </div>
       </div>

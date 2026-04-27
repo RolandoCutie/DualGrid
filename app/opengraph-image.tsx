@@ -1,13 +1,10 @@
 import { ImageResponse } from 'next/og';
 
-import { getBaseUrl } from '@/lib/base-url';
-
 export const runtime = 'edge';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export default async function Image() {
-  const baseUrl = getBaseUrl();
+export default function Image() {
   return new ImageResponse(
     <div
       style={{
@@ -17,129 +14,111 @@ export default async function Image() {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        background: '#ffffff',
+        background: '#fafafa',
         fontFamily: 'Inter, Arial, sans-serif',
         padding: '60px',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      {/* Background glow top-right */}
+      {/* Glow top-right */}
       <div
         style={{
           position: 'absolute',
-          top: '-60px',
-          right: '-60px',
-          width: '420px',
-          height: '420px',
+          top: '-80px',
+          right: '-80px',
+          width: '460px',
+          height: '460px',
           borderRadius: '50%',
-          background: 'rgba(59, 130, 246, 0.18)',
-          filter: 'blur(90px)',
+          background: 'rgba(99,102,241,0.15)',
+          filter: 'blur(100px)',
         }}
       />
-      {/* Background glow bottom-left */}
+      {/* Glow bottom-left */}
       <div
         style={{
           position: 'absolute',
-          bottom: '-60px',
-          left: '-60px',
-          width: '380px',
-          height: '380px',
+          bottom: '-80px',
+          left: '-80px',
+          width: '400px',
+          height: '400px',
           borderRadius: '50%',
-          background: 'rgba(96, 165, 250, 0.12)',
-          filter: 'blur(90px)',
-        }}
-      />
-      {/* Subtle light vignette for depth */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(circle at 10% 10%, rgba(0,0,0,0.02), transparent 12%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(0,0,0,0.02), transparent 12%, transparent 100%)',
-          pointerEvents: 'none',
+          background: 'rgba(139,92,246,0.10)',
+          filter: 'blur(100px)',
         }}
       />
 
+      {/* Logo badge */}
       <div
         style={{
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
-          gap: '14px',
-          zIndex: 2,
+          justifyContent: 'center',
+          width: '80px',
+          height: '80px',
+          borderRadius: '20px',
+          background: '#6366f1',
+          marginBottom: '28px',
+          boxShadow: '0 8px 32px rgba(99,102,241,0.35)',
         }}
       >
-        {/* Green glow behind the logo to match the green brand */}
-        <div
-          style={{
-            position: 'absolute',
-            width: '380px',
-            height: '220px',
-            borderRadius: '140px',
-            background:
-              'radial-gradient(circle at 50% 40%, rgba(34,197,94,0.22), rgba(34,197,94,0.08) 36%, transparent 60%)',
-            filter: 'blur(56px)',
-            top: '6%',
-            zIndex: 1,
-          }}
-        />
-
-        <img
-          src={`${baseUrl}/icon.png`}
-          alt="CubaWay"
-          width={820}
-          height={420}
-          style={{
-            display: 'block',
-            objectFit: 'contain',
-            background: 'transparent',
-          }}
-        />
+        <span style={{ color: '#fff', fontSize: '38px', fontWeight: 800, letterSpacing: '-1px' }}>
+          DG
+        </span>
       </div>
+
+      {/* Brand name */}
+      <h1
+        style={{
+          color: '#18181b',
+          fontSize: '68px',
+          fontWeight: 800,
+          letterSpacing: '-2px',
+          margin: 0,
+          lineHeight: 1,
+        }}
+      >
+        DualGrid
+      </h1>
 
       {/* Accent line */}
       <div
         style={{
-          width: '72px',
-          height: '6px',
-          background: 'linear-gradient(90deg, #16a34a, #22c55e)',
+          width: '60px',
+          height: '5px',
+          background: 'linear-gradient(90deg,#6366f1,#8b5cf6)',
           borderRadius: '4px',
-          marginTop: '8px',
-          marginBottom: '16px',
-          boxShadow: '0 6px 20px rgba(34,197,94,0.12)',
+          margin: '20px 0',
         }}
       />
 
       {/* Tagline */}
       <p
         style={{
-          color: '#0f172a',
-          fontSize: '28px',
+          color: '#52525b',
+          fontSize: '30px',
+          fontWeight: 500,
           margin: 0,
-          letterSpacing: '-0.01em',
           textAlign: 'center',
-          maxWidth: '880px',
-          fontWeight: 600,
-          lineHeight: 1.18,
-          // slight subtle letter shadow for crispness on some renderers
-          textShadow: '0 1px 0 rgba(255,255,255,0.6)',
+          maxWidth: '760px',
+          lineHeight: 1.3,
         }}
       >
-        Premium Car Rental · Fast WhatsApp Booking
+        Sitios web que convierten visitas en clientes.
       </p>
 
-      {/* URL */}
+      {/* URL label */}
       <p
         style={{
-          color: '#065f46',
+          color: '#6366f1',
           fontSize: '18px',
           margin: 0,
-          marginTop: '30px',
-          opacity: 0.95,
-          fontWeight: 500,
+          marginTop: '32px',
+          fontWeight: 600,
+          letterSpacing: '0.5px',
         }}
       >
-        cubaway.vercel.app
+        dualgrid.studio
       </p>
     </div>,
     { ...size },

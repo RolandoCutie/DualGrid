@@ -4,16 +4,112 @@
     "tagline": "Sitios web que convierten visitas en clientes"
   },
   "nav": {
+    "why": "¿Por qué?",
     "plans": "Planes",
     "process": "Proceso",
     "cta": "Comenzar proyecto"
   },
   "hero": {
     "eyebrow": "Agencia de desarrollo web",
-    "title": "Sitios web que convierten visitas en clientes",
-    "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas.",
+    "title_before": "Sitios web que",
+    "title_highlight": "convierten",
+    "title_after": "visitas en clientes",
+    "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.",
     "cta_primary": "Descubrir mi plan ideal",
     "cta_secondary": "Ver planes y precios"
+  },
+  "why": {
+    "eyebrow": "¿Por qué elegirnos?",
+    "title": "La diferencia DualGrid",
+    "subtitle": "No somos una agencia masiva. Somos un equipo pequeño que trata cada proyecto como si fuera el nuestro.",
+    "items": [
+      {
+        "emoji": "🎨",
+        "title": "Diseño 100% personalizado",
+        "desc": "No usamos plantillas. Cada sitio es único y diseñado desde cero para tu marca."
+      },
+      {
+        "emoji": "⚡",
+        "title": "Servicio completo",
+        "desc": "Tú solo apruebas. Nosotros nos encargamos de todo: diseño, código, dominio y hosting."
+      },
+      {
+        "emoji": "🗣️",
+        "title": "Atención en español",
+        "desc": "Comunicación directa, sin barreras. Soporte vía WhatsApp durante todo el proyecto."
+      },
+      {
+        "emoji": "🔧",
+        "title": "Desarrollamos lo que necesites",
+        "desc": "Sin límites de funcionalidades. Si lo necesitas, lo construimos."
+      },
+      {
+        "emoji": "📱",
+        "title": "Perfecto en todos los dispositivos",
+        "desc": "Diseño responsive desde el primer boceto. Funciona en móvil, tablet y escritorio."
+      },
+      {
+        "emoji": "🔒",
+        "title": "Código limpio y seguro",
+        "desc": "Seguimos mejores prácticas de seguridad y rendimiento en cada proyecto."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Cómo trabajamos",
+    "title": "Proceso claro, resultados predecibles",
+    "subtitle": "Seguimos un flujo de trabajo probado que garantiza calidad y transparencia en cada etapa.",
+    "steps": [
+      {
+        "number": "01",
+        "icon": "🔍",
+        "title": "Descubrimiento",
+        "desc": "Reunión inicial para entender tus objetivos, estilo y público objetivo."
+      },
+      {
+        "number": "02",
+        "icon": "📋",
+        "title": "Propuesta",
+        "desc": "Enviamos una propuesta detallada con alcance, precio y cronograma."
+      },
+      {
+        "number": "03",
+        "icon": "🎨",
+        "title": "Diseño",
+        "desc": "Creamos wireframes y mockups para tu aprobación. 2 rondas de revisión."
+      },
+      {
+        "number": "04",
+        "icon": "⚙️",
+        "title": "Desarrollo",
+        "desc": "Programamos el sitio con código limpio, responsive y optimizado."
+      },
+      {
+        "number": "05",
+        "icon": "🚀",
+        "title": "Lanzamiento",
+        "desc": "Configuramos dominio, hosting y publicamos. Entregamos todos los accesos."
+      },
+      {
+        "number": "06",
+        "icon": "🛡️",
+        "title": "Soporte",
+        "desc": "30 días de garantía para corrección de errores técnicos post-lanzamiento."
+      }
+    ]
+  },
+  "plans": {
+    "eyebrow": "Planes y precios",
+    "title": "Soluciones para cada tipo de negocio",
+    "subtitle": "Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único, código limpio y soporte post-lanzamiento.",
+    "custom_note": "¿No encuentras lo que buscas?",
+    "custom_link": "Completa el cuestionario",
+    "custom_suffix": "y te prepararemos una propuesta a medida.",
+    "select": "Seleccionar plan",
+    "popular": "Más popular",
+    "delivery": "Entrega en",
+    "days": "días",
+    "from": "Desde"
   },
   "questionnaire": {
     "title": "Cuestionario de proyecto",
@@ -21,12 +117,29 @@
     "next": "Siguiente",
     "back": "Anterior",
     "submit": "Ver mi recomendación",
-    "result_title": "Tu recomendación",
-    "result_cta": "Solicitar propuesta personalizada"
+    "step": "Paso",
+    "of": "de",
+    "step1_title": "Cuéntanos sobre ti",
+    "step1_subtitle": "Esta información nos ayuda a personalizar tu propuesta.",
+    "step2_title": "Tu tipo de negocio",
+    "step2_subtitle": "Selecciona el que mejor te describe.",
+    "step3_title": "Tus objetivos",
+    "step3_subtitle": "¿Qué quieres lograr con tu sitio web?",
+    "step4_title": "Presupuesto y plazos",
+    "step4_subtitle": "Ayúdanos a ajustar la propuesta a tus posibilidades.",
+    "step5_title": "Estilo y diseño",
+    "step5_subtitle": "¿Cómo quieres que luzca tu sitio? (máximo 3)",
+    "step6_title": "Contenido disponible",
+    "step6_subtitle": "¿Con qué material cuentas actualmente?",
+    "result_title": "Tu plan recomendado",
+    "result_subtitle": "Basado en tus respuestas, este es el plan ideal para tu negocio.",
+    "result_cta": "Solicitar propuesta por WhatsApp",
+    "result_alternatives": "Otras opciones que podrían funcionar",
+    "result_whatsapp_msg": "¡Hola! Vi la recomendación en DualGrid y quiero más info sobre el plan"
   },
-  "plans": {
-    "title": "Planes y precios",
-    "subtitle": "Soluciones para cada tipo de negocio"
+  "footer": {
+    "tagline": "Diseño con propósito, código con precisión.",
+    "rights": "Todos los derechos reservados."
   },
   "admin": {
     "dashboard": "Panel de control",

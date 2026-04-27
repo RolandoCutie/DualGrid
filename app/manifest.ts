@@ -2,19 +2,18 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    id: 'Cubaway',
-    name: 'Cubaway – Premium Car Rental',
-    short_name: 'Cubaway',
-    description:
-      'Rent premium vehicles quickly and easily. Browse our curated fleet and book instantly with us.',
+    id: 'dualgrid',
+    name: 'DualGrid',
+    short_name: 'DualGrid',
+    description: 'Sitios web que convierten visitas en clientes.',
     start_url: '/',
     scope: '/',
     display: 'standalone',
     display_override: ['window-controls-overlay', 'standalone'],
     orientation: 'portrait',
-    background_color: '#ffffff',
-    theme_color: '#8dc63f',
-    categories: ['travel', 'business'],
+    background_color: '#fafafa',
+    theme_color: '#6366f1',
+    categories: ['business', 'productivity'],
     prefer_related_applications: false,
     icons: [
       {
@@ -67,7 +66,6 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: '512x512',
         type: 'image/png',
       },
-
       {
         src: '/icon-192x192.png',
         sizes: '192x192',
@@ -87,14 +85,7 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: '1200x630',
         type: 'image/png',
         form_factor: 'wide',
-        label: 'CubaWay – Car Rental Fleet',
-      },
-      {
-        src: '/cubawayicon-512.png',
-        sizes: '512x512',
-        type: 'image/png',
-        form_factor: 'narrow',
-        label: 'CubaWay App',
+        label: 'DualGrid – Sitios web que convierten',
       },
     ],
   };

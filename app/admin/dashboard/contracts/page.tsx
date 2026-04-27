@@ -7,6 +7,7 @@ import connectDB from '@/lib/mongodb';
 import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = { title: 'Contratos' };
 
@@ -52,12 +53,13 @@ export default async function ContractsPage() {
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Total</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Estado</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Entrega</th>
+              <th className="px-4 py-3" />
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {contracts.length === 0 && (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-muted-foreground">
+                <td colSpan={6} className="text-center py-8 text-muted-foreground">
                   No hay contratos aún.
                 </td>
               </tr>
@@ -90,6 +92,21 @@ export default async function ContractsPage() {
                     {c.deliveryDate
                       ? new Date(String(c.deliveryDate)).toLocaleDateString('es')
                       : '—'}
+                  </td>
+                  <td className="px-4 py-3 text-right space-x-3">
+                    <Link
+                      href={`/admin/dashboard/contracts/${String(c._id)}`}
+                      className="text-primary text-xs hover:underline"
+                    >
+                      Editar
+                    </Link>
+                    <Link
+                      href={`/api/contracts/${String(c._id)}/pdf`}
+                      className="text-muted-foreground text-xs hover:underline"
+                      target="_blank"
+                    >
+                      PDF
+                    </Link>
                   </td>
                 </tr>
               );

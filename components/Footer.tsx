@@ -1,6 +1,11 @@
-import Link from 'next/link';
+'use client';
+
+import { useLanguage } from '@/components/ui/LanguageProvider';
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-card border-t border-border py-12">
       <div className="max-w-6xl mx-auto px-6">
@@ -12,11 +17,9 @@ export default function Footer() {
             DualGrid
           </div>
           <p className="text-sm text-muted-foreground text-center">
-            © {new Date().getFullYear()} DualGrid · Sitios web que convierten visitas en clientes.
+            © {year} DualGrid · {t('footer.tagline')}
           </p>
-          <p className="text-sm text-muted-foreground">
-            Hecho con ❤️ y mucho código.
-          </p>
+          <p className="text-sm text-muted-foreground">{t('footer.rights')}</p>
         </div>
       </div>
     </footer>

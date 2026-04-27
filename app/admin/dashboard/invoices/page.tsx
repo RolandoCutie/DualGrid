@@ -1,11 +1,12 @@
+import AdminBackButton from '@/components/admin/AdminBackButton';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
-import AdminBackButton from '@/components/admin/AdminBackButton';
-import { requireAdminSession } from '@/lib/require-admin-session';
-import connectDB from '@/lib/mongodb';
-import Invoice from '@/database/invoice.model';
 import Badge from '@/components/ui/Badge';
+import Invoice from '@/database/invoice.model';
+import connectDB from '@/lib/mongodb';
+import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = { title: 'Facturas' };
 
@@ -54,13 +55,16 @@ export default async function InvoicesPage() {
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Cliente</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Total</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Estado</th>
-              <th className="text-left px-4 py-3 font-semibold text-card-foreground">Vencimiento</th>
+              <th className="text-left px-4 py-3 font-semibold text-card-foreground">
+                Vencimiento
+              </th>
+              <th className="px-4 py-3" />
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {invoices.length === 0 && (
               <tr>
-                <td colSpan={5} className="text-center py-8 text-muted-foreground">
+                <td colSpan={6} className="text-center py-8 text-muted-foreground">
                   No hay facturas aún.
                 </td>
               </tr>
@@ -85,9 +89,22 @@ export default async function InvoicesPage() {
                     </Badge>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">
-                    {inv.dueDate
-                      ? new Date(String(inv.dueDate)).toLocaleDateString('es')
-                      : '—'}
+                    {inv.dueDate ? new Date(String(inv.dueDate)).toLocaleDateString('es') : '—'}
+                  </td>
+                  <td className="px-4 py-3 text-right space-x-3">
+                    <Link
+                      href={`/admin/dashboard/invoices/${String(inv._id)}`}
+                      className="text-primary text-xs hover:underline"
+                    >
+                      Editar
+                    </Link>
+                    <Link
+                      href={`/api/invoices/${String(inv._id)}/pdf`}
+                      className="text-muted-foreground text-xs hover:underline"
+                      target="_blank"
+                    >
+                      PDF
+                    </Link>
                   </td>
                 </tr>
               );

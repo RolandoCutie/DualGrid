@@ -3,7 +3,69 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CubaWay — Offline</title>
+    <title>DualGrid — Sin conexión</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #fafafa;
+        color: #18181b;
+      }
+      .logo-badge {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        background: #6366f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(99,102,241,0.28);
+      }
+      h1 {
+        font-size: clamp(1.35rem, 4vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin: 0 0 10px;
+        text-align: center;
+      }
+      p {
+        margin: 0;
+        color: #71717a;
+        font-size: 1rem;
+        text-align: center;
+        max-width: 340px;
+        line-height: 1.5;
+      }
+      .icon {
+        font-size: 56px;
+        margin-bottom: 24px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="icon" aria-hidden="true">📡</span>
+    <div class="logo-badge" aria-label="DualGrid">DG</div>
+    <h1>Sin conexión a internet</h1>
+    <p>Vuelve cuando tengas señal — tu sitio seguirá aquí, listo para convertir visitas en clientes.</p>
+  </body>
+</html>
+
     <style>
       body {
         font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
@@ -27,7 +89,7 @@
       }
       .card h1 {
         font-size: clamp(1.25rem, 4vw, 1.75rem);
-        
+
       }
       .card .subtitle {
         margin: 0;

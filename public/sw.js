@@ -1,4 +1,4 @@
-// CubaWay Service Worker
+// DualGrid Service Worker
 // Provides offline support and caching for PWA functionality.
 // Registered in production only via instrumentation-client.ts.
 //
@@ -7,7 +7,7 @@
 // Next.js JS/CSS chunks in /_next/static/ are auto-invalidated via
 // content-hash URLs — no version bump needed for those.
 
-const CACHE_VERSION = 'cubaway-v14';
+const CACHE_VERSION = 'dualgrid-v1';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -17,16 +17,10 @@ const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 // CACHE_VERSION is bumped AND the SW activates.  The navigation fetch handler
 // already uses network-first, so the homepage loads fresh every time.
 const PRECACHE_ASSETS = [
-  './sinconexion.svg',
-  './sinconexioncarro.svg',
   '/offline.html',
-  '/cubawayicon-192.png',
-  '/cubawayicon-512.png',
-  '/cubawayicon-maskable-192.png',
-  '/cubawayicon-maskable-512.png',
+  '/icon-192x192.png',
+  '/icon-512x512.png',
   '/apple-touch-icon.png',
-  '/logo.svg',
-  '/cubawayicon.jpg',
 ];
 
 // ── Message ───────────────────────────────────────────────────────────────────

@@ -1,15 +1,23 @@
 'use client';
 
-import en from '@/app/i18n/en.json';
-import es from '@/app/i18n/es.json';
+import enRaw from '@/app/i18n/en.json';
+import esRaw from '@/app/i18n/es.json';
 import { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
 
-type Locale = 'en' | 'es';
+export type Locale = 'en' | 'es';
 
-type Translations = Record<string, string | string[]>;
+// Typed JSON dicts
+export const DICTS = { en: enRaw, es: esRaw } as const;
 
-const dictionaries: Record<Locale, Translations> = { en, es };
-
+// Resolves a dot-notation key against a nested JSON object
+function resolve(obj: Record<string, unknown>, key: string): unknown {
+  return key.split('.').reduce<unknown>((cur, part) => {
+    if (cur !== null && typeof cur === 'object') {
+      return (cur as Record<string, unknown>)[part];
+    }
+    return undefined;
+  }, obj);
+}
 
 function subscribeToLocale(callback: () => void) {
   window.addEventListener('storage', callback);
@@ -25,26 +33,30 @@ function getServerLocaleSnapshot(): Locale {
   return 'en';
 }
 
-
 type LanguageContextValue = {
   locale: Locale;
   setLocale: (l: Locale) => void;
+  /** Resolves a dot-notation key to a translated string */
   t: (key: string) => string;
+  /** Resolves a dot-notation key to a string array */
   tArray: (key: string) => string[];
+};
+
+const defaultT = (key: string): string => {
+  const val = resolve(enRaw as Record<string, unknown>, key);
+  if (typeof val === 'string') return val;
+  if (Array.isArray(val) && typeof val[0] === 'string') return val[0] as string;
+  return key;
 };
 
 const LanguageContext = createContext<LanguageContextValue>({
   locale: 'en',
   setLocale: () => {},
-  t: (key: string) => {
-    const val = (en as Record<string, string | string[]>)[key];
-    if (Array.isArray(val)) return val[0];
-    return val ?? key;
-  },
+  t: defaultT,
   tArray: (key: string) => {
-    const val = (en as Record<string, string | string[]>)[key];
-    if (Array.isArray(val)) return val;
-    return val ? [val as string] : [key];
+    const val = resolve(enRaw as Record<string, unknown>, key);
+    if (Array.isArray(val)) return val as string[];
+    return typeof val === 'string' ? [val] : [key];
   },
 });
 
@@ -53,8 +65,6 @@ export function useLanguage() {
 }
 
 export default function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // useSyncExternalStore uses getServerLocaleSnapshot during SSR/hydration ('en'),
-  // then switches to getLocaleSnapshot on the client — no setState, no cascading renders.
   const locale = useSyncExternalStore(
     subscribeToLocale,
     getLocaleSnapshot,
@@ -68,22 +78,22 @@ export default function LanguageProvider({ children }: { children: React.ReactNo
   const setLocale = (l: Locale) => {
     localStorage.setItem('locale', l);
     document.documentElement.lang = l;
-    // Notify useSyncExternalStore to re-read the snapshot
     window.dispatchEvent(new StorageEvent('storage', { key: 'locale', newValue: l }));
   };
 
-  const dict = dictionaries[locale];
+  const dict = DICTS[locale] as Record<string, unknown>;
 
   const t = (key: string): string => {
-    const val = dict[key];
-    if (Array.isArray(val)) return val[0];
-    return val ?? key;
+    const val = resolve(dict, key);
+    if (typeof val === 'string') return val;
+    if (Array.isArray(val) && typeof val[0] === 'string') return val[0] as string;
+    return key;
   };
 
   const tArray = (key: string): string[] => {
-    const val = dict[key];
-    if (Array.isArray(val)) return val;
-    return val ? [val] : [key];
+    const val = resolve(dict, key);
+    if (Array.isArray(val)) return val as string[];
+    return typeof val === 'string' ? [val] : [key];
   };
 
   return (

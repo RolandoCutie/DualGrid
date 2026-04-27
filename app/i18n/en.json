@@ -4,29 +4,142 @@
     "tagline": "Websites that convert visitors into clients"
   },
   "nav": {
+    "why": "Why us?",
     "plans": "Plans",
     "process": "Process",
     "cta": "Start a project"
   },
   "hero": {
     "eyebrow": "Web development agency",
-    "title": "Websites that convert visitors into clients",
-    "subtitle": "We combine artistic design with precise engineering to create unique digital presences.",
+    "title_before": "Websites that",
+    "title_highlight": "convert",
+    "title_after": "visitors into clients",
+    "subtitle": "We combine artistic design with precise engineering to create unique digital presences. Portfolios, restaurants, landing pages and custom systems.",
     "cta_primary": "Find my ideal plan",
     "cta_secondary": "See plans & pricing"
   },
+  "why": {
+    "eyebrow": "Why choose us?",
+    "title": "The DualGrid difference",
+    "subtitle": "We're not a large agency. We're a small team that treats every project as if it were our own.",
+    "items": [
+      {
+        "emoji": "🎨",
+        "title": "100% custom design",
+        "desc": "No templates. Every site is unique and designed from scratch for your brand."
+      },
+      {
+        "emoji": "⚡",
+        "title": "Full service",
+        "desc": "You just approve. We handle everything: design, code, domain and hosting."
+      },
+      {
+        "emoji": "🗣️",
+        "title": "Direct communication",
+        "desc": "Clear, barrier-free communication. WhatsApp support throughout the project."
+      },
+      {
+        "emoji": "🔧",
+        "title": "We build what you need",
+        "desc": "No feature limits. If you need it, we build it."
+      },
+      {
+        "emoji": "📱",
+        "title": "Perfect on all devices",
+        "desc": "Responsive design from the first sketch. Works on mobile, tablet and desktop."
+      },
+      {
+        "emoji": "🔒",
+        "title": "Clean and secure code",
+        "desc": "We follow security and performance best practices on every project."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "How we work",
+    "title": "Clear process, predictable results",
+    "subtitle": "We follow a proven workflow that guarantees quality and transparency at every stage.",
+    "steps": [
+      {
+        "number": "01",
+        "icon": "🔍",
+        "title": "Discovery",
+        "desc": "Initial meeting to understand your goals, style and target audience."
+      },
+      {
+        "number": "02",
+        "icon": "📋",
+        "title": "Proposal",
+        "desc": "We send a detailed proposal with scope, price and timeline."
+      },
+      {
+        "number": "03",
+        "icon": "🎨",
+        "title": "Design",
+        "desc": "We create wireframes and mockups for your approval. 2 revision rounds."
+      },
+      {
+        "number": "04",
+        "icon": "⚙️",
+        "title": "Development",
+        "desc": "We code the site with clean, responsive and optimized code."
+      },
+      {
+        "number": "05",
+        "icon": "🚀",
+        "title": "Launch",
+        "desc": "We configure domain, hosting and publish. We hand over all credentials."
+      },
+      {
+        "number": "06",
+        "icon": "🛡️",
+        "title": "Support",
+        "desc": "30-day guarantee for technical bug fixes after launch."
+      }
+    ]
+  },
+  "plans": {
+    "eyebrow": "Plans & pricing",
+    "title": "Solutions for every type of business",
+    "subtitle": "From landing pages to custom systems. Every plan includes unique design, clean code and post-launch support.",
+    "custom_note": "Can't find what you're looking for?",
+    "custom_link": "Complete the questionnaire",
+    "custom_suffix": "and we'll prepare a tailored proposal for you.",
+    "select": "Select plan",
+    "popular": "Most popular",
+    "delivery": "Delivery in",
+    "days": "days",
+    "from": "From"
+  },
   "questionnaire": {
     "title": "Project questionnaire",
-    "subtitle": "Answer a few questions so we can recommend the best plan.",
+    "subtitle": "Answer a few questions so we can recommend the best plan for you.",
     "next": "Next",
     "back": "Back",
     "submit": "See my recommendation",
-    "result_title": "Your recommendation",
-    "result_cta": "Request a custom proposal"
+    "step": "Step",
+    "of": "of",
+    "step1_title": "Tell us about yourself",
+    "step1_subtitle": "This information helps us personalize your proposal.",
+    "step2_title": "Your business type",
+    "step2_subtitle": "Select the one that best describes you.",
+    "step3_title": "Your goals",
+    "step3_subtitle": "What do you want to achieve with your website?",
+    "step4_title": "Budget & timeline",
+    "step4_subtitle": "Help us tailor the proposal to your possibilities.",
+    "step5_title": "Style & design",
+    "step5_subtitle": "How do you want your site to look? (up to 3)",
+    "step6_title": "Available content",
+    "step6_subtitle": "What material do you currently have?",
+    "result_title": "Your recommended plan",
+    "result_subtitle": "Based on your answers, this is the ideal plan for your business.",
+    "result_cta": "Request proposal via WhatsApp",
+    "result_alternatives": "Other options that could work",
+    "result_whatsapp_msg": "Hi! I saw the recommendation on DualGrid and want more info about the plan"
   },
-  "plans": {
-    "title": "Plans & pricing",
-    "subtitle": "Solutions for every type of business"
+  "footer": {
+    "tagline": "Design with purpose, code with precision.",
+    "rights": "All rights reserved."
   },
   "admin": {
     "dashboard": "Dashboard",

@@ -2,10 +2,12 @@
 
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
 import { Button } from '@/components/ui/Button';
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import { useState } from 'react';
 
 export default function HeroSection() {
   const [wizardOpen, setWizardOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
@@ -31,15 +33,15 @@ export default function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-              Agencia de desarrollo web
+              {t('hero.eyebrow')}
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-card-foreground leading-[1.1] tracking-tight mb-6">
-            Sitios web que{' '}
+            {t('hero.title_before')}{' '}
             <span className="relative inline-block">
-              <span className="relative z-10 text-primary">convierten</span>
+              <span className="relative z-10 text-primary">{t('hero.title_highlight')}</span>
               <svg
                 className="absolute -bottom-2 left-0 w-full"
                 viewBox="0 0 300 12"
@@ -55,13 +57,12 @@ export default function HeroSection() {
                 />
               </svg>
             </span>{' '}
-            visitas en clientes
+            {t('hero.title_after')}
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
-            Combinamos diseño artístico con ingeniería precisa para crear presencias digitales
-            únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA buttons */}
@@ -82,7 +83,7 @@ export default function HeroSection() {
                 </svg>
               }
             >
-              Descubrir mi plan ideal
+              {t('hero.cta_primary')}
             </Button>
             <Button
               size="xl"
@@ -91,7 +92,7 @@ export default function HeroSection() {
                 document.getElementById('planes')?.scrollIntoView({ behavior: 'smooth' })
               }
             >
-              Ver planes y precios
+              {t('hero.cta_secondary')}
             </Button>
           </div>
 
