@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Prevent flash of wrong theme — runs before paint, suppressed from hydration */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})()`,
+            __html: `(function(){try{var v=localStorage.getItem('theme-v');if(v!=='dg1'){localStorage.setItem('theme','light');localStorage.setItem('theme-v','dg1');}var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})()`,
           }}
         />
       </head>

@@ -1,6 +1,7 @@
 'use client';
 
 import { Input } from '@/components/ui/Input';
+import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { Textarea } from '@/components/ui/Textarea';
 import { cn } from '@/lib/utils';
 import type { QuestionnaireAnswers, VisualStyle } from '@/types';
@@ -10,19 +11,11 @@ interface Step5Props {
   onChange: (partial: Partial<QuestionnaireAnswers>) => void;
 }
 
-const STYLES: Array<{ id: VisualStyle; label: string; desc: string }> = [
-  { id: 'minimal', label: 'Minimalista', desc: 'Limpio, espaciado, simple' },
-  { id: 'modern', label: 'Moderno', desc: 'Actual, tecnológico' },
-  { id: 'elegant', label: 'Elegante', desc: 'Sofisticado, premium' },
-  { id: 'colorful', label: 'Colorido', desc: 'Vibrante, llamativo' },
-  { id: 'rustic', label: 'Rústico', desc: 'Artesanal, natural' },
-  { id: 'corporate', label: 'Corporativo', desc: 'Profesional, serio' },
-  { id: 'creative', label: 'Creativo', desc: 'Artístico, único' },
-  { id: 'vintage', label: 'Vintage', desc: 'Retro, nostálgico' },
-  { id: 'fun', label: 'Divertido', desc: 'Juvenil, dinámico' },
-];
-
 export default function Step5Style({ answers, onChange }: Step5Props) {
+  const { locale, t } = useLanguage();
+  const q = DICTS[locale].questionnaire as Record<string, unknown>;
+  const stylesMap = q.step5_styles as Record<string, { label: string; desc: string }>;
+
   const toggleStyle = (id: VisualStyle) => {
     const current = answers.visualStyle;
     if (current.includes(id)) {
@@ -35,21 +28,19 @@ export default function Step5Style({ answers, onChange }: Step5Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-xl font-bold text-card-foreground">Estilo visual</h3>
-        <p className="text-sm text-muted-foreground mt-1">
-          Selecciona hasta 3 estilos que representen tu marca.
-        </p>
+        <h3 className="text-xl font-bold text-card-foreground">{t('questionnaire.step5_title')}</h3>
+        <p className="text-sm text-muted-foreground mt-1">{t('questionnaire.step5_subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        {STYLES.map((s) => {
-          const selected = answers.visualStyle.includes(s.id);
+        {Object.entries(stylesMap).map(([id, s]) => {
+          const selected = answers.visualStyle.includes(id as VisualStyle);
           const maxReached = answers.visualStyle.length >= 3;
           return (
             <button
-              key={s.id}
+              key={id}
               type="button"
-              onClick={() => toggleStyle(s.id)}
+              onClick={() => toggleStyle(id as VisualStyle)}
               disabled={!selected && maxReached}
               className={cn(
                 'flex flex-col items-start p-3 rounded-xl border-2 text-left transition-all duration-200 cursor-pointer',
@@ -66,9 +57,11 @@ export default function Step5Style({ answers, onChange }: Step5Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-medium text-card-foreground">¿Tienes logo?</p>
+          <p className="text-sm font-medium text-card-foreground">
+            {t('questionnaire.step5_logo_label')}
+          </p>
           <div className="flex gap-3">
-            {['Sí', 'No'].map((opt, i) => (
+            {[t('questionnaire.step5_yes'), t('questionnaire.step5_no')].map((opt, i) => (
               <button
                 key={opt}
                 type="button"
@@ -86,16 +79,16 @@ export default function Step5Style({ answers, onChange }: Step5Props) {
           </div>
         </div>
         <Input
-          label="Colores de marca (opcional)"
-          placeholder="Ej: azul marino, dorado..."
+          label={t('questionnaire.step5_colors_label')}
+          placeholder={t('questionnaire.step5_colors_placeholder')}
           value={answers.brandColors}
           onChange={(e) => onChange({ brandColors: e.target.value })}
         />
       </div>
 
       <Textarea
-        label="Sitios web que te gusten (referencias)"
-        placeholder="Comparte 1-3 URLs de sitios que admires..."
+        label={t('questionnaire.step5_references_label')}
+        placeholder={t('questionnaire.step5_references_placeholder')}
         value={answers.referenceWebsites}
         onChange={(e) => onChange({ referenceWebsites: e.target.value })}
         rows={2}

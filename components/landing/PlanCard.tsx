@@ -1,3 +1,6 @@
+'use client';
+
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import type { Plan } from '@/types';
 
@@ -7,6 +10,7 @@ interface PlanCardProps {
 }
 
 export default function PlanCard({ plan, onSelect }: PlanCardProps) {
+  const { t } = useLanguage();
   return (
     <div
       className={cn(
@@ -19,7 +23,7 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
       {plan.highlighted && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
           <span className="px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider shadow">
-            Más popular
+            {t('plans.popular')}
           </span>
         </div>
       )}
@@ -31,12 +35,12 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
 
       <div className="mb-6">
         <div className="flex items-baseline gap-1">
-          <span className="text-sm text-muted-foreground">Desde</span>
+          <span className="text-sm text-muted-foreground">{t('plans.from')}</span>
           <span className="text-4xl font-extrabold text-card-foreground">${plan.price}</span>
           <span className="text-sm text-muted-foreground">USD</span>
         </div>
         <p className="text-xs text-muted-foreground mt-1">
-          ⏱ Entrega en {plan.deliveryDays} días hábiles
+          ⏱ {t('plans.delivery')} {plan.deliveryDays} {t('plans.days')}
         </p>
       </div>
 

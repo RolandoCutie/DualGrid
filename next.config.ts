@@ -1,6 +1,13 @@
 import type { NextConfig } from 'next';
+import path from 'path';
 
 const nextConfig: NextConfig = {
+  webpack: (config) => {
+    // Ensure tailwindcss always resolves from this project's node_modules,
+    // even when webpack's context is a parent directory.
+    config.resolve.modules = [path.resolve(__dirname, 'node_modules'), 'node_modules'];
+    return config;
+  },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if your project has type errors.

@@ -24,20 +24,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function HomePage() {
-  await connectDB();
-  const rawProjects = await Project.find({}).sort({ order: 1, createdAt: -1 }).lean();
+export const dynamic = 'force-dynamic';
 
-  // Serialize for client component
-  const projects = rawProjects.map((p) => ({
-    _id: String(p._id),
-    name: p.name,
-    description: p.description,
-    technologies: p.technologies ?? [],
-    images: p.images ?? [],
-    link: p.link ?? '',
-    featured: p.featured ?? false,
-  }));
+export default async function HomePage() {
+  let projects: {
+    _id: string;
+    name: string;
+    description: string;
+    technologies: string[];
+    images: string[];
+    link: string;
+    featured: boolean;
+  }[] = [];
+
+  try {
+    await connectDB();
+    const rawProjects = await Project.find({}).sort({ order: 1, createdAt: -1 }).lean();
+    projects = rawProjects.map((p) => ({
+      _id: String(p._id),
+      name: p.name,
+      description: p.description,
+      technologies: p.technologies ?? [],
+      images: p.images ?? [],
+      link: p.link ?? '',
+      featured: p.featured ?? false,
+    }));
+  } catch {
+    // DB unavailable — render page without projects
+  }
 
   return (
     <>

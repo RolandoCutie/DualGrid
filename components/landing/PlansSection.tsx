@@ -1,17 +1,36 @@
 'use client';
 
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
-import { useLanguage } from '@/components/ui/LanguageProvider';
+import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { PLANS } from '@/lib/plans';
-import type { Plan } from '@/types';
+import type { Plan, PlanId } from '@/types';
 import { useState } from 'react';
 import PlanCard from './PlanCard';
 
 export default function PlansSection() {
   const [wizardOpen, setWizardOpen] = useState(false);
-  const { t } = useLanguage();
+  const [selectedPlan, setSelectedPlan] = useState<PlanId | undefined>(undefined);
+  const { locale, t } = useLanguage();
 
-  const handleSelectPlan = (_plan: Plan) => {
+  // Merge base plan structure (price, deliveryDays, highlighted) with translated content
+  const plansData = DICTS[locale].plans_data as Record<
+    string,
+    { name: string; tagline: string; features: string[]; ctaLabel: string }
+  >;
+  const translatedPlans: Plan[] = PLANS.map((p) => {
+    const tr = plansData[p.id];
+    return tr
+      ? { ...p, name: tr.name, tagline: tr.tagline, features: tr.features, ctaLabel: tr.ctaLabel }
+      : p;
+  });
+
+  const handleSelectPlan = (plan: Plan) => {
+    setSelectedPlan(plan.id);
+    setWizardOpen(true);
+  };
+
+  const handleOpenGeneric = () => {
+    setSelectedPlan(undefined);
     setWizardOpen(true);
   };
 
@@ -31,7 +50,7 @@ export default function PlansSection() {
 
         {/* Plans grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PLANS.map((plan) => (
+          {translatedPlans.map((plan) => (
             <PlanCard key={plan.id} plan={plan} onSelect={handleSelectPlan} />
           ))}
         </div>
@@ -41,7 +60,7 @@ export default function PlansSection() {
           <p className="text-muted-foreground text-sm">
             {t('plans.custom_note')}{' '}
             <button
-              onClick={() => setWizardOpen(true)}
+              onClick={handleOpenGeneric}
               className="text-primary font-semibold hover:underline cursor-pointer"
             >
               {t('plans.custom_link')}
@@ -51,7 +70,11 @@ export default function PlansSection() {
         </div>
       </div>
 
-      <QuestionnaireWizard open={wizardOpen} onClose={() => setWizardOpen(false)} />
+      <QuestionnaireWizard
+        open={wizardOpen}
+        onClose={() => setWizardOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </section>
   );
 }

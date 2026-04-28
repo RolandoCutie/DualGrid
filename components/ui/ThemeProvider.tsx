@@ -26,8 +26,16 @@ function subscribeToTheme(callback: () => void) {
 }
 
 function getThemeSnapshot(): Theme {
+  // Invalidate preferences from the previous CubaWay site
+  if (localStorage.getItem('theme-v') !== 'dg1') {
+    localStorage.setItem('theme', 'light');
+    localStorage.setItem('theme-v', 'dg1');
+    return 'light';
+  }
   const stored = localStorage.getItem('theme');
-  return stored === 'dark' ? 'dark' : 'light';
+  if (stored === 'dark' || stored === 'light') return stored;
+  localStorage.setItem('theme', 'light');
+  return 'light';
 }
 
 function getServerThemeSnapshot(): Theme {

@@ -17,7 +17,8 @@
     "title_after": "visitas en clientes",
     "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.",
     "cta_primary": "Descubrir mi plan ideal",
-    "cta_secondary": "Ver planes y precios"
+    "cta_secondary": "Ver planes y precios",
+    "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
   },
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
@@ -109,29 +110,221 @@
     "select": "Seleccionar plan",
     "popular": "Más popular",
     "delivery": "Entrega en",
-    "days": "días",
+    "days": "días hábiles",
     "from": "Desde"
+  },
+  "plans_data": {
+    "landing": {
+      "name": "Landing Express",
+      "tagline": "Presencia profesional rápida",
+      "features": [
+        "1 página optimizada para móviles",
+        "Diseño profesional y moderno",
+        "Formulario de contacto funcional",
+        "Botones WhatsApp, email, teléfono",
+        "Integración con redes sociales",
+        "Publicación online incluida"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "menu_qr": {
+      "name": "Menú Digital QR",
+      "tagline": "Perfecta para tu restaurante",
+      "features": [
+        "Menú digital responsive",
+        "Hasta 30 productos categorizados",
+        "Código QR personalizado",
+        "Panel para actualizar precios",
+        "Integración WhatsApp para pedidos",
+        "Diseño acorde a tu identidad"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "portfolio": {
+      "name": "Portafolio Pro",
+      "tagline": "Tu trabajo en su mejor expresión",
+      "features": [
+        "Sitio web de 4-6 páginas",
+        "Galería con categorías y filtros",
+        "Página 'Sobre mí' personalizada",
+        "Formulario de contacto avanzado",
+        "SEO básico incluido",
+        "Animaciones y transiciones elegantes"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "restaurant": {
+      "name": "Restaurante Pro",
+      "tagline": "Sitio completo para tu negocio gastronómico",
+      "features": [
+        "Sitio completo 5-7 páginas",
+        "Menú digital con QR incluido",
+        "Sistema de reservas online",
+        "Galería fotográfica profesional",
+        "Mapa interactivo de ubicación",
+        "SEO local optimizado"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "custom": {
+      "name": "Sistema Personalizado",
+      "tagline": "Funcionalidades a tu medida",
+      "features": [
+        "Análisis de requerimientos personalizado",
+        "Desarrollo a medida",
+        "Panel de administración intuitivo",
+        "Capacitación incluida",
+        "30 días de soporte post-lanzamiento",
+        "Escalable y documentado"
+      ],
+      "ctaLabel": "Solicitar cotización"
+    }
   },
   "questionnaire": {
     "title": "Cuestionario de proyecto",
-    "subtitle": "Responde unas preguntas para que podamos recomendarte el mejor plan.",
+    "subtitle": "Responde unas preguntas para que podamos ofrecerte la mejor solución.",
     "next": "Siguiente",
     "back": "Anterior",
-    "submit": "Ver mi recomendación",
+    "submit": "Enviar consulta",
     "step": "Paso",
     "of": "de",
+    "step_labels": ["Contacto", "Negocio", "Objetivos", "Presupuesto", "Estilo", "Contenido"],
+    "btn_next": "Siguiente →",
+    "btn_back": "Anterior",
+    "btn_submit": "Enviar consulta →",
+    "btn_whatsapp": "Escribirnos por WhatsApp →",
+    "done_badge": "¡Consulta recibida!",
+    "done_title": "Nos pondremos en contacto",
+    "done_subtitle": "Gracias por tu tiempo. Revisaremos tu info y te escribiremos pronto.",
+    "done_greeting": "¡Listo!",
+    "done_greeting_name": "¡Listo, {name}!",
+    "done_body": "Recibimos tu información. Nos pondremos en contacto contigo pronto para hablar sobre tu proyecto.",
+    "done_body_plan": "Recibimos tu información. Te contactaremos pronto para hablar de tu proyecto con el plan *{plan}*.",
+    "done_plan_label": "Plan seleccionado",
+    "done_wait": "¿Prefieres esperar? Te contactaremos por email a",
     "step1_title": "Cuéntanos sobre ti",
     "step1_subtitle": "Esta información nos ayuda a personalizar tu propuesta.",
+    "step1_name_label": "Tu nombre completo",
+    "step1_name_placeholder": "Ej: María García",
+    "step1_business_label": "Nombre de tu negocio / marca",
+    "step1_business_placeholder": "Ej: Estudio Creativo XYZ",
+    "step1_email_label": "Email de contacto",
+    "step1_email_placeholder": "tu@email.com",
+    "step1_phone_label": "WhatsApp / Teléfono",
+    "step1_phone_placeholder": "+53 5 123 4567",
+    "step1_desc_label": "Describe brevemente tu negocio",
+    "step1_desc_placeholder": "¿Qué haces? ¿Qué vendes o qué servicio ofreces?",
     "step2_title": "Tu tipo de negocio",
     "step2_subtitle": "Selecciona el que mejor te describe.",
-    "step3_title": "Tus objetivos",
-    "step3_subtitle": "¿Qué quieres lograr con tu sitio web?",
+    "step2_presence_label": "Presencia online actual",
+    "step2_business_types": {
+      "creative": {
+        "label": "Artista / Creativo",
+        "desc": "Fotógrafo, ilustrador, tatuador, diseñador..."
+      },
+      "restaurant": {
+        "label": "Restaurante / Bar",
+        "desc": "Cafetería, food truck, bar, coctelería..."
+      },
+      "entrepreneur": {
+        "label": "Emprendedor",
+        "desc": "Freelancer, consultor, coach, servicio..."
+      },
+      "professional": {
+        "label": "Profesional",
+        "desc": "Médico, abogado, arquitecto, contador..."
+      },
+      "ecommerce": {
+        "label": "Tienda / E-commerce",
+        "desc": "Vendo productos físicos o digitales."
+      },
+      "other": { "label": "Otro", "desc": "Mi negocio es diferente." }
+    },
+    "step2_online_presence": {
+      "none": { "label": "Sin presencia", "desc": "No tengo nada en internet" },
+      "social_only": { "label": "Solo redes sociales", "desc": "Instagram, Facebook, TikTok..." },
+      "has_website": {
+        "label": "Tengo un sitio web",
+        "desc": "Pero necesito uno nuevo o mejorarlo"
+      }
+    },
+    "step3_title": "Objetivos del sitio web",
+    "step3_subtitle": "¿Qué quieres lograr con tu presencia online?",
+    "step3_goal_label": "Objetivo principal",
+    "step3_pages_label": "Páginas que deseas",
+    "step3_goals": {
+      "more_clients": "Conseguir más clientes",
+      "show_work": "Mostrar mi trabajo",
+      "give_info": "Dar información del negocio",
+      "credibility": "Generar credibilidad",
+      "sell_online": "Vender productos/servicios",
+      "reservations": "Gestionar reservas / citas"
+    },
+    "step3_pages": {
+      "home": "Inicio",
+      "about": "Sobre mí / Nosotros",
+      "services": "Servicios",
+      "portfolio": "Portafolio / Galería",
+      "pricing": "Precios",
+      "testimonials": "Testimonios",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "faq": "Preguntas frecuentes",
+      "menu": "Menú (restaurante)",
+      "shop": "Tienda online",
+      "reservations": "Reservas / Citas",
+      "location": "Ubicación / Mapa"
+    },
     "step4_title": "Presupuesto y plazos",
-    "step4_subtitle": "Ayúdanos a ajustar la propuesta a tus posibilidades.",
-    "step5_title": "Estilo y diseño",
-    "step5_subtitle": "¿Cómo quieres que luzca tu sitio? (máximo 3)",
+    "step4_subtitle": "Esto nos ayuda a ofrecerte la mejor solución.",
+    "step4_budget_label": "Presupuesto aproximado",
+    "step4_deadline_label": "¿Para cuándo lo necesitas?",
+    "step4_domain_label": "¿Ya tienes dominio (dirección web)?",
+    "step4_domain_yes": "Sí, ya tengo",
+    "step4_domain_no": "No, necesito uno",
+    "step4_budgets": {
+      "under_150": { "label": "Económico", "range": "Menos de $150 USD" },
+      "150_300": { "label": "Básico", "range": "$150 – $300 USD" },
+      "300_500": { "label": "Estándar", "range": "$300 – $500 USD" },
+      "500_800": { "label": "Profesional", "range": "$500 – $800 USD" },
+      "800_1500": { "label": "Avanzado", "range": "$800 – $1,500 USD" },
+      "over_1500": { "label": "Premium", "range": "Más de $1,500 USD" }
+    },
+    "step4_deadlines": {
+      "urgent": "Lo antes posible",
+      "2_weeks": "En 2 semanas",
+      "1_month": "En 1 mes",
+      "2_3_months": "En 2-3 meses",
+      "no_rush": "Sin prisa"
+    },
+    "step5_title": "Estilo visual",
+    "step5_subtitle": "Selecciona hasta 3 estilos que representen tu marca.",
+    "step5_logo_label": "¿Tienes logo?",
+    "step5_colors_label": "Colores de marca (opcional)",
+    "step5_colors_placeholder": "Ej: azul marino, dorado...",
+    "step5_references_label": "Sitios web que te gusten (referencias)",
+    "step5_references_placeholder": "Comparte 1-3 URLs de sitios que admires...",
+    "step5_yes": "Sí",
+    "step5_no": "No",
+    "step5_styles": {
+      "minimal": { "label": "Minimalista", "desc": "Limpio, espaciado, simple" },
+      "modern": { "label": "Moderno", "desc": "Actual, tecnológico" },
+      "elegant": { "label": "Elegante", "desc": "Sofisticado, premium" },
+      "colorful": { "label": "Colorido", "desc": "Vibrante, llamativo" },
+      "rustic": { "label": "Rústico", "desc": "Artesanal, natural" },
+      "corporate": { "label": "Corporativo", "desc": "Profesional, serio" },
+      "creative": { "label": "Creativo", "desc": "Artístico, único" },
+      "vintage": { "label": "Vintage", "desc": "Retro, nostálgico" },
+      "fun": { "label": "Divertido", "desc": "Juvenil, dinámico" }
+    },
     "step6_title": "Contenido disponible",
-    "step6_subtitle": "¿Con qué material cuentas actualmente?",
+    "step6_subtitle": "¿Qué materiales tienes listos?",
+    "step6_photos_label": "¿Tienes fotos profesionales?",
+    "step6_texts_label": "¿Tienes textos redactados?",
+    "step6_notes_label": "¿Algo más que debamos saber?",
+    "step6_notes_placeholder": "Cualquier detalle adicional sobre tu proyecto, plazos especiales, o preguntas que tengas...",
+    "step6_yes": "Sí",
+    "step6_no": "No",
     "result_title": "Tu plan recomendado",
     "result_subtitle": "Basado en tus respuestas, este es el plan ideal para tu negocio.",
     "result_cta": "Solicitar propuesta por WhatsApp",

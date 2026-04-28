@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function HeroSection() {
   const [wizardOpen, setWizardOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, tArray } = useLanguage();
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
@@ -98,15 +98,17 @@ export default function HeroSection() {
 
           {/* Trust indicators */}
           <div className="flex flex-wrap items-center justify-center gap-6 mt-14 text-muted-foreground">
-            {[
-              { icon: '⚡', text: 'Entrega rápida' },
-              { icon: '🔒', text: 'Código limpio y seguro' },
-              { icon: '📱', text: '100% responsive' },
-              { icon: '🎨', text: 'Diseño único' },
-            ].map((item) => (
-              <div key={item.text} className="flex items-center gap-2 text-sm">
-                <span>{item.icon}</span>
-                <span>{item.text}</span>
+            {(
+              [
+                { icon: '⚡', key: 0 },
+                { icon: '🔒', key: 1 },
+                { icon: '📱', key: 2 },
+                { icon: '🎨', key: 3 },
+              ] as const
+            ).map(({ icon, key }) => (
+              <div key={key} className="flex items-center gap-2 text-sm">
+                <span>{icon}</span>
+                <span>{tArray('hero.trust')[key]}</span>
               </div>
             ))}
           </div>

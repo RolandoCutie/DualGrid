@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import { Textarea } from '@/components/ui/Textarea';
 import { cn } from '@/lib/utils';
 import type { QuestionnaireAnswers } from '@/types';
@@ -10,21 +11,22 @@ interface Step6Props {
 }
 
 export default function Step6Content({ answers, onChange }: Step6Props) {
+  const { t } = useLanguage();
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-xl font-bold text-card-foreground">Contenido disponible</h3>
-        <p className="text-sm text-muted-foreground mt-1">¿Qué materiales tienes listos?</p>
+        <h3 className="text-xl font-bold text-card-foreground">{t('questionnaire.step6_title')}</h3>
+        <p className="text-sm text-muted-foreground mt-1">{t('questionnaire.step6_subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Photos */}
         <div>
           <p className="text-sm font-medium text-card-foreground mb-3">
-            ¿Tienes fotos profesionales?
+            {t('questionnaire.step6_photos_label')}
           </p>
           <div className="flex gap-3">
-            {['Sí', 'No'].map((opt, i) => (
+            {[t('questionnaire.step6_yes'), t('questionnaire.step6_no')].map((opt, i) => (
               <button
                 key={opt}
                 type="button"
@@ -45,10 +47,10 @@ export default function Step6Content({ answers, onChange }: Step6Props) {
         {/* Texts */}
         <div>
           <p className="text-sm font-medium text-card-foreground mb-3">
-            ¿Tienes textos redactados?
+            {t('questionnaire.step6_texts_label')}
           </p>
           <div className="flex gap-3">
-            {['Sí', 'No'].map((opt, i) => (
+            {[t('questionnaire.step6_yes'), t('questionnaire.step6_no')].map((opt, i) => (
               <button
                 key={opt}
                 type="button"
@@ -68,8 +70,8 @@ export default function Step6Content({ answers, onChange }: Step6Props) {
       </div>
 
       <Textarea
-        label="¿Algo más que debamos saber?"
-        placeholder="Cualquier detalle adicional sobre tu proyecto, plazos especiales, o preguntas que tengas..."
+        label={t('questionnaire.step6_notes_label')}
+        placeholder={t('questionnaire.step6_notes_placeholder')}
         value={answers.extraNotes}
         onChange={(e) => onChange({ extraNotes: e.target.value })}
         rows={4}
