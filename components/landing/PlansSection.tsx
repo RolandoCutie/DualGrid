@@ -38,14 +38,15 @@ export default function PlansSection() {
     <section id="planes" className="py-24 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-14">
-          <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-            {t('plans.eyebrow')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-card-foreground mt-2 mb-4">
+        <div className="text-center mb-16">
+          <div className="section-badge mx-auto mb-4">{t('plans.eyebrow')}</div>
+          <h2
+            className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             {t('plans.title')}
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">{t('plans.subtitle')}</p>
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">{t('plans.subtitle')}</p>
         </div>
 
         {/* Plans grid */}

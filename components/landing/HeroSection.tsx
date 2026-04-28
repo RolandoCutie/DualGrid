@@ -10,70 +10,80 @@ export default function HeroSection() {
   const { t, tArray } = useLanguage();
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
-      {/* Background grid pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" aria-hidden="true">
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background grain-overlay">
+      {/* ── Background: blueprint grid ── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="w-full h-full"
+          className="w-full h-full opacity-[0.035]"
           style={{
             backgroundImage:
               'linear-gradient(var(--color-card-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-card-foreground) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
+            backgroundSize: '48px 48px',
           }}
         />
       </div>
 
-      {/* Gradient blobs */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+      {/* ── Background: gradient orbs ── */}
+      <div
+        className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--primary) 12%, transparent) 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-30"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24 sm:py-32">
+      {/* ── Content ── */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-28 sm:py-36">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-              {t('hero.eyebrow')}
-            </span>
+          {/* Eyebrow badge */}
+          <div className="section-badge mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            {t('hero.eyebrow')}
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-card-foreground leading-[1.1] tracking-tight mb-6">
+          <h1
+            className="text-[clamp(2.5rem,8vw,5rem)] font-extrabold text-card-foreground leading-[1.05] tracking-tight mb-7"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             {t('hero.title_before')}{' '}
-            <span className="relative inline-block">
-              <span className="relative z-10 text-primary">{t('hero.title_highlight')}</span>
-              <svg
-                className="absolute -bottom-2 left-0 w-full"
-                viewBox="0 0 300 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 10C50 4 100 2 150 4C200 6 250 8 298 4"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  className="text-primary"
-                />
-              </svg>
-            </span>{' '}
+            <span className="text-gradient">{t('hero.title_highlight')}</span>{' '}
             {t('hero.title_after')}
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-12">
             {t('hero.subtitle')}
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
             <Button
               size="xl"
               onClick={() => setWizardOpen(true)}
+              className="animate-pulse-glow"
               rightIcon={
                 <svg
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -91,13 +101,14 @@ export default function HeroSection() {
               onClick={() =>
                 document.getElementById('planes')?.scrollIntoView({ behavior: 'smooth' })
               }
+              className="border-border/70 hover:border-primary/50 hover:text-primary"
             >
               {t('hero.cta_secondary')}
             </Button>
           </div>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-14 text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             {(
               [
                 { icon: '⚡', key: 0 },
@@ -106,14 +117,26 @@ export default function HeroSection() {
                 { icon: '🎨', key: 3 },
               ] as const
             ).map(({ icon, key }) => (
-              <div key={key} className="flex items-center gap-2 text-sm">
-                <span>{icon}</span>
+              <div
+                key={key}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/70 text-sm text-muted-foreground shadow-sm"
+              >
+                <span className="text-base">{icon}</span>
                 <span>{tArray('hero.trust')[key]}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* ── Bottom fade gradient ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, var(--background))',
+        }}
+        aria-hidden="true"
+      />
 
       <QuestionnaireWizard open={wizardOpen} onClose={() => setWizardOpen(false)} />
     </section>

@@ -4,7 +4,7 @@ import LanguageProvider from '@/components/ui/LanguageProvider';
 import ThemeProvider from '@/components/ui/ThemeProvider';
 import { getBaseUrl } from '@/lib/base-url';
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Syne } from 'next/font/google';
 import './globals.css';
 
 const baseUrl = getBaseUrl();
@@ -13,6 +13,12 @@ const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const syne = Syne({
+  variable: '--font-syne',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 const jsonLd = {
@@ -72,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className={`${inter.variable} font-sans min-h-screen antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${syne.variable} font-sans min-h-screen antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
           <LanguageProvider>

@@ -67,31 +67,33 @@ export default function NavBarClient() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-40 transition-all duration-500',
         scrolled
-          ? 'bg-card/95 backdrop-blur-md border-b border-border shadow-sm'
+          ? 'bg-card/80 backdrop-blur-xl border-b border-border/60 shadow-[0_1px_20px_-5px_rgba(0,0,0,0.12)]'
           : 'bg-transparent',
       )}
     >
       <nav className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-extrabold text-xl text-card-foreground"
-        >
-          <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-black">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-black shadow-md group-hover:scale-105 transition-transform duration-200">
             DG
           </span>
-          DualGrid
+          <span
+            className="font-extrabold text-xl text-card-foreground tracking-tight"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
+            DualGrid
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="text-sm font-medium text-muted-foreground hover:text-card-foreground transition-colors cursor-pointer"
+              className="text-sm font-medium text-muted-foreground hover:text-card-foreground underline-grow transition-colors cursor-pointer"
             >
               {t(link.labelKey)}
             </button>
@@ -99,7 +101,7 @@ export default function NavBarClient() {
           <LanguageToggle />
           <button
             onClick={() => scrollTo('#planes')}
-            className="px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-[0_0_20px_-4px_var(--primary)] cursor-pointer"
           >
             {t('nav.cta')}
           </button>
@@ -107,7 +109,7 @@ export default function NavBarClient() {
 
         {/* Mobile menu toggle */}
         <button
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-border text-card-foreground"
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-border/80 text-card-foreground hover:border-primary/40 transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menú"
         >
@@ -139,12 +141,12 @@ export default function NavBarClient() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-card border-b border-border px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-card/95 backdrop-blur-xl border-b border-border/60 px-6 py-5 flex flex-col gap-4">
           {NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="text-sm font-medium text-card-foreground py-2 text-left cursor-pointer"
+              className="text-sm font-semibold text-card-foreground py-2 text-left cursor-pointer hover:text-primary transition-colors"
             >
               {t(link.labelKey)}
             </button>
@@ -154,7 +156,7 @@ export default function NavBarClient() {
           </div>
           <button
             onClick={() => scrollTo('#planes')}
-            className="w-full py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer"
+            className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
           >
             {t('nav.cta')}
           </button>
