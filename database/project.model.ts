@@ -27,6 +27,8 @@ const ProjectSchema = new Schema<IProjectDoc>(
   { timestamps: true },
 );
 
-const Project = mongoose.models.Project || mongoose.model<IProjectDoc>('Project', ProjectSchema);
+const Project =
+  mongoose.models.Project ||
+  mongoose.model<IProjectDoc>('Project', ProjectSchema, 'dualgrid_projects');
 
 export default Project;

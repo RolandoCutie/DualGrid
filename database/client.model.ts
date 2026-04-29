@@ -27,6 +27,7 @@ const ClientSchema = new Schema<IClientDoc>(
   { timestamps: true },
 );
 
-const Client = mongoose.models.Client || mongoose.model<IClientDoc>('Client', ClientSchema);
+const Client =
+  mongoose.models.Client || mongoose.model<IClientDoc>('Client', ClientSchema, 'dualgrid_clients');
 
 export default Client;

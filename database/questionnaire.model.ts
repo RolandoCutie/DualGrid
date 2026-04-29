@@ -53,6 +53,10 @@ const QuestionnaireSchema = new Schema<IQuestionnaireDoc>(
 
 const Questionnaire =
   mongoose.models.Questionnaire ||
-  mongoose.model<IQuestionnaireDoc>('Questionnaire', QuestionnaireSchema);
+  mongoose.model<IQuestionnaireDoc>(
+    'Questionnaire',
+    QuestionnaireSchema,
+    'dualgrid_questionnaires',
+  );
 
 export default Questionnaire;

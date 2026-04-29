@@ -50,6 +50,8 @@ const InvoiceSchema = new Schema<IInvoiceDoc>(
   { timestamps: true },
 );
 
-const Invoice = mongoose.models.Invoice || mongoose.model<IInvoiceDoc>('Invoice', InvoiceSchema);
+const Invoice =
+  mongoose.models.Invoice ||
+  mongoose.model<IInvoiceDoc>('Invoice', InvoiceSchema, 'dualgrid_invoices');
 
 export default Invoice;

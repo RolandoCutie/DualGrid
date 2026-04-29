@@ -50,6 +50,7 @@ const ContractSchema = new Schema<IContractDoc>(
 );
 
 const Contract =
-  mongoose.models.Contract || mongoose.model<IContractDoc>('Contract', ContractSchema);
+  mongoose.models.Contract ||
+  mongoose.model<IContractDoc>('Contract', ContractSchema, 'dualgrid_contracts');
 
 export default Contract;
