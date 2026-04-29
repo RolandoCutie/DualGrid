@@ -3,6 +3,7 @@
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function LanguageToggle() {
@@ -42,8 +43,10 @@ function LanguageToggle() {
 
 export default function NavBarClient() {
   const { t } = useLanguage();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const NAV_LINKS = [
     { href: '#por-que', labelKey: 'nav.why' },
@@ -57,6 +60,20 @@ export default function NavBarClient() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    fetch('/api/admin/session')
+      .then((r) => r.json())
+      .then((data) => setIsAdmin(!!data.authenticated))
+      .catch(() => setIsAdmin(false));
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' });
+    setIsAdmin(false);
+    router.push('/');
+    router.refresh();
+  };
 
   const scrollTo = (href: string) => {
     const id = href.replace('#', '');
@@ -99,12 +116,29 @@ export default function NavBarClient() {
             </button>
           ))}
           <LanguageToggle />
-          <button
-            onClick={() => scrollTo('#planes')}
-            className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-[0_0_20px_-4px_var(--primary)] cursor-pointer"
-          >
-            {t('nav.cta')}
-          </button>
+          {isAdmin ? (
+            <>
+              <Link
+                href="/admin/dashboard"
+                className="text-sm font-medium text-muted-foreground hover:text-card-foreground transition-colors"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 rounded-xl border border-border text-sm font-semibold text-muted-foreground hover:text-destructive hover:border-destructive transition-colors cursor-pointer"
+              >
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => scrollTo('#planes')}
+              className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-[0_0_20px_-4px_var(--primary)] cursor-pointer"
+            >
+              {t('nav.cta')}
+            </button>
+          )}
         </div>
 
         {/* Mobile menu toggle */}
@@ -154,12 +188,33 @@ export default function NavBarClient() {
           <div className="pt-1">
             <LanguageToggle />
           </div>
-          <button
-            onClick={() => scrollTo('#planes')}
-            className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
-          >
-            {t('nav.cta')}
-          </button>
+          {isAdmin ? (
+            <>
+              <Link
+                href="/admin/dashboard"
+                onClick={() => setMenuOpen(false)}
+                className="w-full py-3 rounded-xl border border-border text-primary text-sm font-semibold text-center hover:bg-accent/50 transition-colors"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleLogout();
+                }}
+                className="w-full py-3 rounded-xl border border-destructive/60 text-destructive text-sm font-semibold text-center cursor-pointer hover:bg-destructive/10 transition-colors"
+              >
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => scrollTo('#planes')}
+              className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
+            >
+              {t('nav.cta')}
+            </button>
+          )}
         </div>
       )}
     </header>

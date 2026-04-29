@@ -7,6 +7,7 @@ import connectDB from '@/lib/mongodb';
 import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = { title: 'Cuestionarios' };
 
@@ -44,9 +45,10 @@ export default async function QuestionnairesPage() {
           const statusInfo = STATUS_LABELS[status] || STATUS_LABELS.new;
 
           return (
-            <div
+            <Link
               key={String(q._id)}
-              className="flex items-start justify-between gap-4 p-5 rounded-xl border border-border bg-card"
+              href={`/admin/dashboard/questionnaires/${String(q._id)}`}
+              className="flex items-start justify-between gap-4 p-5 rounded-xl border border-border bg-card cursor-pointer"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
@@ -75,7 +77,7 @@ export default async function QuestionnairesPage() {
                   {q.createdAt ? new Date(String(q.createdAt)).toLocaleDateString('es') : ''}
                 </p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
