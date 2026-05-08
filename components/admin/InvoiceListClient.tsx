@@ -119,13 +119,18 @@ export default function InvoiceListClient({ invoices }: Props) {
               </tr>
             )}
             {filtered.map((inv) => (
-              <tr key={inv._id} className="hover:bg-muted/30 transition-colors">
+              <tr
+                key={inv._id}
+                className={`hover:bg-muted/30 transition-colors ${
+                  inv.status === 'overdue' ? 'bg-red-500/5' : ''
+                }`}
+              >
                 <td className="px-4 py-3 font-mono text-xs text-primary font-semibold">
                   {inv.invoiceNumber}
                 </td>
                 <td className="px-4 py-3 font-medium text-card-foreground">{inv.clientName}</td>
                 <td className="px-4 py-3 font-semibold text-card-foreground">
-                  ${inv.totalAmount} USD
+                  ${inv.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">

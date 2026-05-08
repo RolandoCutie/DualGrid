@@ -30,6 +30,7 @@ export interface ContractRow {
   clientBusiness: string | null;
   planName: string;
   totalAmount: number;
+  advanceAmount: number;
   status: string;
   deliveryDate: string | null;
 }
@@ -39,10 +40,28 @@ interface Props {
 }
 
 export default function ContractListClient({ contracts }: Props) {
+  const [rows, setRows] = useState<ContractRow[]>(contracts);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [updating, setUpdating] = useState<string | null>(null);
 
-  const filtered = contracts.filter((c) => {
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    setUpdating(id);
+    try {
+      const res = await fetch(`/api/contracts/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      if (res.ok) {
+        setRows((prev) => prev.map((c) => (c._id === id ? { ...c, status: newStatus } : c)));
+      }
+    } finally {
+      setUpdating(null);
+    }
+  };
+
+  const filtered = rows.filter((c) => {
     const matchSearch =
       !search ||
       c.clientName.toLowerCase().includes(search.toLowerCase()) ||
@@ -85,6 +104,7 @@ export default function ContractListClient({ contracts }: Props) {
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Cliente</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Plan</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Total</th>
+              <th className="text-left px-4 py-3 font-semibold text-card-foreground">Saldo</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Estado</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Entrega</th>
               <th className="px-4 py-3" />
@@ -93,7 +113,7 @@ export default function ContractListClient({ contracts }: Props) {
           <tbody className="divide-y divide-border">
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="text-center py-8 text-muted-foreground">
+                <td colSpan={7} className="text-center py-8 text-muted-foreground">
                   No hay contratos que coincidan con el filtro.
                 </td>
               </tr>
@@ -108,12 +128,38 @@ export default function ContractListClient({ contracts }: Props) {
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">{c.planName}</td>
                 <td className="px-4 py-3 font-semibold text-card-foreground">
-                  ${c.totalAmount} USD
+                  ${c.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </td>
                 <td className="px-4 py-3">
-                  <Badge variant={STATUS_COLORS[c.status] || 'secondary'}>
-                    {STATUS_LABELS[c.status] || c.status}
-                  </Badge>
+                  <span
+                    className={`text-sm font-semibold ${
+                      c.totalAmount - c.advanceAmount > 0 ? 'text-amber-600' : 'text-green-600'
+                    }`}
+                  >
+                    $
+                    {(c.totalAmount - c.advanceAmount).toLocaleString('en-US', {
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                </td>
+                <td className="px-4 py-3">
+                  <div className="flex flex-col gap-1.5">
+                    <Badge variant={STATUS_COLORS[c.status] || 'secondary'}>
+                      {STATUS_LABELS[c.status] || c.status}
+                    </Badge>
+                    <select
+                      value={c.status}
+                      disabled={updating === c._id}
+                      onChange={(e) => handleStatusChange(c._id, e.target.value)}
+                      className="text-xs rounded-md border border-border bg-background text-muted-foreground px-1.5 py-0.5 focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
+                    >
+                      {ALL_STATUSES.map((s) => (
+                        <option key={s} value={s}>
+                          {STATUS_LABELS[s]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">
                   {c.deliveryDate ? new Date(c.deliveryDate).toLocaleDateString('es') : '—'}

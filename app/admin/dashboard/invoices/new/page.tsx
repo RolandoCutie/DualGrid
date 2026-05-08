@@ -3,17 +3,22 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import InvoiceForm from '@/components/admin/InvoiceForm';
 import Client from '@/database/client.model';
+import Contract from '@/database/contract.model';
 import connectDB from '@/lib/mongodb';
+import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'Nueva factura' };
 
 export default async function NewInvoicePage() {
-  await requireAdminSession();
+  await requireAdminSession('/admin/dashboard/invoices/new');
   await connectDB();
 
-  const clients = await Client.find({}).sort({ name: 1 }).lean();
+  const [clients, contracts] = await Promise.all([
+    Client.find({}).sort({ name: 1 }).lean(),
+    Contract.find({ status: { $in: ['active', 'pending'] } }).lean(),
+  ]);
 
   return (
     <AdminPageLayout maxWidth="5xl">
@@ -27,6 +32,11 @@ export default async function NewInvoicePage() {
           _id: c._id.toString(),
           name: c.name,
           businessName: c.businessName ?? undefined,
+        }))}
+        contracts={contracts.map((c) => ({
+          _id: c._id.toString(),
+          clientId: c.clientId.toString(),
+          planName: `${PLAN_MAP[c.planId]?.name ?? c.planId} · ${c.status === 'active' ? 'Activo' : 'Pendiente'}`,
         }))}
       />
     </AdminPageLayout>

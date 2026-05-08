@@ -28,6 +28,7 @@ export default async function ContractsPage() {
       clientBusiness: client?.businessName ? String(client.businessName) : null,
       planName: plan?.name || planId,
       totalAmount: Number(c.totalAmount),
+      advanceAmount: Number(c.advanceAmount),
       status: String(c.status),
       deliveryDate: c.deliveryDate ? String(c.deliveryDate) : null,
     };

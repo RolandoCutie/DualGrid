@@ -13,8 +13,15 @@ interface InvoiceItem {
   unitPrice: string;
 }
 
+interface ContractOption {
+  _id: string;
+  clientId: string;
+  planName: string;
+}
+
 interface InvoiceFormProps {
   clients: Array<{ _id: string; name: string; businessName?: string }>;
+  contracts?: ContractOption[];
   invoiceId?: string;
   defaultValues?: {
     clientId?: string;
@@ -51,7 +58,12 @@ function in30Days() {
   return d.toISOString().split('T')[0];
 }
 
-export default function InvoiceForm({ clients, invoiceId, defaultValues }: InvoiceFormProps) {
+export default function InvoiceForm({
+  clients,
+  contracts = [],
+  invoiceId,
+  defaultValues,
+}: InvoiceFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -65,6 +77,7 @@ export default function InvoiceForm({ clients, invoiceId, defaultValues }: Invoi
   ];
 
   const [clientId, setClientId] = useState(defaultValues?.clientId ?? '');
+  const [contractId, setContractId] = useState(defaultValues?.contractId ?? '');
   const [status, setStatus] = useState(defaultValues?.status ?? 'draft');
   const [taxRate, setTaxRate] = useState(String(defaultValues?.taxRate ?? '0'));
   const [issueDate, setIssueDate] = useState(toDateInput(defaultValues?.issueDate) || todayStr());
@@ -106,6 +119,7 @@ export default function InvoiceForm({ clients, invoiceId, defaultValues }: Invoi
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           clientId,
+          contractId: contractId || undefined,
           status,
           items: parsedItems.filter((it) => it.description),
           subtotal,
@@ -139,10 +153,28 @@ export default function InvoiceForm({ clients, invoiceId, defaultValues }: Invoi
         <Select
           label="Cliente *"
           value={clientId}
-          onChange={(e) => setClientId(e.target.value)}
+          onChange={(e) => {
+            setClientId(e.target.value);
+            setContractId('');
+          }}
           options={clientOptions}
           required
         />
+        {(() => {
+          const clientContracts = contracts.filter((c) => c.clientId === clientId);
+          if (!clientId || clientContracts.length === 0) return null;
+          return (
+            <Select
+              label="Asociar a contrato (opcional)"
+              value={contractId}
+              onChange={(e) => setContractId(e.target.value)}
+              options={[
+                { value: '', label: 'Sin contrato asociado' },
+                ...clientContracts.map((c) => ({ value: c._id, label: c.planName })),
+              ]}
+            />
+          );
+        })()}
         <Select
           label="Estado"
           value={status}

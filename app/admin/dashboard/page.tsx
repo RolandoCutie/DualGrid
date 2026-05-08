@@ -1,5 +1,9 @@
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
+import Client from '@/database/client.model';
+import Contract from '@/database/contract.model';
+import Invoice from '@/database/invoice.model';
+import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import Link from 'next/link';
 
@@ -41,8 +45,31 @@ const MENU_ITEMS = [
   },
 ];
 
+interface AggResult {
+  _id: string;
+  count: number;
+  total: number;
+}
+
 export default async function AdminDashboard() {
   await requireAdminSession('/admin/dashboard');
+  await connectDB();
+
+  const [totalClients, contractAgg, invoiceAgg] = await Promise.all([
+    Client.countDocuments(),
+    Contract.aggregate<AggResult>([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
+    Invoice.aggregate<AggResult>([
+      { $group: { _id: '$status', count: { $sum: 1 }, total: { $sum: '$totalAmount' } } },
+    ]),
+  ]);
+
+  const activeContracts =
+    (contractAgg.find((s) => s._id === 'active')?.count ?? 0) +
+    (contractAgg.find((s) => s._id === 'pending')?.count ?? 0);
+  const paidRevenue = invoiceAgg.find((s) => s._id === 'paid')?.total ?? 0;
+  const unpaidCount =
+    (invoiceAgg.find((s) => s._id === 'sent')?.count ?? 0) +
+    (invoiceAgg.find((s) => s._id === 'overdue')?.count ?? 0);
 
   return (
     <AdminPageLayout>
@@ -50,6 +77,29 @@ export default async function AdminDashboard() {
         title="Panel de DualGrid"
         description="Gestiona clientes, contratos, facturas y cuestionarios."
       />
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Clientes</p>
+          <p className="text-2xl font-bold text-card-foreground">{totalClients}</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Contratos activos</p>
+          <p className="text-2xl font-bold text-primary">{activeContracts}</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Por cobrar</p>
+          <p className="text-2xl font-bold text-amber-500">{unpaidCount}</p>
+          <p className="text-xs text-muted-foreground">facturas pendientes</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Ingresos cobrados</p>
+          <p className="text-xl font-bold text-green-500">
+            ${paidRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+          </p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
         {MENU_ITEMS.map((item) => (

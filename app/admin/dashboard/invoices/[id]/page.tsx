@@ -3,8 +3,10 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import InvoiceForm from '@/components/admin/InvoiceForm';
 import Client from '@/database/client.model';
+import Contract from '@/database/contract.model';
 import Invoice from '@/database/invoice.model';
 import connectDB from '@/lib/mongodb';
+import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -13,13 +15,14 @@ import { notFound } from 'next/navigation';
 export const metadata: Metadata = { title: 'Editar factura' };
 
 export default async function EditInvoicePage({ params }: { params: Promise<{ id: string }> }) {
-  await requireAdminSession();
+  await requireAdminSession('/admin/dashboard/invoices');
   const { id } = await params;
   await connectDB();
 
-  const [invoice, clients] = await Promise.all([
+  const [invoice, clients, contracts] = await Promise.all([
     Invoice.findById(id).lean(),
     Client.find({}).sort({ name: 1 }).lean(),
+    Contract.find({ status: { $in: ['active', 'pending'] } }).lean(),
   ]);
 
   if (!invoice) notFound();
@@ -55,8 +58,14 @@ export default async function EditInvoicePage({ params }: { params: Promise<{ id
           name: c.name,
           businessName: c.businessName ?? undefined,
         }))}
+        contracts={contracts.map((c) => ({
+          _id: c._id.toString(),
+          clientId: c.clientId.toString(),
+          planName: `${PLAN_MAP[c.planId]?.name ?? c.planId} · ${c.status === 'active' ? 'Activo' : 'Pendiente'}`,
+        }))}
         defaultValues={{
           clientId: invoice.clientId.toString(),
+          contractId: invoice.contractId?.toString() ?? '',
           status: invoice.status,
           items: (
             invoice.items as Array<{ description: string; quantity: number; unitPrice: number }>
