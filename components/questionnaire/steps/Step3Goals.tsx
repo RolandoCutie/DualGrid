@@ -16,6 +16,7 @@ const GOAL_ICONS: Record<string, string> = {
   credibility: '⭐',
   sell_online: '🛒',
   reservations: '📅',
+  grow_audience: '📣',
 };
 
 export default function Step3Goals({ answers, onChange }: Step3Props) {

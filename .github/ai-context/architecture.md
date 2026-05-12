@@ -16,15 +16,17 @@ app/
 ├── admin/
 │   ├── [secret]/page.tsx   # Hidden admin login
 │   └── dashboard/
-│       ├── page.tsx                        # Dashboard index with 4 cards
-│       ├── clients/page.tsx                # Clients list (table)
-│       ├── contracts/page.tsx              # Contracts list (table)
-│       ├── invoices/page.tsx               # Invoices list (table)
+│       ├── page.tsx                        # Dashboard index with stats: clientes, contratos, ingresos, gastos, ganancia neta
+│       ├── clients/page.tsx                # Clients list (table + delete)
+│       ├── contracts/page.tsx              # Contracts list (table + delete)
+│       ├── expenses/page.tsx               # Expenses list (table + total) ← NEW
+│       ├── invoices/page.tsx               # Invoices list (table + delete)
 │       └── questionnaires/page.tsx         # Questionnaire submissions list
 └── api/
     ├── admin/login|logout|session/route.ts
     ├── clients/route.ts + [id]/route.ts
     ├── contracts/route.ts
+    ├── expenses/route.ts + [id]/route.ts   # ← NEW: GET|POST|PATCH|DELETE gastos
     ├── invoices/route.ts
     └── questionnaires/route.ts
 
@@ -53,7 +55,13 @@ components/
 │   ├── AdminLoginForm.tsx
 │   ├── AdminPageHeader.tsx       # Title + description + optional action button
 │   ├── AdminPageLayout.tsx
-│   └── AdminBackButton.tsx
+│   ├── AdminBackButton.tsx
+│   ├── ClientForm.tsx / ClientListClient.tsx
+│   ├── ContractForm.tsx / ContractListClient.tsx
+│   ├── InvoiceForm.tsx / InvoiceListClient.tsx
+│   ├── ExpenseForm.tsx           # Create/edit expense form ← NEW
+│   ├── ExpenseListClient.tsx     # Expense table with delete + category filter ← NEW
+│   └── QuestionnaireStatusForm.tsx
 ├── shared/                 # (reserved for cross-feature shared components)
 └── ui/
     ├── Button.tsx           # CVA variants: primary|secondary|outline|ghost|destructive|link
@@ -74,6 +82,7 @@ components/
 database/
 ├── client.model.ts
 ├── contract.model.ts
+├── expense.model.ts        # IExpenseDoc: description, amount, category, date, notes ← NEW
 ├── invoice.model.ts
 ├── questionnaire.model.ts
 └── index.ts                # Re-exports all models

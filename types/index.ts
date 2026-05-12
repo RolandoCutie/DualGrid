@@ -1,6 +1,14 @@
 // ─── Plans ───────────────────────────────────────────────────────────────────
 
-export type PlanId = 'landing' | 'portfolio' | 'menu_qr' | 'restaurant' | 'custom';
+export type PlanId =
+  | 'landing'
+  | 'portfolio'
+  | 'menu_qr'
+  | 'restaurant'
+  | 'wp_business'
+  | 'ecommerce_store'
+  | 'blog'
+  | 'custom';
 
 export interface Plan {
   id: PlanId;
@@ -22,6 +30,7 @@ export type BusinessType =
   | 'entrepreneur'
   | 'professional'
   | 'ecommerce'
+  | 'blogger'
   | 'other';
 
 export type BudgetRange =
@@ -38,7 +47,8 @@ export type PrimaryGoal =
   | 'give_info'
   | 'credibility'
   | 'sell_online'
-  | 'reservations';
+  | 'reservations'
+  | 'grow_audience';
 
 export type VisualStyle =
   | 'minimal'

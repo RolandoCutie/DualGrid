@@ -2,6 +2,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import Client from '@/database/client.model';
 import Contract from '@/database/contract.model';
+import Expense from '@/database/expense.model';
 import Invoice from '@/database/invoice.model';
 import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
@@ -30,6 +31,13 @@ const MENU_ITEMS = [
     color: 'text-purple-500',
   },
   {
+    title: 'Gastos',
+    description: 'Registra y controla los gastos del negocio.',
+    href: '/admin/dashboard/expenses',
+    emoji: '💸',
+    color: 'text-red-500',
+  },
+  {
     title: 'Cuestionarios',
     description: 'Respuestas recibidas del formulario de la landing.',
     href: '/admin/dashboard/questionnaires',
@@ -55,12 +63,15 @@ export default async function AdminDashboard() {
   await requireAdminSession('/admin/dashboard');
   await connectDB();
 
-  const [totalClients, contractAgg, invoiceAgg] = await Promise.all([
+  const [totalClients, contractAgg, invoiceAgg, totalExpenses] = await Promise.all([
     Client.countDocuments(),
     Contract.aggregate<AggResult>([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
     Invoice.aggregate<AggResult>([
       { $group: { _id: '$status', count: { $sum: 1 }, total: { $sum: '$totalAmount' } } },
     ]),
+    Expense.aggregate<{ total: number }>([
+      { $group: { _id: null, total: { $sum: '$amount' } } },
+    ]).then((r) => r[0]?.total ?? 0),
   ]);
 
   const activeContracts =
@@ -79,7 +90,7 @@ export default async function AdminDashboard() {
       />
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6">
         <div className="rounded-2xl border border-border bg-card p-4">
           <p className="text-xs text-muted-foreground mb-1">Clientes</p>
           <p className="text-2xl font-bold text-card-foreground">{totalClients}</p>
@@ -97,6 +108,20 @@ export default async function AdminDashboard() {
           <p className="text-xs text-muted-foreground mb-1">Ingresos cobrados</p>
           <p className="text-xl font-bold text-green-500">
             ${paidRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Total gastos</p>
+          <p className="text-xl font-bold text-red-500">
+            ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <p className="text-xs text-muted-foreground mb-1">Ganancia neta</p>
+          <p
+            className={`text-xl font-bold ${paidRevenue - totalExpenses >= 0 ? 'text-green-600' : 'text-red-600'}`}
+          >
+            ${(paidRevenue - totalExpenses).toLocaleString('en-US', { minimumFractionDigits: 0 })}
           </p>
         </div>
       </div>

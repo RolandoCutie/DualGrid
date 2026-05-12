@@ -17,8 +17,21 @@ interface Props {
 
 export default function ClientListClient({ clients }: Props) {
   const [search, setSearch] = useState('');
+  const [rows, setRows] = useState<ClientRow[]>(clients);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
-  const filtered = clients.filter(
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`¿Eliminar el cliente "${name}"? Esta acción no se puede deshacer.`)) return;
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/clients/${id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((c) => c._id !== id));
+    } finally {
+      setDeleting(null);
+    }
+  };
+
+  const filtered = rows.filter(
     (c) =>
       !search ||
       c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -65,13 +78,20 @@ export default function ClientListClient({ clients }: Props) {
                 <td className="px-4 py-3 text-muted-foreground">{c.businessName ?? '—'}</td>
                 <td className="px-4 py-3 text-muted-foreground">{c.email}</td>
                 <td className="px-4 py-3 text-muted-foreground">{c.phone ?? '—'}</td>
-                <td className="px-4 py-3 text-right">
+                <td className="px-4 py-3 text-right space-x-3">
                   <Link
                     href={`/admin/dashboard/clients/${c._id}`}
                     className="text-primary text-xs hover:underline"
                   >
                     Editar
                   </Link>
+                  <button
+                    onClick={() => handleDelete(c._id, c.name)}
+                    disabled={deleting === c._id}
+                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                  >
+                    {deleting === c._id ? '…' : 'Eliminar'}
+                  </button>
                 </td>
               </tr>
             ))}

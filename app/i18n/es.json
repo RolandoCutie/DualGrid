@@ -118,12 +118,12 @@
       "name": "Landing Express",
       "tagline": "Presencia profesional rápida",
       "features": [
-        "1 página optimizada para móviles",
-        "Diseño profesional y moderno",
+        "1 página responsive, diseño a medida",
+        "Velocidad optimizada — Google Core Web Vitals",
         "Formulario de contacto funcional",
-        "Botones WhatsApp, email, teléfono",
-        "Integración con redes sociales",
-        "Publicación online incluida"
+        "Google Analytics + Meta Pixel incluidos",
+        "Botones WhatsApp, email y llamada directa",
+        "Dominio y hosting configurados"
       ],
       "ctaLabel": "Empezar"
     },
@@ -131,12 +131,12 @@
       "name": "Menú Digital QR",
       "tagline": "Perfecta para tu restaurante",
       "features": [
-        "Menú digital responsive",
-        "Hasta 30 productos categorizados",
-        "Código QR personalizado",
-        "Panel para actualizar precios",
-        "Integración WhatsApp para pedidos",
-        "Diseño acorde a tu identidad"
+        "Panel de gestión visual — sin conocimientos técnicos",
+        "Hasta 50 productos con fotos y precios",
+        "Código QR personalizado + versión imprimible",
+        "Panel visual para actualizar platos y precios",
+        "Botón de pedido directo por WhatsApp",
+        "Diseño acorde a tu identidad de marca"
       ],
       "ctaLabel": "Empezar"
     },
@@ -144,11 +144,11 @@
       "name": "Portafolio Pro",
       "tagline": "Tu trabajo en su mejor expresión",
       "features": [
-        "Sitio web de 4-6 páginas",
-        "Galería con categorías y filtros",
-        "Página 'Sobre mí' personalizada",
-        "Formulario de contacto avanzado",
-        "SEO básico incluido",
+        "Rendimiento máximo con carga ultrarrápida",
+        "Galería de proyectos con categorías y filtros",
+        "Página \"Sobre mí\" con CV descargable",
+        "SEO + Open Graph para redes sociales",
+        "Formulario con notificaciones por email",
         "Animaciones y transiciones elegantes"
       ],
       "ctaLabel": "Empezar"
@@ -157,12 +157,51 @@
       "name": "Restaurante Pro",
       "tagline": "Sitio completo para tu negocio gastronómico",
       "features": [
-        "Sitio completo 5-7 páginas",
-        "Menú digital con QR incluido",
-        "Sistema de reservas online",
-        "Galería fotográfica profesional",
-        "Mapa interactivo de ubicación",
-        "SEO local optimizado"
+        "Sitio web completo (5-7 páginas)",
+        "Menú digital con QR + panel de gestión",
+        "Reservas online con confirmación por email",
+        "Galería fotográfica con lightbox",
+        "Google Maps integrado + SEO local",
+        "Alertas de reservas por email y WhatsApp"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "wp_business": {
+      "name": "Sitio Empresarial",
+      "tagline": "Tu negocio con presencia total",
+      "features": [
+        "Sitio web completo de 5-8 páginas",
+        "Panel CMS: edita tu contenido sin técnicos",
+        "Blog / sección de noticias incluida",
+        "Formularios de contacto y cotización",
+        "SEO técnico configurado desde el inicio",
+        "Hosting, dominio y SSL configurados"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "ecommerce_store": {
+      "name": "Tienda Online",
+      "tagline": "Vende más en internet",
+      "features": [
+        "Tienda completa lista para vender desde el primer día",
+        "Carrito, checkout y múltiples pasarelas de pago",
+        "Panel de pedidos, inventario y clientes",
+        "Cupones, descuentos y precios por volumen",
+        "Emails automáticos de confirmación de pedidos",
+        "SEO técnico optimizado para productos"
+      ],
+      "ctaLabel": "Empezar"
+    },
+    "blog": {
+      "name": "Blog Profesional",
+      "tagline": "Tu voz en internet",
+      "features": [
+        "Diseño de lectura premium y navegación intuitiva",
+        "Categorías, etiquetas, búsqueda y archivo",
+        "Integración con Mailchimp / Brevo (newsletter)",
+        "Comentarios moderados + compartir en redes",
+        "Mapa del sitio XML + SEO básico",
+        "Editor visual fácil de usar"
       ],
       "ctaLabel": "Empezar"
     },
@@ -170,12 +209,12 @@
       "name": "Sistema Personalizado",
       "tagline": "Funcionalidades a tu medida",
       "features": [
-        "Análisis de requerimientos personalizado",
-        "Desarrollo a medida",
-        "Panel de administración intuitivo",
-        "Capacitación incluida",
-        "30 días de soporte post-lanzamiento",
-        "Escalable y documentado"
+        "Desarrollo a medida + API REST / base de datos",
+        "Panel de administración a medida",
+        "Integraciones con servicios externos (APIs)",
+        "Autenticación y gestión de roles de usuario",
+        "Capacitación + documentación técnica",
+        "60 días de soporte post-lanzamiento"
       ],
       "ctaLabel": "Solicitar cotización"
     }
@@ -238,6 +277,10 @@
         "label": "Tienda / E-commerce",
         "desc": "Vendo productos físicos o digitales."
       },
+      "blogger": {
+        "label": "Creador de Contenido",
+        "desc": "Blogger, YouTuber, influencer, periodista..."
+      },
       "other": { "label": "Otro", "desc": "Mi negocio es diferente." }
     },
     "step2_online_presence": {
@@ -258,7 +301,8 @@
       "give_info": "Dar información del negocio",
       "credibility": "Generar credibilidad",
       "sell_online": "Vender productos/servicios",
-      "reservations": "Gestionar reservas / citas"
+      "reservations": "Gestionar reservas / citas",
+      "grow_audience": "Crecer mi audiencia"
     },
     "step3_pages": {
       "home": "Inicio",

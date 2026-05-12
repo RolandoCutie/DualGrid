@@ -44,6 +44,19 @@ export default function ContractListClient({ contracts }: Props) {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
+
+  const handleDelete = async (id: string, clientName: string) => {
+    if (!confirm(`¿Eliminar el contrato de ${clientName}? Esta acción no se puede deshacer.`))
+      return;
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/contracts/${id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((c) => c._id !== id));
+    } finally {
+      setDeleting(null);
+    }
+  };
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setUpdating(id);
@@ -178,6 +191,13 @@ export default function ContractListClient({ contracts }: Props) {
                   >
                     PDF
                   </Link>
+                  <button
+                    onClick={() => handleDelete(c._id, c.clientName)}
+                    disabled={deleting === c._id}
+                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                  >
+                    {deleting === c._id ? '…' : 'Eliminar'}
+                  </button>
                 </td>
               </tr>
             ))}

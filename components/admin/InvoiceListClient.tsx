@@ -42,6 +42,19 @@ export default function InvoiceListClient({ invoices }: Props) {
   const [statusFilter, setStatusFilter] = useState('');
   const [rows, setRows] = useState<InvoiceRow[]>(invoices);
   const [updating, setUpdating] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
+
+  const handleDelete = async (id: string, invoiceNumber: string) => {
+    if (!confirm(`¿Eliminar la factura ${invoiceNumber}? Esta acción no se puede deshacer.`))
+      return;
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/invoices/${id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((inv) => inv._id !== id));
+    } finally {
+      setDeleting(null);
+    }
+  };
 
   const filtered = rows.filter((inv) => {
     const matchSearch =
@@ -169,6 +182,13 @@ export default function InvoiceListClient({ invoices }: Props) {
                   >
                     PDF
                   </Link>
+                  <button
+                    onClick={() => handleDelete(inv._id, inv.invoiceNumber)}
+                    disabled={deleting === inv._id}
+                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                  >
+                    {deleting === inv._id ? '…' : 'Eliminar'}
+                  </button>
                 </td>
               </tr>
             ))}

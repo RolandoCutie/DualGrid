@@ -10,38 +10,103 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
     portfolio: 0,
     menu_qr: 0,
     restaurant: 0,
+    wp_business: 0,
+    ecommerce_store: 0,
+    blog: 0,
     custom: 0,
   };
 
   // ─── Business type signals ─────────────────────────────────────────────────
   if (answers.businessType === 'creative') {
     scores.portfolio += 40;
+    scores.blog += 10;
   }
   if (answers.businessType === 'restaurant') {
     scores.menu_qr += 30;
     scores.restaurant += 40;
   }
   if (answers.businessType === 'entrepreneur') {
-    scores.landing += 30;
+    scores.landing += 20;
+    scores.wp_business += 25;
     scores.portfolio += 10;
   }
   if (answers.businessType === 'professional') {
-    scores.landing += 25;
-    scores.portfolio += 20;
+    scores.landing += 15;
+    scores.wp_business += 35;
+    scores.portfolio += 15;
   }
   if (answers.businessType === 'ecommerce') {
-    scores.custom += 35;
-    scores.restaurant += 15;
+    scores.custom += 25;
+    scores.ecommerce_store += 45;
+    scores.restaurant += 10;
+  }
+  if (answers.businessType === 'blogger') {
+    scores.blog += 50;
+    scores.portfolio += 15;
   }
 
   // ─── Budget signals ────────────────────────────────────────────────────────
   const budgetScores: Record<string, Record<PlanId, number>> = {
-    under_150: { landing: 40, menu_qr: 20, portfolio: 0, restaurant: 0, custom: 0 },
-    '150_300': { landing: 30, menu_qr: 30, portfolio: 15, restaurant: 0, custom: 0 },
-    '300_500': { landing: 10, menu_qr: 15, portfolio: 35, restaurant: 15, custom: 5 },
-    '500_800': { landing: 0, menu_qr: 5, portfolio: 20, restaurant: 35, custom: 20 },
-    '800_1500': { landing: 0, menu_qr: 0, portfolio: 10, restaurant: 25, custom: 40 },
-    over_1500: { landing: 0, menu_qr: 0, portfolio: 5, restaurant: 15, custom: 50 },
+    under_150: {
+      landing: 40,
+      menu_qr: 20,
+      portfolio: 0,
+      restaurant: 0,
+      wp_business: 0,
+      ecommerce_store: 0,
+      blog: 10,
+      custom: 0,
+    },
+    '150_300': {
+      landing: 30,
+      menu_qr: 30,
+      portfolio: 15,
+      restaurant: 0,
+      wp_business: 0,
+      ecommerce_store: 0,
+      blog: 20,
+      custom: 0,
+    },
+    '300_500': {
+      landing: 10,
+      menu_qr: 15,
+      portfolio: 35,
+      restaurant: 10,
+      wp_business: 10,
+      ecommerce_store: 5,
+      blog: 30,
+      custom: 5,
+    },
+    '500_800': {
+      landing: 0,
+      menu_qr: 5,
+      portfolio: 15,
+      restaurant: 25,
+      wp_business: 35,
+      ecommerce_store: 30,
+      blog: 10,
+      custom: 10,
+    },
+    '800_1500': {
+      landing: 0,
+      menu_qr: 0,
+      portfolio: 10,
+      restaurant: 20,
+      wp_business: 15,
+      ecommerce_store: 25,
+      blog: 5,
+      custom: 40,
+    },
+    over_1500: {
+      landing: 0,
+      menu_qr: 0,
+      portfolio: 5,
+      restaurant: 15,
+      wp_business: 5,
+      ecommerce_store: 15,
+      blog: 0,
+      custom: 50,
+    },
   };
   if (answers.budget && budgetScores[answers.budget]) {
     const bs = budgetScores[answers.budget];
@@ -50,10 +115,21 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
 
   // ─── Primary goal signals ──────────────────────────────────────────────────
   if (answers.primaryGoal === 'show_work') scores.portfolio += 20;
-  if (answers.primaryGoal === 'more_clients') scores.landing += 15;
-  if (answers.primaryGoal === 'sell_online') scores.custom += 25;
+  if (answers.primaryGoal === 'more_clients') {
+    scores.landing += 15;
+    scores.wp_business += 10;
+  }
+  if (answers.primaryGoal === 'give_info') scores.wp_business += 25;
+  if (answers.primaryGoal === 'sell_online') {
+    scores.ecommerce_store += 35;
+    scores.custom += 15;
+  }
   if (answers.primaryGoal === 'reservations') scores.restaurant += 20;
   if (answers.primaryGoal === 'credibility') scores.portfolio += 10;
+  if (answers.primaryGoal === 'grow_audience') {
+    scores.blog += 40;
+    scores.portfolio += 10;
+  }
 
   // ─── Desired pages signals ─────────────────────────────────────────────────
   if (answers.desiredPages.includes('menu')) {
@@ -61,10 +137,18 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
     scores.restaurant += 15;
   }
   if (answers.desiredPages.includes('portfolio')) scores.portfolio += 15;
-  if (answers.desiredPages.includes('shop')) scores.custom += 20;
+  if (answers.desiredPages.includes('services')) scores.wp_business += 15;
+  if (answers.desiredPages.includes('about')) scores.wp_business += 10;
+  if (answers.desiredPages.includes('shop')) {
+    scores.ecommerce_store += 30;
+    scores.custom += 10;
+  }
   if (answers.desiredPages.includes('reservations')) {
     scores.restaurant += 10;
     scores.custom += 10;
+  }
+  if (answers.desiredPages.includes('blog')) {
+    scores.blog += 25;
   }
 
   // ─── Find winner ──────────────────────────────────────────────────────────

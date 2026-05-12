@@ -118,12 +118,12 @@
       "name": "Landing Express",
       "tagline": "Fast professional presence",
       "features": [
-        "1 mobile-optimized page",
-        "Professional and modern design",
+        "1 responsive page, custom design",
+        "Speed optimized — Google Core Web Vitals",
         "Working contact form",
-        "WhatsApp, email & phone buttons",
-        "Social media integration",
-        "Online publishing included"
+        "Google Analytics + Meta Pixel included",
+        "WhatsApp, email & direct call buttons",
+        "Domain and hosting configured"
       ],
       "ctaLabel": "Get started"
     },
@@ -131,12 +131,12 @@
       "name": "Digital QR Menu",
       "tagline": "Perfect for your restaurant",
       "features": [
-        "Responsive digital menu",
-        "Up to 30 categorized products",
-        "Custom QR code",
-        "Panel to update prices",
-        "WhatsApp integration for orders",
-        "Design matching your identity"
+        "Visual management panel — no technical skills needed",
+        "Up to 50 products with photos and prices",
+        "Custom QR code + printable version",
+        "Visual panel to update dishes and prices",
+        "Direct order button via WhatsApp",
+        "Design matching your brand identity"
       ],
       "ctaLabel": "Get started"
     },
@@ -144,11 +144,11 @@
       "name": "Portfolio Pro",
       "tagline": "Your work at its best",
       "features": [
-        "4–6 page website",
-        "Gallery with categories and filters",
-        "Personalized 'About me' page",
-        "Advanced contact form",
-        "Basic SEO included",
+        "Maximum performance, ultra-fast loading",
+        "Project gallery with categories and filters",
+        "\"About me\" page with downloadable CV",
+        "SEO + Open Graph for social media",
+        "Contact form with email notifications",
         "Elegant animations and transitions"
       ],
       "ctaLabel": "Get started"
@@ -157,12 +157,51 @@
       "name": "Restaurant Pro",
       "tagline": "Complete site for your food business",
       "features": [
-        "Complete 5–7 page site",
-        "Digital menu with QR included",
-        "Online reservation system",
-        "Professional photo gallery",
-        "Interactive location map",
-        "Optimized local SEO"
+        "Full website (5–7 pages)",
+        "Digital menu with QR + management panel",
+        "Online reservations with email confirmation",
+        "Photo gallery with lightbox",
+        "Google Maps integrated + local SEO",
+        "Reservation alerts via email and WhatsApp"
+      ],
+      "ctaLabel": "Get started"
+    },
+    "wp_business": {
+      "name": "Business Website",
+      "tagline": "Your business with full presence",
+      "features": [
+        "Full website (5–8 pages)",
+        "CMS panel: edit your content without developers",
+        "Blog / news section included",
+        "Contact and quote request forms",
+        "Technical SEO configured from day one",
+        "Hosting, domain and SSL configured"
+      ],
+      "ctaLabel": "Get started"
+    },
+    "ecommerce_store": {
+      "name": "Online Store",
+      "tagline": "Sell more on the internet",
+      "features": [
+        "Complete store ready to sell from day one",
+        "Cart, checkout and multiple payment gateways",
+        "Orders, inventory and customer panel",
+        "Coupons, discounts and bulk pricing",
+        "Automatic order confirmation emails",
+        "Technical SEO optimized for products"
+      ],
+      "ctaLabel": "Get started"
+    },
+    "blog": {
+      "name": "Pro Blog",
+      "tagline": "Your voice online",
+      "features": [
+        "Premium reading design and intuitive navigation",
+        "Categories, tags, search and archive",
+        "Mailchimp / Brevo integration (newsletter)",
+        "Moderated comments + social sharing",
+        "XML sitemap + basic SEO",
+        "Easy-to-use visual editor"
       ],
       "ctaLabel": "Get started"
     },
@@ -170,12 +209,12 @@
       "name": "Custom System",
       "tagline": "Functionality tailored to your needs",
       "features": [
-        "Personalized requirements analysis",
-        "Custom development",
-        "Intuitive admin panel",
-        "Training included",
-        "30 days post-launch support",
-        "Scalable and documented"
+        "Custom development + REST API / database",
+        "Custom-built admin panel",
+        "Integrations with external services (APIs)",
+        "Authentication and user role management",
+        "Training + technical documentation",
+        "60 days post-launch support"
       ],
       "ctaLabel": "Request quote"
     }
@@ -238,6 +277,10 @@
         "label": "Store / E-commerce",
         "desc": "I sell physical or digital products."
       },
+      "blogger": {
+        "label": "Content Creator",
+        "desc": "Blogger, YouTuber, influencer, journalist..."
+      },
       "other": { "label": "Other", "desc": "My business is different." }
     },
     "step2_online_presence": {
@@ -258,7 +301,8 @@
       "give_info": "Provide business information",
       "credibility": "Build credibility",
       "sell_online": "Sell products/services",
-      "reservations": "Manage reservations / appointments"
+      "reservations": "Manage reservations / appointments",
+      "grow_audience": "Grow my audience"
     },
     "step3_pages": {
       "home": "Home",

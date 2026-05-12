@@ -15,6 +15,7 @@ const BUSINESS_TYPE_ICONS: Record<string, string> = {
   entrepreneur: '🚀',
   professional: '💼',
   ecommerce: '🛍️',
+  blogger: '✍️',
   other: '✨',
 };
 
