@@ -14,27 +14,41 @@ import Step3Goals from './steps/Step3Goals';
 import Step4Budget from './steps/Step4Budget';
 import Step5Style from './steps/Step5Style';
 import Step6Content from './steps/Step6Content';
+import StepResult from './steps/StepResult';
 
 const DEFAULT_ANSWERS: QuestionnaireAnswers = {
   fullName: '',
   businessName: '',
   email: '',
   phone: '',
+  referralSource: '',
   businessType: '',
   businessDescription: '',
+  businessAge: '',
+  mainServices: '',
   onlinePresence: '',
+  targetAudience: '',
   primaryGoal: '',
   primaryAction: '',
   desiredPages: [],
+  specialFeatures: [],
+  differentiation: '',
   budget: '',
   deadline: '',
   hasDomain: false,
+  needsCMS: '',
+  successDefinition: '',
   visualStyle: [],
   hasLogo: false,
   brandColors: '',
   referenceWebsites: '',
+  visualFeeling: '',
   hasPhotos: false,
   hasTexts: false,
+  socialMedia: '',
+  siteLanguages: '',
+  priorWebExperience: '',
+  concerns: '',
   extraNotes: '',
 };
 
@@ -56,32 +70,48 @@ function buildWhatsAppMessage(answers: QuestionnaireAnswers, planId: PlanId | st
   if (answers.businessName) lines.push(`• Empresa/Negocio: ${answers.businessName}`);
   if (answers.email) lines.push(`• Email: ${answers.email}`);
   if (answers.phone) lines.push(`• Teléfono: ${answers.phone}`);
+  if (answers.referralSource) lines.push(`• Nos encontró por: ${answers.referralSource}`);
   lines.push('');
   lines.push(`🏢 *Negocio*`);
   if (answers.businessType) lines.push(`• Tipo: ${answers.businessType}`);
+  if (answers.businessAge) lines.push(`• Antigüedad: ${answers.businessAge}`);
   if (answers.onlinePresence) lines.push(`• Presencia online: ${answers.onlinePresence}`);
   if (answers.businessDescription) lines.push(`• Descripción: ${answers.businessDescription}`);
+  if (answers.mainServices) lines.push(`• Servicios principales: ${answers.mainServices}`);
+  if (answers.targetAudience) lines.push(`• Público objetivo: ${answers.targetAudience}`);
   lines.push('');
-  lines.push(`🎯 *Objetivos*`);
+  lines.push(`🎯 *Objetivos y funcionalidades*`);
   if (answers.primaryGoal) lines.push(`• Objetivo principal: ${answers.primaryGoal}`);
+  if (answers.primaryAction) lines.push(`• Acción CTA: ${answers.primaryAction}`);
   if (answers.desiredPages.length)
     lines.push(`• Páginas deseadas: ${answers.desiredPages.join(', ')}`);
+  if (answers.specialFeatures.length)
+    lines.push(`• Funcionalidades especiales: ${answers.specialFeatures.join(', ')}`);
+  if (answers.differentiation) lines.push(`• Diferenciación: ${answers.differentiation}`);
   lines.push('');
   lines.push(`💰 *Presupuesto y plazos*`);
   if (answers.budget) lines.push(`• Presupuesto: ${answers.budget}`);
   if (answers.deadline) lines.push(`• Plazo: ${answers.deadline}`);
   lines.push(`• Tiene dominio: ${answers.hasDomain ? 'Sí' : 'No'}`);
+  if (answers.needsCMS) lines.push(`• Necesita CMS: ${answers.needsCMS}`);
+  if (answers.successDefinition) lines.push(`• Éxito definido como: ${answers.successDefinition}`);
   lines.push('');
   lines.push(`🎨 *Estilo y marca*`);
   if (answers.visualStyle.length) lines.push(`• Estilo visual: ${answers.visualStyle.join(', ')}`);
   lines.push(`• Tiene logo: ${answers.hasLogo ? 'Sí' : 'No'}`);
   if (answers.brandColors) lines.push(`• Colores de marca: ${answers.brandColors}`);
   if (answers.referenceWebsites) lines.push(`• Referencias: ${answers.referenceWebsites}`);
+  if (answers.visualFeeling) lines.push(`• Sensación deseada: ${answers.visualFeeling}`);
   lines.push('');
   lines.push(`📁 *Contenido disponible*`);
   lines.push(`• Fotos profesionales: ${answers.hasPhotos ? 'Sí' : 'No'}`);
   lines.push(`• Textos redactados: ${answers.hasTexts ? 'Sí' : 'No'}`);
-  if (answers.extraNotes) lines.push(`• Notas: ${answers.extraNotes}`);
+  if (answers.siteLanguages) lines.push(`• Idioma del sitio: ${answers.siteLanguages}`);
+  if (answers.socialMedia) lines.push(`• Redes sociales: ${answers.socialMedia}`);
+  if (answers.priorWebExperience)
+    lines.push(`• Experiencia previa con web: ${answers.priorWebExperience}`);
+  if (answers.concerns) lines.push(`• Preocupaciones: ${answers.concerns}`);
+  if (answers.extraNotes) lines.push(`• Notas adicionales: ${answers.extraNotes}`);
   return lines.join('\n');
 }
 
@@ -96,6 +126,7 @@ export default function QuestionnaireWizard({
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [finalPlan, setFinalPlan] = useState<PlanId | null>(null);
+  const [finalScores, setFinalScores] = useState<Record<PlanId, number> | null>(null);
 
   const totalSteps = 6;
   const isLastStep = step === totalSteps;
@@ -124,12 +155,16 @@ export default function QuestionnaireWizard({
   const handleSubmit = async () => {
     setSubmitting(true);
     let plan: PlanId;
+    let scores: Record<PlanId, number> | null = null;
     try {
       if (selectedPlan) {
         plan = selectedPlan;
+        const result = recommendPlan(answers);
+        scores = result.scores;
       } else {
-        const { recommended } = recommendPlan(answers);
+        const { recommended, scores: s } = recommendPlan(answers);
         plan = recommended;
+        scores = s;
       }
 
       await fetch('/api/questionnaires', {
@@ -142,11 +177,14 @@ export default function QuestionnaireWizard({
         }),
       });
     } catch {
-      plan = selectedPlan ?? recommendPlan(answers).recommended;
+      const result = recommendPlan(answers);
+      plan = selectedPlan ?? result.recommended;
+      scores = result.scores;
     } finally {
       setSubmitting(false);
     }
     setFinalPlan(plan!);
+    setFinalScores(scores);
     setDone(true);
   };
 
@@ -157,6 +195,7 @@ export default function QuestionnaireWizard({
       setAnswers(DEFAULT_ANSWERS);
       setDone(false);
       setFinalPlan(null);
+      setFinalScores(null);
     }, 300);
   };
 
@@ -181,49 +220,13 @@ export default function QuestionnaireWizard({
 
   const stepComponent = () => {
     if (done) {
-      const plansData = DICTS[locale].plans_data as Record<string, { name: string }>;
-      const planName = finalPlan
-        ? (plansData[finalPlan]?.name ?? PLAN_MAP[finalPlan]?.name ?? finalPlan)
-        : t('questionnaire.done_plan_label');
-      const firstName = answers.fullName.split(' ')[0];
-      const greeting = firstName
-        ? t('questionnaire.done_greeting_name').replace('{name}', firstName)
-        : t('questionnaire.done_greeting');
-      const bodyText = selectedPlan
-        ? t('questionnaire.done_body_plan').replace('{plan}', planName)
-        : t('questionnaire.done_body');
       return (
-        <div className="text-center py-6 space-y-6">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-2">
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-primary"
-            >
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold text-card-foreground">{greeting}</h3>
-            <p className="text-muted-foreground mt-2 max-w-sm mx-auto text-sm">{bodyText}</p>
-          </div>
-          <div className="bg-muted/50 rounded-2xl p-4 text-left max-w-xs mx-auto">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-              {t('questionnaire.done_plan_label')}
-            </p>
-            <p className="text-base font-bold text-card-foreground">{planName}</p>
-          </div>
-          <Button size="lg" onClick={handleContactClick} className="w-full sm:w-auto">
-            {t('questionnaire.btn_whatsapp')}
-          </Button>
-          <p className="text-xs text-muted-foreground">
-            {t('questionnaire.done_wait')} <span className="font-medium">{answers.email}</span>
-          </p>
-        </div>
+        <StepResult
+          recommendedPlan={finalPlan!}
+          scores={finalScores ?? ({} as Record<PlanId, number>)}
+          clientName={answers.fullName}
+          onContactClick={handleContactClick}
+        />
       );
     }
     switch (step) {

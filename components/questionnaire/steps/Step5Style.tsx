@@ -93,6 +93,14 @@ export default function Step5Style({ answers, onChange }: Step5Props) {
         onChange={(e) => onChange({ referenceWebsites: e.target.value })}
         rows={2}
       />
+
+      <Textarea
+        label={t('questionnaire.step5_feeling_label')}
+        placeholder={t('questionnaire.step5_feeling_placeholder')}
+        value={answers.visualFeeling}
+        onChange={(e) => onChange({ visualFeeling: e.target.value })}
+        rows={2}
+      />
     </div>
   );
 }

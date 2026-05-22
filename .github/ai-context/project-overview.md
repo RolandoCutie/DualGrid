@@ -8,15 +8,15 @@
 
 ## Main Features
 
-| Feature | Description |
-|---|---|
-| **Landing Page** | Hero, plans section, process section, differentials. |
-| **Questionnaire Wizard** | 6-step interactive wizard. Collects client info, business type, goals, budget, style, content availability. Recommends a plan automatically. |
-| **Plan Recommendation Engine** | Scoring system in `lib/recommendation.ts`. Weights by business type, budget, goals, desired pages. |
-| **Plans Catalog** | 5 plans defined in `lib/plans.ts`: Landing, Menú QR, Portfolio, Restaurant, Custom. |
-| **Admin Dashboard** | Protected area. Manages clients, contracts, invoices, questionnaires. |
-| **Bilingual UI (i18n)** | EN/ES via `LanguageProvider`. Strings in `app/i18n/[locale].json`. |
-| **Dark / Light Mode** | ThemeProvider with CSS variables. |
+| Feature                        | Description                                                                                                                                                                                                                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Landing Page**               | Hero, plans section, process section, differentials.                                                                                                                                                                                                                             |
+| **Questionnaire Wizard**       | 6-step interactive wizard. Collects: contact info (+ referral source), business type/age/services, goals + CTA action + differentiation, budget/timeline/CMS needs/success definition, visual style + feeling, content + experience + concerns. Recommends a plan automatically. |
+| **Plan Recommendation Engine** | Scoring system in `lib/recommendation.ts`. Weights by business type, budget, goals, desired pages, CMS need, primary action, and business age.                                                                                                                                   |
+| **Plans Catalog**              | 5 plans defined in `lib/plans.ts`: Landing, Menú QR, Portfolio, Restaurant, Custom.                                                                                                                                                                                              |
+| **Admin Dashboard**            | Protected area. Manages clients, contracts, invoices, questionnaires.                                                                                                                                                                                                            |
+| **Bilingual UI (i18n)**        | EN/ES via `LanguageProvider`. Strings in `app/i18n/[locale].json`.                                                                                                                                                                                                               |
+| **Dark / Light Mode**          | ThemeProvider with CSS variables.                                                                                                                                                                                                                                                |
 
 ---
 

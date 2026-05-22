@@ -67,31 +67,44 @@ export interface QuestionnaireAnswers {
   businessName: string;
   email: string;
   phone: string;
+  referralSource: 'social_media' | 'referral' | 'google' | 'other' | '';
 
   // Step 2 – Business
   businessType: BusinessType | '';
   businessDescription: string;
+  businessAge: 'new' | 'under_1' | '1_3' | '3_5' | 'over_5' | '';
+  mainServices: string;
   onlinePresence: 'none' | 'social_only' | 'has_website' | '';
+  targetAudience: string;
 
   // Step 3 – Goals
   primaryGoal: PrimaryGoal | '';
   primaryAction: string;
   desiredPages: string[];
+  specialFeatures: string[];
+  differentiation: string;
 
   // Step 4 – Budget & timing
   budget: BudgetRange | '';
   deadline: string;
   hasDomain: boolean;
+  needsCMS: 'frequently' | 'occasionally' | 'no' | '';
+  successDefinition: string;
 
   // Step 5 – Visual style
   visualStyle: VisualStyle[];
   hasLogo: boolean;
   brandColors: string;
   referenceWebsites: string;
+  visualFeeling: string;
 
   // Step 6 – Content
   hasPhotos: boolean;
   hasTexts: boolean;
+  socialMedia: string;
+  siteLanguages: string;
+  priorWebExperience: 'yes' | 'no' | '';
+  concerns: string;
   extraNotes: string;
 }
 

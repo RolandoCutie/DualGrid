@@ -151,6 +151,90 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
     scores.blog += 25;
   }
 
+  // ─── Special features signals ──────────────────────────────────────────────
+  if (answers.specialFeatures.includes('booking')) {
+    scores.restaurant += 20;
+    scores.wp_business += 10;
+    scores.custom += 10;
+  }
+  if (answers.specialFeatures.includes('newsletter')) {
+    scores.blog += 20;
+    scores.wp_business += 10;
+  }
+  if (answers.specialFeatures.includes('multilang')) {
+    scores.custom += 25;
+    scores.wp_business += 10;
+  }
+  if (answers.specialFeatures.includes('live_chat')) {
+    scores.wp_business += 10;
+    scores.custom += 15;
+  }
+  if (answers.specialFeatures.includes('map')) {
+    scores.restaurant += 10;
+    scores.wp_business += 5;
+  }
+  if (answers.specialFeatures.includes('social_feed')) {
+    scores.blog += 10;
+    scores.portfolio += 10;
+    scores.wp_business += 5;
+  }
+  if (answers.specialFeatures.includes('gallery')) {
+    scores.portfolio += 15;
+    scores.restaurant += 10;
+    scores.blog += 5;
+  }
+  if (answers.specialFeatures.includes('video_banner')) {
+    scores.portfolio += 10;
+    scores.landing += 5;
+    scores.restaurant += 5;
+  }
+  if (answers.specialFeatures.includes('faq')) {
+    scores.wp_business += 10;
+    scores.landing += 5;
+  }
+
+  // ─── CMS need signals ─────────────────────────────────────────────────────
+  if (answers.needsCMS === 'frequently') {
+    scores.menu_qr += 15;
+    scores.restaurant += 10;
+    scores.wp_business += 15;
+    scores.blog += 10;
+  }
+  if (answers.needsCMS === 'occasionally') {
+    scores.wp_business += 5;
+    scores.restaurant += 5;
+  }
+
+  // ─── Primary action signals ───────────────────────────────────────────────
+  if (answers.primaryAction === 'book_appointment') {
+    scores.restaurant += 15;
+    scores.custom += 10;
+  }
+  if (answers.primaryAction === 'buy_product') {
+    scores.ecommerce_store += 20;
+    scores.custom += 10;
+  }
+  if (answers.primaryAction === 'view_portfolio') {
+    scores.portfolio += 20;
+  }
+  if (answers.primaryAction === 'request_quote') {
+    scores.wp_business += 15;
+    scores.landing += 10;
+  }
+  if (answers.primaryAction === 'subscribe') {
+    scores.blog += 20;
+  }
+
+  // ─── Business age signals ─────────────────────────────────────────────────
+  if (answers.businessAge === 'new' || answers.businessAge === 'under_1') {
+    scores.landing += 15;
+    scores.menu_qr += 5;
+  }
+  if (answers.businessAge === 'over_5') {
+    scores.wp_business += 10;
+    scores.custom += 5;
+  }
+
   // ─── Find winner ──────────────────────────────────────────────────────────
   const recommended = (Object.keys(scores) as PlanId[]).reduce((a, b) =>
     scores[a] >= scores[b] ? a : b,

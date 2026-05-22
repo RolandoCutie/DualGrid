@@ -1,8 +1,9 @@
 'use client';
 
 import { Input } from '@/components/ui/Input';
-import { useLanguage } from '@/components/ui/LanguageProvider';
+import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { Textarea } from '@/components/ui/Textarea';
+import { cn } from '@/lib/utils';
 import type { QuestionnaireAnswers } from '@/types';
 
 interface Step1Props {
@@ -11,7 +12,10 @@ interface Step1Props {
 }
 
 export default function Step1Contact({ answers, onChange }: Step1Props) {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
+  const q = DICTS[locale].questionnaire as Record<string, unknown>;
+  const referralOptions = q.step1_referral_options as Record<string, string>;
+
   return (
     <div className="space-y-5">
       <div>
@@ -59,6 +63,34 @@ export default function Step1Contact({ answers, onChange }: Step1Props) {
         onChange={(e) => onChange({ businessDescription: e.target.value })}
         rows={3}
       />
+
+      {/* Referral source */}
+      <div>
+        <p className="text-sm font-medium text-card-foreground mb-3">
+          {t('questionnaire.step1_referral_label')}
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {Object.entries(referralOptions).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() =>
+                onChange({
+                  referralSource: id as QuestionnaireAnswers['referralSource'],
+                })
+              }
+              className={cn(
+                'px-3 py-2 rounded-xl border-2 text-sm font-medium text-left transition-all duration-200 cursor-pointer',
+                answers.referralSource === id
+                  ? 'border-primary bg-primary/5 text-primary'
+                  : 'border-border text-card-foreground hover:border-primary/50',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

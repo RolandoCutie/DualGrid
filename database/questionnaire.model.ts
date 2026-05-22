@@ -37,7 +37,16 @@ const QuestionnaireSchema = new Schema<IQuestionnaireDoc>(
     answers: { type: Schema.Types.Mixed, required: true },
     recommendedPlan: {
       type: String,
-      enum: ['landing', 'portfolio', 'menu_qr', 'restaurant', 'custom'],
+      enum: [
+        'landing',
+        'portfolio',
+        'menu_qr',
+        'restaurant',
+        'wp_business',
+        'ecommerce_store',
+        'blog',
+        'custom',
+      ],
       required: true,
     },
     score: { type: Schema.Types.Mixed, default: {} },

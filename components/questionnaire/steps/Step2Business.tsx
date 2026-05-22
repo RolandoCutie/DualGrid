@@ -1,6 +1,7 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import { Textarea } from '@/components/ui/Textarea';
 import { cn } from '@/lib/utils';
 import type { BusinessType, QuestionnaireAnswers } from '@/types';
 
@@ -27,6 +28,7 @@ export default function Step2Business({ answers, onChange }: Step2Props) {
     string,
     { label: string; desc: string }
   >;
+  const businessAgeOptions = q.step2_age as Record<string, string>;
 
   return (
     <div className="space-y-6">
@@ -35,6 +37,7 @@ export default function Step2Business({ answers, onChange }: Step2Props) {
         <p className="text-sm text-muted-foreground mt-1">{t('questionnaire.step2_subtitle')}</p>
       </div>
 
+      {/* Business type */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {Object.entries(businessTypes).map(([id, bt]) => (
           <button
@@ -55,6 +58,40 @@ export default function Step2Business({ answers, onChange }: Step2Props) {
         ))}
       </div>
 
+      {/* Business age */}
+      <div>
+        <p className="text-sm font-medium text-card-foreground mb-3">
+          {t('questionnaire.step2_age_label')}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {Object.entries(businessAgeOptions).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => onChange({ businessAge: id as QuestionnaireAnswers['businessAge'] })}
+              className={cn(
+                'px-3 py-1.5 rounded-full text-xs font-medium border-2 transition-all duration-200 cursor-pointer',
+                answers.businessAge === id
+                  ? 'border-primary bg-primary text-primary-foreground'
+                  : 'border-border text-card-foreground hover:border-primary/50',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main services */}
+      <Textarea
+        label={t('questionnaire.step2_services_label')}
+        placeholder={t('questionnaire.step2_services_placeholder')}
+        value={answers.mainServices}
+        onChange={(e) => onChange({ mainServices: e.target.value })}
+        rows={3}
+      />
+
+      {/* Online presence */}
       <div>
         <p className="text-sm font-medium text-card-foreground mb-3">
           {t('questionnaire.step2_presence_label')}

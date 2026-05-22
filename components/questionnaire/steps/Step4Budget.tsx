@@ -1,6 +1,7 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import { Textarea } from '@/components/ui/Textarea';
 import { cn } from '@/lib/utils';
 import type { BudgetRange, QuestionnaireAnswers } from '@/types';
 
@@ -14,6 +15,7 @@ export default function Step4Budget({ answers, onChange }: Step4Props) {
   const q = DICTS[locale].questionnaire as Record<string, unknown>;
   const budgetsMap = q.step4_budgets as Record<string, { label: string; range: string }>;
   const deadlinesMap = q.step4_deadlines as Record<string, string>;
+  const cmsMap = q.step4_cms as Record<string, string>;
 
   return (
     <div className="space-y-6">
@@ -96,6 +98,39 @@ export default function Step4Budget({ answers, onChange }: Step4Props) {
           )}
         </div>
       </div>
+
+      {/* CMS need */}
+      <div>
+        <p className="text-sm font-medium text-card-foreground mb-3">
+          {t('questionnaire.step4_cms_label')}
+        </p>
+        <div className="flex flex-col gap-2">
+          {Object.entries(cmsMap).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => onChange({ needsCMS: id as QuestionnaireAnswers['needsCMS'] })}
+              className={cn(
+                'w-full text-left px-4 py-2.5 rounded-xl border-2 text-sm font-medium transition-all duration-200 cursor-pointer',
+                answers.needsCMS === id
+                  ? 'border-primary bg-primary/5 text-primary'
+                  : 'border-border text-card-foreground hover:border-primary/50',
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Success definition */}
+      <Textarea
+        label={t('questionnaire.step4_success_label')}
+        placeholder={t('questionnaire.step4_success_placeholder')}
+        value={answers.successDefinition}
+        onChange={(e) => onChange({ successDefinition: e.target.value })}
+        rows={2}
+      />
     </div>
   );
 }
