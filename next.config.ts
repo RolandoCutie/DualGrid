@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // API routes must never be cached — responses contain live data.
+        source: '/api/(.*)',
+        headers: [{ key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' }],
+      },
+      {
         // Security headers for all routes
         source: '/(.*)',
         headers: [

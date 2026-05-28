@@ -8,6 +8,7 @@ interface Project {
   _id: string;
   name: string;
   description: string;
+  category: string;
   technologies: string[];
   images: string[];
   link?: string;
@@ -22,20 +23,30 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
 
-  // Collect unique technologies across all projects
-  const allTechs = useMemo(() => {
-    const set = new Set<string>();
-    projects.forEach((p) => p.technologies.forEach((tech) => set.add(tech)));
-    return Array.from(set).sort();
+  // Collect unique categories present in actual projects (preserve insertion order)
+  const availableCategories = useMemo(() => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    projects.forEach((p) => {
+      if (p.category && !seen.has(p.category)) {
+        seen.add(p.category);
+        result.push(p.category);
+      }
+    });
+    return result;
   }, [projects]);
 
   const filtered = useMemo(
-    () =>
-      activeFilter === 'all'
-        ? projects
-        : projects.filter((p) => p.technologies.includes(activeFilter)),
+    () => (activeFilter === 'all' ? projects : projects.filter((p) => p.category === activeFilter)),
     [projects, activeFilter],
   );
+
+  // Translate a category key to the current language label
+  const categoryLabel = (key: string): string => {
+    const label = t(`portfolio.categories.${key}`);
+    // Fallback: capitalise the raw key if translation is missing
+    return label !== `portfolio.categories.${key}` ? label : key.replace(/_/g, ' ');
+  };
 
   return (
     <section id="portafolio" className="py-24 bg-muted/20">
@@ -51,8 +62,8 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
           <p className="text-muted-foreground max-w-xl mx-auto">{t('portfolio.subtitle')}</p>
         </div>
 
-        {/* Filter pills */}
-        {allTechs.length > 0 && (
+        {/* Filter pills — by project category (user-friendly) */}
+        {availableCategories.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2 mb-10">
             <button
               onClick={() => setActiveFilter('all')}
@@ -64,17 +75,17 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
             >
               {t('portfolio.filter_all')}
             </button>
-            {allTechs.map((tech) => (
+            {availableCategories.map((cat) => (
               <button
-                key={tech}
-                onClick={() => setActiveFilter(tech)}
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors duration-150 ${
-                  activeFilter === tech
+                  activeFilter === cat
                     ? 'bg-primary text-primary-foreground border-primary'
                     : 'bg-card text-muted-foreground border-border hover:border-primary/50 hover:text-card-foreground'
                 }`}
               >
-                {tech}
+                {categoryLabel(cat)}
               </button>
             ))}
           </div>
@@ -86,7 +97,12 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => (
-              <ProjectCard key={project._id} project={project} t={t} />
+              <ProjectCard
+                key={project._id}
+                project={project}
+                t={t}
+                categoryLabel={categoryLabel}
+              />
             ))}
           </div>
         )}
@@ -95,7 +111,15 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   );
 }
 
-function ProjectCard({ project, t }: { project: Project; t: (key: string) => string }) {
+function ProjectCard({
+  project,
+  t,
+  categoryLabel,
+}: {
+  project: Project;
+  t: (key: string) => string;
+  categoryLabel: (key: string) => string;
+}) {
   const [imgIdx, setImgIdx] = useState(0);
   const hasImages = project.images.length > 0;
 
@@ -147,17 +171,12 @@ function ProjectCard({ project, t }: { project: Project; t: (key: string) => str
           {project.description}
         </p>
 
-        {/* Tech badges */}
-        {project.technologies.length > 0 && (
+        {/* Category badge */}
+        {project.category && (
           <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
-            {project.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/8 text-primary border border-primary/20"
-              >
-                {tech}
-              </span>
-            ))}
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/8 text-primary border border-primary/20">
+              {categoryLabel(project.category)}
+            </span>
           </div>
         )}
 

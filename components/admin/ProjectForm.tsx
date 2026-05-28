@@ -2,14 +2,27 @@
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+const CATEGORY_OPTIONS = [
+  { value: 'landing', label: 'Landing Page' },
+  { value: 'ecommerce', label: 'Tienda Online' },
+  { value: 'restaurant', label: 'Restaurante' },
+  { value: 'portfolio', label: 'Portafolio' },
+  { value: 'blog', label: 'Blog' },
+  { value: 'corporate', label: 'Sitio Empresarial' },
+  { value: 'menu_qr', label: 'Menú QR' },
+  { value: 'custom', label: 'Proyecto Personalizado' },
+];
 
 interface ProjectFormData {
   name: string;
   slug: string;
   description: string;
+  category: string;
   technologies: string; // comma-separated in UI
   images: string; // comma-separated in UI
   link: string;
@@ -18,7 +31,9 @@ interface ProjectFormData {
 }
 
 interface ProjectFormProps {
-  defaultValues?: Partial<ProjectFormData & { technologies: string[]; images: string[] }>;
+  defaultValues?: Partial<
+    ProjectFormData & { technologies: string[]; images: string[]; category: string }
+  >;
   projectId?: string;
 }
 
@@ -37,6 +52,7 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
     name: defaultValues?.name ?? '',
     slug: defaultValues?.slug ?? '',
     description: defaultValues?.description ?? '',
+    category: defaultValues?.category ?? 'custom',
     technologies: toCommaSeparated(defaultValues?.technologies),
     images: toCommaSeparated(defaultValues?.images),
     link: defaultValues?.link ?? '',
@@ -68,6 +84,7 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
       name: form.name,
       slug: form.slug,
       description: form.description,
+      category: form.category,
       technologies: form.technologies
         .split(',')
         .map((t) => t.trim())
@@ -124,11 +141,19 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
         rows={4}
         placeholder="Descripción del proyecto..."
       />
+      <Select
+        label="Categoría del proyecto"
+        value={form.category}
+        onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+        options={CATEGORY_OPTIONS}
+        placeholder="Selecciona una categoría"
+      />
       <Input
-        label="Tecnologías (separadas por coma)"
+        label="Stack técnico (referencia interna, no se muestra al cliente)"
         value={form.technologies}
         onChange={set('technologies')}
         placeholder="Next.js, Tailwind CSS, MongoDB"
+        hint="Campo opcional. Solo visible en el panel admin."
       />
       <Input
         label="Imágenes (URLs separadas por coma)"

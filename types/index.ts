@@ -77,9 +77,9 @@ export interface QuestionnaireAnswers {
   onlinePresence: 'none' | 'social_only' | 'has_website' | '';
   targetAudience: string;
 
-  // Step 3 – Goals
-  primaryGoal: PrimaryGoal | '';
-  primaryAction: string;
+  // Step 3 – Goals (multi-select up to 3)
+  primaryGoal: PrimaryGoal[];
+  primaryAction: string[];
   desiredPages: string[];
   specialFeatures: string[];
   differentiation: string;
@@ -91,16 +91,25 @@ export interface QuestionnaireAnswers {
   needsCMS: 'frequently' | 'occasionally' | 'no' | '';
   successDefinition: string;
 
-  // Step 5 – Visual style
+  // Step 5 – Visual style & branding identity
   visualStyle: VisualStyle[];
   hasLogo: boolean;
   brandColors: string;
   referenceWebsites: string;
   visualFeeling: string;
+  // Branding identity (new)
+  brandEssence: string;
+  brandValues: string;
+  brandNoDos: string;
+  logoSpecificElements: string;
+  priorBrandPresence: string;
+  logoWords: string;
+  logoInspiration: string;
 
   // Step 6 – Content
   hasPhotos: boolean;
   hasTexts: boolean;
+  clientContentDeadline: string;
   socialMedia: string;
   siteLanguages: string;
   priorWebExperience: 'yes' | 'no' | '';
@@ -147,6 +156,7 @@ export interface IContract {
   services: ContractService[];
   totalAmount: number;
   advanceAmount: number;
+  paidAmount: number;
   status: ContractStatus;
   startDate: string;
   deliveryDate: string;
@@ -167,6 +177,8 @@ export interface InvoiceItem {
   total: number;
 }
 
+export type PaymentMethod = 'cash' | 'bank_transfer' | 'paypal' | 'card' | 'crypto' | 'other';
+
 export interface IInvoice {
   _id?: string;
   invoiceNumber: string;
@@ -178,6 +190,8 @@ export interface IInvoice {
   taxRate: number;
   taxAmount: number;
   totalAmount: number;
+  paidAt?: string;
+  paymentMethod?: PaymentMethod;
   status: InvoiceStatus;
   issueDate: string;
   dueDate: string;

@@ -310,7 +310,7 @@
     },
     "step3_title": "Website goals",
     "step3_subtitle": "What do you want to achieve with your online presence?",
-    "step3_goal_label": "Primary goal",
+    "step3_goal_label": "Primary goals (select up to 3)",
     "step3_action_label": "What primary action do you want visitors to take?",
     "step3_actions": {
       "whatsapp_contact": "💬 Contact me via WhatsApp",
@@ -417,6 +417,22 @@
       "vintage": { "label": "Vintage", "desc": "Retro, nostalgic" },
       "fun": { "label": "Fun", "desc": "Youthful, dynamic" }
     },
+    "step5_branding_title": "🎨 Visual Identity (Branding)",
+    "step5_branding_subtitle": "If you also need logo or brand identity design, these questions help us capture your brand essence.",
+    "step5_brand_essence_label": "What is the essence of your business in 3 words?",
+    "step5_brand_essence_placeholder": "E.g.: adventure, luxury, cultural · fun, family, accessible",
+    "step5_brand_values_label": "What values or feelings do you want the brand to convey?",
+    "step5_brand_values_placeholder": "E.g.: trust, adrenaline, relaxation, history, warmth...",
+    "step5_brand_nodos_label": "Is there any color, symbol or concept you definitely do NOT want? (optional)",
+    "step5_brand_nodos_placeholder": "E.g.: no red color, nothing too modern, avoid religious symbols...",
+    "step5_logo_words_label": "What words should be included in the logo? (optional)",
+    "step5_logo_words_placeholder": "E.g.: company name + slogan, name only, initials...",
+    "step5_logo_elements_label": "Is there a specific element you want to include in the logo? (optional)",
+    "step5_logo_elements_placeholder": "E.g.: a boat, the mountains from the old logo, a palm tree...",
+    "step5_prior_brand_label": "Have you used any prior visual identity for your business? (optional)",
+    "step5_prior_brand_placeholder": "Tell us about symbols, colors or visual environments you've used before to represent your business.",
+    "step5_logo_inspiration_label": "What logos or brands do you like and why? (optional)",
+    "step5_logo_inspiration_placeholder": "You can include names, URLs of competitor pages, images or any brand that inspires you.",
     "step6_title": "Available content",
     "step6_subtitle": "What materials do you have ready?",
     "step6_photos_label": "Do you have professional photos?",
@@ -430,6 +446,8 @@
     "step6_notes_placeholder": "Any additional details, special deadlines, or questions...",
     "step6_social_label": "Business social media (optional)",
     "step6_social_placeholder": "E.g.: @yourbusiness on Instagram, facebook.com/yourbusiness...",
+    "step6_content_deadline_label": "What content will you provide and by when? (optional)",
+    "step6_content_deadline_placeholder": "E.g.: I have the copy ready, photos in 2 weeks, the logo is being designed...",
     "step6_lang_label": "What language(s) should the site be in?",
     "step6_lang_es": "🇪🇸 Spanish only",
     "step6_lang_en": "🇺🇸 English only",
@@ -476,6 +494,16 @@
     "filter_all": "All",
     "visit_site": "Visit site",
     "technologies": "Technologies",
-    "no_projects": "No projects yet. Check back soon!"
+    "no_projects": "No projects yet. Check back soon!",
+    "categories": {
+      "landing": "Landing Page",
+      "ecommerce": "Online Store",
+      "restaurant": "Restaurant",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "corporate": "Corporate Website",
+      "menu_qr": "QR Menu",
+      "custom": "Custom Project"
+    }
   }
 }

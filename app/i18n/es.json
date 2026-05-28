@@ -312,7 +312,7 @@
     "step2_audience_placeholder": "Ej: mujeres entre 25-40 años, empresas locales, turistas extranjeros...",
     "step3_title": "Objetivos del sitio web",
     "step3_subtitle": "¿Qué quieres lograr con tu presencia online?",
-    "step3_goal_label": "Objetivo principal",
+    "step3_goal_label": "Objetivos principales (selecciona hasta 3)",
     "step3_action_label": "¿Qué acción principal quieres que realicen los visitantes?",
     "step3_actions": {
       "whatsapp_contact": "💬 Contactarme por WhatsApp",
@@ -405,7 +405,7 @@
     "step5_references_label": "Sitios web que te gusten (referencias)",
     "step5_references_placeholder": "Comparte 1-3 URLs de sitios que admires...",
     "step5_feeling_label": "¿Qué sensación quieres transmitir? (opcional)",
-    "step5_feeling_placeholder": "Ej: \"Quiero que mis clientes sientan confianza y profesionalismo\" o \"Quiero que sientan que entran a un lugar acogedor\"",
+    "step5_feeling_placeholder": "Ej: «Quiero que mis clientes sientan confianza y profesionalismo» o «Quiero que sientan que entran a un lugar acogedor»",
     "step5_yes": "Sí",
     "step5_no": "No",
     "step5_styles": {
@@ -419,6 +419,22 @@
       "vintage": { "label": "Vintage", "desc": "Retro, nostálgico" },
       "fun": { "label": "Divertido", "desc": "Juvenil, dinámico" }
     },
+    "step5_branding_title": "🎨 Identidad Visual (Branding)",
+    "step5_branding_subtitle": "Si también necesitas diseño de logo o identidad visual, estas preguntas nos ayudan a capturar tu esencia de marca.",
+    "step5_brand_essence_label": "¿Cuál es la esencia de tu negocio en 3 palabras?",
+    "step5_brand_essence_placeholder": "Ej: aventura, lujo, cultural · divertido, familiar, accesible",
+    "step5_brand_values_label": "¿Qué valores o sensaciones quieres que transmita la marca?",
+    "step5_brand_values_placeholder": "Ej: confianza, adrenalina, relax, historia, calidez...",
+    "step5_brand_nodos_label": "¿Hay algún color, símbolo o concepto que definitivamente NO quieras? (opcional)",
+    "step5_brand_nodos_placeholder": "Ej: no quiero el color rojo, nada demasiado moderno, evitar símbolos religiosos...",
+    "step5_logo_words_label": "¿Qué palabras deben incluirse en el logo? (opcional)",
+    "step5_logo_words_placeholder": "Ej: nombre de la empresa + slogan, solo el nombre, iniciales...",
+    "step5_logo_elements_label": "¿Hay algún elemento específico que quieras incluir en el logo? (opcional)",
+    "step5_logo_elements_placeholder": "Ej: un barco, las montañas del logo anterior, una palma...",
+    "step5_prior_brand_label": "¿Has usado antes algún modo de autorrepresentación? (opcional)",
+    "step5_prior_brand_placeholder": "Cuéntanos sobre símbolos, colores o entornos visuales que hayas usado antes para representar tu negocio.",
+    "step5_logo_inspiration_label": "¿Qué logos o marcas te gustan y por qué? (opcional)",
+    "step5_logo_inspiration_placeholder": "Puedes incluir nombres, URLs de páginas de competencia, imágenes o cualquier marca que te inspire.",
     "step6_title": "Contenido disponible",
     "step6_subtitle": "¿Qué materiales tienes listos?",
     "step6_photos_label": "¿Tienes fotos profesionales?",
@@ -432,6 +448,8 @@
     "step6_notes_placeholder": "Cualquier detalle adicional sobre tu proyecto, plazos especiales, o preguntas que tengas...",
     "step6_social_label": "Redes sociales del negocio (opcional)",
     "step6_social_placeholder": "Ej: @tunegocio en Instagram, facebook.com/tunegocio...",
+    "step6_content_deadline_label": "¿Qué contenido vas a aportar tú y para cuándo? (opcional)",
+    "step6_content_deadline_placeholder": "Ej: tengo textos listos, las fotos las entrego en 2 semanas, el logo lo están diseñando...",
     "step6_lang_label": "¿En qué idioma(s) debe estar el sitio?",
     "step6_lang_es": "🇪🇸 Solo español",
     "step6_lang_en": "🇺🇸 Solo inglés",
@@ -478,6 +496,16 @@
     "filter_all": "Todos",
     "visit_site": "Ver sitio",
     "technologies": "Tecnologías",
-    "no_projects": "No hay proyectos todavía. ¡Vuelve pronto!"
+    "no_projects": "No hay proyectos todavía. ¡Vuelve pronto!",
+    "categories": {
+      "landing": "Landing Page",
+      "ecommerce": "Tienda Online",
+      "restaurant": "Restaurante",
+      "portfolio": "Portafolio",
+      "blog": "Blog",
+      "corporate": "Sitio Empresarial",
+      "menu_qr": "Menú QR",
+      "custom": "Proyecto Personalizado"
+    }
   }
 }

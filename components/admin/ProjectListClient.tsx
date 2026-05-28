@@ -3,10 +3,21 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+const CATEGORY_LABELS: Record<string, string> = {
+  landing: 'Landing Page',
+  ecommerce: 'Tienda Online',
+  restaurant: 'Restaurante',
+  portfolio: 'Portafolio',
+  blog: 'Blog',
+  corporate: 'Sitio Empresarial',
+  menu_qr: 'Menú QR',
+  custom: 'Proyecto Personalizado',
+};
+
 export interface ProjectRow {
   _id: string;
   name: string;
-  technologies: string[];
+  category: string;
   link: string | null;
   featured: boolean;
 }
@@ -17,15 +28,17 @@ interface Props {
 
 export default function ProjectListClient({ projects }: Props) {
   const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
   const [featuredFilter, setFeaturedFilter] = useState('');
 
   const filtered = projects.filter((p) => {
     const matchSearch =
       !search ||
       p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.technologies.some((t) => t.toLowerCase().includes(search.toLowerCase()));
+      (CATEGORY_LABELS[p.category] ?? p.category).toLowerCase().includes(search.toLowerCase());
+    const matchCategory = !categoryFilter || p.category === categoryFilter;
     const matchFeatured = !featuredFilter || (featuredFilter === 'yes' ? p.featured : !p.featured);
-    return matchSearch && matchFeatured;
+    return matchSearch && matchCategory && matchFeatured;
   });
 
   return (
@@ -34,11 +47,23 @@ export default function ProjectListClient({ projects }: Props) {
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
         <input
           type="text"
-          placeholder="Buscar por nombre o tecnología…"
+          placeholder="Buscar por nombre…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
         />
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+        >
+          <option value="">Todas las categorías</option>
+          {Object.entries(CATEGORY_LABELS).map(([val, label]) => (
+            <option key={val} value={val}>
+              {label}
+            </option>
+          ))}
+        </select>
         <select
           value={featuredFilter}
           onChange={(e) => setFeaturedFilter(e.target.value)}
@@ -56,9 +81,7 @@ export default function ProjectListClient({ projects }: Props) {
           <thead className="bg-muted/50">
             <tr>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Nombre</th>
-              <th className="text-left px-4 py-3 font-semibold text-card-foreground">
-                Tecnologías
-              </th>
+              <th className="text-left px-4 py-3 font-semibold text-card-foreground">Categoría</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Enlace</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Destacado</th>
               <th className="px-4 py-3" />
@@ -75,8 +98,10 @@ export default function ProjectListClient({ projects }: Props) {
             {filtered.map((p) => (
               <tr key={p._id} className="hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3 font-medium text-card-foreground">{p.name}</td>
-                <td className="px-4 py-3 text-muted-foreground">
-                  {p.technologies.length > 0 ? p.technologies.join(', ') : '—'}
+                <td className="px-4 py-3">
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/8 text-primary border border-primary/20">
+                    {CATEGORY_LABELS[p.category] ?? p.category ?? '—'}
+                  </span>
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">
                   {p.link ? (

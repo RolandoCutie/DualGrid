@@ -5,6 +5,7 @@ import ProjectForm from '@/components/admin/ProjectForm';
 import Project from '@/database/project.model';
 import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
+import mongoose from 'mongoose';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = { title: 'Editar proyecto' };
 export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   await requireAdminSession();
   const { id } = await params;
+  if (!mongoose.isValidObjectId(id)) notFound();
   await connectDB();
 
   const project = await Project.findById(id).lean();

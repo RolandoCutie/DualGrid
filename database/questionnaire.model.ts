@@ -10,8 +10,8 @@ export interface IQuestionnaireDoc extends Document {
     businessType: BusinessType | '';
     businessDescription: string;
     onlinePresence: 'none' | 'social_only' | 'has_website' | '';
-    primaryGoal: PrimaryGoal | '';
-    primaryAction: string;
+    primaryGoal: PrimaryGoal[] | PrimaryGoal | ''; // array (new) or legacy string
+    primaryAction: string[];
     desiredPages: string[];
     budget: BudgetRange | '';
     deadline: string;
@@ -23,8 +23,33 @@ export interface IQuestionnaireDoc extends Document {
     hasPhotos: boolean;
     hasTexts: boolean;
     extraNotes: string;
+    // Additional fields stored via Mixed schema
+    referralSource?: string;
+    businessAge?: string;
+    mainServices?: string;
+    targetAudience?: string;
+    differentiation?: string;
+    needsCMS?: string;
+    successDefinition?: string;
+    visualFeeling?: string;
+    socialMedia?: string;
+    siteLanguages?: string;
+    priorWebExperience?: string;
+    concerns?: string;
+    specialFeatures?: string[];
+    // Branding identity fields
+    brandEssence?: string;
+    brandValues?: string;
+    brandNoDos?: string;
+    logoSpecificElements?: string;
+    priorBrandPresence?: string;
+    logoWords?: string;
+    logoInspiration?: string;
+    // Content timeline
+    clientContentDeadline?: string;
   };
   recommendedPlan: PlanId;
+  selectedPlan?: PlanId | null;
   score: Record<string, number>;
   status: 'new' | 'reviewed' | 'contacted';
   adminNotes?: string;
@@ -48,6 +73,21 @@ const QuestionnaireSchema = new Schema<IQuestionnaireDoc>(
         'custom',
       ],
       required: true,
+    },
+    selectedPlan: {
+      type: String,
+      enum: [
+        'landing',
+        'portfolio',
+        'menu_qr',
+        'restaurant',
+        'wp_business',
+        'ecommerce_store',
+        'blog',
+        'custom',
+        null,
+      ],
+      default: null,
     },
     score: { type: Schema.Types.Mixed, default: {} },
     status: {

@@ -1,6 +1,7 @@
 import AdminBackButton from '@/components/admin/AdminBackButton';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
+import ConvertToClientButton from '@/components/admin/ConvertToClientButton';
 import QuestionnaireStatusForm from '@/components/admin/QuestionnaireStatusForm';
 import Badge from '@/components/ui/Badge';
 import Questionnaire from '@/database/questionnaire.model';
@@ -20,7 +21,44 @@ const BUSINESS_TYPE_LABELS: Record<string, string> = {
   entrepreneur: 'Emprendedor',
   professional: 'Profesional (médico, abogado, etc.)',
   ecommerce: 'E-commerce',
+  blogger: 'Blogger / Creador de contenido',
   other: 'Otro',
+};
+
+const BUSINESS_AGE_LABELS: Record<string, string> = {
+  new: 'Nuevo (aún no lanzado)',
+  under_1: 'Menos de 1 año',
+  '1_3': '1 – 3 años',
+  '3_5': '3 – 5 años',
+  over_5: 'Más de 5 años',
+};
+
+const REFERRAL_LABELS: Record<string, string> = {
+  social_media: 'Redes sociales',
+  referral: 'Recomendación',
+  google: 'Google',
+  other: 'Otro',
+};
+
+const NEEDS_CMS_LABELS: Record<string, string> = {
+  frequently: 'Frecuentemente (blog, productos)',
+  occasionally: 'Ocasionalmente',
+  no: 'No necesito editar',
+};
+
+const SPECIAL_FEATURES_LABELS: Record<string, string> = {
+  whatsapp_btn: 'Botón WhatsApp',
+  contact_form: 'Formulario de contacto',
+  map: 'Mapa de ubicación',
+  gallery: 'Galería de fotos/videos',
+  video_banner: 'Video en portada',
+  newsletter: 'Suscripción newsletter',
+  booking: 'Reservas / citas online',
+  live_chat: 'Chat en vivo',
+  multilang: 'Sitio multiidioma',
+  reviews: 'Reseñas / testimonios',
+  social_feed: 'Feed de Instagram/redes',
+  faq: 'Preguntas frecuentes',
 };
 
 const BUDGET_LABELS: Record<string, string> = {
@@ -35,10 +73,11 @@ const BUDGET_LABELS: Record<string, string> = {
 const GOAL_LABELS: Record<string, string> = {
   more_clients: 'Conseguir más clientes',
   show_work: 'Mostrar mi trabajo',
-  give_info: 'Dar información',
+  give_info: 'Dar información del negocio',
   credibility: 'Generar credibilidad',
   sell_online: 'Vender online',
-  reservations: 'Tomar reservaciones',
+  reservations: 'Gestionar reservas / citas',
+  grow_audience: 'Crecer mi audiencia',
 };
 
 const STYLE_LABELS: Record<string, string> = {
@@ -70,13 +109,16 @@ const DESIRED_PAGES_LABELS: Record<string, string> = {
   home: 'Inicio',
   about: 'Sobre mí / Nosotros',
   services: 'Servicios',
-  portfolio: 'Portafolio',
-  menu: 'Menú',
-  contact: 'Contacto',
+  portfolio: 'Portafolio / Galería',
+  pricing: 'Precios',
+  testimonials: 'Testimonios',
   blog: 'Blog',
-  shop: 'Tienda',
-  reservations: 'Reservaciones',
+  contact: 'Contacto',
   faq: 'Preguntas frecuentes',
+  menu: 'Menú (restaurante)',
+  shop: 'Tienda online',
+  reservations: 'Reservas / Citas',
+  location: 'Ubicación / Mapa',
 };
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -157,6 +199,14 @@ export default async function QuestionnaireDetailPage({
         <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
         <span className="text-sm text-muted-foreground">Plan recomendado:</span>
         <span className="text-sm font-bold text-primary">{plan?.name || planId}</span>
+        {doc.selectedPlan && doc.selectedPlan !== doc.recommendedPlan && (
+          <>
+            <span className="text-sm text-muted-foreground">· Elegido por el cliente:</span>
+            <span className="text-sm font-bold text-accent-foreground">
+              {PLAN_MAP[doc.selectedPlan]?.name || doc.selectedPlan}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Step 1: Contacto */}
@@ -165,6 +215,13 @@ export default async function QuestionnaireDetailPage({
         <InfoRow label="Nombre del negocio" value={String(answers.businessName || '')} />
         <InfoRow label="Email" value={String(answers.email || '')} />
         <InfoRow label="Teléfono" value={String(answers.phone || '')} />
+        <InfoRow
+          label="¿Cómo nos encontró?"
+          value={
+            REFERRAL_LABELS[String(answers.referralSource || '')] ||
+            String(answers.referralSource || '')
+          }
+        />
       </Section>
 
       {/* Step 2: Negocio */}
@@ -177,9 +234,18 @@ export default async function QuestionnaireDetailPage({
           }
         />
         <InfoRow
+          label="Antigüedad del negocio"
+          value={
+            BUSINESS_AGE_LABELS[String(answers.businessAge || '')] ||
+            String(answers.businessAge || '')
+          }
+        />
+        <InfoRow
           label="Descripción del negocio"
           value={String(answers.businessDescription || '')}
         />
+        <InfoRow label="Servicios principales" value={String(answers.mainServices || '')} />
+        <InfoRow label="Público objetivo" value={String(answers.targetAudience || '')} />
         <InfoRow
           label="Presencia online actual"
           value={
@@ -190,15 +256,38 @@ export default async function QuestionnaireDetailPage({
       </Section>
 
       {/* Step 3: Objetivos */}
-      <Section title="3. Objetivos">
+      <Section title="3. Objetivos y funcionalidades">
         <InfoRow
-          label="Objetivo principal"
+          label="Objetivos principales"
           value={
-            GOAL_LABELS[String(answers.primaryGoal || '')] || String(answers.primaryGoal || '')
+            Array.isArray(answers.primaryGoal)
+              ? (answers.primaryGoal as string[]).map((g) => GOAL_LABELS[g] || g)
+              : answers.primaryGoal
+                ? [GOAL_LABELS[String(answers.primaryGoal)] || String(answers.primaryGoal)]
+                : []
           }
         />
-        <InfoRow label="Acción principal del sitio" value={String(answers.primaryAction || '')} />
+        <InfoRow
+          label="Acción principal del sitio (CTA)"
+          value={
+            Array.isArray(answers.primaryAction)
+              ? answers.primaryAction.join(', ')
+              : String(answers.primaryAction || '')
+          }
+        />
         <InfoRow label="Páginas deseadas" value={desiredPagesRaw} />
+        <InfoRow
+          label="Funcionalidades especiales"
+          value={
+            Array.isArray(answers.specialFeatures)
+              ? (answers.specialFeatures as string[]).map((f) => SPECIAL_FEATURES_LABELS[f] || f)
+              : []
+          }
+        />
+        <InfoRow
+          label="Diferenciación / propuesta de valor"
+          value={String(answers.differentiation || '')}
+        />
       </Section>
 
       {/* Step 4: Presupuesto */}
@@ -212,11 +301,17 @@ export default async function QuestionnaireDetailPage({
           label="¿Ya tiene dominio?"
           value={typeof answers.hasDomain === 'boolean' ? answers.hasDomain : undefined}
         />
+        <InfoRow
+          label="Necesidad de CMS"
+          value={NEEDS_CMS_LABELS[String(answers.needsCMS || '')] || String(answers.needsCMS || '')}
+        />
+        <InfoRow label="Definición de éxito" value={String(answers.successDefinition || '')} />
       </Section>
 
       {/* Step 5: Estilo visual */}
-      <Section title="5. Estilo visual">
+      <Section title="5. Estilo visual y marca">
         <InfoRow label="Estilos preferidos" value={visualStyleRaw} />
+        <InfoRow label="Sensación deseada" value={String(answers.visualFeeling || '')} />
         <InfoRow
           label="¿Tiene logo?"
           value={typeof answers.hasLogo === 'boolean' ? answers.hasLogo : undefined}
@@ -225,8 +320,42 @@ export default async function QuestionnaireDetailPage({
         <InfoRow label="Sitios de referencia" value={String(answers.referenceWebsites || '')} />
       </Section>
 
+      {/* Step 5b: Branding / Identidad Visual */}
+      {(answers.brandEssence ||
+        answers.brandValues ||
+        answers.brandNoDos ||
+        answers.logoWords ||
+        answers.logoSpecificElements ||
+        answers.priorBrandPresence ||
+        answers.logoInspiration) && (
+        <Section title="5b. Identidad Visual (Branding)">
+          <InfoRow
+            label="Esencia del negocio (3 palabras)"
+            value={String(answers.brandEssence || '')}
+          />
+          <InfoRow
+            label="Valores / sensaciones de marca"
+            value={String(answers.brandValues || '')}
+          />
+          <InfoRow label="Lo que NO quiere" value={String(answers.brandNoDos || '')} />
+          <InfoRow label="Palabras en el logo" value={String(answers.logoWords || '')} />
+          <InfoRow
+            label="Elementos específicos para el logo"
+            value={String(answers.logoSpecificElements || '')}
+          />
+          <InfoRow
+            label="Autorrepresentación previa"
+            value={String(answers.priorBrandPresence || '')}
+          />
+          <InfoRow
+            label="Logos / marcas de inspiración"
+            value={String(answers.logoInspiration || '')}
+          />
+        </Section>
+      )}
+
       {/* Step 6: Contenido */}
-      <Section title="6. Contenido disponible">
+      <Section title="6. Contenido y experiencia">
         <InfoRow
           label="¿Tiene fotos propias?"
           value={typeof answers.hasPhotos === 'boolean' ? answers.hasPhotos : undefined}
@@ -235,15 +364,62 @@ export default async function QuestionnaireDetailPage({
           label="¿Tiene textos redactados?"
           value={typeof answers.hasTexts === 'boolean' ? answers.hasTexts : undefined}
         />
+        <InfoRow
+          label="Contenido a aportar y plazo"
+          value={String(answers.clientContentDeadline || '')}
+        />
+        <InfoRow label="Redes sociales" value={String(answers.socialMedia || '')} />
+        <InfoRow label="Idioma(s) del sitio" value={String(answers.siteLanguages || '')} />
+        <InfoRow
+          label="Experiencia previa con web"
+          value={
+            answers.priorWebExperience === 'yes'
+              ? 'Sí'
+              : answers.priorWebExperience === 'no'
+                ? 'No'
+                : String(answers.priorWebExperience || '')
+          }
+        />
+        <InfoRow label="Preocupaciones / dudas" value={String(answers.concerns || '')} />
         <InfoRow label="Notas adicionales" value={String(answers.extraNotes || '')} />
       </Section>
 
-      {/* Status management */}
+      {/* Score breakdown */}
+      {doc.score && Object.keys(doc.score).length > 0 && (
+        <Section title="Puntuación por plan">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
+            {Object.entries(doc.score as Record<string, number>)
+              .sort(([, a], [, b]) => b - a)
+              .map(([pid, pts]) => (
+                <div
+                  key={pid}
+                  className={`rounded-lg px-3 py-2 text-center ${pid === planId ? 'bg-primary/10 border border-primary' : 'bg-muted'}`}
+                >
+                  <p className="text-xs text-muted-foreground">{PLAN_MAP[pid]?.name || pid}</p>
+                  <p
+                    className={`text-lg font-bold ${pid === planId ? 'text-primary' : 'text-card-foreground'}`}
+                  >
+                    {pts}
+                  </p>
+                </div>
+              ))}
+          </div>
+        </Section>
+      )}
+
+      {/* Status management + Convert to client */}
       <QuestionnaireStatusForm
         id={id}
         currentStatus={String(doc.status)}
         currentNotes={doc.adminNotes || ''}
       />
+      <div className="rounded-xl border border-border bg-card p-5 mt-4">
+        <h3 className="font-semibold text-card-foreground mb-1">Acciones rápidas</h3>
+        <p className="text-sm text-muted-foreground mb-3">
+          Convierte este lead en un cliente del CRM con un solo clic.
+        </p>
+        <ConvertToClientButton questionnaireId={id} currentStatus={String(doc.status)} />
+      </div>
     </AdminPageLayout>
   );
 }

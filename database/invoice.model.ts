@@ -1,6 +1,8 @@
 import type { InvoiceStatus } from '@/types';
 import mongoose, { Document, Schema } from 'mongoose';
 
+export type PaymentMethod = 'cash' | 'bank_transfer' | 'paypal' | 'card' | 'crypto' | 'other';
+
 export interface IInvoiceDoc extends Document {
   invoiceNumber: string;
   clientId: mongoose.Types.ObjectId;
@@ -13,6 +15,8 @@ export interface IInvoiceDoc extends Document {
   status: InvoiceStatus;
   issueDate: Date;
   dueDate: Date;
+  paidAt?: Date;
+  paymentMethod?: PaymentMethod;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -45,6 +49,11 @@ const InvoiceSchema = new Schema<IInvoiceDoc>(
     },
     issueDate: { type: Date, required: true },
     dueDate: { type: Date, required: true },
+    paidAt: { type: Date },
+    paymentMethod: {
+      type: String,
+      enum: ['cash', 'bank_transfer', 'paypal', 'card', 'crypto', 'other'],
+    },
     notes: { type: String },
   },
   { timestamps: true },

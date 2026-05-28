@@ -28,8 +28,8 @@ const DEFAULT_ANSWERS: QuestionnaireAnswers = {
   mainServices: '',
   onlinePresence: '',
   targetAudience: '',
-  primaryGoal: '',
-  primaryAction: '',
+  primaryGoal: [],
+  primaryAction: [],
   desiredPages: [],
   specialFeatures: [],
   differentiation: '',
@@ -43,8 +43,16 @@ const DEFAULT_ANSWERS: QuestionnaireAnswers = {
   brandColors: '',
   referenceWebsites: '',
   visualFeeling: '',
+  brandEssence: '',
+  brandValues: '',
+  brandNoDos: '',
+  logoSpecificElements: '',
+  priorBrandPresence: '',
+  logoWords: '',
+  logoInspiration: '',
   hasPhotos: false,
   hasTexts: false,
+  clientContentDeadline: '',
   socialMedia: '',
   siteLanguages: '',
   priorWebExperience: '',
@@ -81,8 +89,9 @@ function buildWhatsAppMessage(answers: QuestionnaireAnswers, planId: PlanId | st
   if (answers.targetAudience) lines.push(`• Público objetivo: ${answers.targetAudience}`);
   lines.push('');
   lines.push(`🎯 *Objetivos y funcionalidades*`);
-  if (answers.primaryGoal) lines.push(`• Objetivo principal: ${answers.primaryGoal}`);
-  if (answers.primaryAction) lines.push(`• Acción CTA: ${answers.primaryAction}`);
+  if (answers.primaryGoal.length)
+    lines.push(`• Objetivo(s) principal(es): ${answers.primaryGoal.join(', ')}`);
+  if (answers.primaryAction.length) lines.push(`• Acción CTA: ${answers.primaryAction.join(', ')}`);
   if (answers.desiredPages.length)
     lines.push(`• Páginas deseadas: ${answers.desiredPages.join(', ')}`);
   if (answers.specialFeatures.length)
@@ -100,12 +109,24 @@ function buildWhatsAppMessage(answers: QuestionnaireAnswers, planId: PlanId | st
   if (answers.visualStyle.length) lines.push(`• Estilo visual: ${answers.visualStyle.join(', ')}`);
   lines.push(`• Tiene logo: ${answers.hasLogo ? 'Sí' : 'No'}`);
   if (answers.brandColors) lines.push(`• Colores de marca: ${answers.brandColors}`);
-  if (answers.referenceWebsites) lines.push(`• Referencias: ${answers.referenceWebsites}`);
+  if (answers.referenceWebsites) lines.push(`• Referencias web: ${answers.referenceWebsites}`);
   if (answers.visualFeeling) lines.push(`• Sensación deseada: ${answers.visualFeeling}`);
+  if (answers.brandEssence)
+    lines.push(`• Esencia del negocio (3 palabras): ${answers.brandEssence}`);
+  if (answers.brandValues) lines.push(`• Valores / sensaciones de marca: ${answers.brandValues}`);
+  if (answers.brandNoDos) lines.push(`• Lo que NO quiere: ${answers.brandNoDos}`);
+  if (answers.logoSpecificElements)
+    lines.push(`• Elementos para el logo: ${answers.logoSpecificElements}`);
+  if (answers.priorBrandPresence)
+    lines.push(`• Autorrepresentación previa: ${answers.priorBrandPresence}`);
+  if (answers.logoWords) lines.push(`• Palabras en el logo: ${answers.logoWords}`);
+  if (answers.logoInspiration) lines.push(`• Logos de inspiración: ${answers.logoInspiration}`);
   lines.push('');
   lines.push(`📁 *Contenido disponible*`);
   lines.push(`• Fotos profesionales: ${answers.hasPhotos ? 'Sí' : 'No'}`);
   lines.push(`• Textos redactados: ${answers.hasTexts ? 'Sí' : 'No'}`);
+  if (answers.clientContentDeadline)
+    lines.push(`• Contenido disponible para: ${answers.clientContentDeadline}`);
   if (answers.siteLanguages) lines.push(`• Idioma del sitio: ${answers.siteLanguages}`);
   if (answers.socialMedia) lines.push(`• Redes sociales: ${answers.socialMedia}`);
   if (answers.priorWebExperience)
@@ -174,6 +195,7 @@ export default function QuestionnaireWizard({
           answers,
           recommendedPlan: plan,
           selectedPlan: selectedPlan ?? null,
+          score: scores ?? {},
         }),
       });
     } catch {

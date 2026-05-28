@@ -23,11 +23,17 @@
 ## Business Logic Rules
 
 1. The public CTA opens a 6-step questionnaire wizard modal.
-2. The wizard scores answers and recommends one of 5 plans.
-3. On submission the questionnaire is saved to MongoDB (`Questionnaire` collection).
-4. The admin can view questionnaire submissions, create clients, contracts, and invoices.
-5. Invoice numbers auto-increment with format `DG-0001`.
-6. Admin access protected by HMAC-SHA256 session tokens via `ADMIN_SECRET_PATH`.
+2. The wizard scores answers and recommends one of 8 plans.
+3. On submission the questionnaire is saved to MongoDB (`Questionnaire` collection) with all 30+ answer fields.
+4. The admin can view ALL questionnaire fields (contact, business age, services, audience, features, CMS needs, success definition, visual feeling, social media, concerns, score breakdown).
+5. A questionnaire can be converted into a Client record via `POST /api/questionnaires/[id]/convert` — auto-marks questionnaire status as 'contacted'.
+6. Questionnaire list has client-side status filter (new / reviewed / contacted).
+7. Invoice numbers auto-increment with format `DG-0001`.
+8. Invoices track `paidAt` (date) and `paymentMethod` (cash/bank_transfer/paypal/card/crypto/other).
+9. Contracts track `paidAmount` (amount actually received, default 0) alongside `advanceAmount`.
+10. Contract `planId` supports all 8 plan types: landing, portfolio, menu_qr, restaurant, wp_business, ecommerce_store, blog, custom.
+11. Admin access protected by HMAC-SHA256 session tokens via `ADMIN_SECRET_PATH`.
+12. Dashboard shows: clients, active contracts, new leads (unreviewed questionnaires), paid revenue, pending revenue (with overdue highlight), net profit (paid revenue − expenses).
 
 ---
 

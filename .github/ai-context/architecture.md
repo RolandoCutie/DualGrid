@@ -16,19 +16,25 @@ app/
 ├── admin/
 │   ├── [secret]/page.tsx   # Hidden admin login
 │   └── dashboard/
-│       ├── page.tsx                        # Dashboard index with stats: clientes, contratos, ingresos, gastos, ganancia neta
+│       ├── page.tsx                        # Dashboard index with stats: clientes, contratos activos, leads nuevos, ingresos cobrados, por cobrar (con vencidas), ganancia neta
 │       ├── clients/page.tsx                # Clients list (table + delete)
 │       ├── contracts/page.tsx              # Contracts list (table + delete)
 │       ├── expenses/page.tsx               # Expenses list (table + total) ← NEW
 │       ├── invoices/page.tsx               # Invoices list (table + delete)
-│       └── questionnaires/page.tsx         # Questionnaire submissions list
+│       └── questionnaires/
+│           ├── page.tsx                    # Questionnaire list with status filter (new/reviewed/contacted)
+│           └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action
 └── api/
     ├── admin/login|logout|session/route.ts
     ├── clients/route.ts + [id]/route.ts
-    ├── contracts/route.ts
+    ├── contracts/route.ts + [id]/route.ts
     ├── expenses/route.ts + [id]/route.ts   # ← NEW: GET|POST|PATCH|DELETE gastos
-    ├── invoices/route.ts
-    └── questionnaires/route.ts
+    ├── invoices/route.ts + [id]/route.ts
+    └── questionnaires/
+        ├── route.ts                        # POST (public submit)
+        └── [id]/
+            ├── route.ts                    # GET|PATCH|DELETE (admin)
+            └── convert/route.ts            # POST: convert questionnaire → Client record
 
 components/
 ├── NavBar.tsx              # Thin server wrapper → NavBarClient
@@ -61,7 +67,9 @@ components/
 │   ├── InvoiceForm.tsx / InvoiceListClient.tsx
 │   ├── ExpenseForm.tsx           # Create/edit expense form ← NEW
 │   ├── ExpenseListClient.tsx     # Expense table with delete + category filter ← NEW
-│   └── QuestionnaireStatusForm.tsx
+│   ├── QuestionnaireListClient.tsx # Client-side list with status filter tabs ← NEW
+│   ├── QuestionnaireStatusForm.tsx # Change status + admin notes
+│   └── ConvertToClientButton.tsx # One-click lead → client conversion ← NEW
 ├── shared/                 # (reserved for cross-feature shared components)
 └── ui/
     ├── Button.tsx           # CVA variants: primary|secondary|outline|ghost|destructive|link
@@ -84,6 +92,7 @@ database/
 ├── contract.model.ts
 ├── expense.model.ts        # IExpenseDoc: description, amount, category, date, notes ← NEW
 ├── invoice.model.ts
+├── project.model.ts        # IProjectDoc: name, slug, description, category, technologies, images, link, featured, order
 ├── questionnaire.model.ts
 └── index.ts                # Re-exports all models
 

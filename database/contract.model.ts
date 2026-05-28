@@ -7,6 +7,7 @@ export interface IContractDoc extends Document {
   services: Array<{ name: string; description: string; price: number }>;
   totalAmount: number;
   advanceAmount: number;
+  paidAmount: number;
   status: ContractStatus;
   startDate: Date;
   deliveryDate: Date;
@@ -30,12 +31,22 @@ const ContractSchema = new Schema<IContractDoc>(
     clientId: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
     planId: {
       type: String,
-      enum: ['landing', 'portfolio', 'menu_qr', 'restaurant', 'custom'],
+      enum: [
+        'landing',
+        'portfolio',
+        'menu_qr',
+        'restaurant',
+        'wp_business',
+        'ecommerce_store',
+        'blog',
+        'custom',
+      ],
       required: true,
     },
     services: [ServiceSchema],
     totalAmount: { type: Number, required: true, min: 0 },
     advanceAmount: { type: Number, required: true, min: 0 },
+    paidAmount: { type: Number, default: 0, min: 0 },
     status: {
       type: String,
       enum: ['draft', 'pending', 'active', 'completed', 'cancelled'],

@@ -4,6 +4,7 @@ import Client from '@/database/client.model';
 import Contract from '@/database/contract.model';
 import Expense from '@/database/expense.model';
 import Invoice from '@/database/invoice.model';
+import Questionnaire from '@/database/questionnaire.model';
 import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import Link from 'next/link';
@@ -63,24 +64,28 @@ export default async function AdminDashboard() {
   await requireAdminSession('/admin/dashboard');
   await connectDB();
 
-  const [totalClients, contractAgg, invoiceAgg, totalExpenses] = await Promise.all([
-    Client.countDocuments(),
-    Contract.aggregate<AggResult>([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
-    Invoice.aggregate<AggResult>([
-      { $group: { _id: '$status', count: { $sum: 1 }, total: { $sum: '$totalAmount' } } },
-    ]),
-    Expense.aggregate<{ total: number }>([
-      { $group: { _id: null, total: { $sum: '$amount' } } },
-    ]).then((r) => r[0]?.total ?? 0),
-  ]);
+  const [totalClients, contractAgg, invoiceAgg, totalExpenses, totalQuestionnaires] =
+    await Promise.all([
+      Client.countDocuments(),
+      Contract.aggregate<AggResult>([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
+      Invoice.aggregate<AggResult>([
+        { $group: { _id: '$status', count: { $sum: 1 }, total: { $sum: '$totalAmount' } } },
+      ]),
+      Expense.aggregate<{ total: number }>([
+        { $group: { _id: null, total: { $sum: '$amount' } } },
+      ]).then((r) => r[0]?.total ?? 0),
+      Questionnaire.countDocuments({ status: 'new' }),
+    ]);
 
   const activeContracts =
     (contractAgg.find((s) => s._id === 'active')?.count ?? 0) +
     (contractAgg.find((s) => s._id === 'pending')?.count ?? 0);
   const paidRevenue = invoiceAgg.find((s) => s._id === 'paid')?.total ?? 0;
-  const unpaidCount =
-    (invoiceAgg.find((s) => s._id === 'sent')?.count ?? 0) +
-    (invoiceAgg.find((s) => s._id === 'overdue')?.count ?? 0);
+  const pendingRevenue =
+    (invoiceAgg.find((s) => s._id === 'sent')?.total ?? 0) +
+    (invoiceAgg.find((s) => s._id === 'overdue')?.total ?? 0);
+  const overdueCount = invoiceAgg.find((s) => s._id === 'overdue')?.count ?? 0;
+  const netProfit = paidRevenue - totalExpenses;
 
   return (
     <AdminPageLayout>
@@ -90,7 +95,7 @@ export default async function AdminDashboard() {
       />
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 mt-6">
         <div className="rounded-2xl border border-border bg-card p-4">
           <p className="text-xs text-muted-foreground mb-1">Clientes</p>
           <p className="text-2xl font-bold text-card-foreground">{totalClients}</p>
@@ -100,9 +105,9 @@ export default async function AdminDashboard() {
           <p className="text-2xl font-bold text-primary">{activeContracts}</p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Por cobrar</p>
-          <p className="text-2xl font-bold text-amber-500">{unpaidCount}</p>
-          <p className="text-xs text-muted-foreground">facturas pendientes</p>
+          <p className="text-xs text-muted-foreground mb-1">Leads nuevos</p>
+          <p className="text-2xl font-bold text-amber-500">{totalQuestionnaires}</p>
+          <p className="text-xs text-muted-foreground">sin revisar</p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-4">
           <p className="text-xs text-muted-foreground mb-1">Ingresos cobrados</p>
@@ -111,18 +116,22 @@ export default async function AdminDashboard() {
           </p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Total gastos</p>
-          <p className="text-xl font-bold text-red-500">
-            ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+          <p className="text-xs text-muted-foreground mb-1">Por cobrar</p>
+          <p className="text-xl font-bold text-amber-500">
+            ${pendingRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
           </p>
+          {overdueCount > 0 && (
+            <p className="text-xs text-red-500 mt-0.5">
+              {overdueCount} vencida{overdueCount > 1 ? 's' : ''}
+            </p>
+          )}
         </div>
         <div className="rounded-2xl border border-border bg-card p-4">
           <p className="text-xs text-muted-foreground mb-1">Ganancia neta</p>
-          <p
-            className={`text-xl font-bold ${paidRevenue - totalExpenses >= 0 ? 'text-green-600' : 'text-red-600'}`}
-          >
-            ${(paidRevenue - totalExpenses).toLocaleString('en-US', { minimumFractionDigits: 0 })}
+          <p className={`text-xl font-bold ${netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            ${netProfit.toLocaleString('en-US', { minimumFractionDigits: 0 })}
           </p>
+          <p className="text-xs text-muted-foreground">cobrado − gastos</p>
         </div>
       </div>
 

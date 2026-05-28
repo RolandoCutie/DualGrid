@@ -5,14 +5,19 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { answers, recommendedPlan, score } = body;
+    const { answers, recommendedPlan, selectedPlan, score } = body;
 
     if (!answers || !recommendedPlan) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     await connectDB();
-    const doc = await Questionnaire.create({ answers, recommendedPlan, score: score || {} });
+    const doc = await Questionnaire.create({
+      answers,
+      recommendedPlan,
+      selectedPlan: selectedPlan ?? null,
+      score: score || {},
+    });
 
     return NextResponse.json({ id: doc._id.toString() }, { status: 201 });
   } catch (err) {

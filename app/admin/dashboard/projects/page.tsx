@@ -17,7 +17,7 @@ export default async function ProjectsPage() {
   const rows: ProjectRow[] = projects.map((p: Record<string, unknown>) => ({
     _id: String(p._id),
     name: String(p.name),
-    technologies: Array.isArray(p.technologies) ? (p.technologies as string[]) : [],
+    category: String((p as { category?: string }).category ?? 'custom'),
     link: p.link ? String(p.link) : null,
     featured: Boolean(p.featured),
   }));

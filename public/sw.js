@@ -7,7 +7,7 @@
 // Next.js JS/CSS chunks in /_next/static/ are auto-invalidated via
 // content-hash URLs — no version bump needed for those.
 
-const CACHE_VERSION = 'dualgrid-v1';
+const CACHE_VERSION = 'dualgrid-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -103,10 +103,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets (_next/static, fonts, images, icons) — cache first
+  // Static assets (_next/static, fonts, local icons) — cache first
+  // NOTE: /_next/image/ is intentionally excluded — Next.js already handles its
+  // HTTP cache headers (immutable CDN URLs). Caching them here can cause stale
+  // optimized images if the source changes. Let the browser HTTP cache handle them.
   if (
     url.pathname.startsWith('/_next/static/') ||
-    url.pathname.startsWith('/_next/image/') ||
     /\.(png|jpg|jpeg|svg|gif|webp|woff|woff2|ttf|otf|ico)$/.test(url.pathname)
   ) {
     event.respondWith(

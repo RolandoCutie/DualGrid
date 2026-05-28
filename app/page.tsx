@@ -31,6 +31,7 @@ export default async function HomePage() {
     _id: string;
     name: string;
     description: string;
+    category: string;
     technologies: string[];
     images: string[];
     link: string;
@@ -44,6 +45,7 @@ export default async function HomePage() {
       _id: String(p._id),
       name: p.name,
       description: p.description,
+      category: (p as { category?: string }).category ?? 'custom',
       technologies: p.technologies ?? [],
       images: p.images ?? [],
       link: p.link ?? '',

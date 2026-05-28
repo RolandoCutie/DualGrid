@@ -109,6 +109,15 @@ export default function Step6Content({ answers, onChange }: Step6Props) {
         onChange={(e) => onChange({ socialMedia: e.target.value })}
       />
 
+      {/* Content deadline */}
+      <Textarea
+        label={t('questionnaire.step6_content_deadline_label')}
+        placeholder={t('questionnaire.step6_content_deadline_placeholder')}
+        value={answers.clientContentDeadline}
+        onChange={(e) => onChange({ clientContentDeadline: e.target.value })}
+        rows={2}
+      />
+
       {/* Prior web experience */}
       <div>
         <p className="text-sm font-medium text-card-foreground mb-3">
