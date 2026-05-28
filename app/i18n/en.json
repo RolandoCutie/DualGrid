@@ -118,12 +118,12 @@
       "name": "Landing Express",
       "tagline": "Fast professional presence",
       "features": [
-        "1 responsive page, custom design",
-        "Speed optimized — Google Core Web Vitals",
-        "Working contact form",
-        "Google Analytics + Meta Pixel included",
-        "WhatsApp, email & direct call buttons",
-        "Domain and hosting configured"
+        "Custom one-page professional design",
+        "Fully responsive for mobile, tablet & desktop",
+        "Contact form to receive client inquiries",
+        "WhatsApp, call & social media buttons",
+        "Fast loading so no visitor leaves before seeing your offer",
+        "Google Analytics included to track your visitors"
       ],
       "ctaLabel": "Get started"
     },
@@ -131,12 +131,12 @@
       "name": "Digital QR Menu",
       "tagline": "Perfect for your restaurant",
       "features": [
-        "Visual management panel — no technical skills needed",
-        "Up to 50 products with photos and prices",
-        "Custom QR code + printable version",
-        "Visual panel to update dishes and prices",
-        "Direct order button via WhatsApp",
-        "Design matching your brand identity"
+        "Visual design matching your brand and colors",
+        "Up to 50 dishes with photo, description and price",
+        "Custom QR code ready to print at the table",
+        "Simple panel to update dishes and prices yourself",
+        "Button for customers to order directly via WhatsApp",
+        "Works on any phone — no app download needed"
       ],
       "ctaLabel": "Get started"
     },
@@ -144,12 +144,12 @@
       "name": "Portfolio Pro",
       "tagline": "Your work at its best",
       "features": [
-        "Maximum performance, ultra-fast loading",
-        "Project gallery with categories and filters",
-        "\"About me\" page with downloadable CV",
-        "SEO + Open Graph for social media",
-        "Contact form with email notifications",
-        "Elegant animations and transitions"
+        "Elegant design with animations and ultra-fast loading",
+        "Project gallery with categories and filters for easy browsing",
+        "\"About me\" page with optional downloadable CV",
+        "SEO configured so clients find you on Google by your specialty",
+        "Contact form with direct email notifications",
+        "Optimized for sharing on social media with custom preview image"
       ],
       "ctaLabel": "Get started"
     },
@@ -157,12 +157,12 @@
       "name": "Restaurant Pro",
       "tagline": "Complete site for your food business",
       "features": [
-        "Full website (5–7 pages)",
-        "Digital menu with QR + management panel",
-        "Online reservations with email confirmation",
-        "Photo gallery with lightbox",
-        "Google Maps integrated + local SEO",
-        "Reservation alerts via email and WhatsApp"
+        "Full website: home, menu, reservations, gallery, location & contact",
+        "Digital menu with custom QR + panel to update it yourself",
+        "Online reservation system with automatic email confirmation to guests",
+        "Photo gallery for ambiance, dishes and special events",
+        "Integrated map + local SEO to appear on Google Maps",
+        "Get notified of every new reservation by email and WhatsApp"
       ],
       "ctaLabel": "Get started"
     },
@@ -170,12 +170,12 @@
       "name": "Business Website",
       "tagline": "Your business with full presence",
       "features": [
-        "Full website (5–8 pages)",
-        "CMS panel: edit your content without developers",
-        "Blog / news section included",
+        "Full website up to 8 pages, custom designed",
+        "Admin panel to update texts and images without any help",
+        "News or blog section to keep your clients informed",
         "Contact and quote request forms",
-        "Technical SEO configured from day one",
-        "Hosting, domain and SSL configured"
+        "SEO configured from day one to rank on Google",
+        "Google Analytics and social media integration"
       ],
       "ctaLabel": "Get started"
     },
@@ -184,11 +184,11 @@
       "tagline": "Sell more on the internet",
       "features": [
         "Complete store ready to sell from day one",
-        "Cart, checkout and multiple payment gateways",
-        "Orders, inventory and customer panel",
-        "Coupons, discounts and bulk pricing",
-        "Automatic order confirmation emails",
-        "Technical SEO optimized for products"
+        "Shopping cart, checkout and multiple payment methods",
+        "Panel to manage your orders, inventory and customers",
+        "Configurable discount coupons and promotions",
+        "Automatic emails for order confirmation, payment & tracking",
+        "Product SEO so customers find you on Google searches"
       ],
       "ctaLabel": "Get started"
     },
@@ -196,12 +196,12 @@
       "name": "Pro Blog",
       "tagline": "Your voice online",
       "features": [
-        "Premium reading design and intuitive navigation",
-        "Categories, tags, search and archive",
-        "Mailchimp / Brevo integration (newsletter)",
-        "Moderated comments + social sharing",
-        "XML sitemap + basic SEO",
-        "Easy-to-use visual editor"
+        "Comfortable reading design and intuitive navigation",
+        "Categories, tags, search and article archive",
+        "Newsletter so readers subscribe and receive your updates",
+        "Moderated comments section + social sharing buttons",
+        "SEO configured so Google indexes and ranks your articles",
+        "Simple editor to publish new content without technical help"
       ],
       "ctaLabel": "Get started"
     },
@@ -209,12 +209,12 @@
       "name": "Custom System",
       "tagline": "Functionality tailored to your needs",
       "features": [
-        "Custom development + REST API / database",
-        "Custom-built admin panel",
-        "Integrations with external services (APIs)",
-        "Authentication and user role management",
-        "Training + technical documentation",
-        "60 days post-launch support"
+        "Features designed exactly around your business needs",
+        "Your own admin panel to manage your platform independently",
+        "Connected to services you already use (payments, bookings, CRM…)",
+        "User system with differentiated roles and permissions",
+        "Training so you and your team can use it from day one",
+        "60 days of support included after launch"
       ],
       "ctaLabel": "Request quote"
     }

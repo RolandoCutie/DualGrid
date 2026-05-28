@@ -121,6 +121,32 @@ const DESIRED_PAGES_LABELS: Record<string, string> = {
   location: 'Ubicación / Mapa',
 };
 
+const PRIMARY_ACTION_LABELS: Record<string, string> = {
+  whatsapp_contact: 'Contactar por WhatsApp',
+  contact_form: 'Llenar formulario de contacto',
+  call: 'Llamar por teléfono',
+  book_appointment: 'Reservar cita / mesa',
+  buy_product: 'Comprar producto / servicio',
+  view_portfolio: 'Ver portafolio',
+  download: 'Descargar (menú, catálogo...)',
+  request_quote: 'Solicitar cotización',
+  subscribe: 'Suscribirse al newsletter',
+};
+
+const DEADLINE_LABELS: Record<string, string> = {
+  urgent: 'Lo antes posible',
+  '2_weeks': 'En 2 semanas',
+  '1_month': 'En 1 mes',
+  '2_3_months': 'En 2–3 meses',
+  no_rush: 'Sin prisa / flexible',
+};
+
+const SITE_LANGUAGE_LABELS: Record<string, string> = {
+  es: 'Solo español 🇪🇸',
+  en: 'Solo inglés 🇺🇸',
+  both: 'Bilingüe (ES + EN) 🌐',
+};
+
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
 function InfoRow({
@@ -271,7 +297,7 @@ export default async function QuestionnaireDetailPage({
           label="Acción principal del sitio (CTA)"
           value={
             Array.isArray(answers.primaryAction)
-              ? answers.primaryAction.join(', ')
+              ? (answers.primaryAction as string[]).map((a) => PRIMARY_ACTION_LABELS[a] || a)
               : String(answers.primaryAction || '')
           }
         />
@@ -296,7 +322,10 @@ export default async function QuestionnaireDetailPage({
           label="Presupuesto disponible"
           value={BUDGET_LABELS[String(answers.budget || '')] || String(answers.budget || '')}
         />
-        <InfoRow label="Plazo deseado" value={String(answers.deadline || '')} />
+        <InfoRow
+          label="Plazo deseado"
+          value={DEADLINE_LABELS[String(answers.deadline || '')] || String(answers.deadline || '')}
+        />
         <InfoRow
           label="¿Ya tiene dominio?"
           value={typeof answers.hasDomain === 'boolean' ? answers.hasDomain : undefined}
@@ -369,7 +398,13 @@ export default async function QuestionnaireDetailPage({
           value={String(answers.clientContentDeadline || '')}
         />
         <InfoRow label="Redes sociales" value={String(answers.socialMedia || '')} />
-        <InfoRow label="Idioma(s) del sitio" value={String(answers.siteLanguages || '')} />
+        <InfoRow
+          label="Idioma(s) del sitio"
+          value={
+            SITE_LANGUAGE_LABELS[String(answers.siteLanguages || '')] ||
+            String(answers.siteLanguages || '')
+          }
+        />
         <InfoRow
           label="Experiencia previa con web"
           value={

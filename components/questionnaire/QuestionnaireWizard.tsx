@@ -67,71 +67,215 @@ interface QuestionnaireWizardProps {
   selectedPlan?: PlanId;
 }
 
+// ─── Label maps for human-readable WhatsApp message ───────────────────────────
+
+const WA_BUSINESS_TYPE: Record<string, string> = {
+  creative: 'Artista / Creativo',
+  restaurant: 'Restaurante / Bar',
+  entrepreneur: 'Emprendedor',
+  professional: 'Profesional (médico, abogado, etc.)',
+  ecommerce: 'Tienda / E-commerce',
+  blogger: 'Creador de contenido / Blogger',
+  other: 'Otro',
+};
+const WA_BUSINESS_AGE: Record<string, string> = {
+  new: 'Nuevo / idea',
+  under_1: 'Menos de 1 año',
+  '1_3': '1–3 años',
+  '3_5': '3–5 años',
+  over_5: 'Más de 5 años',
+};
+const WA_ONLINE_PRESENCE: Record<string, string> = {
+  none: 'Sin presencia online',
+  social_only: 'Solo redes sociales',
+  has_website: 'Ya tiene sitio web',
+};
+const WA_GOAL: Record<string, string> = {
+  more_clients: 'Conseguir más clientes',
+  show_work: 'Mostrar mi trabajo',
+  give_info: 'Dar información del negocio',
+  credibility: 'Generar credibilidad',
+  sell_online: 'Vender productos / servicios',
+  reservations: 'Gestionar reservas / citas',
+  grow_audience: 'Crecer mi audiencia',
+};
+const WA_ACTION: Record<string, string> = {
+  whatsapp_contact: 'Contactar por WhatsApp',
+  contact_form: 'Llenar formulario de contacto',
+  call: 'Llamar por teléfono',
+  book_appointment: 'Reservar cita / mesa',
+  buy_product: 'Comprar producto / servicio',
+  view_portfolio: 'Ver portafolio',
+  download: 'Descargar (menú, catálogo...)',
+  request_quote: 'Solicitar cotización',
+  subscribe: 'Suscribirse al newsletter',
+};
+const WA_PAGES: Record<string, string> = {
+  home: 'Inicio',
+  about: 'Sobre mí / Nosotros',
+  services: 'Servicios',
+  portfolio: 'Portafolio / Galería',
+  pricing: 'Precios',
+  testimonials: 'Testimonios',
+  blog: 'Blog',
+  contact: 'Contacto',
+  faq: 'Preguntas frecuentes',
+  menu: 'Menú (restaurante)',
+  shop: 'Tienda online',
+  reservations: 'Reservas / Citas',
+  location: 'Ubicación / Mapa',
+};
+const WA_FEATURES: Record<string, string> = {
+  whatsapp_btn: 'Botón WhatsApp',
+  contact_form: 'Formulario de contacto',
+  map: 'Mapa de ubicación',
+  gallery: 'Galería de fotos/videos',
+  video_banner: 'Video en portada',
+  newsletter: 'Newsletter',
+  booking: 'Reservas / citas online',
+  live_chat: 'Chat en vivo',
+  multilang: 'Sitio multiidioma',
+  reviews: 'Reseñas / testimonios',
+  social_feed: 'Feed de Instagram/redes',
+  faq: 'Preguntas frecuentes',
+};
+const WA_BUDGET: Record<string, string> = {
+  under_150: 'Menos de $150 USD',
+  '150_300': '$150 – $300 USD',
+  '300_500': '$300 – $500 USD',
+  '500_800': '$500 – $800 USD',
+  '800_1500': '$800 – $1,500 USD',
+  over_1500: 'Más de $1,500 USD',
+};
+const WA_DEADLINE: Record<string, string> = {
+  urgent: 'Lo antes posible',
+  '2_weeks': 'En 2 semanas',
+  '1_month': 'En 1 mes',
+  '2_3_months': 'En 2–3 meses',
+  no_rush: 'Sin prisa / flexible',
+};
+const WA_CMS: Record<string, string> = {
+  frequently: 'Sí, frecuentemente (menú, blog, precios...)',
+  occasionally: 'Sí, ocasionalmente',
+  no: 'No, ustedes se encargan',
+};
+const WA_STYLE: Record<string, string> = {
+  minimal: 'Minimalista',
+  modern: 'Moderno',
+  elegant: 'Elegante',
+  colorful: 'Colorido',
+  rustic: 'Rústico',
+  corporate: 'Corporativo',
+  creative: 'Creativo',
+  vintage: 'Vintage',
+  fun: 'Divertido',
+};
+const WA_SITE_LANG: Record<string, string> = {
+  es: 'Solo español 🇪🇸',
+  en: 'Solo inglés 🇺🇸',
+  both: 'Bilingüe (ES + EN) 🌐',
+};
+const WA_REFERRAL: Record<string, string> = {
+  social_media: 'Redes sociales',
+  referral: 'Recomendación de alguien',
+  google: 'Google',
+  other: 'Otro',
+};
+
+/** Translate a single key using a label map, falling back to the raw key */
+function l(map: Record<string, string>, key: string): string {
+  return map[key] ?? key;
+}
+/** Translate an array of keys and join them with ", " */
+function lArr(map: Record<string, string>, keys: string[]): string {
+  return keys.map((k) => map[k] ?? k).join(', ');
+}
+
 function buildWhatsAppMessage(answers: QuestionnaireAnswers, planId: PlanId | string): string {
+  const plan = PLAN_MAP[planId as PlanId];
+  const planName = plan?.name ?? planId;
+
   const lines: string[] = [];
   lines.push(`🌐 *Nueva consulta – DualGrid*`);
   lines.push('');
-  lines.push(`📋 *Plan de interés:* ${planId}`);
+  lines.push(`📋 *Plan de interés:* ${planName}`);
   lines.push('');
   lines.push(`👤 *Datos de contacto*`);
   lines.push(`• Nombre: ${answers.fullName}`);
   if (answers.businessName) lines.push(`• Empresa/Negocio: ${answers.businessName}`);
   if (answers.email) lines.push(`• Email: ${answers.email}`);
   if (answers.phone) lines.push(`• Teléfono: ${answers.phone}`);
-  if (answers.referralSource) lines.push(`• Nos encontró por: ${answers.referralSource}`);
+  if (answers.referralSource)
+    lines.push(`• Nos encontró por: ${l(WA_REFERRAL, answers.referralSource)}`);
   lines.push('');
   lines.push(`🏢 *Negocio*`);
-  if (answers.businessType) lines.push(`• Tipo: ${answers.businessType}`);
-  if (answers.businessAge) lines.push(`• Antigüedad: ${answers.businessAge}`);
-  if (answers.onlinePresence) lines.push(`• Presencia online: ${answers.onlinePresence}`);
-  if (answers.businessDescription) lines.push(`• Descripción: ${answers.businessDescription}`);
+  if (answers.businessType)
+    lines.push(`• Tipo de negocio: ${l(WA_BUSINESS_TYPE, answers.businessType)}`);
+  if (answers.businessAge) lines.push(`• Antigüedad: ${l(WA_BUSINESS_AGE, answers.businessAge)}`);
+  if (answers.onlinePresence)
+    lines.push(`• Presencia online actual: ${l(WA_ONLINE_PRESENCE, answers.onlinePresence)}`);
+  if (answers.businessDescription)
+    lines.push(`• Descripción del negocio: ${answers.businessDescription}`);
   if (answers.mainServices) lines.push(`• Servicios principales: ${answers.mainServices}`);
   if (answers.targetAudience) lines.push(`• Público objetivo: ${answers.targetAudience}`);
   lines.push('');
   lines.push(`🎯 *Objetivos y funcionalidades*`);
   if (answers.primaryGoal.length)
-    lines.push(`• Objetivo(s) principal(es): ${answers.primaryGoal.join(', ')}`);
-  if (answers.primaryAction.length) lines.push(`• Acción CTA: ${answers.primaryAction.join(', ')}`);
+    lines.push(`• Objetivo(s) principal(es): ${lArr(WA_GOAL, answers.primaryGoal)}`);
+  if (answers.primaryAction.length)
+    lines.push(
+      `• Acción que quiero que hagan los visitantes: ${lArr(WA_ACTION, answers.primaryAction)}`,
+    );
   if (answers.desiredPages.length)
-    lines.push(`• Páginas deseadas: ${answers.desiredPages.join(', ')}`);
+    lines.push(`• Páginas deseadas: ${lArr(WA_PAGES, answers.desiredPages)}`);
   if (answers.specialFeatures.length)
-    lines.push(`• Funcionalidades especiales: ${answers.specialFeatures.join(', ')}`);
-  if (answers.differentiation) lines.push(`• Diferenciación: ${answers.differentiation}`);
+    lines.push(`• Funcionalidades especiales: ${lArr(WA_FEATURES, answers.specialFeatures)}`);
+  if (answers.differentiation)
+    lines.push(`• ¿Qué te diferencia de la competencia?: ${answers.differentiation}`);
   lines.push('');
   lines.push(`💰 *Presupuesto y plazos*`);
-  if (answers.budget) lines.push(`• Presupuesto: ${answers.budget}`);
-  if (answers.deadline) lines.push(`• Plazo: ${answers.deadline}`);
-  lines.push(`• Tiene dominio: ${answers.hasDomain ? 'Sí' : 'No'}`);
-  if (answers.needsCMS) lines.push(`• Necesita CMS: ${answers.needsCMS}`);
-  if (answers.successDefinition) lines.push(`• Éxito definido como: ${answers.successDefinition}`);
+  if (answers.budget) lines.push(`• Presupuesto aproximado: ${l(WA_BUDGET, answers.budget)}`);
+  if (answers.deadline) lines.push(`• Plazo deseado: ${l(WA_DEADLINE, answers.deadline)}`);
+  lines.push(`• ¿Ya tiene dominio?: ${answers.hasDomain ? 'Sí' : 'No'}`);
+  if (answers.needsCMS)
+    lines.push(`• ¿Necesita actualizar contenido él mismo?: ${l(WA_CMS, answers.needsCMS)}`);
+  if (answers.successDefinition)
+    lines.push(`• Cómo define el éxito del proyecto: ${answers.successDefinition}`);
   lines.push('');
   lines.push(`🎨 *Estilo y marca*`);
-  if (answers.visualStyle.length) lines.push(`• Estilo visual: ${answers.visualStyle.join(', ')}`);
-  lines.push(`• Tiene logo: ${answers.hasLogo ? 'Sí' : 'No'}`);
+  if (answers.visualStyle.length)
+    lines.push(`• Estilo visual preferido: ${lArr(WA_STYLE, answers.visualStyle)}`);
+  lines.push(`• ¿Tiene logo?: ${answers.hasLogo ? 'Sí' : 'No'}`);
   if (answers.brandColors) lines.push(`• Colores de marca: ${answers.brandColors}`);
-  if (answers.referenceWebsites) lines.push(`• Referencias web: ${answers.referenceWebsites}`);
-  if (answers.visualFeeling) lines.push(`• Sensación deseada: ${answers.visualFeeling}`);
+  if (answers.referenceWebsites)
+    lines.push(`• Sitios web de referencia: ${answers.referenceWebsites}`);
+  if (answers.visualFeeling)
+    lines.push(`• Sensación que quiere transmitir: ${answers.visualFeeling}`);
   if (answers.brandEssence)
-    lines.push(`• Esencia del negocio (3 palabras): ${answers.brandEssence}`);
+    lines.push(`• Esencia del negocio en 3 palabras: ${answers.brandEssence}`);
   if (answers.brandValues) lines.push(`• Valores / sensaciones de marca: ${answers.brandValues}`);
-  if (answers.brandNoDos) lines.push(`• Lo que NO quiere: ${answers.brandNoDos}`);
+  if (answers.brandNoDos) lines.push(`• Lo que definitivamente NO quiere: ${answers.brandNoDos}`);
   if (answers.logoSpecificElements)
-    lines.push(`• Elementos para el logo: ${answers.logoSpecificElements}`);
+    lines.push(`• Elementos específicos para el logo: ${answers.logoSpecificElements}`);
   if (answers.priorBrandPresence)
-    lines.push(`• Autorrepresentación previa: ${answers.priorBrandPresence}`);
-  if (answers.logoWords) lines.push(`• Palabras en el logo: ${answers.logoWords}`);
-  if (answers.logoInspiration) lines.push(`• Logos de inspiración: ${answers.logoInspiration}`);
+    lines.push(`• Identidad visual previa: ${answers.priorBrandPresence}`);
+  if (answers.logoWords) lines.push(`• Palabras que debe llevar el logo: ${answers.logoWords}`);
+  if (answers.logoInspiration)
+    lines.push(`• Logos / marcas de inspiración: ${answers.logoInspiration}`);
   lines.push('');
   lines.push(`📁 *Contenido disponible*`);
-  lines.push(`• Fotos profesionales: ${answers.hasPhotos ? 'Sí' : 'No'}`);
-  lines.push(`• Textos redactados: ${answers.hasTexts ? 'Sí' : 'No'}`);
+  lines.push(`• ¿Tiene fotos profesionales?: ${answers.hasPhotos ? 'Sí' : 'No'}`);
+  lines.push(`• ¿Tiene textos redactados?: ${answers.hasTexts ? 'Sí' : 'No'}`);
   if (answers.clientContentDeadline)
-    lines.push(`• Contenido disponible para: ${answers.clientContentDeadline}`);
-  if (answers.siteLanguages) lines.push(`• Idioma del sitio: ${answers.siteLanguages}`);
-  if (answers.socialMedia) lines.push(`• Redes sociales: ${answers.socialMedia}`);
+    lines.push(`• Contenido que aportará y cuándo: ${answers.clientContentDeadline}`);
+  if (answers.siteLanguages)
+    lines.push(`• Idioma(s) del sitio: ${l(WA_SITE_LANG, answers.siteLanguages)}`);
+  if (answers.socialMedia) lines.push(`• Redes sociales del negocio: ${answers.socialMedia}`);
   if (answers.priorWebExperience)
-    lines.push(`• Experiencia previa con web: ${answers.priorWebExperience}`);
-  if (answers.concerns) lines.push(`• Preocupaciones: ${answers.concerns}`);
+    lines.push(
+      `• ¿Ha trabajado antes con un desarrollador web?: ${answers.priorWebExperience === 'yes' ? 'Sí' : 'No, es su primera vez'}`,
+    );
+  if (answers.concerns) lines.push(`• Preocupaciones / dudas: ${answers.concerns}`);
   if (answers.extraNotes) lines.push(`• Notas adicionales: ${answers.extraNotes}`);
   return lines.join('\n');
 }
