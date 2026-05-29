@@ -80,8 +80,14 @@ export default function ClientListClient({ clients }: Props) {
                 <td className="px-4 py-3 text-muted-foreground">{c.phone ?? '—'}</td>
                 <td className="px-4 py-3 text-right space-x-3">
                   <Link
-                    href={`/admin/dashboard/clients/${c._id}`}
+                    href={`/admin/dashboard/clients/${c._id}/overview`}
                     className="text-primary text-xs hover:underline"
+                  >
+                    Ver perfil
+                  </Link>
+                  <Link
+                    href={`/admin/dashboard/clients/${c._id}`}
+                    className="text-muted-foreground text-xs hover:underline"
                   >
                     Editar
                   </Link>

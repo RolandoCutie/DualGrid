@@ -13,12 +13,14 @@ export const metadata: Metadata = { title: 'Detalle Cuestionario de Branding' };
 
 interface Props {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ back?: string }>;
 }
 
-export default async function BrandingDetailPage({ params }: Props) {
+export default async function BrandingDetailPage({ params, searchParams }: Props) {
   await requireAdminSession('/admin/dashboard/branding-questionnaires');
 
   const { id } = await params;
+  const { back } = await searchParams;
   await connectDB();
 
   let doc: Record<string, unknown> | null = null;
@@ -36,7 +38,7 @@ export default async function BrandingDetailPage({ params }: Props) {
 
   return (
     <AdminPageLayout>
-      <AdminBackButton href="/admin/dashboard/branding-questionnaires" />
+      <AdminBackButton href={back ?? '/admin/dashboard/branding-questionnaires'} label="Volver" />
       <AdminPageHeader
         title={`Cuestionario de ${clientName ?? 'cliente'}`}
         description="Respuestas del test de identidad visual"

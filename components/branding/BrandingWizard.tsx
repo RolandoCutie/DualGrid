@@ -67,11 +67,11 @@ const PLAN_RESULTS: Record<
   }
 > = {
   essential: {
-    name: 'GRID ESSENTIAL',
+    name: 'PLAN ESENCIAL',
     price: '$100 USD',
     deliveryDays: '5 a 7 días hábiles',
     description:
-      'Estás en la etapa perfecta para dar vida a tu idea de forma rápida, limpia y profesional, asegurando los cimientos visuales correctos sin comprometer tu presupuesto de arranque.',
+      'Ideal para emprendedores individuales o pequeños negocios locales que necesitan empezar rápido y con buena imagen. Construcción de los elementos visuales mínimos y obligatorios para existir en el mercado.',
     color: 'text-emerald-500',
     borderColor: 'border-emerald-500/30',
     includes: [
@@ -83,11 +83,11 @@ const PLAN_RESULTS: Record<
     ],
   },
   corporate: {
-    name: 'GRID CORPORATE',
+    name: 'PLAN CORPORATIVO',
     price: '$300 USD',
     deliveryDays: '15 a 20 días hábiles',
     description:
-      'Tu proyecto necesita dar el salto al siguiente nivel. Con este plan crearemos un universo visual único y un manual de identidad robusto para que tu marca compita con fuerza en el mercado.',
+      'Diseñado para PYMEs o marcas que buscan posicionarse con fuerza y diferenciarse de la competencia. Sistema visual completo con universo gráfico y manual de identidad.',
     color: 'text-primary',
     borderColor: 'border-primary/30',
     includes: [
@@ -97,24 +97,24 @@ const PLAN_RESULTS: Record<
       'Tipografía corporativa (fuentes principales y secundarias)',
       'Universo Visual: patrones, texturas o iconografía propia que complementa la marca',
       'Manual de Identidad Visual Completo (dirección de arte, tono visual, retículas y áreas de restricción)',
-      'Aplicaciones de Marca a elegir 3-4: papelería corporativa, plantillas para redes sociales o packaging básico',
+      'Aplicaciones de Marca a elegir 3 o 4: papelería corporativa, plantillas para redes sociales o packaging básico',
     ],
   },
   global: {
-    name: 'GRID ECOSYSTEM',
+    name: 'PLAN GLOBAL / PREMIUM',
     price: '$550 USD',
-    deliveryDays: '20 a 25 días hábiles',
+    deliveryDays: '60 días hábiles',
     description:
-      'Tu visión es grande y requiere una infraestructura visual premium. Este plan está diseñado para estructurar submarcas y blindar tu identidad global ante cualquier canal físico o digital.',
+      'Para empresas consolidadas o proyectos con múltiples subdivisiones. Arquitectura de marca compleja y blindaje visual para grandes proyectos con submarcas, guías avanzadas y aplicaciones complejas.',
     color: 'text-amber-500',
     borderColor: 'border-amber-500/30',
     includes: [
       'Todo lo incluido en el Plan Corporativo',
       '2 o 3 propuestas conceptuales + 3 rondas de revisiones detalladas',
       'Arquitectura de Marca: diseño del sistema de submarcas y cómo conviven con la marca madre',
-      'Guías de estilo avanzadas para programadores (UI), impresores y creadores de contenido',
+      'Manual de Identidad Visual Completo con normas gráficas para producción a gran escala',
+      'Universo Visual: patrones, texturas o iconografía propia que complementa la marca',
       'Aplicaciones de Marca a elegir 10 piezas: papelería, redes sociales, packaging, merchandising, señalética y más',
-      'Manual técnico riguroso de normas gráficas para producción a gran escala',
     ],
   },
 };

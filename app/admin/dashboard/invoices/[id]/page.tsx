@@ -14,9 +14,16 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = { title: 'Editar factura' };
 
-export default async function EditInvoicePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditInvoicePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ back?: string }>;
+}) {
   await requireAdminSession('/admin/dashboard/invoices');
   const { id } = await params;
+  const { back } = await searchParams;
   await connectDB();
 
   const [invoice, clients, contracts] = await Promise.all([
@@ -29,7 +36,7 @@ export default async function EditInvoicePage({ params }: { params: Promise<{ id
 
   return (
     <AdminPageLayout maxWidth="5xl">
-      <AdminBackButton href="/admin/dashboard/invoices" />
+      <AdminBackButton href={back ?? '/admin/dashboard/invoices'} label="Volver" />
       <div className="flex items-center justify-between">
         <AdminPageHeader
           title={`Factura ${invoice.invoiceNumber}`}

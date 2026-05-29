@@ -12,9 +12,16 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = { title: 'Editar contrato' };
 
-export default async function EditContractPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditContractPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ back?: string }>;
+}) {
   await requireAdminSession();
   const { id } = await params;
+  const { back } = await searchParams;
   await connectDB();
 
   const [contract, clients] = await Promise.all([
@@ -26,7 +33,7 @@ export default async function EditContractPage({ params }: { params: Promise<{ i
 
   return (
     <AdminPageLayout maxWidth="5xl">
-      <AdminBackButton href="/admin/dashboard/contracts" />
+      <AdminBackButton href={back ?? '/admin/dashboard/contracts'} label="Volver" />
       <div className="flex items-center justify-between mb-0">
         <AdminPageHeader title="Editar contrato" />
         <Link

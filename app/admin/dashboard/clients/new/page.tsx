@@ -7,17 +7,22 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'Nuevo cliente' };
 
-export default async function NewClientPage() {
+export default async function NewClientPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ back?: string }>;
+}) {
   await requireAdminSession('/admin/dashboard/clients/new');
+  const { back } = await searchParams;
 
   return (
     <AdminPageLayout maxWidth="5xl">
-      <AdminBackButton href="/admin/dashboard/clients" />
+      <AdminBackButton href={back ?? '/admin/dashboard/clients'} label="Volver" />
       <AdminPageHeader
         title="Nuevo cliente"
         description="Registra un nuevo cliente en el sistema."
       />
-      <ClientForm />
+      <ClientForm redirectTo={back ?? '/admin/dashboard/clients'} />
     </AdminPageLayout>
   );
 }

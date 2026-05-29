@@ -1,6 +1,7 @@
 'use client';
 
 import Modal from '@/components/ui/Modal';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface Client {
@@ -24,10 +25,8 @@ export default function CreateBrandingAssignmentModal({
   baseUrl,
   onCreated,
 }: CreateBrandingAssignmentModalProps) {
-  const [mode, setMode] = useState<'client' | 'manual'>('client');
+  const [mode, setMode] = useState<'client'>('client');
   const [selectedClientId, setSelectedClientId] = useState('');
-  const [manualName, setManualName] = useState('');
-  const [manualEmail, setManualEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -39,8 +38,6 @@ export default function CreateBrandingAssignmentModal({
   const reset = () => {
     setMode('client');
     setSelectedClientId('');
-    setManualName('');
-    setManualEmail('');
     setLoading(false);
     setError('');
     setCreatedToken(null);
@@ -59,23 +56,14 @@ export default function CreateBrandingAssignmentModal({
     let clientName: string | undefined;
     let clientEmail: string | undefined;
 
-    if (mode === 'client') {
-      if (!selectedClientId) {
-        setError('Selecciona un cliente.');
-        return;
-      }
-      const found = clients.find((c) => c._id === selectedClientId);
-      clientId = found?._id;
-      clientName = found?.name;
-      clientEmail = found?.email;
-    } else {
-      if (!manualName.trim()) {
-        setError('Ingresa el nombre del destinatario.');
-        return;
-      }
-      clientName = manualName.trim();
-      clientEmail = manualEmail.trim() || undefined;
+    if (!selectedClientId) {
+      setError('Selecciona un cliente.');
+      return;
     }
+    const found = clients.find((c) => c._id === selectedClientId);
+    clientId = found?._id;
+    clientName = found?.name;
+    clientEmail = found?.email;
 
     setLoading(true);
     try {
@@ -123,74 +111,32 @@ export default function CreateBrandingAssignmentModal({
               Genera un enlace único del test de identidad visual para enviárselo a un cliente.
             </p>
 
-            {/* Mode tabs */}
-            <div className="flex gap-2 mb-5">
-              <button
-                onClick={() => setMode('client')}
-                className={`flex-1 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                  mode === 'client'
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-border text-muted-foreground hover:border-primary/50'
-                }`}
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-foreground mb-1">
+                Seleccionar cliente
+              </label>
+              <select
+                value={selectedClientId}
+                onChange={(e) => setSelectedClientId(e.target.value)}
+                className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                Cliente existente
-              </button>
-              <button
-                onClick={() => setMode('manual')}
-                className={`flex-1 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                  mode === 'manual'
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-border text-muted-foreground hover:border-primary/50'
-                }`}
-              >
-                Datos manuales
-              </button>
-            </div>
-
-            {mode === 'client' ? (
-              <div className="mb-5">
-                <label className="block text-sm font-medium text-foreground mb-1">
-                  Seleccionar cliente
-                </label>
-                <select
-                  value={selectedClientId}
-                  onChange={(e) => setSelectedClientId(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                <option value="">-- Elige un cliente --</option>
+                {clients.map((c) => (
+                  <option key={c._id} value={c._id}>
+                    {c.name} {c.email ? `(${c.email})` : ''}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-xs text-muted-foreground">
+                ¿El cliente no está registrado aún?{' '}
+                <Link
+                  href="/admin/dashboard/clients/new?back=/admin/dashboard/branding-questionnaires"
+                  className="text-primary hover:underline font-medium"
                 >
-                  <option value="">-- Elige un cliente --</option>
-                  {clients.map((c) => (
-                    <option key={c._id} value={c._id}>
-                      {c.name} {c.email ? `(${c.email})` : ''}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <div className="space-y-3 mb-5">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">Nombre *</label>
-                  <input
-                    type="text"
-                    value={manualName}
-                    onChange={(e) => setManualName(e.target.value)}
-                    placeholder="Nombre del destinatario"
-                    className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">
-                    Email (opcional)
-                  </label>
-                  <input
-                    type="email"
-                    value={manualEmail}
-                    onChange={(e) => setManualEmail(e.target.value)}
-                    placeholder="email@ejemplo.com"
-                    className="w-full rounded-lg border border-border bg-background text-foreground px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-              </div>
-            )}
+                  Crear cliente nuevo →
+                </Link>
+              </p>
+            </div>
 
             {error && <p className="text-destructive text-sm mb-3">{error}</p>}
 

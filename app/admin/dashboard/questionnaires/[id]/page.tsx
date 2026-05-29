@@ -189,13 +189,16 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default async function QuestionnaireDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ back?: string }>;
 }) {
   await requireAdminSession('/admin/dashboard/questionnaires');
   await connectDB();
 
   const { id } = await params;
+  const { back } = await searchParams;
   const doc = await Questionnaire.findById(id).lean();
   if (!doc) notFound();
 
@@ -214,7 +217,7 @@ export default async function QuestionnaireDetailPage({
 
   return (
     <AdminPageLayout maxWidth="3xl">
-      <AdminBackButton href="/admin/dashboard/questionnaires" />
+      <AdminBackButton href={back ?? '/admin/dashboard/questionnaires'} label="Volver" />
       <AdminPageHeader
         title={String(answers.fullName || 'Cuestionario sin nombre')}
         description={`Recibido el ${doc.createdAt ? new Date(String(doc.createdAt)).toLocaleDateString('es', { year: 'numeric', month: 'long', day: 'numeric' }) : '—'}`}

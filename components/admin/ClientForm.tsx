@@ -19,6 +19,7 @@ interface ClientFormData {
 interface ClientFormProps {
   defaultValues?: Partial<ClientFormData>;
   clientId?: string;
+  redirectTo?: string;
 }
 
 const BUSINESS_TYPE_OPTIONS = [
@@ -31,7 +32,7 @@ const BUSINESS_TYPE_OPTIONS = [
   { value: 'other', label: 'Otro' },
 ];
 
-export default function ClientForm({ defaultValues, clientId }: ClientFormProps) {
+export default function ClientForm({ defaultValues, clientId, redirectTo }: ClientFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -77,7 +78,7 @@ export default function ClientForm({ defaultValues, clientId }: ClientFormProps)
         throw new Error(data.error ?? 'Error al guardar');
       }
 
-      router.push('/admin/dashboard/clients');
+      router.push(redirectTo ?? '/admin/dashboard/clients');
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error inesperado');
