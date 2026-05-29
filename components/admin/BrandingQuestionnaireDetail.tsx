@@ -91,21 +91,6 @@ export default function BrandingQuestionnaireDetail({
       setDeleting(false);
     }
   };
-  const [deleting, setDeleting] = useState(false);
-
-  const handleDelete = async () => {
-    if (
-      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
-    )
-      return;
-    setDeleting(true);
-    try {
-      const res = await fetch(`/api/branding-questionnaires/${id}`, { method: 'DELETE' });
-      if (res.ok) router.push('/admin/dashboard/branding-questionnaires');
-    } finally {
-      setDeleting(false);
-    }
-  };
 
   const saveNotes = async () => {
     setSaving(true);
