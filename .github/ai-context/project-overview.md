@@ -8,15 +8,16 @@
 
 ## Main Features
 
-| Feature                        | Description                                                                                                                                                                                                                                                                      |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Landing Page**               | Hero, plans section, process section, differentials.                                                                                                                                                                                                                             |
-| **Questionnaire Wizard**       | 6-step interactive wizard. Collects: contact info (+ referral source), business type/age/services, goals + CTA action + differentiation, budget/timeline/CMS needs/success definition, visual style + feeling, content + experience + concerns. Recommends a plan automatically. |
-| **Plan Recommendation Engine** | Scoring system in `lib/recommendation.ts`. Weights by business type, budget, goals, desired pages, CMS need, primary action, and business age.                                                                                                                                   |
-| **Plans Catalog**              | 5 plans defined in `lib/plans.ts`: Landing, Menú QR, Portfolio, Restaurant, Custom.                                                                                                                                                                                              |
-| **Admin Dashboard**            | Protected area. Manages clients, contracts, invoices, questionnaires.                                                                                                                                                                                                            |
-| **Bilingual UI (i18n)**        | EN/ES via `LanguageProvider`. Strings in `app/i18n/[locale].json`.                                                                                                                                                                                                               |
-| **Dark / Light Mode**          | ThemeProvider with CSS variables.                                                                                                                                                                                                                                                |
+| Feature                        | Description                                                                                                                                                                                                                                                                              |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Landing Page**               | Hero, plans section, process section, differentials.                                                                                                                                                                                                                                     |
+| **Questionnaire Wizard**       | 6-step interactive wizard. Collects: contact info (+ referral source), business type/age/services, goals + CTA action + differentiation, budget/timeline/CMS needs/success definition, visual style + feeling, content + experience + concerns. Recommends a plan automatically.         |
+| **Plan Recommendation Engine** | Scoring system in `lib/recommendation.ts`. Weights by business type, budget, goals, desired pages, CMS need, primary action, and business age.                                                                                                                                           |
+| **Plans Catalog**              | 5 plans defined in `lib/plans.ts`: Landing, Menú QR, Portfolio, Restaurant, Custom.                                                                                                                                                                                                      |
+| **Admin Dashboard**            | Protected area. Manages clients, contracts, invoices, questionnaires and branding questionnaires.                                                                                                                                                                                        |
+| **Branding Questionnaire**     | 4-question scoring quiz (A/B/C per question). Recommends one of 3 branding plans: Grid Essential ($100), Grid Corporate ($300), Grid Ecosystem ($550). Admin creates shareable token links and sends them to clients via WhatsApp. Results stored in `BrandingQuestionnaire` collection. |
+| **Bilingual UI (i18n)**        | EN/ES via `LanguageProvider`. Strings in `app/i18n/[locale].json`.                                                                                                                                                                                                                       |
+| **Dark / Light Mode**          | ThemeProvider with CSS variables.                                                                                                                                                                                                                                                        |
 
 ---
 
@@ -34,6 +35,7 @@
 10. Contract `planId` supports all 8 plan types: landing, portfolio, menu_qr, restaurant, wp_business, ecommerce_store, blog, custom.
 11. Admin access protected by HMAC-SHA256 session tokens via `ADMIN_SECRET_PATH`.
 12. Dashboard shows: clients, active contracts, new leads (unreviewed questionnaires), paid revenue, pending revenue (with overdue highlight), net profit (paid revenue − expenses).
+13. Branding questionnaire logic in `lib/branding-recommendation.ts`: Q4 (budget) acts as a hard filter. Budget A → Essential, C → Global, B → Corporate (unless strong global majority). Stored in `dualgrid_branding_questionnaires` collection.
 
 ---
 

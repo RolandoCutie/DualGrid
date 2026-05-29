@@ -52,6 +52,13 @@ const MENU_ITEMS = [
     emoji: '🖥️',
     color: 'text-indigo-500',
   },
+  {
+    title: 'Branding',
+    description: 'Genera y gestiona cuestionarios de identidad visual para clientes.',
+    href: '/admin/dashboard/branding-questionnaires',
+    emoji: '🎨',
+    color: 'text-pink-500',
+  },
 ];
 
 interface AggResult {

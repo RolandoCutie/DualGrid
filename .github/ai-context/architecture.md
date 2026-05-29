@@ -21,20 +21,28 @@ app/
 │       ├── contracts/page.tsx              # Contracts list (table + delete)
 │       ├── expenses/page.tsx               # Expenses list (table + total) ← NEW
 │       ├── invoices/page.tsx               # Invoices list (table + delete)
-│       └── questionnaires/
+│       ├── questionnaires/
 │           ├── page.tsx                    # Questionnaire list with status filter (new/reviewed/contacted)
 │           └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action
+│       └── branding-questionnaires/
+│           ├── page.tsx                    # Branding questionnaire list + "Nueva Asignación" button
+│           └── [id]/page.tsx               # Branding questionnaire detail: answers, score, notes
 └── api/
     ├── admin/login|logout|session/route.ts
     ├── clients/route.ts + [id]/route.ts
     ├── contracts/route.ts + [id]/route.ts
     ├── expenses/route.ts + [id]/route.ts   # ← NEW: GET|POST|PATCH|DELETE gastos
     ├── invoices/route.ts + [id]/route.ts
-    └── questionnaires/
-        ├── route.ts                        # POST (public submit)
-        └── [id]/
-            ├── route.ts                    # GET|PATCH|DELETE (admin)
-            └── convert/route.ts            # POST: convert questionnaire → Client record
+    ├── questionnaires/
+    │   ├── route.ts                        # POST (public submit)
+    │   └── [id]/
+    │       ├── route.ts                    # GET|PATCH|DELETE (admin)
+    │       └── convert/route.ts            # POST: convert questionnaire → Client record
+    ├── branding-questionnaires/
+    │   ├── route.ts                        # GET list (admin) | POST create assignment (admin)
+    │   └── [id]/route.ts                   # GET detail | PATCH adminNotes (admin)
+    └── branding/
+        └── [token]/route.ts                # GET by token (public) | PUT submit answers (public)
 
 components/
 ├── NavBar.tsx              # Thin server wrapper → NavBarClient

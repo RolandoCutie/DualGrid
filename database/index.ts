@@ -1,4 +1,5 @@
 // Re-export all models for convenience
+export { default as BrandingQuestionnaire } from './branding-questionnaire.model';
 export { default as Client } from './client.model';
 export { default as Contract } from './contract.model';
 export { default as Expense } from './expense.model';
