@@ -56,7 +56,15 @@ const QUESTIONS = [
 
 const PLAN_RESULTS: Record<
   BrandingPlanId,
-  { name: string; price: string; deliveryDays: string; description: string; color: string }
+  {
+    name: string;
+    price: string;
+    deliveryDays: string;
+    description: string;
+    color: string;
+    borderColor: string;
+    includes: string[];
+  }
 > = {
   essential: {
     name: 'GRID ESSENTIAL',
@@ -65,6 +73,14 @@ const PLAN_RESULTS: Record<
     description:
       'Estás en la etapa perfecta para dar vida a tu idea de forma rápida, limpia y profesional, asegurando los cimientos visuales correctos sin comprometer tu presupuesto de arranque.',
     color: 'text-emerald-500',
+    borderColor: 'border-emerald-500/30',
+    includes: [
+      '1 propuesta conceptual fuerte + 1 ronda de ajustes menores (color, tipografía)',
+      'Variantes del logo: versión horizontal, vertical e isotipo para redes sociales',
+      'Paleta de colores (códigos HEX, RGB y CMYK)',
+      'Tipografía corporativa (fuentes principales y secundarias)',
+      'Guía de Uso Básica en PDF: cómo aplicar el logo, fondos correctos y errores a evitar',
+    ],
   },
   corporate: {
     name: 'GRID CORPORATE',
@@ -73,6 +89,16 @@ const PLAN_RESULTS: Record<
     description:
       'Tu proyecto necesita dar el salto al siguiente nivel. Con este plan crearemos un universo visual único y un manual de identidad robusto para que tu marca compita con fuerza en el mercado.',
     color: 'text-primary',
+    borderColor: 'border-primary/30',
+    includes: [
+      '2 propuestas conceptuales diferentes + 2 rondas de revisiones sobre la elegida',
+      'Variantes del logo: versión horizontal, vertical e isotipo para redes sociales',
+      'Paleta de colores (códigos HEX, RGB y CMYK)',
+      'Tipografía corporativa (fuentes principales y secundarias)',
+      'Universo Visual: patrones, texturas o iconografía propia que complementa la marca',
+      'Manual de Identidad Visual Completo (dirección de arte, tono visual, retículas y áreas de restricción)',
+      'Aplicaciones de Marca a elegir 3-4: papelería corporativa, plantillas para redes sociales o packaging básico',
+    ],
   },
   global: {
     name: 'GRID ECOSYSTEM',
@@ -81,6 +107,15 @@ const PLAN_RESULTS: Record<
     description:
       'Tu visión es grande y requiere una infraestructura visual premium. Este plan está diseñado para estructurar submarcas y blindar tu identidad global ante cualquier canal físico o digital.',
     color: 'text-amber-500',
+    borderColor: 'border-amber-500/30',
+    includes: [
+      'Todo lo incluido en el Plan Corporativo',
+      '2 o 3 propuestas conceptuales + 3 rondas de revisiones detalladas',
+      'Arquitectura de Marca: diseño del sistema de submarcas y cómo conviven con la marca madre',
+      'Guías de estilo avanzadas para programadores (UI), impresores y creadores de contenido',
+      'Aplicaciones de Marca a elegir 10 piezas: papelería, redes sociales, packaging, merchandising, señalética y más',
+      'Manual técnico riguroso de normas gráficas para producción a gran escala',
+    ],
   },
 };
 
@@ -168,8 +203,9 @@ export default function BrandingWizard({ token }: BrandingWizardProps) {
     const plan = PLAN_RESULTS[result];
     return (
       <div className="flex-1 flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-xl text-center space-y-6">
-          <div className="space-y-2">
+        <div className="w-full max-w-xl space-y-6">
+          {/* Header */}
+          <div className="text-center space-y-2">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
               Tu plan ideal es
             </p>
@@ -178,10 +214,31 @@ export default function BrandingWizard({ token }: BrandingWizardProps) {
             <p className="text-sm text-muted-foreground">{plan.deliveryDays}</p>
           </div>
 
-          <div className="bg-muted/50 border border-border rounded-2xl p-6">
-            <p className="text-base text-foreground leading-relaxed">{plan.description}</p>
+          {/* Description */}
+          <div className="bg-muted/50 border border-border rounded-2xl p-5">
+            <p className="text-base text-foreground leading-relaxed text-center">
+              {plan.description}
+            </p>
           </div>
 
+          {/* Includes */}
+          <div className={cn('border rounded-2xl p-5 space-y-3', plan.borderColor)}>
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wide">
+              ¿Qué incluye?
+            </p>
+            <ul className="space-y-2">
+              {plan.includes.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                  <span className={cn('mt-0.5 shrink-0 text-base leading-none', plan.color)}>
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CTA */}
           <button
             onClick={handleWhatsApp}
             className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors w-full justify-center"
