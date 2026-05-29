@@ -6,7 +6,7 @@ export const getBaseUrl = () => {
   const rawBaseUrl = configuredUrl || vercelUrl;
 
   if (!rawBaseUrl) {
-    return 'http://localhost:3000';
+    return 'https://www.dualgrid.io';
   }
 
   if (/^https?:\/\//i.test(rawBaseUrl)) {

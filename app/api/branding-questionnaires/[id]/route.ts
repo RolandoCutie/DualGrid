@@ -22,6 +22,25 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
+// DELETE /api/branding-questionnaires/[id] — delete (admin only)
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const sessionToken = req.cookies.get('admin_session')?.value ?? '';
+  if (!isAdminSessionTokenValid(sessionToken)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const { id } = await params;
+    await connectDB();
+    const doc = await BrandingQuestionnaire.findByIdAndDelete(id);
+    if (!doc) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('[branding-questionnaires/[id] DELETE]', err);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
 // PATCH /api/branding-questionnaires/[id] — update adminNotes (admin only)
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const sessionToken = req.cookies.get('admin_session')?.value ?? '';

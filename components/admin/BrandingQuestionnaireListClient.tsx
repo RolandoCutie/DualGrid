@@ -43,13 +43,29 @@ const FILTER_OPTIONS = [
 ];
 
 export default function BrandingQuestionnaireListClient({
-  rows,
+  rows: initialRows,
   baseUrl,
 }: BrandingQuestionnaireListClientProps) {
+  const [rows, setRows] = useState(initialRows);
   const [filter, setFilter] = useState('all');
   const [copied, setCopied] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   const filtered = filter === 'all' ? rows : rows.filter((r) => r.status === filter);
+
+  const handleDelete = async (id: string) => {
+    if (
+      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
+    )
+      return;
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/branding-questionnaires/${id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((r) => r._id !== id));
+    } finally {
+      setDeleting(null);
+    }
+  };
 
   const copyLink = async (token: string) => {
     const url = `${baseUrl}/branding/${token}`;
@@ -158,6 +174,14 @@ export default function BrandingQuestionnaireListClient({
                     Ver respuestas
                   </Link>
                 )}
+                <button
+                  onClick={() => handleDelete(row._id)}
+                  disabled={deleting === row._id}
+                  title="Eliminar cuestionario"
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg border border-destructive text-destructive bg-background hover:bg-destructive/10 disabled:opacity-50 transition-colors"
+                >
+                  {deleting === row._id ? '...' : 'Eliminar'}
+                </button>
               </div>
             </div>
           ))}
