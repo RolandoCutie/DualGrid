@@ -23,7 +23,7 @@ const AdminSecretLoginPage = async ({ params, searchParams }: PageProps) => {
 
   const token = (await cookies()).get(ADMIN_SESSION_COOKIE)?.value;
   if (isAdminSessionTokenValid(token)) {
-    redirect('    http://localhost:3000/admin/dashboard/cars/new');
+    redirect('/admin/dashboard');
   }
 
   const nextPath = sanitizeNextPath(next);
