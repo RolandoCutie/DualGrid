@@ -93,7 +93,7 @@ export interface QuestionnaireAnswers {
 
   // Step 5 – Visual style & branding identity
   visualStyle: VisualStyle[];
-  hasLogo: boolean;
+  hasLogo: boolean | null;
   brandColors: string;
   referenceWebsites: string;
   visualFeeling: string;

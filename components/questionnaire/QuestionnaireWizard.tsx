@@ -39,7 +39,7 @@ const DEFAULT_ANSWERS: QuestionnaireAnswers = {
   needsCMS: '',
   successDefinition: '',
   visualStyle: [],
-  hasLogo: false,
+  hasLogo: null,
   brandColors: '',
   referenceWebsites: '',
   visualFeeling: '',
