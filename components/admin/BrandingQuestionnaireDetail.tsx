@@ -1,6 +1,7 @@
 'use client';
 
 import Badge from '@/components/ui/Badge';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const QUESTION_TITLES = [
@@ -70,10 +71,41 @@ export default function BrandingQuestionnaireDetail({
   baseUrl,
   token,
 }: BrandingDetailProps) {
+  const router = useRouter();
   const [notes, setNotes] = useState(initialNotes ?? '');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    if (
+      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
+    )
+      return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/branding-questionnaires/${id}`, { method: 'DELETE' });
+      if (res.ok) router.push('/admin/dashboard/branding-questionnaires');
+    } finally {
+      setDeleting(false);
+    }
+  };
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    if (
+      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
+    )
+      return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/branding-questionnaires/${id}`, { method: 'DELETE' });
+      if (res.ok) router.push('/admin/dashboard/branding-questionnaires');
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const saveNotes = async () => {
     setSaving(true);
@@ -127,9 +159,18 @@ export default function BrandingQuestionnaireDetail({
             })}
           </p>
         )}
-        <button onClick={copyLink} className="text-xs text-primary hover:underline">
-          {copied ? '✓ Enlace copiado' : '🔗 Copiar enlace del cuestionario'}
-        </button>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <button onClick={copyLink} className="text-xs text-primary hover:underline">
+            {copied ? '✓ Enlace copiado' : '🔗 Copiar enlace del cuestionario'}
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-destructive text-destructive bg-background hover:bg-destructive/10 disabled:opacity-50 transition-colors"
+          >
+            {deleting ? 'Eliminando...' : 'Eliminar cuestionario'}
+          </button>
+        </div>
       </div>
 
       {/* Score summary */}
