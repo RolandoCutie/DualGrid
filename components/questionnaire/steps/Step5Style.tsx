@@ -103,71 +103,73 @@ export default function Step5Style({ answers, onChange }: Step5Props) {
         rows={2}
       />
 
-      {/* ─── Identidad Visual / Branding ─────────────────────────────── */}
-      <div className="border-t border-border pt-5">
-        <h4 className="text-base font-bold text-card-foreground mb-1">
-          {t('questionnaire.step5_branding_title')}
-        </h4>
-        <p className="text-xs text-muted-foreground mb-4">
-          {t('questionnaire.step5_branding_subtitle')}
-        </p>
+      {/* ─── Identidad Visual / Branding — solo si NO tiene logo ──────── */}
+      {answers.hasLogo === false && (
+        <div className="border-t border-border pt-5">
+          <h4 className="text-base font-bold text-card-foreground mb-1">
+            {t('questionnaire.step5_branding_title')}
+          </h4>
+          <p className="text-xs text-muted-foreground mb-4">
+            {t('questionnaire.step5_branding_subtitle')}
+          </p>
 
-        <div className="space-y-4">
-          <Input
-            label={t('questionnaire.step5_brand_essence_label')}
-            placeholder={t('questionnaire.step5_brand_essence_placeholder')}
-            value={answers.brandEssence}
-            onChange={(e) => onChange({ brandEssence: e.target.value })}
-          />
+          <div className="space-y-4">
+            <Input
+              label={t('questionnaire.step5_brand_essence_label')}
+              placeholder={t('questionnaire.step5_brand_essence_placeholder')}
+              value={answers.brandEssence}
+              onChange={(e) => onChange({ brandEssence: e.target.value })}
+            />
 
-          <Textarea
-            label={t('questionnaire.step5_brand_values_label')}
-            placeholder={t('questionnaire.step5_brand_values_placeholder')}
-            value={answers.brandValues}
-            onChange={(e) => onChange({ brandValues: e.target.value })}
-            rows={2}
-          />
+            <Textarea
+              label={t('questionnaire.step5_brand_values_label')}
+              placeholder={t('questionnaire.step5_brand_values_placeholder')}
+              value={answers.brandValues}
+              onChange={(e) => onChange({ brandValues: e.target.value })}
+              rows={2}
+            />
 
-          <Textarea
-            label={t('questionnaire.step5_brand_nodos_label')}
-            placeholder={t('questionnaire.step5_brand_nodos_placeholder')}
-            value={answers.brandNoDos}
-            onChange={(e) => onChange({ brandNoDos: e.target.value })}
-            rows={2}
-          />
+            <Textarea
+              label={t('questionnaire.step5_brand_nodos_label')}
+              placeholder={t('questionnaire.step5_brand_nodos_placeholder')}
+              value={answers.brandNoDos}
+              onChange={(e) => onChange({ brandNoDos: e.target.value })}
+              rows={2}
+            />
 
-          <Input
-            label={t('questionnaire.step5_logo_words_label')}
-            placeholder={t('questionnaire.step5_logo_words_placeholder')}
-            value={answers.logoWords}
-            onChange={(e) => onChange({ logoWords: e.target.value })}
-          />
+            <Input
+              label={t('questionnaire.step5_logo_words_label')}
+              placeholder={t('questionnaire.step5_logo_words_placeholder')}
+              value={answers.logoWords}
+              onChange={(e) => onChange({ logoWords: e.target.value })}
+            />
 
-          <Textarea
-            label={t('questionnaire.step5_logo_elements_label')}
-            placeholder={t('questionnaire.step5_logo_elements_placeholder')}
-            value={answers.logoSpecificElements}
-            onChange={(e) => onChange({ logoSpecificElements: e.target.value })}
-            rows={2}
-          />
+            <Textarea
+              label={t('questionnaire.step5_logo_elements_label')}
+              placeholder={t('questionnaire.step5_logo_elements_placeholder')}
+              value={answers.logoSpecificElements}
+              onChange={(e) => onChange({ logoSpecificElements: e.target.value })}
+              rows={2}
+            />
 
-          <Textarea
-            label={t('questionnaire.step5_prior_brand_label')}
-            placeholder={t('questionnaire.step5_prior_brand_placeholder')}
-            value={answers.priorBrandPresence}
-            onChange={(e) => onChange({ priorBrandPresence: e.target.value })}
-            rows={2}
-          />
+            <Textarea
+              label={t('questionnaire.step5_prior_brand_label')}
+              placeholder={t('questionnaire.step5_prior_brand_placeholder')}
+              value={answers.priorBrandPresence}
+              onChange={(e) => onChange({ priorBrandPresence: e.target.value })}
+              rows={2}
+            />
 
-          <Textarea
-            label={t('questionnaire.step5_logo_inspiration_label')}
-            placeholder={t('questionnaire.step5_logo_inspiration_placeholder')}
-            value={answers.logoInspiration}
-            onChange={(e) => onChange({ logoInspiration: e.target.value })}
-            rows={2}
-          />
+            <Textarea
+              label={t('questionnaire.step5_logo_inspiration_label')}
+              placeholder={t('questionnaire.step5_logo_inspiration_placeholder')}
+              value={answers.logoInspiration}
+              onChange={(e) => onChange({ logoInspiration: e.target.value })}
+              rows={2}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
