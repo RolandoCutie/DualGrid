@@ -51,12 +51,13 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       contract: contractData,
       client: clientData,
       planName: plan?.name ?? contract.planId,
-    }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as unknown as React.ReactElement<any>,
   );
 
   const filename = `contrato-${clientDoc.name.replace(/\s+/g, '-').toLowerCase()}-${contract._id.toString().slice(-6)}.pdf`;
 
-  return new NextResponse(buffer, {
+  return new NextResponse(new Uint8Array(buffer), {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="${filename}"`,

@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function Loading() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
@@ -18,10 +16,8 @@ export default function Loading() {
           </div>
         </div>
 
-
-
         <div className="mt-6 grid grid-cols-3  gap-4 w-full max-w-2xl opacity-40">
-          {[1, 2, 3,].map((i) => (
+          {[1, 2, 3].map((i) => (
             <div
               key={i}
               className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden animate-pulse"

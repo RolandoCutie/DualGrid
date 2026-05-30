@@ -8,12 +8,6 @@ const nextConfig: NextConfig = {
     config.resolve.modules = [path.resolve(__dirname, 'node_modules'), 'node_modules'];
     return config;
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
   images: {
     remotePatterns: [
       {

@@ -34,7 +34,7 @@ const AdminSecretLoginPage = async ({ params, searchParams }: PageProps) => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground">Admin Access</h1>
           <p className="text-muted-foreground mt-2">
-            Sign in with your admin credentials to manage the fleet.
+            Ingresa con tus credenciales para gestionar DualGrid.
           </p>
         </div>
         <AdminLoginForm nextPath={nextPath} />

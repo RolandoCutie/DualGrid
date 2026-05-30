@@ -51,12 +51,16 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   };
 
   const buffer = await renderToBuffer(
-    React.createElement(InvoicePDF, { invoice: invoiceData, client: clientData }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    React.createElement(InvoicePDF, {
+      invoice: invoiceData,
+      client: clientData,
+    }) as unknown as React.ReactElement<any>,
   );
 
   const filename = `factura-${invoice.invoiceNumber.toLowerCase()}-${clientDoc.name.replace(/\s+/g, '-').toLowerCase()}.pdf`;
 
-  return new NextResponse(buffer, {
+  return new NextResponse(new Uint8Array(buffer), {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="${filename}"`,

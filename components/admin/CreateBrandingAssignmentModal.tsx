@@ -25,7 +25,6 @@ export default function CreateBrandingAssignmentModal({
   baseUrl,
   onCreated,
 }: CreateBrandingAssignmentModalProps) {
-  const [mode, setMode] = useState<'client'>('client');
   const [selectedClientId, setSelectedClientId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -36,7 +35,6 @@ export default function CreateBrandingAssignmentModal({
   const [copied, setCopied] = useState(false);
 
   const reset = () => {
-    setMode('client');
     setSelectedClientId('');
     setLoading(false);
     setError('');
@@ -52,18 +50,14 @@ export default function CreateBrandingAssignmentModal({
 
   const handleSubmit = async () => {
     setError('');
-    let clientId: string | undefined;
-    let clientName: string | undefined;
-    let clientEmail: string | undefined;
-
     if (!selectedClientId) {
       setError('Selecciona un cliente.');
       return;
     }
     const found = clients.find((c) => c._id === selectedClientId);
-    clientId = found?._id;
-    clientName = found?.name;
-    clientEmail = found?.email;
+    const clientId = found?._id;
+    const clientName = found?.name;
+    const clientEmail = found?.email;
 
     setLoading(true);
     try {

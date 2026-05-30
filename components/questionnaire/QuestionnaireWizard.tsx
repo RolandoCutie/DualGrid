@@ -379,7 +379,7 @@ export default function QuestionnaireWizard({
   const canProceed = (): boolean => {
     if (step === 1) return answers.fullName.length > 0 && answers.email.length > 0;
     if (step === 2) return answers.businessType !== '';
-    if (step === 3) return answers.primaryGoal !== '';
+    if (step === 3) return answers.primaryGoal.length > 0;
     if (step === 4) return answers.budget !== '';
     return true;
   };

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { ADMIN_SESSION_COOKIE, getAdminLoginPath, isAdminSessionTokenValid } from './admin-auth';
 
-export const requireAdminSession = async (nextPath: string) => {
+export const requireAdminSession = async (nextPath: string = '/admin/dashboard') => {
   const token = (await cookies()).get(ADMIN_SESSION_COOKIE)?.value;
 
   if (!isAdminSessionTokenValid(token)) {
