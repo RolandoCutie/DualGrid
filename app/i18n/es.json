@@ -102,6 +102,8 @@
   },
   "plans": {
     "eyebrow": "Planes y precios",
+    "section_title": "Planes de Desarrollo Web",
+    "section_subtitle": "Sitios completos listos para hacer crecer tu negocio — diseño, código, dominio y hosting incluidos.",
     "title": "Soluciones para cada tipo de negocio",
     "subtitle": "Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único, código limpio y soporte post-lanzamiento.",
     "custom_note": "¿No encuentras lo que buscas?",
@@ -112,6 +114,52 @@
     "delivery": "Entrega en",
     "days": "días hábiles",
     "from": "Desde"
+  },
+  "branding_plans": {
+    "eyebrow": "Identidad visual",
+    "section_title": "Planes de Branding e Identidad Visual",
+    "section_subtitle": "Una identidad de marca poderosa que te hace inolvidable. Desde un logo de arranque hasta un sistema de identidad corporativa completo.",
+    "title": "Encuentra el plan de identidad de marca ideal",
+    "subtitle": "¿No sabes qué plan te encaja? Responde 4 preguntas y obtén tu recomendación personalizada en segundos.",
+    "cta_quiz": "Descubrir mi plan con un test rápido",
+    "custom_note": "¿Aún no estás seguro?",
+    "custom_link": "Haz el test de identidad",
+    "custom_suffix": "y te diremos exactamente qué necesitas.",
+    "popular": "Más popular",
+    "from": "Desde",
+    "essential_name": "Grid Essential",
+    "essential_tagline": "Identidad de arranque rápido",
+    "corporate_name": "Grid Corporate",
+    "corporate_tagline": "Inversión estratégica de marca",
+    "global_name": "Grid Ecosystem",
+    "global_tagline": "Arquitectura de marca premium",
+    "essential_features": [
+      "Logo personalizado diseñado desde cero",
+      "Paleta de colores de marca (principal + secundaria)",
+      "Selección tipográfica (2 fuentes)",
+      "Guía de uso rápida en PDF",
+      "3 variantes de logo (color, B/N, ícono)",
+      "Entrega en 20–30 días hábiles"
+    ],
+    "corporate_features": [
+      "Todo lo de Grid Essential",
+      "Universo visual completo: íconos, texturas, estilo fotográfico",
+      "Primeras aplicaciones: tarjetas, plantillas para redes, papelería",
+      "Manual de identidad completo y profesional (PDF)",
+      "Revisiones ilimitadas durante la fase de diseño",
+      "Entrega en 30–45 días hábiles"
+    ],
+    "global_features": [
+      "Todo lo de Grid Corporate",
+      "Sistema de submarcas y guías de arquitectura de marca",
+      "Manual técnico avanzado para desarrolladores e impresores",
+      "Diseño de merchandising y señalética",
+      "Sesión dedicada de estrategia de marca",
+      "Entrega en 45–60 días hábiles"
+    ],
+    "essential_cta": "Empezar",
+    "corporate_cta": "Empezar",
+    "global_cta": "Empezar"
   },
   "plans_data": {
     "landing": {

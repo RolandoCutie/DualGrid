@@ -77,6 +77,9 @@ export default function BrandingQuestionnaireDetail({
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [convertError, setConvertError] = useState('');
+  const [currentStatus, setCurrentStatus] = useState(status);
 
   const handleDelete = async () => {
     if (
@@ -113,6 +116,31 @@ export default function BrandingQuestionnaireDetail({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleConvert = async () => {
+    if (!confirm('¿Crear un cliente a partir de este cuestionario de branding?')) return;
+    setConverting(true);
+    setConvertError('');
+    try {
+      const res = await fetch(`/api/branding-questionnaires/${id}/convert`, { method: 'POST' });
+      const data = await res.json();
+      if (res.status === 409) {
+        setConvertError('Ya existe un cliente con este email.');
+        return;
+      }
+      if (!res.ok) {
+        setConvertError(data.error || 'Error al crear el cliente.');
+        return;
+      }
+      setCurrentStatus('contacted');
+      router.push('/admin/dashboard/clients');
+      router.refresh();
+    } catch {
+      setConvertError('Error de red. Inténtalo de nuevo.');
+    } finally {
+      setConverting(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header info */}
@@ -123,8 +151,18 @@ export default function BrandingQuestionnaireDetail({
             {clientEmail && <p className="text-sm text-muted-foreground">{clientEmail}</p>}
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <Badge variant={status === 'completed' ? 'success' : 'warning'}>
-              {status === 'completed' ? 'Completado' : 'Pendiente'}
+            <Badge
+              variant={
+                currentStatus === 'completed' || currentStatus === 'contacted'
+                  ? 'success'
+                  : 'warning'
+              }
+            >
+              {currentStatus === 'completed'
+                ? 'Completado'
+                : currentStatus === 'contacted'
+                  ? 'Contactado'
+                  : 'Pendiente'}
             </Badge>
             {recommendedPlan && (
               <span className={`font-bold text-sm ${PLAN_COLORS[recommendedPlan] ?? ''}`}>
@@ -157,6 +195,30 @@ export default function BrandingQuestionnaireDetail({
           </button>
         </div>
       </div>
+
+      {/* Convert to client */}
+      {clientName && (
+        <div className="bg-card border border-border rounded-xl p-5">
+          <h3 className="font-semibold text-foreground mb-2">Convertir en cliente</h3>
+          {convertError && <p className="text-sm text-destructive mb-2">{convertError}</p>}
+          <button
+            onClick={handleConvert}
+            disabled={converting || currentStatus === 'contacted'}
+            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white font-semibold px-5 py-2 rounded-xl transition-colors text-sm"
+          >
+            {converting
+              ? 'Creando cliente…'
+              : currentStatus === 'contacted'
+                ? '✓ Ya convertido a cliente'
+                : '👤 Convertir en cliente'}
+          </button>
+          {currentStatus !== 'contacted' && (
+            <p className="text-xs text-muted-foreground mt-1.5">
+              Crea automáticamente un registro de cliente con los datos del cuestionario.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Score summary */}
       {score && (

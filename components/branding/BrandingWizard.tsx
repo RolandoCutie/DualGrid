@@ -69,7 +69,7 @@ const PLAN_RESULTS: Record<
   essential: {
     name: 'PLAN ESENCIAL',
     price: '$100 USD',
-    deliveryDays: '5 a 7 días hábiles',
+    deliveryDays: '20 a 30 días hábiles',
     description:
       'Ideal para emprendedores individuales o pequeños negocios locales que necesitan empezar rápido y con buena imagen. Construcción de los elementos visuales mínimos y obligatorios para existir en el mercado.',
     color: 'text-emerald-500',
@@ -85,7 +85,7 @@ const PLAN_RESULTS: Record<
   corporate: {
     name: 'PLAN CORPORATIVO',
     price: '$300 USD',
-    deliveryDays: '15 a 20 días hábiles',
+    deliveryDays: '30 a 45 días hábiles',
     description:
       'Diseñado para PYMEs o marcas que buscan posicionarse con fuerza y diferenciarse de la competencia. Sistema visual completo con universo gráfico y manual de identidad.',
     color: 'text-primary',
@@ -103,7 +103,7 @@ const PLAN_RESULTS: Record<
   global: {
     name: 'PLAN GLOBAL / PREMIUM',
     price: '$550 USD',
-    deliveryDays: '60 días hábiles',
+    deliveryDays: '50 a 65 días hábiles',
     description:
       'Para empresas consolidadas o proyectos con múltiples subdivisiones. Arquitectura de marca compleja y blindaje visual para grandes proyectos con submarcas, guías avanzadas y aplicaciones complejas.',
     color: 'text-amber-500',

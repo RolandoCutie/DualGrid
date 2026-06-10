@@ -1,3 +1,4 @@
+import BrandingPlansSection from '@/components/landing/BrandingPlansSection';
 import HeroSection from '@/components/landing/HeroSection';
 import PlansSection from '@/components/landing/PlansSection';
 import PortfolioSection from '@/components/landing/PortfolioSection';
@@ -61,6 +62,7 @@ export default async function HomePage() {
       <WhySection />
       <PortfolioSection projects={projects} />
       <PlansSection />
+      <BrandingPlansSection />
       <ProcessSection />
     </>
   );

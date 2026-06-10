@@ -38,11 +38,29 @@ const FILTER_OPTIONS = [
   { value: 'contacted', label: 'Contactados' },
 ];
 
-export default function QuestionnaireListClient({ questionnaires }: QuestionnaireListClientProps) {
+export default function QuestionnaireListClient({
+  questionnaires: initialQuestionnaires,
+}: QuestionnaireListClientProps) {
+  const [questionnaires, setQuestionnaires] = useState(initialQuestionnaires);
   const [filter, setFilter] = useState<string>('all');
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   const filtered =
     filter === 'all' ? questionnaires : questionnaires.filter((q) => q.status === filter);
+
+  const handleDelete = async (id: string) => {
+    if (
+      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
+    )
+      return;
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/questionnaires/${id}`, { method: 'DELETE' });
+      if (res.ok) setQuestionnaires((prev) => prev.filter((q) => q._id !== id));
+    } finally {
+      setDeleting(null);
+    }
+  };
 
   return (
     <div>
@@ -82,12 +100,14 @@ export default function QuestionnaireListClient({ questionnaires }: Questionnair
           const statusInfo = STATUS_LABELS[q.status] || STATUS_LABELS.new;
 
           return (
-            <Link
+            <div
               key={q._id}
-              href={`/admin/dashboard/questionnaires/${q._id}`}
-              className="flex items-start justify-between gap-4 p-5 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors cursor-pointer"
+              className="border border-border rounded-xl p-5 bg-card flex flex-col sm:flex-row sm:items-center gap-4"
             >
-              <div className="flex-1 min-w-0">
+              <Link
+                href={`/admin/dashboard/questionnaires/${q._id}`}
+                className="flex-1 min-w-0 hover:opacity-80 transition-opacity"
+              >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-semibold text-card-foreground text-sm">
                     {q.answers.fullName || 'Sin nombre'}
@@ -106,17 +126,29 @@ export default function QuestionnaireListClient({ questionnaires }: Questionnair
                   Presupuesto: <span className="font-medium">{q.answers.budget || '—'}</span> ·
                   Plazo: <span className="font-medium">{q.answers.deadline || '—'}</span>
                 </p>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-xs text-muted-foreground">Plan recomendado</p>
-                <p className="text-sm font-bold text-primary mt-0.5">
-                  {plan?.name || q.recommendedPlan}
-                </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {q.createdAt ? new Date(q.createdAt).toLocaleDateString('es') : ''}
+                  Plan:{' '}
+                  <span className="font-bold text-primary">{plan?.name || q.recommendedPlan}</span>
+                  {q.createdAt && <> · {new Date(q.createdAt).toLocaleDateString('es')}</>}
                 </p>
+              </Link>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <Link
+                  href={`/admin/dashboard/questionnaires/${q._id}`}
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg border border-primary text-primary bg-background hover:bg-primary/10 transition-colors"
+                >
+                  Ver respuestas
+                </Link>
+                <button
+                  onClick={() => handleDelete(q._id)}
+                  disabled={deleting === q._id}
+                  title="Eliminar cuestionario"
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg border border-destructive text-destructive bg-background hover:bg-destructive/10 disabled:opacity-50 transition-colors"
+                >
+                  {deleting === q._id ? '...' : 'Eliminar'}
+                </button>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

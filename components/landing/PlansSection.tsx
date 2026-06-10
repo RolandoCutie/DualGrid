@@ -44,9 +44,11 @@ export default function PlansSection() {
             className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            {t('plans.title')}
+            {t('plans.section_title')}
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">{t('plans.subtitle')}</p>
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+            {t('plans.section_subtitle')}
+          </p>
         </div>
 
         {/* Plans grid */}

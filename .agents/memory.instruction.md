@@ -23,3 +23,4 @@ applyTo: '**'
 - **Typo patterns**: Watch for `lenght` → `length` and `Cant` → `Can't`
 - **React Compiler**: No direct `setState` inside `useEffect` body — triggers cascading render warning. Move state resets into event handlers or callbacks
 - **CarCard design**: Category-level card with colored banner (categoryColor), auto-rotating car model carousel (3 desktop / 1 mobile), specs row with icons, price badge. Cars cycle every 2s
+- **Admin PDF exports**: Use server-only routes under `/app/api/.../[id]/pdf/route.ts` with `isAdminSessionTokenValid` + `renderToBuffer` from `@react-pdf/renderer`, then return `application/pdf` with `Content-Disposition` attachment

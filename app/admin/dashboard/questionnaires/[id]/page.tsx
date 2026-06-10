@@ -236,6 +236,12 @@ export default async function QuestionnaireDetailPage({
             </span>
           </>
         )}
+        <a
+          href={`/api/questionnaires/${id}/pdf`}
+          className="ml-auto inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg border border-primary text-primary bg-background hover:bg-primary/10 transition-colors"
+        >
+          Exportar PDF
+        </a>
       </div>
 
       {/* Step 1: Contacto */}

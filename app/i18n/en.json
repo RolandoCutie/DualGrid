@@ -102,6 +102,8 @@
   },
   "plans": {
     "eyebrow": "Plans & pricing",
+    "section_title": "Web Development Plans",
+    "section_subtitle": "All-inclusive sites built to grow your business — design, code, domain and hosting.",
     "title": "Solutions for every type of business",
     "subtitle": "From landing pages to custom systems. Every plan includes unique design, clean code and post-launch support.",
     "custom_note": "Can't find what you're looking for?",
@@ -112,6 +114,52 @@
     "delivery": "Delivery in",
     "days": "business days",
     "from": "From"
+  },
+  "branding_plans": {
+    "eyebrow": "Visual identity",
+    "section_title": "Branding & Visual Identity Plans",
+    "section_subtitle": "A strong brand identity that makes you unforgettable. From a quick-start logo to a full corporate identity system.",
+    "title": "Find the right brand identity plan",
+    "subtitle": "Not sure which plan fits you? Take the 4-question test and get your personalized recommendation in seconds.",
+    "cta_quiz": "Find my plan with a quick test",
+    "custom_note": "Still not sure?",
+    "custom_link": "Take the identity test",
+    "custom_suffix": "and we'll tell you exactly what you need.",
+    "popular": "Most popular",
+    "from": "From",
+    "essential_name": "Grid Essential",
+    "essential_tagline": "Quick-start brand identity",
+    "corporate_name": "Grid Corporate",
+    "corporate_tagline": "Strategic brand investment",
+    "global_name": "Grid Ecosystem",
+    "global_tagline": "Premium brand architecture",
+    "essential_features": [
+      "Custom logo designed from scratch",
+      "Brand color palette (primary + secondary)",
+      "Typography selection (2 typefaces)",
+      "Quick-use PDF brand guide",
+      "3 logo format variants (color, B&W, icon)",
+      "Delivery in 20–30 business days"
+    ],
+    "corporate_features": [
+      "Everything in Grid Essential",
+      "Complete visual universe: icons, textures, photo style",
+      "First brand applications: business cards, social media templates, stationery",
+      "Full professional brand manual (PDF)",
+      "Unlimited revisions during design phase",
+      "Delivery in 30–45 business days"
+    ],
+    "global_features": [
+      "Everything in Grid Corporate",
+      "Sub-brand system and brand architecture guidelines",
+      "Advanced design manual for developers and printers",
+      "Merchandising and signage design",
+      "Dedicated brand strategy session",
+      "Delivery in 45–60 business days"
+    ],
+    "essential_cta": "Get started",
+    "corporate_cta": "Get started",
+    "global_cta": "Get started"
   },
   "plans_data": {
     "landing": {

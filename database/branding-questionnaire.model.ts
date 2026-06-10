@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export type BrandingPlanId = 'essential' | 'corporate' | 'global';
-export type BrandingQuestionnaireStatus = 'pending' | 'completed';
+export type BrandingQuestionnaireStatus = 'pending' | 'completed' | 'contacted';
 
 export interface IBrandingAnswers {
   q1: 'A' | 'B' | 'C';
@@ -15,6 +15,7 @@ export interface IBrandingQuestionnaireDoc extends Document {
   clientId?: string;
   clientName?: string;
   clientEmail?: string;
+  clientPhone?: string;
   status: BrandingQuestionnaireStatus;
   answers?: IBrandingAnswers;
   score?: { essential: number; corporate: number; global: number };
@@ -30,9 +31,10 @@ const BrandingQuestionnaireSchema = new Schema<IBrandingQuestionnaireDoc>(
     clientId: { type: String, trim: true },
     clientName: { type: String, trim: true },
     clientEmail: { type: String, trim: true, lowercase: true },
+    clientPhone: { type: String, trim: true },
     status: {
       type: String,
-      enum: ['pending', 'completed'],
+      enum: ['pending', 'completed', 'contacted'],
       default: 'pending',
     },
     answers: {

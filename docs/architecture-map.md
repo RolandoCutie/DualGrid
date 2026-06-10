@@ -1,5 +1,17 @@
 # CubaWay – Architecture Map
 
+## Recent DualGrid Updates
+
+- Added admin-protected PDF export routes for questionnaires:
+  - `/app/api/questionnaires/[id]/pdf/route.ts`
+  - `/app/api/branding-questionnaires/[id]/pdf/route.ts`
+- Added PDF document builders:
+  - `/lib/pdf/QuestionnairePDF.tsx`
+  - `/lib/pdf/BrandingQuestionnairePDF.tsx`
+- Added export buttons in admin detail views:
+  - `/app/admin/dashboard/questionnaires/[id]/page.tsx`
+  - `/app/admin/dashboard/branding-questionnaires/[id]/page.tsx`
+
 ## Full Folder Structure
 
 ```

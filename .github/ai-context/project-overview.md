@@ -15,6 +15,7 @@
 | **Plan Recommendation Engine** | Scoring system in `lib/recommendation.ts`. Weights by business type, budget, goals, desired pages, CMS need, primary action, and business age.                                                                                                                                           |
 | **Plans Catalog**              | 5 plans defined in `lib/plans.ts`: Landing, Menú QR, Portfolio, Restaurant, Custom.                                                                                                                                                                                                      |
 | **Admin Dashboard**            | Protected area. Manages clients, contracts, invoices, questionnaires and branding questionnaires.                                                                                                                                                                                        |
+| **Questionnaire PDF Export**   | Admin can export detailed PDF reports for both website questionnaires and branding questionnaires from their detail pages. PDF generation uses server-side React PDF and admin-protected API routes.                                                                                     |
 | **Branding Questionnaire**     | 4-question scoring quiz (A/B/C per question). Recommends one of 3 branding plans: Grid Essential ($100), Grid Corporate ($300), Grid Ecosystem ($550). Admin creates shareable token links and sends them to clients via WhatsApp. Results stored in `BrandingQuestionnaire` collection. |
 | **Bilingual UI (i18n)**        | EN/ES via `LanguageProvider`. Strings in `app/i18n/[locale].json`.                                                                                                                                                                                                                       |
 | **Dark / Light Mode**          | ThemeProvider with CSS variables.                                                                                                                                                                                                                                                        |
@@ -36,6 +37,7 @@
 11. Admin access protected by HMAC-SHA256 session tokens via `ADMIN_SECRET_PATH`.
 12. Dashboard shows: clients, active contracts, new leads (unreviewed questionnaires), paid revenue, pending revenue (with overdue highlight), net profit (paid revenue − expenses).
 13. Branding questionnaire logic in `lib/branding-recommendation.ts`: Q4 (budget) acts as a hard filter. Budget A → Essential, C → Global, B → Corporate (unless strong global majority). Stored in `dualgrid_branding_questionnaires` collection.
+14. Admin can export both questionnaire types to PDF via `/api/questionnaires/[id]/pdf` and `/api/branding-questionnaires/[id]/pdf` (admin session required).
 
 ---
 

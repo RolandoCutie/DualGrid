@@ -23,10 +23,10 @@ app/
 │       ├── invoices/page.tsx               # Invoices list (table + delete)
 │       ├── questionnaires/
 │           ├── page.tsx                    # Questionnaire list with status filter (new/reviewed/contacted)
-│           └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action
+│       │   └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action, PDF export
 │       └── branding-questionnaires/
 │           ├── page.tsx                    # Branding questionnaire list + "Nueva Asignación" button
-│           └── [id]/page.tsx               # Branding questionnaire detail: answers, score, notes
+│           └── [id]/page.tsx               # Branding questionnaire detail: answers, score, notes, PDF export
 └── api/
     ├── admin/login|logout|session/route.ts
     ├── clients/route.ts + [id]/route.ts
@@ -37,10 +37,13 @@ app/
     │   ├── route.ts                        # POST (public submit)
     │   └── [id]/
     │       ├── route.ts                    # GET|PATCH|DELETE (admin)
-    │       └── convert/route.ts            # POST: convert questionnaire → Client record
+    │       ├── convert/route.ts            # POST: convert questionnaire → Client record
+    │       └── pdf/route.ts                # GET: export questionnaire detail PDF (admin)
     ├── branding-questionnaires/
     │   ├── route.ts                        # GET list (admin) | POST create assignment (admin)
-    │   └── [id]/route.ts                   # GET detail | PATCH adminNotes (admin)
+    │   └── [id]/
+    │       ├── route.ts                    # GET detail | PATCH adminNotes (admin)
+    │       └── pdf/route.ts                # GET: export branding questionnaire PDF (admin)
     └── branding/
         └── [token]/route.ts                # GET by token (public) | PUT submit answers (public)
 
@@ -111,7 +114,12 @@ lib/
 ├── admin-auth.ts           # HMAC session tokens
 ├── require-admin-session.ts
 ├── base-url.ts
-└── utils.ts                # cn()
+├── utils.ts                # cn()
+└── pdf/
+    ├── ContractPDF.tsx
+    ├── InvoicePDF.tsx
+    ├── QuestionnairePDF.tsx
+    └── BrandingQuestionnairePDF.tsx
 
 types/
 └── index.ts                # All TypeScript interfaces and types

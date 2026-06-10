@@ -43,6 +43,14 @@ export default async function BrandingDetailPage({ params, searchParams }: Props
         title={`Cuestionario de ${clientName ?? 'cliente'}`}
         description="Respuestas del test de identidad visual"
       />
+      <div className="mt-3 mb-6">
+        <a
+          href={`/api/branding-questionnaires/${id}/pdf`}
+          className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg border border-primary text-primary bg-background hover:bg-primary/10 transition-colors"
+        >
+          Exportar PDF
+        </a>
+      </div>
       <div className="mt-6">
         <BrandingQuestionnaireDetail
           id={String(doc._id)}
