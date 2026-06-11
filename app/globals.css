@@ -64,39 +64,52 @@
 .dark {
   color-scheme: dark;
 
-  --background: #07090f;
-  --foreground: #94a3b8;
+  /* DualGrid Dark — Neon Craft palette */
+  /* Primary cyan: #00d9ff | Green accent: #00ff9d | Purple: #a594f9 */
+  /* Surfaces: #2b303a (card) | #000000 (background) */
 
-  --card: #0c0f1a;
-  --card-foreground: #e2e8f0;
+  --background: #000000;
+  --foreground: #e2e8f0;
 
-  --popover: #0c0f1a;
-  --popover-foreground: #e2e8f0;
+  --card: #2b303a;
+  --card-foreground: #f1f5f9;
 
-  --primary: #818cf8;
-  --primary-opaced: #312e81;
-  --primary-foreground: #ffffff;
+  --popover: #2b303a;
+  --popover-foreground: #f1f5f9;
 
-  --secondary: #111827;
+  /* Primary: cyan eléctrico */
+  --primary: #00d9ff;
+  --primary-opaced: #00d9ff26;
+  --primary-foreground: #000000;
+
+  --secondary: #1a1f2b;
   --secondary-foreground: #e2e8f0;
 
-  --muted: #111827;
-  --muted-foreground: #64748b;
+  --muted: #1a1f2b;
+  --muted-foreground: #94a3b8;
 
-  --accent: #22d3ee;
-  --accent-foreground: #0f172a;
+  /* Accent: green neon */
+  --accent: #00ff9d;
+  --accent-foreground: #000000;
+
+  /* Purple highlight */
+  --purple: #a594f9;
 
   --destructive: #ef4444;
 
-  --border: #1e293b;
-  --input: #111827;
-  --ring: #818cf8;
+  --border: #3a4150;
+  --input: #1a1f2b;
+  --ring: #00d9ff;
 
-  --surface: #111827;
-  --surface-modal: #1e293b;
+  --surface: #1a1f2b;
+  --surface-modal: #2b303a;
 
-  --gradient-start: #818cf8;
-  --gradient-end: #22d3ee;
+  --gradient-start: #00d9ff;
+  --gradient-end: #00ff9d;
+
+  /* Background radial glow — réplica del diseño */
+  --bg-glow-1: radial-gradient(ellipse 80% 50% at 50% -10%, #00d9ff18 0%, transparent 70%);
+  --bg-glow-2: radial-gradient(ellipse 60% 60% at 80% 90%, #00ff9d12 0%, transparent 60%);
 }
 
 @theme inline {
@@ -299,4 +312,63 @@ h6 {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--primary);
+}
+
+/* ─── Dark mode — cinematic gradient background ─── */
+.dark body {
+  /*
+   * Base: profundo azul noche (#07091a) — no negro puro
+   * Glow 1: cyan concentrado en el centro/horizonte del hero (~48% vertical)
+   * Glow 2: verde neon difuminado en esquina inferior derecha
+   * Glow 3: destello cyan suave en esquina superior izquierda
+   */
+  background-color: #07091a;
+  background-image:
+    /* Fondo base: azul noche de bordes a negro profundo al centro-bajo */
+    radial-gradient(ellipse 160% 100% at 50% -10%, #0f1e48 0%, #07091a 45%, #030407 100%),
+    /* Glow cyan principal — el "sol" de la escena */
+    radial-gradient(ellipse 70% 60% at 50% 50%, #00c8ff40 0%, #00d9ff1a 28%, transparent 58%),
+    /* Núcleo brillante cyan */
+    radial-gradient(circle 18% at 50% 48%, #00e8ff55 0%, #00d9ff0d 45%, transparent 55%),
+    /* Verde neon difuminado abajo a la derecha */
+    radial-gradient(ellipse 60% 55% at 86% 90%, #00ff9d38 0%, #00ff9d0a 40%, transparent 55%),
+    /* Destello cyan tenue arriba izquierda */
+    radial-gradient(circle 25% at 8% 18%, #00d9ff1a 0%, transparent 55%);
+  background-attachment: fixed;
+}
+
+/* ─── Dark neon card glow ─── */
+.dark .glow-primary {
+  box-shadow:
+    0 0 0 1px #00d9ff30,
+    0 0 40px -8px #00d9ff60,
+    0 8px 32px -8px #00d9ff25;
+}
+.dark .glow-accent {
+  box-shadow:
+    0 0 0 1px #00ff9d30,
+    0 0 40px -8px #00ff9d60,
+    0 8px 32px -8px #00ff9d25;
+}
+
+/* ─── Dark neon glow on primary button ─── */
+.dark button:hover .neon-btn,
+.dark .neon-btn:hover {
+  box-shadow: 0 0 24px -4px #00d9ff80;
+}
+
+/* ─── Dark plan card border glow ─── */
+.dark .plan-card-highlight {
+  box-shadow:
+    0 0 0 1.5px #00d9ff50,
+    0 0 48px -10px #00d9ff45,
+    0 0 0 1px #00ff9d20 inset;
+}
+
+/* ─── Neon text glow ─── */
+.dark .neon-text {
+  text-shadow: 0 0 20px #00d9ff80;
+}
+.dark .neon-text-green {
+  text-shadow: 0 0 20px #00ff9d80;
 }

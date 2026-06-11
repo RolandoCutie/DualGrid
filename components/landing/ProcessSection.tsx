@@ -14,8 +14,7 @@ export default function ProcessSection() {
   return (
     <section
       id="proceso"
-      className="py-28 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--muted) 0%, var(--background) 100%)' }}
+      className="py-28 relative overflow-hidden bg-[linear-gradient(180deg,var(--muted)_0%,var(--background)_100%)] dark:bg-transparent"
     >
       {/* Orb */}
       <div

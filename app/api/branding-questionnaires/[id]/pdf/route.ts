@@ -2,7 +2,7 @@ import BrandingQuestionnaire from '@/database/branding-questionnaire.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import BrandingQuestionnairePDF from '@/lib/pdf/BrandingQuestionnairePDF';
-import { renderToBuffer } from '@react-pdf/renderer';
+import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import React from 'react';
@@ -44,7 +44,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       recommendedPlan: doc.recommendedPlan ? String(doc.recommendedPlan) : undefined,
       adminNotes: doc.adminNotes ? String(doc.adminNotes) : undefined,
       createdAt: doc.createdAt ? String(doc.createdAt) : null,
-    }) as unknown as React.ReactElement,
+    }) as unknown as React.ReactElement<DocumentProps>,
   );
 
   const fileBase = safeSlug(String(doc.clientName ?? 'cuestionario-branding')) || 'sin-nombre';

@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/components/ui/LanguageProvider';
+import { useTheme } from '@/components/ui/ThemeProvider';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -38,6 +39,61 @@ function LanguageToggle() {
         </button>
       ))}
     </div>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
+  return (
+    <button
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      className={cn(
+        'relative flex h-8 w-[58px] items-center rounded-full border transition-all duration-300 cursor-pointer',
+        isDark ? 'bg-[#00d9ff15] border-[#00d9ff40]' : 'bg-muted/80 border-border',
+      )}
+    >
+      {/* Track glow dark */}
+      <span
+        aria-hidden
+        className={cn(
+          'absolute inset-0 rounded-full transition-opacity duration-300',
+          isDark ? 'opacity-100' : 'opacity-0',
+        )}
+        style={{ boxShadow: '0 0 12px -2px #00d9ff60 inset' }}
+      />
+      {/* Thumb */}
+      <span
+        aria-hidden
+        className={cn(
+          'relative z-10 flex h-6 w-6 items-center justify-center rounded-full shadow-md transition-all duration-300',
+          isDark
+            ? 'translate-x-[28px] bg-[#00d9ff] text-black'
+            : 'translate-x-1 bg-primary text-white',
+        )}
+      >
+        {isDark ? (
+          /* Moon icon */
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        ) : (
+          /* Sun icon */
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+        )}
+      </span>
+    </button>
   );
 }
 
@@ -116,6 +172,7 @@ export default function NavBarClient() {
             </button>
           ))}
           <LanguageToggle />
+          <ThemeToggle />
           {isAdmin ? (
             <>
               <Link
@@ -185,8 +242,9 @@ export default function NavBarClient() {
               {t(link.labelKey)}
             </button>
           ))}
-          <div className="pt-1">
+          <div className="flex items-center gap-3 pt-1">
             <LanguageToggle />
+            <ThemeToggle />
           </div>
           {isAdmin ? (
             <>

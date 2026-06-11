@@ -49,7 +49,7 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   };
 
   return (
-    <section id="portafolio" className="py-24 bg-muted/20">
+    <section id="portafolio" className="py-24 bg-muted/20 dark:bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">

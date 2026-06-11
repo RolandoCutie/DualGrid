@@ -15,12 +15,19 @@ export default function PlansSection() {
   // Merge base plan structure (price, deliveryDays, highlighted) with translated content
   const plansData = DICTS[locale].plans_data as Record<
     string,
-    { name: string; tagline: string; features: string[]; ctaLabel: string }
+    { name: string; tagline: string; features: string[]; ctaLabel: string; target?: string }
   >;
   const translatedPlans: Plan[] = PLANS.map((p) => {
     const tr = plansData[p.id];
     return tr
-      ? { ...p, name: tr.name, tagline: tr.tagline, features: tr.features, ctaLabel: tr.ctaLabel }
+      ? {
+          ...p,
+          name: tr.name,
+          tagline: tr.tagline,
+          features: tr.features,
+          ctaLabel: tr.ctaLabel,
+          target: tr.target,
+        }
       : p;
   });
 
@@ -35,7 +42,7 @@ export default function PlansSection() {
   };
 
   return (
-    <section id="planes" className="py-24 bg-background">
+    <section id="planes" className="py-24 bg-background dark:bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="text-center mb-16">

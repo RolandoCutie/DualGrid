@@ -20,6 +20,7 @@ export interface Plan {
   features: string[];
   highlighted?: boolean;
   ctaLabel: string;
+  target?: string;
 }
 
 // ─── Questionnaire ────────────────────────────────────────────────────────────

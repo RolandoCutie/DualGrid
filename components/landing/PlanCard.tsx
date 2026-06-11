@@ -3,6 +3,7 @@
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import type { Plan } from '@/types';
+import { useState } from 'react';
 
 interface PlanCardProps {
   plan: Plan;
@@ -11,6 +12,8 @@ interface PlanCardProps {
 
 export default function PlanCard({ plan, onSelect }: PlanCardProps) {
   const { t } = useLanguage();
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div
       className={cn(
@@ -88,19 +91,20 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
         </p>
       </div>
 
-      {/* Features */}
-      <ul className="flex-1 space-y-3 mb-8">
-        {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3 text-sm text-card-foreground">
+      {/* Ideal para — before CTA */}
+      {plan.target && (
+        <div className="mb-6">
+          <div className="flex items-start gap-3 text-sm text-card-foreground leading-relaxed">
             <span
-              className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+              className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
               style={{
-                background:
-                  'linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--accent) 15%, transparent))',
+                border: '2px solid var(--primary)',
+                color: 'var(--primary)',
               }}
             >
               <svg
-                className="w-2.5 h-2.5 text-primary"
+                width="10"
+                height="10"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -109,10 +113,10 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
-            {feature}
-          </li>
-        ))}
-      </ul>
+            <span>{plan.target}</span>
+          </div>
+        </div>
+      )}
 
       {/* CTA Button */}
       <button
@@ -120,8 +124,8 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
         className={cn(
           'w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 cursor-pointer',
           plan.highlighted
-            ? 'text-white shadow-md hover:shadow-lg hover:opacity-90'
-            : 'border-2 border-border text-card-foreground hover:border-primary/50 hover:text-primary',
+            ? 'text-white shadow-md hover:shadow-lg hover:opacity-90 mb-4'
+            : 'border-2 border-border text-card-foreground hover:border-primary/50 hover:text-primary mb-4',
         )}
         style={
           plan.highlighted
@@ -133,6 +137,67 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
       >
         {plan.ctaLabel}
       </button>
+
+      {/* Expand toggle (after CTA) */}
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        className="flex items-center justify-between w-full text-sm font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer py-1 px-1 rounded-lg hover:bg-primary/5"
+        aria-expanded={expanded}
+      >
+        <span
+          className="underline underline-offset-2"
+          style={{ textDecorationColor: 'color-mix(in srgb, var(--primary) 50%, transparent)' }}
+        >
+          {expanded ? t('plans.hide_features') : t('plans.see_features')}
+        </span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          className={cn('shrink-0 transition-transform duration-300', expanded && 'rotate-180')}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {/* Features (collapsible) */}
+      <div
+        className={cn(
+          'overflow-hidden transition-all duration-500 ease-in-out',
+          expanded ? 'max-h-[760px] opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0',
+        )}
+      >
+        <ul className="space-y-3">
+          {plan.features.map((feature, i) => (
+            <li
+              key={`${plan.id}-${i}`}
+              className="flex items-start gap-3 text-sm text-card-foreground"
+            >
+              <span
+                className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                style={{
+                  background:
+                    'linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--accent) 15%, transparent))',
+                }}
+              >
+                <svg
+                  className="w-2.5 h-2.5 text-primary"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

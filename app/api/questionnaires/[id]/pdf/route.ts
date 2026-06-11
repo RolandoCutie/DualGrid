@@ -2,7 +2,7 @@ import Questionnaire from '@/database/questionnaire.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import QuestionnairePDF from '@/lib/pdf/QuestionnairePDF';
-import { renderToBuffer } from '@react-pdf/renderer';
+import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import React from 'react';
@@ -45,7 +45,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   };
 
   const buffer = await renderToBuffer(
-    React.createElement(QuestionnairePDF, pdfData) as unknown as React.ReactElement,
+    React.createElement(QuestionnairePDF, pdfData) as unknown as React.ReactElement<DocumentProps>,
   );
 
   const filename = `cuestionario-web-${safeSlug(clientName) || 'sin-nombre'}-${id.slice(-6)}.pdf`;

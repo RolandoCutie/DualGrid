@@ -18,7 +18,12 @@
     "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.",
     "cta_primary": "Descubrir mi plan ideal",
     "cta_secondary": "Ver planes y precios",
-    "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
+    "trust": [
+      "Entrega rápida",
+      "Código limpio y seguro",
+      "100% responsive",
+      "Diseño único"
+    ]
   },
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
@@ -113,7 +118,9 @@
     "popular": "Más popular",
     "delivery": "Entrega en",
     "days": "días hábiles",
-    "from": "Desde"
+    "from": "Desde",
+    "see_features": "Ver todas las características",
+    "hide_features": "Ocultar características"
   },
   "branding_plans": {
     "eyebrow": "Identidad visual",
@@ -127,39 +134,44 @@
     "custom_suffix": "y te diremos exactamente qué necesitas.",
     "popular": "Más popular",
     "from": "Desde",
-    "essential_name": "Grid Essential",
-    "essential_tagline": "Identidad de arranque rápido",
-    "corporate_name": "Grid Corporate",
-    "corporate_tagline": "Inversión estratégica de marca",
-    "global_name": "Grid Ecosystem",
-    "global_tagline": "Arquitectura de marca premium",
+    "essential_name": "Plan Esencial",
+    "essential_tagline": "Identidad básica para arrancar con fuerza.",
+    "corporate_name": "Plan Corporativo",
+    "corporate_tagline": "Universo visual completo y estratégico.",
+    "global_name": "Plan Global",
+    "global_tagline": "Arquitectura de marca para proyectos globales.",
     "essential_features": [
-      "Logo personalizado diseñado desde cero",
-      "Paleta de colores de marca (principal + secundaria)",
-      "Selección tipográfica (2 fuentes)",
-      "Guía de uso rápida en PDF",
-      "3 variantes de logo (color, B/N, ícono)",
-      "Entrega en 20–30 días hábiles"
+      "1 propuesta conceptual + 1 ronda de ajustes menores (color o tipografía).",
+      "Versión principal + variantes adaptativas.",
+      "Paleta de colores corporativos con sus códigos técnicos necesarios.",
+      "Selección de fuentes tipográficas principales y secundarias para la consistencia de tu comunicación.",
+      "Guía de Uso Básica (PDF) con las pautas esenciales para aplicar tu logo correctamente, fondos permitidos y errores de uso que debes evitar."
     ],
     "corporate_features": [
-      "Todo lo de Grid Essential",
-      "Universo visual completo: íconos, texturas, estilo fotográfico",
-      "Primeras aplicaciones: tarjetas, plantillas para redes, papelería",
-      "Manual de identidad completo y profesional (PDF)",
-      "Revisiones ilimitadas durante la fase de diseño",
-      "Entrega en 30–45 días hábiles"
+      "2 propuestas conceptuales + 2 rondas completas de revisiones sobre la opción seleccionada.",
+      "Versión principal + variantes adaptativas (horizontal, vertical e isotipo para avatares).",
+      "Paleta de colores detallada y sistema de fuentes corporativas.",
+      "Elementos gráficos de soporte personalizados como patrones, texturas o iconografía propia para enriquecer tu marca.",
+      "Manual de Identidad Visual Completo que define la dirección de arte, el tono de la comunicación visual, las retículas de construcción del logo y sus áreas de restricción técnica.",
+      "Diseño de 3 a 4 aplicaciones a elegir según la necesidad del negocio."
     ],
     "global_features": [
-      "Todo lo de Grid Corporate",
-      "Sistema de submarcas y guías de arquitectura de marca",
-      "Manual técnico avanzado para desarrolladores e impresores",
-      "Diseño de merchandising y señalética",
-      "Sesión dedicada de estrategia de marca",
-      "Entrega en 45–60 días hábiles"
+      "3 propuestas conceptuales + 3 rondas exhaustivas de revisiones detalladas.",
+      "Versión principal + variantes adaptativas (horizontal, vertical e isotipo para avatares).",
+      "Paleta de colores detallada y sistema de fuentes corporativas.",
+      "Elementos gráficos de soporte personalizados como patrones, texturas o iconografía propia para enriquecer tu marca.",
+      "Manual de Identidad Visual Completo que define la dirección de arte, el tono de la comunicación visual, las retículas de construcción del logo y sus áreas de restricción técnica.",
+      "Diseño estructurado de sistema de submarcas para definir con coherencia visual cómo se relacionan las distintas unidades o líneas de negocio entre sí.",
+      "Suite de hasta 10 aplicaciones corporativas avanzadas a elegir."
     ],
-    "essential_cta": "Empezar",
-    "corporate_cta": "Empezar",
-    "global_cta": "Empezar"
+    "essential_cta": "Comienza ahora",
+    "corporate_cta": "Comienza ahora",
+    "global_cta": "Comienza ahora",
+    "see_features": "Ver todas las características",
+    "hide_features": "Ocultar características",
+    "essential_target": "Ideal para: Emprendedores y pequeños proyectos locales que necesitan cimientos visuales profesionales sin complicaciones.",
+    "corporate_target": "Ideal para: PYMEs o marcas que buscan posicionarse con fuerza, diferenciarse de la competencia y expandir su alcance.",
+    "global_target": "Ideal para: Empresas consolidadas, corporaciones o marcas paraguas que manejan múltiples subdivisiones, productos independientes o proyectos complejos."
   },
   "plans_data": {
     "landing": {
@@ -173,7 +185,8 @@
         "Carga rápida para que ningún visitante se vaya sin ver tu oferta",
         "Google Analytics incluido para ver cuánta gente te visita"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Emprendedores, freelancers, coaches o negocios locales que necesitan una página profesional rápida para captar clientes y proyectar credibilidad."
     },
     "menu_qr": {
       "name": "Menú Digital QR",
@@ -186,7 +199,8 @@
         "Botón para que tus clientes pidan directo por WhatsApp",
         "Compatible con cualquier móvil — sin descargar ninguna app"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Restaurantes, cafeterías, bares, food trucks y cualquier negocio gastronómico que quiera digitalizar su carta y agilizar el servicio en mesa."
     },
     "portfolio": {
       "name": "Portafolio Pro",
@@ -199,7 +213,8 @@
         "Formulario de contacto con notificaciones directas a tu email",
         "Listo para compartir en redes con imagen y descripción personalizada"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Diseñadores, fotógrafos, arquitectos e ilustradores que necesitan mostrar su trabajo de forma impactante para conseguir clientes de mayor nivel."
     },
     "restaurant": {
       "name": "Restaurante Pro",
@@ -212,7 +227,8 @@
         "Mapa de ubicación integrado + SEO local para aparecer en Google Maps",
         "Te avisamos de cada nueva reserva por email y WhatsApp"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Restaurantes, asadores y servicios de catering que necesitan un sitio completo con menú, sistema de reservas y presencia en Google Maps."
     },
     "wp_business": {
       "name": "Sitio Empresarial",
@@ -225,7 +241,8 @@
         "SEO configurado desde el primer día para posicionarte en Google",
         "Integración con Google Analytics y tus redes sociales"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: PYMEs, consultoras y empresas de servicios que necesitan una presencia digital completa con múltiples páginas y gestión propia de contenido."
     },
     "ecommerce_store": {
       "name": "Tienda Online",
@@ -238,7 +255,8 @@
         "Emails automáticos de confirmación, pago recibido y seguimiento de pedido",
         "SEO de productos para que te encuentren en búsquedas de Google"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Tiendas físicas que quieren vender online, marcas de producto y emprendedores que necesitan una tienda lista para facturar desde el primer día."
     },
     "blog": {
       "name": "Blog Profesional",
@@ -251,7 +269,8 @@
         "SEO configurado para que Google indexe y posicione tus artículos",
         "Editor sencillo para publicar nuevos contenidos sin ayuda técnica"
       ],
-      "ctaLabel": "Empezar"
+      "ctaLabel": "Empezar",
+      "target": "Ideal para: Escritores, periodistas, educadores y creadores de contenido que quieren construir audiencia y posicionarse como referentes en su área."
     },
     "custom": {
       "name": "Sistema Personalizado",
@@ -264,7 +283,8 @@
         "Capacitación para que tú y tu equipo sepan usarlo desde el primer día",
         "60 días de soporte incluidos tras el lanzamiento"
       ],
-      "ctaLabel": "Solicitar cotización"
+      "ctaLabel": "Solicitar cotización",
+      "target": "Ideal para: Negocios con necesidades únicas — plataformas de reservas, sistemas de gestión o proyectos que requieren funcionalidades completamente a medida."
     }
   },
   "questionnaire": {
@@ -275,7 +295,14 @@
     "submit": "Enviar consulta",
     "step": "Paso",
     "of": "de",
-    "step_labels": ["Contacto", "Negocio", "Objetivos", "Presupuesto", "Estilo", "Contenido"],
+    "step_labels": [
+      "Contacto",
+      "Negocio",
+      "Objetivos",
+      "Presupuesto",
+      "Estilo",
+      "Contenido"
+    ],
     "btn_next": "Siguiente →",
     "btn_back": "Anterior",
     "btn_submit": "Enviar consulta →",
@@ -346,11 +373,20 @@
         "label": "Creador de Contenido",
         "desc": "Blogger, YouTuber, influencer, periodista..."
       },
-      "other": { "label": "Otro", "desc": "Mi negocio es diferente." }
+      "other": {
+        "label": "Otro",
+        "desc": "Mi negocio es diferente."
+      }
     },
     "step2_online_presence": {
-      "none": { "label": "Sin presencia", "desc": "No tengo nada en internet" },
-      "social_only": { "label": "Solo redes sociales", "desc": "Instagram, Facebook, TikTok..." },
+      "none": {
+        "label": "Sin presencia",
+        "desc": "No tengo nada en internet"
+      },
+      "social_only": {
+        "label": "Solo redes sociales",
+        "desc": "Instagram, Facebook, TikTok..."
+      },
       "has_website": {
         "label": "Tengo un sitio web",
         "desc": "Pero necesito uno nuevo o mejorarlo"
@@ -431,12 +467,30 @@
     "step4_success_label": "¿Cómo defines el éxito de este proyecto? (opcional)",
     "step4_success_placeholder": "Ej: recibir 10 clientes nuevos al mes, aumentar mis reservas online, vender más productos...",
     "step4_budgets": {
-      "under_150": { "label": "Económico", "range": "Menos de $150 USD" },
-      "150_300": { "label": "Básico", "range": "$150 – $300 USD" },
-      "300_500": { "label": "Estándar", "range": "$300 – $500 USD" },
-      "500_800": { "label": "Profesional", "range": "$500 – $800 USD" },
-      "800_1500": { "label": "Avanzado", "range": "$800 – $1,500 USD" },
-      "over_1500": { "label": "Premium", "range": "Más de $1,500 USD" }
+      "under_150": {
+        "label": "Económico",
+        "range": "Menos de $150 USD"
+      },
+      "150_300": {
+        "label": "Básico",
+        "range": "$150 – $300 USD"
+      },
+      "300_500": {
+        "label": "Estándar",
+        "range": "$300 – $500 USD"
+      },
+      "500_800": {
+        "label": "Profesional",
+        "range": "$500 – $800 USD"
+      },
+      "800_1500": {
+        "label": "Avanzado",
+        "range": "$800 – $1,500 USD"
+      },
+      "over_1500": {
+        "label": "Premium",
+        "range": "Más de $1,500 USD"
+      }
     },
     "step4_deadlines": {
       "urgent": "Lo antes posible",
@@ -457,15 +511,42 @@
     "step5_yes": "Sí",
     "step5_no": "No",
     "step5_styles": {
-      "minimal": { "label": "Minimalista", "desc": "Limpio, espaciado, simple" },
-      "modern": { "label": "Moderno", "desc": "Actual, tecnológico" },
-      "elegant": { "label": "Elegante", "desc": "Sofisticado, premium" },
-      "colorful": { "label": "Colorido", "desc": "Vibrante, llamativo" },
-      "rustic": { "label": "Rústico", "desc": "Artesanal, natural" },
-      "corporate": { "label": "Corporativo", "desc": "Profesional, serio" },
-      "creative": { "label": "Creativo", "desc": "Artístico, único" },
-      "vintage": { "label": "Vintage", "desc": "Retro, nostálgico" },
-      "fun": { "label": "Divertido", "desc": "Juvenil, dinámico" }
+      "minimal": {
+        "label": "Minimalista",
+        "desc": "Limpio, espaciado, simple"
+      },
+      "modern": {
+        "label": "Moderno",
+        "desc": "Actual, tecnológico"
+      },
+      "elegant": {
+        "label": "Elegante",
+        "desc": "Sofisticado, premium"
+      },
+      "colorful": {
+        "label": "Colorido",
+        "desc": "Vibrante, llamativo"
+      },
+      "rustic": {
+        "label": "Rústico",
+        "desc": "Artesanal, natural"
+      },
+      "corporate": {
+        "label": "Corporativo",
+        "desc": "Profesional, serio"
+      },
+      "creative": {
+        "label": "Creativo",
+        "desc": "Artístico, único"
+      },
+      "vintage": {
+        "label": "Vintage",
+        "desc": "Retro, nostálgico"
+      },
+      "fun": {
+        "label": "Divertido",
+        "desc": "Juvenil, dinámico"
+      }
     },
     "step5_branding_title": "🎨 Identidad Visual (Branding)",
     "step5_branding_subtitle": "Si también necesitas diseño de logo o identidad visual, estas preguntas nos ayudan a capturar tu esencia de marca.",

@@ -7,7 +7,10 @@ export default function WhySection() {
   const items = DICTS[locale].why.items as Array<{ emoji: string; title: string; desc: string }>;
 
   return (
-    <section id="por-que" className="py-28 bg-background relative overflow-hidden">
+    <section
+      id="por-que"
+      className="py-28 bg-background dark:bg-transparent relative overflow-hidden"
+    >
       {/* Subtle background orb */}
       <div
         className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none opacity-40"

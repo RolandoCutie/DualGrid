@@ -13,12 +13,12 @@
 
 ## UI Libraries
 
-| Library                          | Usage                                                                         |
-| -------------------------------- | ----------------------------------------------------------------------------- |
-| `class-variance-authority` (CVA) | Button variants in `components/ui/Button.tsx`                                 |
-| `lucide-react`                   | Icons throughout the app                                                      |
-| `clsx` + `tailwind-merge`        | Via `cn()` in `lib/utils.ts`                                                  |
-| `@react-pdf/renderer`            | Server-side PDF generation for invoices, contracts, and questionnaire exports |
+| Library                          | Usage                                                                                                                                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `class-variance-authority` (CVA) | Button variants in `components/ui/Button.tsx`                                                                                                          |
+| `lucide-react`                   | Icons throughout the app                                                                                                                               |
+| `clsx` + `tailwind-merge`        | Via `cn()` in `lib/utils.ts`                                                                                                                           |
+| `@react-pdf/renderer`            | Server-side PDF generation for invoices, contracts, and questionnaire exports (`renderToBuffer` + `ReactElement<DocumentProps>` casting in API routes) |
 
 ## Auth
 
@@ -40,12 +40,21 @@
 Defined in `app/globals.css`:
 
 ```css
---background: #fafafa --foreground: #18181b --card: #ffffff --card-foreground: #18181b
-  --primary: #6366f1 (indigo-500) --primary-foreground: #ffffff --secondary: #f4f4f5
-  --muted: #f4f4f5 --border: #e4e4e7 --ring: #6366f1;
+/* Light */
+--background: #f5f7ff;
+--card: #ffffff;
+--primary: #4f46e5;
+--accent: #0891b2;
+
+/* Dark neon palette */
+--background: #000000;
+--card: #2b303a;
+--primary: #00d9ff;
+--accent: #00ff9d;
+--purple: #a594f9;
 ```
 
-Dark mode mirrors with zinc-900 backgrounds.
+Dark mode uses a cinematic multi-layer gradient background (base linear gradient + radial cyan/green glows) applied globally on `body`, and landing sections switch to transparent in dark mode so the global effect remains visible.
 
 ## Key Utility Functions
 

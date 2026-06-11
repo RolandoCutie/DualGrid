@@ -6,7 +6,7 @@
 app/
 ├── layout.tsx              # Root layout: Inter font, ThemeProvider, LanguageProvider, NavBar, Footer
 ├── page.tsx                # Home (Server): HeroSection + WhySection + PlansSection + ProcessSection
-├── globals.css             # Tailwind v4 + CSS variables design tokens (zinc/indigo palette)
+├── globals.css             # Tailwind v4 + CSS variables design tokens + dark neon cinematic gradient background
 ├── manifest.ts             # PWA manifest
 ├── sitemap.ts / robots.ts
 ├── i18n/
@@ -52,11 +52,11 @@ components/
 ├── NavBarClient.tsx        # Sticky header, DG logo, scroll behavior, mobile menu
 ├── Footer.tsx              # Simple footer with DualGrid branding
 ├── landing/
-│   ├── HeroSection.tsx     # Hero with CTA that opens QuestionnaireWizard
-│   ├── PlansSection.tsx    # Grid of PlanCards
-│   ├── PlanCard.tsx        # Single plan card (reusable)
-│   ├── ProcessSection.tsx  # 6-step process grid
-│   └── WhySection.tsx      # 6 differentials grid
+│   ├── HeroSection.tsx     # Hero with CTA that opens QuestionnaireWizard (dark mode transparent section to expose global gradient)
+│   ├── PlansSection.tsx    # Grid of PlanCards (dark mode transparent section)
+│   ├── PlanCard.tsx        # Single web plan card with CTA-first layout + expandable features
+│   ├── ProcessSection.tsx  # 6-step process grid (dark mode transparent section)
+│   └── WhySection.tsx      # 6 differentials grid (dark mode transparent section)
 ├── questionnaire/
 │   ├── QuestionnaireWizard.tsx   # Orchestrates 6 steps + result
 │   ├── StepIndicator.tsx         # Progress bar dots + labels
@@ -120,7 +120,8 @@ lib/
     ├── InvoicePDF.tsx
     ├── QuestionnairePDF.tsx
     └── BrandingQuestionnairePDF.tsx
-
+API note:
+- `app/api/questionnaires/[id]/pdf/route.ts` and `app/api/branding-questionnaires/[id]/pdf/route.ts` cast created elements to `React.ReactElement<DocumentProps>` before `renderToBuffer` for strict TS compatibility.
 types/
 └── index.ts                # All TypeScript interfaces and types
 

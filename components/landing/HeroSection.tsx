@@ -10,7 +10,7 @@ export default function HeroSection() {
   const { t, tArray } = useLanguage();
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background grain-overlay">
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background dark:bg-transparent grain-overlay">
       {/* ── Background: blueprint grid ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
