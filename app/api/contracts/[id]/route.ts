@@ -31,6 +31,19 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   await connectDB();
   const { id } = await params;
   const body = await req.json();
+
+  // Guard: revisionsUsed cannot exceed revisionsIncluded
+  if (body.revisionsUsed !== undefined) {
+    const existing = (await Contract.findById(id).lean()) as { revisionsIncluded?: number } | null;
+    const limit = body.revisionsIncluded ?? existing?.revisionsIncluded ?? Infinity;
+    if (body.revisionsUsed > limit) {
+      return NextResponse.json(
+        { error: `El cliente solo tiene ${limit} ronda(s) de revisión incluida(s).` },
+        { status: 422 },
+      );
+    }
+  }
+
   const updated = await Contract.findByIdAndUpdate(
     id,
     { $set: body },

@@ -9,6 +9,12 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import React from 'react';
 
+const BRANDING_PLAN_NAMES: Record<string, string> = {
+  essential: 'Branding Essential',
+  corporate: 'Branding Corporate',
+  global: 'Branding Global',
+};
+
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const jar = await cookies();
   const token = jar.get('admin_session')?.value ?? '';
@@ -26,6 +32,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!clientDoc) return NextResponse.json({ error: 'Client not found' }, { status: 404 });
 
   const plan = PLAN_MAP[contract.planId];
+  const planName = plan?.name ?? BRANDING_PLAN_NAMES[contract.planId] ?? contract.planId;
 
   const contractData = {
     _id: contract._id.toString(),
@@ -36,6 +43,10 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     status: contract.status,
     startDate: contract.startDate.toISOString(),
     deliveryDate: contract.deliveryDate.toISOString(),
+    revisionsIncluded: contract.revisionsIncluded,
+    revisionsUsed: contract.revisionsUsed,
+    excludedItems: contract.excludedItems as string[] | undefined,
+    contractTerms: contract.contractTerms as string | undefined,
     notes: contract.notes,
   };
 
@@ -50,7 +61,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     React.createElement(ContractPDF, {
       contract: contractData,
       client: clientData,
-      planName: plan?.name ?? contract.planId,
+      planName,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }) as unknown as React.ReactElement<any>,
   );

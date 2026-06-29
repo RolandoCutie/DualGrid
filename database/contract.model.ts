@@ -1,9 +1,9 @@
-import type { ContractStatus, PlanId } from '@/types';
+import type { ContractStatus } from '@/types';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IContractDoc extends Document {
   clientId: mongoose.Types.ObjectId;
-  planId: PlanId;
+  planId: string;
   services: Array<{ name: string; description: string; price: number }>;
   totalAmount: number;
   advanceAmount: number;
@@ -11,6 +11,10 @@ export interface IContractDoc extends Document {
   status: ContractStatus;
   startDate: Date;
   deliveryDate: Date;
+  revisionsIncluded: number;
+  revisionsUsed: number;
+  excludedItems: string[];
+  contractTerms?: string;
   notes?: string;
   signedAt?: Date;
   createdAt: Date;
@@ -40,6 +44,9 @@ const ContractSchema = new Schema<IContractDoc>(
         'ecommerce_store',
         'blog',
         'custom',
+        'essential',
+        'corporate',
+        'global',
       ],
       required: true,
     },
@@ -54,6 +61,10 @@ const ContractSchema = new Schema<IContractDoc>(
     },
     startDate: { type: Date, required: true },
     deliveryDate: { type: Date, required: true },
+    revisionsIncluded: { type: Number, default: 0, min: 0 },
+    revisionsUsed: { type: Number, default: 0, min: 0 },
+    excludedItems: [{ type: String }],
+    contractTerms: { type: String },
     notes: { type: String },
     signedAt: { type: Date },
   },

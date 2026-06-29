@@ -18,6 +18,9 @@ export default async function ContractsPage() {
     .sort({ createdAt: -1 })
     .lean();
 
+
+  
+
   const rows: ContractRow[] = contracts.map((c: Record<string, unknown>) => {
     const client = c.clientId as Record<string, unknown> | null;
     const planId = String(c.planId);

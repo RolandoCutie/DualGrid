@@ -21,6 +21,7 @@ export interface Plan {
   highlighted?: boolean;
   ctaLabel: string;
   target?: string;
+  revisionsIncluded?: number;
 }
 
 // ─── Questionnaire ────────────────────────────────────────────────────────────
@@ -153,7 +154,7 @@ export interface IContract {
   _id?: string;
   clientId: string;
   clientName?: string; // populated
-  planId: PlanId;
+  planId: string; // PlanId | BrandingPlanId
   services: ContractService[];
   totalAmount: number;
   advanceAmount: number;
@@ -161,6 +162,10 @@ export interface IContract {
   status: ContractStatus;
   startDate: string;
   deliveryDate: string;
+  revisionsIncluded?: number;
+  revisionsUsed?: number;
+  excludedItems?: string[];
+  contractTerms?: string;
   notes?: string;
   signedAt?: string;
   createdAt?: string;

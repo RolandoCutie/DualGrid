@@ -22,6 +22,10 @@ export default async function EditContractPage({
   await requireAdminSession();
   const { id } = await params;
   const { back } = await searchParams;
+
+  // Guard against non-ObjectId segments (e.g. static asset requests like logo.png)
+  if (!/^[0-9a-fA-F]{24}$/.test(id)) notFound();
+
   await connectDB();
 
   const [contract, clients] = await Promise.all([
@@ -74,6 +78,10 @@ export default async function EditContractPage({
           status: contract.status,
           startDate: contract.startDate.toISOString(),
           deliveryDate: contract.deliveryDate.toISOString(),
+          revisionsIncluded: contract.revisionsIncluded,
+          revisionsUsed: contract.revisionsUsed,
+          excludedItems: (contract.excludedItems as string[] | undefined) ?? [],
+          contractTerms: (contract.contractTerms as string | undefined) ?? '',
           notes: contract.notes ?? '',
         }}
       />
