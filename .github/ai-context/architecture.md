@@ -16,13 +16,13 @@ app/
 ├── admin/
 │   ├── [secret]/page.tsx   # Hidden admin login
 │   └── dashboard/
-│       ├── page.tsx                        # Dashboard index with stats: clientes, contratos activos, leads nuevos, ingresos cobrados, por cobrar (con vencidas), ganancia neta
-│       ├── clients/page.tsx                # Clients list (table + delete)
-│       ├── contracts/page.tsx              # Contracts list (table + delete)
-│       ├── expenses/page.tsx               # Expenses list (table + total) ← NEW
-│       ├── invoices/page.tsx               # Invoices list (table + delete)
+│       ├── page.tsx                        # Dashboard: <DashboardStats> async SC wrapped in <Suspense> (streaming) + menu links
+│       ├── clients/page.tsx                # Clients list (soft delete filter)
+│       ├── contracts/page.tsx              # Contracts list (soft delete filter)
+│       ├── expenses/page.tsx               # Expenses list (soft delete filter)
+│       ├── invoices/page.tsx               # Invoices list (soft delete filter)
 │       ├── questionnaires/
-│           ├── page.tsx                    # Questionnaire list with status filter (new/reviewed/contacted)
+│           ├── page.tsx                    # Questionnaire list with status filter + text search + pagination
 │       │   └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action, PDF export
 │       └── branding-questionnaires/
 │           ├── page.tsx                    # Branding questionnaire list + "Nueva Asignación" button

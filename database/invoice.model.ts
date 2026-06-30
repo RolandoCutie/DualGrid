@@ -18,6 +18,8 @@ export interface IInvoiceDoc extends Document {
   paidAt?: Date;
   paymentMethod?: PaymentMethod;
   notes?: string;
+  currency: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -55,9 +57,43 @@ const InvoiceSchema = new Schema<IInvoiceDoc>(
       enum: ['cash', 'bank_transfer', 'paypal', 'card', 'crypto', 'other'],
     },
     notes: { type: String },
+    currency: { type: String, default: 'USD' },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes
+InvoiceSchema.index({ clientId: 1 });
+InvoiceSchema.index({ contractId: 1 });
+InvoiceSchema.index({ status: 1 });
+InvoiceSchema.index({ createdAt: -1 });
+InvoiceSchema.index({ deletedAt: 1 });
+
+// ─── paidAmount sync hook (#15) ───────────────────────────────────────────────
+// Whenever an invoice is saved, recalculate the parent contract's paidAmount
+// so Contract.paidAmount always equals the sum of all paid, non-deleted invoices.
+async function syncContractPaid(contractId: mongoose.Types.ObjectId | undefined) {
+  if (!contractId) return;
+  const InvoiceModel = mongoose.model('Invoice');
+  const ContractModel = mongoose.model('Contract');
+  const agg = await InvoiceModel.aggregate<{ total: number }>([
+    {
+      $match: {
+        contractId: new mongoose.Types.ObjectId(contractId.toString()),
+        status: 'paid',
+        deletedAt: null,
+      },
+    },
+    { $group: { _id: null, total: { $sum: '$totalAmount' } } },
+  ]);
+  const paidAmount = agg[0]?.total ?? 0;
+  await ContractModel.findByIdAndUpdate(contractId, { paidAmount });
+}
+
+InvoiceSchema.post('save', async function () {
+  await syncContractPaid(this.contractId as mongoose.Types.ObjectId | undefined);
+});
 
 const Invoice =
   mongoose.models.Invoice ||

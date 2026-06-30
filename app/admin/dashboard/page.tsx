@@ -8,6 +8,7 @@ import Questionnaire from '@/database/questionnaire.model';
 import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 const MENU_ITEMS = [
   {
@@ -67,21 +68,26 @@ interface AggResult {
   total: number;
 }
 
-export default async function AdminDashboard() {
-  await requireAdminSession('/admin/dashboard');
+/** Separate async Server Component so stats stream in independently (#34) */
+async function DashboardStats() {
   await connectDB();
 
   const [totalClients, contractAgg, invoiceAgg, totalExpenses, totalQuestionnaires] =
     await Promise.all([
-      Client.countDocuments(),
-      Contract.aggregate<AggResult>([{ $group: { _id: '$status', count: { $sum: 1 } } }]),
+      Client.countDocuments({ deletedAt: null }),
+      Contract.aggregate<AggResult>([
+        { $match: { deletedAt: null } },
+        { $group: { _id: '$status', count: { $sum: 1 } } },
+      ]),
       Invoice.aggregate<AggResult>([
+        { $match: { deletedAt: null } },
         { $group: { _id: '$status', count: { $sum: 1 }, total: { $sum: '$totalAmount' } } },
       ]),
       Expense.aggregate<{ total: number }>([
+        { $match: { deletedAt: null } },
         { $group: { _id: null, total: { $sum: '$amount' } } },
       ]).then((r) => r[0]?.total ?? 0),
-      Questionnaire.countDocuments({ status: 'new' }),
+      Questionnaire.countDocuments({ status: 'new', deletedAt: null }),
     ]);
 
   const activeContracts =
@@ -95,52 +101,76 @@ export default async function AdminDashboard() {
   const netProfit = paidRevenue - totalExpenses;
 
   return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 mt-6">
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Clientes</p>
+        <p className="text-2xl font-bold text-card-foreground">{totalClients}</p>
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Contratos activos</p>
+        <p className="text-2xl font-bold text-primary">{activeContracts}</p>
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Leads nuevos</p>
+        <p className="text-2xl font-bold text-amber-500">{totalQuestionnaires}</p>
+        <p className="text-xs text-muted-foreground">sin revisar</p>
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Ingresos cobrados</p>
+        <p className="text-xl font-bold text-green-500">
+          ${paidRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+        </p>
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Por cobrar</p>
+        <p className="text-xl font-bold text-amber-500">
+          ${pendingRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+        </p>
+        {overdueCount > 0 && (
+          <p className="text-xs text-red-500 mt-0.5">
+            {overdueCount} vencida{overdueCount > 1 ? 's' : ''}
+          </p>
+        )}
+      </div>
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="text-xs text-muted-foreground mb-1">Ganancia neta</p>
+        <p className={`text-xl font-bold ${netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          ${netProfit.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+        </p>
+        <p className="text-xs text-muted-foreground">cobrado − gastos</p>
+      </div>
+    </div>
+  );
+}
+
+/** Skeleton shown while stats are loading */
+function StatsSkeleton() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 mt-6">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="rounded-2xl border border-border bg-card p-4 animate-pulse">
+          <div className="h-3 bg-muted rounded w-3/4 mb-2" />
+          <div className="h-7 bg-muted rounded w-1/2" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default async function AdminDashboard() {
+  await requireAdminSession('/admin/dashboard');
+
+  return (
     <AdminPageLayout>
       <AdminPageHeader
         title="Panel de DualGrid"
         description="Gestiona clientes, contratos, facturas y cuestionarios."
       />
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 mt-6">
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Clientes</p>
-          <p className="text-2xl font-bold text-card-foreground">{totalClients}</p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Contratos activos</p>
-          <p className="text-2xl font-bold text-primary">{activeContracts}</p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Leads nuevos</p>
-          <p className="text-2xl font-bold text-amber-500">{totalQuestionnaires}</p>
-          <p className="text-xs text-muted-foreground">sin revisar</p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Ingresos cobrados</p>
-          <p className="text-xl font-bold text-green-500">
-            ${paidRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-          </p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Por cobrar</p>
-          <p className="text-xl font-bold text-amber-500">
-            ${pendingRevenue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-          </p>
-          {overdueCount > 0 && (
-            <p className="text-xs text-red-500 mt-0.5">
-              {overdueCount} vencida{overdueCount > 1 ? 's' : ''}
-            </p>
-          )}
-        </div>
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs text-muted-foreground mb-1">Ganancia neta</p>
-          <p className={`text-xl font-bold ${netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            ${netProfit.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-          </p>
-          <p className="text-xs text-muted-foreground">cobrado − gastos</p>
-        </div>
-      </div>
+      {/* Stats stream independently — menu links appear immediately (#34) */}
+      <Suspense fallback={<StatsSkeleton />}>
+        <DashboardStats />
+      </Suspense>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
         {MENU_ITEMS.map((item) => (

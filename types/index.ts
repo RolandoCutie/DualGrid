@@ -10,6 +10,31 @@ export type PlanId =
   | 'blog'
   | 'custom';
 
+/**
+ * Represents a single capability entry in a plan's feature matrix.
+ * Used to define exactly what is and isn't included, with optional quantity limits,
+ * so clients have clear expectations before signing.
+ */
+export interface PlanFeatureEntry {
+  /** Matches the questionnaire's specialFeatures / desiredPages keys where applicable */
+  key: string;
+  /** Human-readable label for internal use and future plan detail pages */
+  label: string;
+  /** Whether this feature is included in the plan */
+  included: boolean;
+  /**
+   * How many instances of this feature are allowed.
+   * - A number means a hard cap (e.g. 2 contact forms).
+   * - 'unlimited' means no cap.
+   * - Omit when `included` is false or the concept of a limit doesn't apply.
+   */
+  limit?: number | 'unlimited';
+  /** Unit that describes what `limit` counts (e.g. 'páginas', 'platos', 'productos') */
+  limitUnit?: string;
+  /** Optional clarifying note shown internally (e.g. "se puede ampliar con upgrade") */
+  note?: string;
+}
+
 export interface Plan {
   id: PlanId;
   name: string;
@@ -22,6 +47,12 @@ export interface Plan {
   ctaLabel: string;
   target?: string;
   revisionsIncluded?: number;
+  /**
+   * Structured feature matrix for this plan.
+   * Covers every option surfaced in the questionnaire (Step 3: goals, pages, special features)
+   * so the team can immediately tell a client what is and isn't included.
+   */
+  detailedFeatures?: PlanFeatureEntry[];
 }
 
 // ─── Questionnaire ────────────────────────────────────────────────────────────

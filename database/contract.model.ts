@@ -17,6 +17,8 @@ export interface IContractDoc extends Document {
   contractTerms?: string;
   notes?: string;
   signedAt?: Date;
+  currency: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -67,9 +69,17 @@ const ContractSchema = new Schema<IContractDoc>(
     contractTerms: { type: String },
     notes: { type: String },
     signedAt: { type: Date },
+    currency: { type: String, default: 'USD' },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes
+ContractSchema.index({ clientId: 1 });
+ContractSchema.index({ status: 1 });
+ContractSchema.index({ createdAt: -1 });
+ContractSchema.index({ deletedAt: 1 });
 
 const Contract =
   mongoose.models.Contract ||

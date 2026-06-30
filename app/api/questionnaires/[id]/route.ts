@@ -1,6 +1,7 @@
 import Questionnaire from '@/database/questionnaire.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
+import { QuestionnairePatchSchema } from '@/lib/schemas';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -18,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (denied) return denied;
   await connectDB();
   const { id } = await params;
-  const q = await Questionnaire.findById(id).lean();
+  const q = await Questionnaire.findOne({ _id: id, deletedAt: null }).lean();
   if (!q) return NextResponse.json({ error: 'Not found' }, { status: 404 });
   return NextResponse.json(q);
 }
@@ -29,10 +30,15 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   await connectDB();
   const { id } = await params;
   const body = await req.json();
-  // Only allow updating status and adminNotes
-  const { status, adminNotes } = body as { status?: string; adminNotes?: string };
-  const updated = await Questionnaire.findByIdAndUpdate(
-    id,
+
+  const parsed = QuestionnairePatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues }, { status: 422 });
+  }
+
+  const { status, adminNotes } = parsed.data;
+  const updated = await Questionnaire.findOneAndUpdate(
+    { _id: id, deletedAt: null },
     { $set: { ...(status && { status }), ...(adminNotes !== undefined && { adminNotes }) } },
     { new: true, runValidators: true },
   ).lean();
@@ -45,6 +51,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   if (denied) return denied;
   await connectDB();
   const { id } = await params;
-  await Questionnaire.findByIdAndDelete(id);
+  await Questionnaire.findByIdAndUpdate(id, { deletedAt: new Date() });
   return NextResponse.json({ ok: true });
 }

@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Clientes' };
 export default async function ClientsPage() {
   await requireAdminSession('/admin/dashboard/clients');
   await connectDB();
-  const clients = await Client.find({}).sort({ createdAt: -1 }).lean();
+  const clients = await Client.find({ deletedAt: null }).sort({ createdAt: -1 }).lean();
 
   const rows: ClientRow[] = clients.map((c: Record<string, unknown>) => ({
     _id: String(c._id),

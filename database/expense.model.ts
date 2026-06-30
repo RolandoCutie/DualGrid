@@ -17,6 +17,8 @@ export interface IExpenseDoc extends Document {
   category: ExpenseCategory;
   date: Date;
   notes?: string;
+  currency: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -43,9 +45,16 @@ const ExpenseSchema = new Schema<IExpenseDoc>(
     },
     date: { type: Date, required: true },
     notes: { type: String, trim: true },
+    currency: { type: String, default: 'USD' },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes
+ExpenseSchema.index({ date: -1 });
+ExpenseSchema.index({ category: 1 });
+ExpenseSchema.index({ deletedAt: 1 });
 
 const Expense = mongoose.models.Expense ?? mongoose.model<IExpenseDoc>('Expense', ExpenseSchema);
 export default Expense;

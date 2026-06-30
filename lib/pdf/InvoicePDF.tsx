@@ -3,15 +3,15 @@ import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/rendere
 Font.register({ family: 'Helvetica', fonts: [] });
 
 // ─── Paleta reducida ─────────────────────────────────────
-const INK    = '#0f172a';
-const SLATE  = '#334155';
-const MUTED  = '#94a3b8';
+const INK = '#0f172a';
+const SLATE = '#334155';
+const MUTED = '#94a3b8';
 const BORDER = '#e2e8f0';
-const BG     = '#f8fafc';
-const WHITE  = '#ffffff';
+const BG = '#f8fafc';
+const WHITE = '#ffffff';
 const ACCENT = '#4f46e5';
-const GREEN  = '#16a34a';
-const RED    = '#ef4444';
+const GREEN = '#16a34a';
+const RED = '#ef4444';
 const ORANGE = '#d97706';
 
 const styles = StyleSheet.create({
@@ -349,12 +349,16 @@ function fmt(n: number) {
 }
 function fmtDate(d: string) {
   return new Date(d).toLocaleDateString('es-ES', {
-    day: '2-digit', month: 'long', year: 'numeric',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   });
 }
 function today() {
   return new Date().toLocaleDateString('es-ES', {
-    day: '2-digit', month: 'long', year: 'numeric',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   });
 }
 
@@ -369,7 +373,6 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
   return (
     <Document title={'Factura ' + invoice.invoiceNumber + ' — DualGrid'} author="DualGrid">
       <Page size="A4" style={styles.page}>
-
         {/* ── HEADER ── */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
@@ -377,16 +380,12 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
               {'Dual'}
               <Text style={styles.logoDot}>{'Grid'}</Text>
             </Text>
-            <Text style={styles.logoTagline}>
-              {'Diseño con propósito · Código con precisión'}
-            </Text>
+            <Text style={styles.logoTagline}>{'Diseño con propósito · Código con precisión'}</Text>
           </View>
           <View style={styles.headerRight}>
             <View>
               <Text style={styles.docTitle}>{'FACTURA'}</Text>
-              <Text style={styles.docSubtitle}>
-                {'Documento de cobro por servicios digitales'}
-              </Text>
+              <Text style={styles.docSubtitle}>{'Documento de cobro por servicios digitales'}</Text>
             </View>
             <View style={styles.headerMeta}>
               <Text style={styles.metaNumLabel}>{'N°'}</Text>
@@ -425,7 +424,6 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
 
         {/* ── BODY ── */}
         <View style={styles.body}>
-
           {/* Partes */}
           <Text style={[styles.sectionLabel, { marginTop: 14 }]}>{'PARTES'}</Text>
           <View style={styles.row}>
@@ -437,7 +435,7 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
                 </View>
                 <Text style={styles.partyName}>{'DualGrid Studio'}</Text>
                 <Text style={styles.partySub}>{'Agencia de diseño y desarrollo web'}</Text>
-                <Text style={styles.partyLine}>{'hola@dualgrid.dev'}</Text>
+                <Text style={styles.partyLine}>{'dualgrid.studio@gmail.com'}</Text>
                 <Text style={styles.partyLine}>{'dualgrid.dev'}</Text>
               </View>
             </View>
@@ -448,13 +446,11 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
                   <Text style={styles.cardLabel}>{'FACTURADO A'}</Text>
                 </View>
                 <Text style={styles.partyName}>{client.name}</Text>
-                {client.businessName
-                  ? <Text style={styles.partySub}>{client.businessName}</Text>
-                  : null}
+                {client.businessName ? (
+                  <Text style={styles.partySub}>{client.businessName}</Text>
+                ) : null}
                 <Text style={styles.partyLine}>{client.email}</Text>
-                {client.phone
-                  ? <Text style={styles.partyLine}>{client.phone}</Text>
-                  : null}
+                {client.phone ? <Text style={styles.partyLine}>{client.phone}</Text> : null}
               </View>
             </View>
           </View>
@@ -464,9 +460,7 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
           <View style={styles.tableWrap}>
             <View style={styles.tableHead}>
               <Text style={[styles.colDesc, styles.thText]}>{'DESCRIPCIÓN'}</Text>
-              <Text style={[styles.colQty, styles.thText, { textAlign: 'center' }]}>
-                {'CANT.'}
-              </Text>
+              <Text style={[styles.colQty, styles.thText, { textAlign: 'center' }]}>{'CANT.'}</Text>
               <Text style={[styles.colUnit, styles.thText, { textAlign: 'right' }]}>
                 {'PRECIO UNIT.'}
               </Text>
@@ -495,9 +489,7 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
               </View>
               {invoice.taxRate > 0 ? (
                 <View style={styles.totalRow}>
-                  <Text style={styles.totalLabel}>
-                    {'IVA (' + invoice.taxRate + '%)'}
-                  </Text>
+                  <Text style={styles.totalLabel}>{'IVA (' + invoice.taxRate + '%)'}</Text>
                   <Text style={styles.totalValue}>{fmt(invoice.taxAmount)}</Text>
                 </View>
               ) : null}
@@ -512,20 +504,14 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
           {!isPaid ? (
             <View style={styles.payBox}>
               <Text style={styles.payBoxTitle}>{'INSTRUCCIONES DE PAGO'}</Text>
+              <Text style={styles.payBoxLine}>{'Transferencia bancaria · PayPal · Zelle'}</Text>
               <Text style={styles.payBoxLine}>
-                {'Transferencia bancaria · PayPal · Zelle'}
+                {'Cuenta/email de pago: dualgrid.studio@gmail.com'}
               </Text>
-              <Text style={styles.payBoxLine}>
-                {'Cuenta/email de pago: hola@dualgrid.dev'}
-              </Text>
-              <Text style={styles.payBoxLine}>
-                {'Referencia: ' + invoice.invoiceNumber}
-              </Text>
+              <Text style={styles.payBoxLine}>{'Referencia: ' + invoice.invoiceNumber}</Text>
               <View style={styles.payBoxDue}>
                 <Text style={styles.payBoxDueLabel}>{'Fecha límite de pago'}</Text>
-                <Text
-                  style={isOverdue ? styles.payBoxDueValueAlert : styles.payBoxDueValue}
-                >
+                <Text style={isOverdue ? styles.payBoxDueValueAlert : styles.payBoxDueValue}>
                   {fmtDate(invoice.dueDate)}
                 </Text>
               </View>
@@ -551,10 +537,9 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
             }}
           >
             <Text style={{ fontSize: 8.5, color: MUTED }}>
-              {'Gracias por confiar en DualGrid — hola@dualgrid.dev'}
+              {'Gracias por confiar en DualGrid — dualgrid.studio@gmail.com'}
             </Text>
           </View>
-
         </View>
 
         {/* ── FOOTER ── */}
@@ -562,16 +547,13 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
           <View style={styles.footerAccent} />
           <View style={styles.footerBottom}>
             <Text style={styles.footerLogo}>{'DualGrid'}</Text>
-            <Text style={styles.footerContact}>{'hola@dualgrid.dev  ·  dualgrid.dev'}</Text>
+            <Text style={styles.footerContact}>{'dualgrid.studio@gmail.com  ·  dualgrid.dev'}</Text>
             <Text
               style={styles.footerPage}
-              render={({ pageNumber, totalPages }) =>
-                'Página ' + pageNumber + ' de ' + totalPages
-              }
+              render={({ pageNumber, totalPages }) => 'Página ' + pageNumber + ' de ' + totalPages}
             />
           </View>
         </View>
-
       </Page>
     </Document>
   );

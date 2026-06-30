@@ -8,6 +8,7 @@ export interface IClientDoc extends Document {
   businessName?: string;
   businessType?: BusinessType;
   notes?: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,9 +24,15 @@ const ClientSchema = new Schema<IClientDoc>(
       enum: ['creative', 'restaurant', 'entrepreneur', 'professional', 'ecommerce', 'other'],
     },
     notes: { type: String },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes
+ClientSchema.index({ createdAt: -1 });
+ClientSchema.index({ email: 1 });
+ClientSchema.index({ deletedAt: 1 });
 
 const Client =
   mongoose.models.Client || mongoose.model<IClientDoc>('Client', ClientSchema, 'dualgrid_clients');

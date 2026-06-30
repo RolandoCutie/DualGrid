@@ -6,7 +6,7 @@ import Modal from '@/components/ui/Modal';
 import { PLAN_MAP } from '@/lib/plans';
 import { recommendPlan } from '@/lib/recommendation';
 import type { PlanId, QuestionnaireAnswers } from '@/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StepIndicator from './StepIndicator';
 import Step1Contact from './steps/Step1Contact';
 import Step2Business from './steps/Step2Business';
@@ -287,11 +287,31 @@ export default function QuestionnaireWizard({
 }: QuestionnaireWizardProps) {
   const { t, tArray, locale } = useLanguage();
   const [step, setStep] = useState(1);
-  const [answers, setAnswers] = useState<QuestionnaireAnswers>(DEFAULT_ANSWERS);
+  const [answers, setAnswers] = useState<QuestionnaireAnswers>(() => {
+    // Restore draft from localStorage on first render (#37)
+    if (typeof window === 'undefined') return DEFAULT_ANSWERS;
+    try {
+      const saved = localStorage.getItem('dg_questionnaire_draft');
+      if (saved) return { ...DEFAULT_ANSWERS, ...JSON.parse(saved) };
+    } catch {
+      // ignore parse errors
+    }
+    return DEFAULT_ANSWERS;
+  });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [finalPlan, setFinalPlan] = useState<PlanId | null>(null);
   const [finalScores, setFinalScores] = useState<Record<PlanId, number> | null>(null);
+
+  // Persist answers to localStorage on every change (#37)
+  useEffect(() => {
+    if (done) return; // don't overwrite after submit
+    try {
+      localStorage.setItem('dg_questionnaire_draft', JSON.stringify(answers));
+    } catch {
+      // storage might be full or unavailable
+    }
+  }, [answers, done]);
 
   const totalSteps = 6;
   const isLastStep = step === totalSteps;
@@ -349,6 +369,12 @@ export default function QuestionnaireWizard({
     } finally {
       setSubmitting(false);
     }
+    // Clear saved draft after successful submission (#37)
+    try {
+      localStorage.removeItem('dg_questionnaire_draft');
+    } catch {
+      /* noop */
+    }
     setFinalPlan(plan!);
     setFinalScores(scores);
     setDone(true);
@@ -362,6 +388,7 @@ export default function QuestionnaireWizard({
       setDone(false);
       setFinalPlan(null);
       setFinalScores(null);
+      // Keep draft in localStorage — user may want to resume later
     }, 300);
   };
 

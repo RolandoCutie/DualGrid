@@ -1,5 +1,6 @@
 'use client';
 
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -14,6 +15,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   education: 'Educación / Cursos',
   other: 'Otro',
 };
+
+const PAGE_SIZE = 20;
 
 export interface ExpenseRow {
   _id: string;
@@ -32,16 +35,19 @@ export default function ExpenseListClient({ expenses }: Props) {
   const [rows, setRows] = useState<ExpenseRow[]>(expenses);
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [confirm, setConfirm] = useState<{ id: string; name: string } | null>(null);
 
-  const handleDelete = async (id: string, description: string) => {
-    if (!confirm(`¿Eliminar el gasto "${description}"? Esta acción no se puede deshacer.`)) return;
-    setDeleting(id);
+  const handleDeleteConfirm = async () => {
+    if (!confirm) return;
+    setDeleting(true);
     try {
-      const res = await fetch(`/api/expenses/${id}`, { method: 'DELETE' });
-      if (res.ok) setRows((prev) => prev.filter((e) => e._id !== id));
+      const res = await fetch(`/api/expenses/${confirm.id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((e) => e._id !== confirm.id));
     } finally {
-      setDeleting(null);
+      setDeleting(false);
+      setConfirm(null);
     }
   };
 
@@ -51,17 +57,33 @@ export default function ExpenseListClient({ expenses }: Props) {
     return matchSearch && matchCategory;
   });
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
   const totalFiltered = filtered.reduce((sum, e) => sum + e.amount, 0);
 
   return (
     <div>
+      <ConfirmModal
+        open={!!confirm}
+        title="Eliminar gasto"
+        message={`¿Eliminar el gasto "${confirm?.name}"? Esta acción no se puede deshacer.`}
+        loading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setConfirm(null)}
+      />
+
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
         <input
           type="text"
           placeholder="Buscar por descripción…"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
           className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
         />
         <select
@@ -116,7 +138,7 @@ export default function ExpenseListClient({ expenses }: Props) {
                 </td>
               </tr>
             )}
-            {filtered.map((e) => (
+            {paginated.map((e) => (
               <tr key={e._id} className="hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
                   {new Date(e.date).toLocaleDateString('es')}
@@ -141,11 +163,10 @@ export default function ExpenseListClient({ expenses }: Props) {
                     Editar
                   </Link>
                   <button
-                    onClick={() => handleDelete(e._id, e.description)}
-                    disabled={deleting === e._id}
-                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                    onClick={() => setConfirm({ id: e._id, name: e.description })}
+                    className="text-red-500 text-xs hover:underline"
                   >
-                    {deleting === e._id ? '…' : 'Eliminar'}
+                    Eliminar
                   </button>
                 </td>
               </tr>
@@ -153,6 +174,32 @@ export default function ExpenseListClient({ expenses }: Props) {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
+          <span>{filtered.length} gastos</span>
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={safePage <= 1}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              ← Anterior
+            </button>
+            <span className="px-2">
+              {safePage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={safePage >= totalPages}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

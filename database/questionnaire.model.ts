@@ -53,9 +53,25 @@ export interface IQuestionnaireDoc extends Document {
   score: Record<string, number>;
   status: 'new' | 'reviewed' | 'contacted';
   adminNotes?: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
+
+// Explicit schema for the plan scoring object (#13)
+const ScoreSchema = new Schema(
+  {
+    landing: { type: Number, default: 0 },
+    portfolio: { type: Number, default: 0 },
+    menu_qr: { type: Number, default: 0 },
+    restaurant: { type: Number, default: 0 },
+    wp_business: { type: Number, default: 0 },
+    ecommerce_store: { type: Number, default: 0 },
+    blog: { type: Number, default: 0 },
+    custom: { type: Number, default: 0 },
+  },
+  { _id: false },
+);
 
 const QuestionnaireSchema = new Schema<IQuestionnaireDoc>(
   {
@@ -89,16 +105,22 @@ const QuestionnaireSchema = new Schema<IQuestionnaireDoc>(
       ],
       default: null,
     },
-    score: { type: Schema.Types.Mixed, default: {} },
+    score: { type: ScoreSchema, default: {} },
     status: {
       type: String,
       enum: ['new', 'reviewed', 'contacted'],
       default: 'new',
     },
     adminNotes: { type: String },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes
+QuestionnaireSchema.index({ status: 1 });
+QuestionnaireSchema.index({ createdAt: -1 });
+QuestionnaireSchema.index({ deletedAt: 1 });
 
 const Questionnaire =
   mongoose.models.Questionnaire ||

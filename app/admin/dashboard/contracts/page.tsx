@@ -13,13 +13,10 @@ export const metadata: Metadata = { title: 'Contratos' };
 export default async function ContractsPage() {
   await requireAdminSession('/admin/dashboard/contracts');
   await connectDB();
-  const contracts = await Contract.find({})
+  const contracts = await Contract.find({ deletedAt: null })
     .populate('clientId', 'name businessName')
     .sort({ createdAt: -1 })
     .lean();
-
-
-  
 
   const rows: ContractRow[] = contracts.map((c: Record<string, unknown>) => {
     const client = c.clientId as Record<string, unknown> | null;

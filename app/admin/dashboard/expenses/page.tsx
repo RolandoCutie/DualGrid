@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Gastos' };
 export default async function ExpensesPage() {
   await requireAdminSession('/admin/dashboard/expenses');
   await connectDB();
-  const expenses = await Expense.find({}).sort({ date: -1 }).lean();
+  const expenses = await Expense.find({ deletedAt: null }).sort({ date: -1 }).lean();
 
   const totalExpenses = expenses.reduce(
     (sum: number, e: Record<string, unknown>) => sum + (Number(e.amount) || 0),

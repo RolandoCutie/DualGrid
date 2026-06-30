@@ -1,6 +1,7 @@
 import Client from '@/database/client.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
+import { ClientPatchSchema } from '@/lib/schemas';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface Params {
@@ -14,7 +15,7 @@ export async function GET(req: NextRequest, { params }: Params) {
   }
   const { id } = await params;
   await connectDB();
-  const client = await Client.findById(id).lean();
+  const client = await Client.findOne({ _id: id, deletedAt: null }).lean();
   if (!client) return NextResponse.json({ error: 'Not found' }, { status: 404 });
   return NextResponse.json(client);
 }
@@ -26,8 +27,14 @@ export async function PATCH(req: NextRequest, { params }: Params) {
   }
   const { id } = await params;
   const body = await req.json();
+  const parsed = ClientPatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues }, { status: 422 });
+  }
   await connectDB();
-  const updated = await Client.findByIdAndUpdate(id, body, { new: true }).lean();
+  const updated = await Client.findOneAndUpdate({ _id: id, deletedAt: null }, parsed.data, {
+    new: true,
+  }).lean();
   if (!updated) return NextResponse.json({ error: 'Not found' }, { status: 404 });
   return NextResponse.json(updated);
 }
@@ -39,6 +46,6 @@ export async function DELETE(req: NextRequest, { params }: Params) {
   }
   const { id } = await params;
   await connectDB();
-  await Client.findByIdAndDelete(id);
+  await Client.findByIdAndUpdate(id, { deletedAt: new Date() });
   return NextResponse.json({ success: true });
 }

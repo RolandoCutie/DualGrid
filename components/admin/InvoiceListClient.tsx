@@ -1,6 +1,7 @@
 'use client';
 
 import Badge from '@/components/ui/Badge';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -23,6 +24,7 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 const ALL_STATUSES = Object.keys(STATUS_LABELS);
+const PAGE_SIZE = 20;
 
 export interface InvoiceRow {
   _id: string;
@@ -42,17 +44,19 @@ export default function InvoiceListClient({ invoices }: Props) {
   const [statusFilter, setStatusFilter] = useState('');
   const [rows, setRows] = useState<InvoiceRow[]>(invoices);
   const [updating, setUpdating] = useState<string | null>(null);
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [confirm, setConfirm] = useState<{ id: string; name: string } | null>(null);
 
-  const handleDelete = async (id: string, invoiceNumber: string) => {
-    if (!confirm(`¿Eliminar la factura ${invoiceNumber}? Esta acción no se puede deshacer.`))
-      return;
-    setDeleting(id);
+  const handleDeleteConfirm = async () => {
+    if (!confirm) return;
+    setDeleting(true);
     try {
-      const res = await fetch(`/api/invoices/${id}`, { method: 'DELETE' });
-      if (res.ok) setRows((prev) => prev.filter((inv) => inv._id !== id));
+      const res = await fetch(`/api/invoices/${confirm.id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((inv) => inv._id !== confirm.id));
     } finally {
-      setDeleting(null);
+      setDeleting(false);
+      setConfirm(null);
     }
   };
 
@@ -64,6 +68,10 @@ export default function InvoiceListClient({ invoices }: Props) {
     const matchStatus = !statusFilter || inv.status === statusFilter;
     return matchSearch && matchStatus;
   });
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setUpdating(id);
@@ -85,13 +93,25 @@ export default function InvoiceListClient({ invoices }: Props) {
 
   return (
     <div>
+      <ConfirmModal
+        open={!!confirm}
+        title="Eliminar factura"
+        message={`¿Eliminar la factura "${confirm?.name}"? Esta acción no se puede deshacer.`}
+        loading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setConfirm(null)}
+      />
+
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
         <input
           type="text"
           placeholder="Buscar por N° o cliente…"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
           className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
         />
         <select
@@ -131,7 +151,7 @@ export default function InvoiceListClient({ invoices }: Props) {
                 </td>
               </tr>
             )}
-            {filtered.map((inv) => (
+            {paginated.map((inv) => (
               <tr
                 key={inv._id}
                 className={`hover:bg-muted/30 transition-colors ${
@@ -183,11 +203,10 @@ export default function InvoiceListClient({ invoices }: Props) {
                     PDF
                   </Link>
                   <button
-                    onClick={() => handleDelete(inv._id, inv.invoiceNumber)}
-                    disabled={deleting === inv._id}
-                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                    onClick={() => setConfirm({ id: inv._id, name: inv.invoiceNumber })}
+                    className="text-red-500 text-xs hover:underline"
                   >
-                    {deleting === inv._id ? '…' : 'Eliminar'}
+                    Eliminar
                   </button>
                 </td>
               </tr>
@@ -195,6 +214,32 @@ export default function InvoiceListClient({ invoices }: Props) {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
+          <span>{filtered.length} facturas</span>
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={safePage <= 1}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              ← Anterior
+            </button>
+            <span className="px-2">
+              {safePage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={safePage >= totalPages}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

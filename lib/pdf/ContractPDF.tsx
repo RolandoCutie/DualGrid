@@ -458,7 +458,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
                 </View>
                 <Text style={styles.partyName}>{'DualGrid Studio'}</Text>
                 <Text style={styles.partySub}>{'Agencia de diseño y desarrollo web'}</Text>
-                <Text style={styles.partyLine}>{'hola@dualgrid.dev'}</Text>
+                <Text style={styles.partyLine}>{'dualgrid.studio@gmail.com'}</Text>
                 <Text style={styles.partyLine}>{'dualgrid.dev'}</Text>
               </View>
             </View>
@@ -626,7 +626,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
               <Text style={styles.infoBlockLine}>
                 {'• Métodos aceptados: transferencia · PayPal · Zelle'}
               </Text>
-              <Text style={styles.infoBlockLine}>{'• Pagos a: hola@dualgrid.dev'}</Text>
+              <Text style={styles.infoBlockLine}>{'• Pagos a: dualgrid.studio@gmail.com'}</Text>
               <Text style={styles.infoBlockLine}>
                 {'• Ningún archivo final se entrega sin pago total.'}
               </Text>
@@ -674,7 +674,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
               <View style={styles.sigLine} />
               <Text style={styles.sigName}>{'DualGrid Studio'}</Text>
               <Text style={styles.sigRole}>{'Agencia de Diseño y Desarrollo Web'}</Text>
-              <Text style={styles.sigField}>{'Email: hola@dualgrid.dev'}</Text>
+              <Text style={styles.sigField}>{'Email: dualgrid.studio@gmail.com'}</Text>
               <Text style={styles.sigField}>{'Fecha: ___________________________'}</Text>
             </View>
             <View style={styles.sigCol}>
@@ -697,7 +697,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
           <View style={styles.footerAccent} />
           <View style={styles.footerBottom}>
             <Text style={styles.footerLogo}>{'DualGrid'}</Text>
-            <Text style={styles.footerContact}>{'hola@dualgrid.dev  ·  dualgrid.dev'}</Text>
+            <Text style={styles.footerContact}>{'dualgrid.studio@gmail.com  ·  dualgrid.dev'}</Text>
             <Text
               style={styles.footerPage}
               render={({ pageNumber, totalPages }) => 'Página ' + pageNumber + ' de ' + totalPages}
@@ -799,7 +799,9 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
             <View style={styles.footerAccent} />
             <View style={styles.footerBottom}>
               <Text style={styles.footerLogo}>{'DualGrid'}</Text>
-              <Text style={styles.footerContact}>{'hola@dualgrid.dev  ·  dualgrid.dev'}</Text>
+              <Text style={styles.footerContact}>
+                {'dualgrid.studio@gmail.com  ·  dualgrid.dev'}
+              </Text>
               <Text
                 style={styles.footerPage}
                 render={({ pageNumber, totalPages }) =>

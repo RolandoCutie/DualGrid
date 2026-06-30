@@ -1,6 +1,7 @@
 import Expense from '@/database/expense.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
+import { ExpensePatchSchema } from '@/lib/schemas';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -18,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (denied) return denied;
   await connectDB();
   const { id } = await params;
-  const expense = await Expense.findById(id).lean();
+  const expense = await Expense.findOne({ _id: id, deletedAt: null }).lean();
   if (!expense) return NextResponse.json({ error: 'Not found' }, { status: 404 });
   return NextResponse.json(expense);
 }
@@ -29,9 +30,15 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   await connectDB();
   const { id } = await params;
   const body = await req.json();
-  const updated = await Expense.findByIdAndUpdate(
-    id,
-    { $set: body },
+
+  const parsed = ExpensePatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues }, { status: 422 });
+  }
+
+  const updated = await Expense.findOneAndUpdate(
+    { _id: id, deletedAt: null },
+    { $set: parsed.data },
     { new: true, runValidators: true },
   ).lean();
   if (!updated) return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -43,6 +50,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   if (denied) return denied;
   await connectDB();
   const { id } = await params;
-  await Expense.findByIdAndDelete(id);
+  await Expense.findByIdAndUpdate(id, { deletedAt: new Date() });
   return NextResponse.json({ ok: true });
 }

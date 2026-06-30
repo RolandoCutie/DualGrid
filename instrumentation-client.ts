@@ -1,4 +1,16 @@
-// PWA Service Worker Registration
+import * as Sentry from '@sentry/nextjs';
+
+// ─── Sentry client init (#41) ────────────────────────────────────────────────
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  enabled: process.env.NODE_ENV === 'production',
+  tracesSampleRate: 0.1,
+  replaysSessionSampleRate: 0.05,
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [],
+});
+
+// ─── PWA Service Worker Registration ─────────────────────────────────────────
 if (
   typeof window !== 'undefined' &&
   'serviceWorker' in navigator &&

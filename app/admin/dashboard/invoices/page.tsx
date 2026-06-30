@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Facturas' };
 export default async function InvoicesPage() {
   await requireAdminSession('/admin/dashboard/invoices');
   await connectDB();
-  const invoices = await Invoice.find({})
+  const invoices = await Invoice.find({ deletedAt: null })
     .populate('clientId', 'name')
     .sort({ createdAt: -1 })
     .lean();

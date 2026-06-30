@@ -58,15 +58,17 @@ Dark mode uses a cinematic multi-layer gradient background (base linear gradient
 
 ## Key Utility Functions
 
-| Function                     | File                           | Purpose                           |
-| ---------------------------- | ------------------------------ | --------------------------------- |
-| `cn(...classes)`             | `lib/utils.ts`                 | Merge Tailwind classes safely     |
-| `connectDB()`                | `lib/mongodb.ts`               | Cached Mongoose connection        |
-| `recommendPlan(answers)`     | `lib/recommendation.ts`        | Returns `{ recommended, scores }` |
-| `PLANS` / `PLAN_MAP`         | `lib/plans.ts`                 | Catalog of 5 DualGrid plans       |
-| `getBaseUrl()`               | `lib/base-url.ts`              | Canonical URL for SEO metadata    |
-| `requireAdminSession()`      | `lib/require-admin-session.ts` | Redirect guard for admin pages    |
-| `isAdminSessionTokenValid()` | `lib/admin-auth.ts`            | Guard for admin API routes        |
+| Function                     | File                           | Purpose                                                                                        |
+| ---------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `cn(...classes)`             | `lib/utils.ts`                 | Merge Tailwind classes safely                                                                  |
+| `connectDB()`                | `lib/mongodb.ts`               | Cached Mongoose connection                                                                     |
+| `recommendPlan(answers)`     | `lib/recommendation.ts`        | Returns `{ recommended, scores }`                                                              |
+| `PLANS` / `PLAN_MAP`         | `lib/plans.ts`                 | Catalog of 8 plans with `detailedFeatures` matrix                                              |
+| `getBaseUrl()`               | `lib/base-url.ts`              | Canonical URL for SEO metadata                                                                 |
+| `requireAdminSession()`      | `lib/require-admin-session.ts` | Redirect guard for admin pages                                                                 |
+| `isAdminSessionTokenValid()` | `lib/admin-auth.ts`            | Guard for admin API routes                                                                     |
+| Zod schemas                  | `lib/schemas.ts`               | Validation schemas for all API routes (Client, Contract, Invoice, Expense, Questionnaire)      |
+| `nextSeq(name)`              | `database/counter.model.ts`    | Atomic counter for invoice numbers — uses `findOneAndUpdate + $inc` to prevent race conditions |
 
 ## Removed from Original Stack
 

@@ -1,6 +1,7 @@
 'use client';
 
 import Badge from '@/components/ui/Badge';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -23,6 +24,7 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 const ALL_STATUSES = Object.keys(STATUS_LABELS);
+const PAGE_SIZE = 20;
 
 export interface ContractRow {
   _id: string;
@@ -44,17 +46,19 @@ export default function ContractListClient({ contracts }: Props) {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [confirm, setConfirm] = useState<{ id: string; name: string } | null>(null);
 
-  const handleDelete = async (id: string, clientName: string) => {
-    if (!confirm(`¿Eliminar el contrato de ${clientName}? Esta acción no se puede deshacer.`))
-      return;
-    setDeleting(id);
+  const handleDeleteConfirm = async () => {
+    if (!confirm) return;
+    setDeleting(true);
     try {
-      const res = await fetch(`/api/contracts/${id}`, { method: 'DELETE' });
-      if (res.ok) setRows((prev) => prev.filter((c) => c._id !== id));
+      const res = await fetch(`/api/contracts/${confirm.id}`, { method: 'DELETE' });
+      if (res.ok) setRows((prev) => prev.filter((c) => c._id !== confirm.id));
     } finally {
-      setDeleting(null);
+      setDeleting(false);
+      setConfirm(null);
     }
   };
 
@@ -84,15 +88,30 @@ export default function ContractListClient({ contracts }: Props) {
     return matchSearch && matchStatus;
   });
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
   return (
     <div>
+      <ConfirmModal
+        open={!!confirm}
+        title="Eliminar contrato"
+        message={`¿Eliminar el contrato de "${confirm?.name}"? Esta acción no se puede deshacer.`}
+        loading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setConfirm(null)}
+      />
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
         <input
           type="text"
           placeholder="Buscar por cliente o plan…"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
           className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
         />
         <select
@@ -131,7 +150,7 @@ export default function ContractListClient({ contracts }: Props) {
                 </td>
               </tr>
             )}
-            {filtered.map((c) => (
+            {paginated.map((c) => (
               <tr key={c._id} className="hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3 font-medium text-card-foreground">
                   {c.clientName}
@@ -192,11 +211,10 @@ export default function ContractListClient({ contracts }: Props) {
                     PDF
                   </Link>
                   <button
-                    onClick={() => handleDelete(c._id, c.clientName)}
-                    disabled={deleting === c._id}
-                    className="text-red-500 text-xs hover:underline disabled:opacity-40"
+                    onClick={() => setConfirm({ id: c._id, name: c.clientName })}
+                    className="text-red-500 text-xs hover:underline"
                   >
-                    {deleting === c._id ? '…' : 'Eliminar'}
+                    Eliminar
                   </button>
                 </td>
               </tr>
@@ -204,6 +222,32 @@ export default function ContractListClient({ contracts }: Props) {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
+          <span>{filtered.length} contratos</span>
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={safePage <= 1}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              ← Anterior
+            </button>
+            <span className="px-2">
+              {safePage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={safePage >= totalPages}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

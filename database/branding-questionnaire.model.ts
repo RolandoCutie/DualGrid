@@ -21,9 +21,30 @@ export interface IBrandingQuestionnaireDoc extends Document {
   score?: { essential: number; corporate: number; global: number };
   recommendedPlan?: BrandingPlanId;
   adminNotes?: string;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
+
+// Explicit sub-schemas for answers and score (#13)
+const BrandingAnswersSchema = new Schema(
+  {
+    q1: { type: String, enum: ['A', 'B', 'C'], required: true },
+    q2: { type: String, enum: ['A', 'B', 'C'], required: true },
+    q3: { type: String, enum: ['A', 'B', 'C'], required: true },
+    q4: { type: String, enum: ['A', 'B', 'C'], required: true },
+  },
+  { _id: false },
+);
+
+const BrandingScoreSchema = new Schema(
+  {
+    essential: { type: Number, default: 0 },
+    corporate: { type: Number, default: 0 },
+    global: { type: Number, default: 0 },
+  },
+  { _id: false },
+);
 
 const BrandingQuestionnaireSchema = new Schema<IBrandingQuestionnaireDoc>(
   {
@@ -38,11 +59,11 @@ const BrandingQuestionnaireSchema = new Schema<IBrandingQuestionnaireDoc>(
       default: 'pending',
     },
     answers: {
-      type: Schema.Types.Mixed,
+      type: BrandingAnswersSchema,
       default: null,
     },
     score: {
-      type: Schema.Types.Mixed,
+      type: BrandingScoreSchema,
       default: null,
     },
     recommendedPlan: {
@@ -50,9 +71,15 @@ const BrandingQuestionnaireSchema = new Schema<IBrandingQuestionnaireDoc>(
       enum: ['essential', 'corporate', 'global'],
     },
     adminNotes: { type: String, default: '' },
+    deletedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
+
+// Performance indexes — token already indexed via unique:true
+BrandingQuestionnaireSchema.index({ status: 1 });
+BrandingQuestionnaireSchema.index({ createdAt: -1 });
+BrandingQuestionnaireSchema.index({ deletedAt: 1 });
 
 const BrandingQuestionnaire =
   mongoose.models.BrandingQuestionnaire ||

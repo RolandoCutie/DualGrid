@@ -1,6 +1,7 @@
 'use client';
 
 import Badge from '@/components/ui/Badge';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import { PLAN_MAP } from '@/lib/plans';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -38,64 +39,107 @@ const FILTER_OPTIONS = [
   { value: 'contacted', label: 'Contactados' },
 ];
 
+const PAGE_SIZE = 20;
+
 export default function QuestionnaireListClient({
   questionnaires: initialQuestionnaires,
 }: QuestionnaireListClientProps) {
   const [questionnaires, setQuestionnaires] = useState(initialQuestionnaires);
   const [filter, setFilter] = useState<string>('all');
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [confirm, setConfirm] = useState<string | null>(null);
 
-  const filtered =
+  const byStatus =
     filter === 'all' ? questionnaires : questionnaires.filter((q) => q.status === filter);
 
-  const handleDelete = async (id: string) => {
-    if (
-      !confirm('¿Seguro que quieres eliminar este cuestionario? Esta acción no se puede deshacer.')
-    )
-      return;
-    setDeleting(id);
+  const filtered = !search
+    ? byStatus
+    : byStatus.filter((q) => {
+        const s = search.toLowerCase();
+        return (
+          q.answers.fullName?.toLowerCase().includes(s) ||
+          q.answers.email?.toLowerCase().includes(s) ||
+          q.answers.businessName?.toLowerCase().includes(s) ||
+          q.answers.phone?.toLowerCase().includes(s)
+        );
+      });
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  const handleDeleteConfirm = async () => {
+    if (!confirm) return;
+    setDeleting(true);
     try {
-      const res = await fetch(`/api/questionnaires/${id}`, { method: 'DELETE' });
-      if (res.ok) setQuestionnaires((prev) => prev.filter((q) => q._id !== id));
+      const res = await fetch(`/api/questionnaires/${confirm}`, { method: 'DELETE' });
+      if (res.ok) setQuestionnaires((prev) => prev.filter((q) => q._id !== confirm));
     } finally {
-      setDeleting(null);
+      setDeleting(false);
+      setConfirm(null);
     }
   };
 
   return (
     <div>
-      {/* Filter tabs */}
-      <div className="flex gap-2 mb-4 flex-wrap">
-        {FILTER_OPTIONS.map((opt) => {
-          const count =
-            opt.value === 'all'
-              ? questionnaires.length
-              : questionnaires.filter((q) => q.status === opt.value).length;
-          return (
-            <button
-              key={opt.value}
-              onClick={() => setFilter(opt.value)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
-                filter === opt.value
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-card text-card-foreground border-border hover:border-primary/50'
-              }`}
-            >
-              {opt.label}
-              <span className="ml-1.5 text-xs opacity-70">({count})</span>
-            </button>
-          );
-        })}
+      <ConfirmModal
+        open={!!confirm}
+        title="Eliminar cuestionario"
+        message="¿Eliminar este cuestionario? Esta acción no se puede deshacer."
+        loading={deleting}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setConfirm(null)}
+      />
+
+      {/* Filter tabs + search */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-4">
+        <input
+          type="text"
+          placeholder="Buscar por nombre, email o teléfono…"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="sm:w-72 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
+        />
+        <div className="flex gap-2 flex-wrap">
+          {FILTER_OPTIONS.map((opt) => {
+            const count =
+              opt.value === 'all'
+                ? questionnaires.length
+                : questionnaires.filter((q) => q.status === opt.value).length;
+            return (
+              <button
+                key={opt.value}
+                onClick={() => {
+                  setFilter(opt.value);
+                  setPage(1);
+                }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
+                  filter === opt.value
+                    ? 'bg-primary text-primary-foreground border-primary'
+                    : 'bg-card text-card-foreground border-border hover:border-primary/50'
+                }`}
+              >
+                {opt.label}
+                <span className="ml-1.5 text-xs opacity-70">({count})</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* List */}
       <div className="space-y-3">
         {filtered.length === 0 && (
           <p className="text-center py-8 text-muted-foreground">
-            No hay cuestionarios con este estado.
+            No hay cuestionarios que coincidan.
           </p>
         )}
-        {filtered.map((q) => {
+        {paginated.map((q) => {
           const plan = PLAN_MAP[q.recommendedPlan];
           const statusInfo = STATUS_LABELS[q.status] || STATUS_LABELS.new;
 
@@ -140,18 +184,43 @@ export default function QuestionnaireListClient({
                   Ver respuestas
                 </Link>
                 <button
-                  onClick={() => handleDelete(q._id)}
-                  disabled={deleting === q._id}
+                  onClick={() => setConfirm(q._id)}
                   title="Eliminar cuestionario"
                   className="px-3 py-1.5 text-xs font-medium rounded-lg border border-destructive text-destructive bg-background hover:bg-destructive/10 disabled:opacity-50 transition-colors"
                 >
-                  {deleting === q._id ? '...' : 'Eliminar'}
+                  Eliminar
                 </button>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
+          <span>{filtered.length} cuestionarios</span>
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={safePage <= 1}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              ← Anterior
+            </button>
+            <span className="px-2">
+              {safePage} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={safePage >= totalPages}
+              className="px-3 py-1 rounded-lg border border-border hover:bg-muted/50 disabled:opacity-40 transition-colors"
+            >
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
