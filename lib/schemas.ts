@@ -47,6 +47,11 @@ export const ContractCreateSchema = z.object({
     'essential',
     'corporate',
     'global',
+    'hosting_annual',
+    'hosting_biennial',
+    'hosting_triennial',
+    'domain',
+    'hosting_domain',
   ]),
   services: z.array(ServiceRowSchema).default([]),
   totalAmount: z.number().min(0),
@@ -65,6 +70,12 @@ export const ContractCreateSchema = z.object({
   notes: z.string().max(3000).optional(),
   signedAt: z.string().optional(),
   currency: currencyEnum,
+  // ── Recurring / renewal ──────────────────────────────────────
+  isRecurring: z.boolean().optional().default(false),
+  renewalDate: z.string().optional(),
+  renewalPeriodMonths: z.number().min(1).optional(),
+  renewalNotificationDays: z.number().min(1).optional().default(30),
+  lastRenewalNotificationAt: z.string().optional(),
 });
 
 export const ContractPatchSchema = ContractCreateSchema.partial();

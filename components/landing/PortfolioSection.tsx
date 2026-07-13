@@ -49,7 +49,40 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   };
 
   return (
-    <section id="portafolio" className="py-24 bg-muted/20 dark:bg-transparent">
+    <section
+      id="portafolio"
+      className="py-24 bg-muted/20 dark:bg-transparent relative overflow-hidden"
+    >
+      {/* Orb 1 — accent (green) top-left */}
+      <div
+        className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 65%)',
+          filter: 'blur(70px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 2 — primary (cyan) bottom-right */}
+      <div
+        className="absolute -bottom-20 -right-20 w-[450px] h-[450px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 65%)',
+          filter: 'blur(65px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 3 — purple center diffuse */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 5%, transparent) 0%, transparent 70%)',
+          filter: 'blur(100px)',
+        }}
+        aria-hidden="true"
+      />
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">

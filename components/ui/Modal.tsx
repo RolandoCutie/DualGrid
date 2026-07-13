@@ -56,7 +56,7 @@ export default function Modal({
       onClick={(e) => closeOnBackdrop && e.target === overlayRef.current && onClose()}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
 
       {/* Panel */}
       <div

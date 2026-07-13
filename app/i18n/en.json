@@ -18,12 +18,7 @@
     "subtitle": "We combine artistic design with precise engineering to create unique digital presences. Portfolios, restaurants, landing pages and custom systems.",
     "cta_primary": "Find my ideal plan",
     "cta_secondary": "See plans & pricing",
-    "trust": [
-      "Fast delivery",
-      "Clean & secure code",
-      "100% responsive",
-      "Unique design"
-    ]
+    "trust": ["Fast delivery", "Clean & secure code", "100% responsive", "Unique design"]
   },
   "why": {
     "eyebrow": "Why choose us?",
@@ -295,14 +290,7 @@
     "submit": "Send inquiry",
     "step": "Step",
     "of": "of",
-    "step_labels": [
-      "Contact",
-      "Business",
-      "Goals",
-      "Budget",
-      "Style",
-      "Content"
-    ],
+    "step_labels": ["Contact", "Business", "Goals", "Budget", "Style", "Content"],
     "btn_next": "Next →",
     "btn_back": "Back",
     "btn_submit": "Send inquiry →",
@@ -634,5 +622,26 @@
       "menu_qr": "QR Menu",
       "custom": "Custom Project"
     }
+  },
+  "hosting": {
+    "eyebrow": "Hosting & Domain",
+    "title": "Professional web infrastructure with full management",
+    "subtitle": "Your website deserves fast, secure, fully managed hosting. We handle everything: speed, backups, SSL, and direct WhatsApp support.",
+    "feat_speed": "Ultra-fast NVMe",
+    "feat_security": "SSL + protection",
+    "feat_backup": "Daily backups",
+    "feat_cdn": "Global CDN",
+    "plan_annual": "Annual Plan",
+    "plan_biennial": "Biennial Plan",
+    "plan_triennial": "Triennial Plan",
+    "per_year": "year",
+    "billed_multi": "Billed at the start of the period",
+    "cta": "Request this plan",
+    "domain_title": "Domain registration & transfer",
+    "domain_desc": "We register or transfer your ideal domain. Available extensions: .com, .net, .org, .io, .es, .co and more. Management included.",
+    "domain_from": "From",
+    "domain_cta": "Register domain",
+    "hosting_domain_cta": "I want hosting + domain",
+    "trust_note": "99.9% uptime guaranteed · Direct Spanish-language support · No lock-in contracts"
   }
 }

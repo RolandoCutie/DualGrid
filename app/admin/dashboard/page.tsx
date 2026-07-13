@@ -60,6 +60,13 @@ const MENU_ITEMS = [
     emoji: '🎨',
     color: 'text-pink-500',
   },
+  {
+    title: 'Hosting & Dominio',
+    description: 'Solicitudes de hosting y dominio desde la landing.',
+    href: '/admin/dashboard/hosting-leads',
+    emoji: '🖥️',
+    color: 'text-cyan-500',
+  },
 ];
 
 interface AggResult {

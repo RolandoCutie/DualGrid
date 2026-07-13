@@ -18,12 +18,7 @@
     "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.",
     "cta_primary": "Descubrir mi plan ideal",
     "cta_secondary": "Ver planes y precios",
-    "trust": [
-      "Entrega rápida",
-      "Código limpio y seguro",
-      "100% responsive",
-      "Diseño único"
-    ]
+    "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
   },
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
@@ -295,14 +290,7 @@
     "submit": "Enviar consulta",
     "step": "Paso",
     "of": "de",
-    "step_labels": [
-      "Contacto",
-      "Negocio",
-      "Objetivos",
-      "Presupuesto",
-      "Estilo",
-      "Contenido"
-    ],
+    "step_labels": ["Contacto", "Negocio", "Objetivos", "Presupuesto", "Estilo", "Contenido"],
     "btn_next": "Siguiente →",
     "btn_back": "Anterior",
     "btn_submit": "Enviar consulta →",
@@ -636,5 +624,26 @@
       "menu_qr": "Menú QR",
       "custom": "Proyecto Personalizado"
     }
+  },
+  "hosting": {
+    "eyebrow": "Hosting & Dominio",
+    "title": "Infraestructura web profesional con gestión integral",
+    "subtitle": "Tu sitio web merece hosting rápido, seguro y gestionado. Nos encargamos de todo: velocidad, backups, SSL y soporte directo por WhatsApp.",
+    "feat_speed": "NVMe ultra-rápido",
+    "feat_security": "SSL + protección",
+    "feat_backup": "Backups diarios",
+    "feat_cdn": "CDN global",
+    "plan_annual": "Plan Anual",
+    "plan_biennial": "Plan Bianual",
+    "plan_triennial": "Plan Trienal",
+    "per_year": "año",
+    "billed_multi": "Facturado al inicio del período",
+    "cta": "Solicitar este plan",
+    "domain_title": "Registro & transferencia de dominio",
+    "domain_desc": "Registramos o transferimos tu dominio ideal. Extensiones disponibles: .com, .net, .org, .io, .es, .co y más. Gestión incluida.",
+    "domain_from": "Desde",
+    "domain_cta": "Registrar dominio",
+    "hosting_domain_cta": "Quiero hosting + dominio",
+    "trust_note": "Disponibilidad garantizada del 99.9% · Soporte directo en español · Sin contratos forzados"
   }
 }

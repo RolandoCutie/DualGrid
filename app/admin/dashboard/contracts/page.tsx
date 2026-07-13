@@ -22,11 +22,21 @@ export default async function ContractsPage() {
     const client = c.clientId as Record<string, unknown> | null;
     const planId = String(c.planId);
     const plan = PLAN_MAP[planId];
+    const EXTRA_PLAN_NAMES: Record<string, string> = {
+      essential: 'Branding Essential',
+      corporate: 'Branding Corporate',
+      global: 'Branding Global',
+      hosting_annual: 'Hosting Anual',
+      hosting_biennial: 'Hosting Bianual',
+      hosting_triennial: 'Hosting Trienal',
+      domain: 'Dominio',
+      hosting_domain: 'Hosting + Dominio',
+    };
     return {
       _id: String(c._id),
       clientName: client ? String(client.name) : '—',
       clientBusiness: client?.businessName ? String(client.businessName) : null,
-      planName: plan?.name || planId,
+      planName: plan?.name || EXTRA_PLAN_NAMES[planId] || planId,
       totalAmount: Number(c.totalAmount),
       advanceAmount: Number(c.advanceAmount),
       status: String(c.status),

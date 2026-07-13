@@ -11,13 +11,33 @@ export default function WhySection() {
       id="por-que"
       className="py-28 bg-background dark:bg-transparent relative overflow-hidden"
     >
-      {/* Subtle background orb */}
+      {/* Orb 1 — accent (green) top-right */}
       <div
-        className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none opacity-40"
+        className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%)',
-          filter: 'blur(60px)',
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 65%)',
+          filter: 'blur(70px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 2 — primary (cyan) bottom-left */}
+      <div
+        className="absolute -bottom-32 -left-24 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 65%)',
+          filter: 'blur(90px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 3 — purple center-top */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[320px] h-[320px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 7%, transparent) 0%, transparent 70%)',
+          filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />

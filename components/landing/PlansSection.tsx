@@ -42,7 +42,40 @@ export default function PlansSection() {
   };
 
   return (
-    <section id="planes" className="py-24 bg-background dark:bg-transparent">
+    <section
+      id="planes"
+      className="py-24 bg-background dark:bg-transparent relative overflow-hidden"
+    >
+      {/* Orb 1 — primary arch top-center (arch of light) */}
+      <div
+        className="absolute -top-48 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse, color-mix(in srgb, var(--primary) 7%, transparent) 0%, transparent 65%)',
+          filter: 'blur(120px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 2 — accent (green) bottom-right */}
+      <div
+        className="absolute -bottom-16 -right-16 w-[420px] h-[420px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 65%)',
+          filter: 'blur(65px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 3 — purple top-left */}
+      <div
+        className="absolute -top-8 -left-8 w-[280px] h-[280px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 8%, transparent) 0%, transparent 65%)',
+          filter: 'blur(45px)',
+        }}
+        aria-hidden="true"
+      />
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="text-center mb-16">

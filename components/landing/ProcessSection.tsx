@@ -16,13 +16,33 @@ export default function ProcessSection() {
       id="proceso"
       className="py-28 relative overflow-hidden bg-[linear-gradient(180deg,var(--muted)_0%,var(--background)_100%)] dark:bg-transparent"
     >
-      {/* Orb */}
+      {/* Orb 1 — primary (cyan) bottom-left */}
       <div
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none"
+        className="absolute -bottom-16 -left-16 w-[500px] h-[500px] pointer-events-none"
         style={{
           background:
             'radial-gradient(circle, color-mix(in srgb, var(--primary) 7%, transparent), transparent 70%)',
           filter: 'blur(60px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 2 — accent (green) top-right */}
+      <div
+        className="absolute -top-24 -right-20 w-[520px] h-[520px] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 65%)',
+          filter: 'blur(80px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 3 — purple center-right mid-height */}
+      <div
+        className="absolute top-1/2 -right-8 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 7%, transparent) 0%, transparent 65%)',
+          filter: 'blur(50px)',
         }}
         aria-hidden="true"
       />

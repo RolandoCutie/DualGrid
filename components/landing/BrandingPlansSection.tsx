@@ -240,7 +240,40 @@ export default function BrandingPlansSection() {
   const bp = DICTS[locale].branding_plans as Record<string, string | string[]>;
 
   return (
-    <section id="branding" className="py-24 bg-muted/30 dark:bg-transparent">
+    <section
+      id="branding"
+      className="py-24 bg-muted/30 dark:bg-transparent relative overflow-hidden"
+    >
+      {/* Orb 1 — purple dominant top-right (branding palette) */}
+      <div
+        className="absolute -top-32 -right-32 w-[650px] h-[650px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 9%, transparent) 0%, transparent 65%)',
+          filter: 'blur(90px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 2 — accent (green) bottom-left */}
+      <div
+        className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 65%)',
+          filter: 'blur(75px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Orb 3 — primary (cyan) center-left diffuse */}
+      <div
+        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[340px] h-[340px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--primary) 5%, transparent) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        aria-hidden="true"
+      />
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="text-center mb-16">

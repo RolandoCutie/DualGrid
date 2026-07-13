@@ -32,6 +32,11 @@ interface ContractFormProps {
     excludedItems?: string[];
     contractTerms?: string;
     notes?: string;
+    // Renewal fields
+    isRecurring?: boolean;
+    renewalDate?: string;
+    renewalPeriodMonths?: number;
+    renewalNotificationDays?: number;
   };
 }
 
@@ -41,11 +46,21 @@ const BRANDING_PLAN_OPTIONS = [
   { value: 'global', label: 'Branding Global ($550)' },
 ];
 
+const HOSTING_PLAN_OPTIONS = [
+  { value: 'hosting_annual', label: '🖥️ Hosting Anual ($120/año)' },
+  { value: 'hosting_biennial', label: '🖥️ Hosting Bianual ($110/año)' },
+  { value: 'hosting_triennial', label: '🖥️ Hosting Trienal ($100/año)' },
+  { value: 'domain', label: '🌐 Dominio (desde $15/año)' },
+  { value: 'hosting_domain', label: '🌐 Hosting + Dominio' },
+];
+
 const PLAN_OPTIONS = [
   { value: '', label: 'Seleccionar plan...' },
   ...PLANS.map((p) => ({ value: p.id, label: `${p.name} ($${p.price})` })),
   { value: '', label: '─── Branding ───', disabled: true },
   ...BRANDING_PLAN_OPTIONS,
+  { value: '', label: '─── Hosting & Dominio ───', disabled: true },
+  ...HOSTING_PLAN_OPTIONS,
 ];
 
 const STATUS_OPTIONS = [
@@ -94,13 +109,49 @@ export default function ContractForm({ clients, contractId, defaultValues }: Con
       ? defaultValues.services.map((s) => ({ ...s, price: String(s.price) }))
       : [{ name: '', description: '', price: '' }],
   );
+  // Renewal state
+  const [isRecurring, setIsRecurring] = useState(defaultValues?.isRecurring ?? false);
+  const [renewalDate, setRenewalDate] = useState(toDateInput(defaultValues?.renewalDate));
+  const [renewalPeriodMonths, setRenewalPeriodMonths] = useState(
+    String(defaultValues?.renewalPeriodMonths ?? '12'),
+  );
+  const [renewalNotificationDays, setRenewalNotificationDays] = useState(
+    String(defaultValues?.renewalNotificationDays ?? '30'),
+  );
 
   const BRANDING_PRICES: Record<string, number> = { essential: 100, corporate: 300, global: 550 };
+  const HOSTING_PRICES: Record<string, number> = {
+    hosting_annual: 120,
+    hosting_biennial: 110,
+    hosting_triennial: 100,
+    domain: 15,
+    hosting_domain: 130,
+  };
+  const HOSTING_PERIODS: Record<string, number> = {
+    hosting_annual: 12,
+    hosting_biennial: 24,
+    hosting_triennial: 36,
+    domain: 12,
+    hosting_domain: 12,
+  };
 
   // When plan is selected, auto-fill from template
   const handlePlanChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;
     setPlanId(id);
+
+    // Auto-mark hosting/domain plans as recurring
+    const isHostingPlan = id in HOSTING_PRICES;
+    if (isHostingPlan) {
+      setIsRecurring(true);
+      setRenewalPeriodMonths(String(HOSTING_PERIODS[id]));
+      setTotalAmount(String(HOSTING_PRICES[id]));
+      // Default renewal date = today + period
+      const d = new Date();
+      d.setMonth(d.getMonth() + HOSTING_PERIODS[id]);
+      setRenewalDate(d.toISOString().split('T')[0]);
+      return;
+    }
 
     const template = getContractTemplate(id);
     if (template) {
@@ -158,6 +209,11 @@ export default function ContractForm({ clients, contractId, defaultValues }: Con
           excludedItems: excludedItems.filter(Boolean),
           contractTerms: contractTerms || undefined,
           notes: notes || undefined,
+          // Renewal fields
+          isRecurring,
+          renewalDate: isRecurring && renewalDate ? renewalDate : undefined,
+          renewalPeriodMonths: isRecurring ? Number(renewalPeriodMonths) || undefined : undefined,
+          renewalNotificationDays: isRecurring ? Number(renewalNotificationDays) || 30 : 30,
         }),
       });
 
@@ -193,6 +249,15 @@ export default function ContractForm({ clients, contractId, defaultValues }: Con
           options={PLAN_OPTIONS}
           required
         />
+        {(planId && planId.startsWith('hosting')) ||
+        planId === 'domain' ||
+        planId === 'hosting_domain' ? (
+          <div className="sm:col-span-2 -mt-2 px-3 py-2 rounded-lg bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800 text-xs text-cyan-700 dark:text-cyan-300">
+            🔄 <strong>Servicio recurrente.</strong> Se ha marcado automáticamente como recurrente
+            con la fecha y período de renovación correspondiente. Revisa la sección &quot;Servicio
+            recurrente&quot; al final del formulario.
+          </div>
+        ) : null}
         <Input
           label="Monto total (USD) *"
           type="number"
@@ -385,6 +450,83 @@ export default function ContractForm({ clients, contractId, defaultValues }: Con
       {error && (
         <p className="text-sm text-destructive bg-destructive/10 rounded-lg px-4 py-2">{error}</p>
       )}
+
+      {/* ── Renovación recurrente ─────────────────────────────────── */}
+      <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-sm font-semibold text-card-foreground">Servicio recurrente</h3>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Hosting, dominio, mantenimiento u otro servicio que se renueva periódicamente.
+              Recibirás un email automático antes del vencimiento.
+            </p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isRecurring}
+              onChange={(e) => setIsRecurring(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div
+              className="w-11 h-6 bg-muted rounded-full peer peer-checked:bg-primary transition-colors
+                            after:content-[''] after:absolute after:top-[2px] after:start-[2px]
+                            after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all
+                            peer-checked:after:translate-x-full"
+            />
+          </label>
+        </div>
+
+        {isRecurring && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-border">
+            <Input
+              label="Fecha de renovación *"
+              type="date"
+              value={renewalDate}
+              onChange={(e) => setRenewalDate(e.target.value)}
+              hint="¿Cuándo vence o se renueva el servicio?"
+              required={isRecurring}
+            />
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-card-foreground">
+                Período de renovación
+              </label>
+              <select
+                value={renewalPeriodMonths}
+                onChange={(e) => setRenewalPeriodMonths(e.target.value)}
+                className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="1">Mensual (1 mes)</option>
+                <option value="3">Trimestral (3 meses)</option>
+                <option value="6">Semestral (6 meses)</option>
+                <option value="12">Anual (1 año)</option>
+                <option value="24">Bienal (2 años)</option>
+                <option value="36">Trienal (3 años)</option>
+              </select>
+              <p className="text-xs text-muted-foreground">Cada cuánto tiempo se renueva</p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-card-foreground">
+                Avisar con anticipación
+              </label>
+              <select
+                value={renewalNotificationDays}
+                onChange={(e) => setRenewalNotificationDays(e.target.value)}
+                className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="7">7 días antes</option>
+                <option value="15">15 días antes</option>
+                <option value="30">30 días antes</option>
+                <option value="60">60 días antes</option>
+                <option value="90">90 días antes</option>
+              </select>
+              <p className="text-xs text-muted-foreground">
+                Cuándo enviar el recordatorio por email
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="flex items-center gap-3 pt-2">
         <Button type="submit" loading={loading}>

@@ -44,6 +44,7 @@
 18. All admin API routes validate request bodies with Zod schemas (`lib/schemas.ts`) before touching the database.
 19. GET list endpoints support pagination via `?page=&limit=` query params. Default limit: 50. Max: 100.
 20. `Contract.paidAmount` is auto-synced from paid invoices via a `post('save')` hook on the Invoice model.
+21. **Recurring services**: Contracts can be marked `isRecurring: true` with `renewalDate`, `renewalPeriodMonths`, and `renewalNotificationDays`. A Vercel Cron Job (`/api/cron/check-renewals`) runs daily at 9 AM and sends an email to `dualgrid.studio@gmail.com` via Resend when a renewal is approaching. Requires `RESEND_API_KEY` and `CRON_SECRET` env vars.
 
 ---
 
@@ -57,4 +58,7 @@ ADMIN_SESSION_SECRET=         # HMAC signing secret
 ADMIN_SECRET_PATH=            # Hidden admin login URL segment
 NEXT_PUBLIC_WHATSAPP_PHONE=   # WhatsApp number for questionnaire CTA
 NEXT_PUBLIC_BASE_URL=         # Canonical base URL
+RESEND_API_KEY=               # Resend API key for transactional emails (renewal notifications)
+RESEND_FROM=                  # Sender address, e.g. "DualGrid <notificaciones@tudominio.com>"
+CRON_SECRET=                  # Random secret to protect /api/cron/* endpoints
 ```
