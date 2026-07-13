@@ -1,6 +1,6 @@
 import type { ContractStatus } from '@/types';
-import './client.model';
 import mongoose, { Document, Schema } from 'mongoose';
+import './client.model';
 
 export interface IContractDoc extends Document {
   clientId: mongoose.Types.ObjectId;
