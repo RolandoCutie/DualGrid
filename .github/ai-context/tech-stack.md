@@ -15,6 +15,10 @@ Mongoose note:
 
 - Models that use `ref` relations must import their dependent models for side effects (for example, `contract.model.ts` imports `client.model.ts`, and `invoice.model.ts` imports both `client.model.ts` and `contract.model.ts`). This keeps refs registered in isolated Next.js/Turbopack server chunks and prevents `MissingSchemaError` during `populate()` or `mongoose.model()` lookups.
 
+Deployment note:
+
+- The repository ships an `.npmrc` with `include=optional` so Linux deploys install native optional packages required by Tailwind 4's `lightningcss` dependency. Without optional packages, `next build` can fail while evaluating `app/globals.css` with `Cannot find module '../lightningcss.linux-x64-gnu.node'`.
+
 ## UI Libraries
 
 | Library                          | Usage                                                                                                                                                  |
