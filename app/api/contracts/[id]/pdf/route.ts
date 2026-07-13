@@ -4,7 +4,7 @@ import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import ContractPDF from '@/lib/pdf/ContractPDF';
 import { PLAN_MAP } from '@/lib/plans';
-import { renderToBuffer } from '@react-pdf/renderer';
+import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import React from 'react';
@@ -62,8 +62,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       contract: contractData,
       client: clientData,
       planName,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as unknown as React.ReactElement<any>,
+    }) as unknown as React.ReactElement<DocumentProps>,
   );
 
   const filename = `contrato-${clientDoc.name.replace(/\s+/g, '-').toLowerCase()}-${contract._id.toString().slice(-6)}.pdf`;

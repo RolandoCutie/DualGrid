@@ -1,4 +1,5 @@
 import type { ContractStatus } from '@/types';
+import './client.model';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IContractDoc extends Document {

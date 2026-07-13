@@ -1,4 +1,6 @@
 import type { InvoiceStatus } from '@/types';
+import './client.model';
+import './contract.model';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export type PaymentMethod = 'cash' | 'bank_transfer' | 'paypal' | 'card' | 'crypto' | 'other';

@@ -11,6 +11,9 @@
 | MongoDB      | Atlas / any | Main database                               |
 | Mongoose     | 9           | Models in `database/`                       |
 
+Mongoose note:
+- Models that use `ref` relations must import their dependent models for side effects (for example, `contract.model.ts` imports `client.model.ts`, and `invoice.model.ts` imports both `client.model.ts` and `contract.model.ts`). This keeps refs registered in isolated Next.js/Turbopack server chunks and prevents `MissingSchemaError` during `populate()` or `mongoose.model()` lookups.
+
 ## UI Libraries
 
 | Library                          | Usage                                                                                                                                                  |

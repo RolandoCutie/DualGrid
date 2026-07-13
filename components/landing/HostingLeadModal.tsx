@@ -1,6 +1,5 @@
 'use client';
 
-import { useLanguage } from '@/components/ui/LanguageProvider';
 import Modal from '@/components/ui/Modal';
 import { useEffect, useState } from 'react';
 
@@ -21,8 +20,6 @@ interface Props {
 }
 
 export default function HostingLeadModal({ open, initialPlan, onClose }: Props) {
-  const { t } = useLanguage();
-
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

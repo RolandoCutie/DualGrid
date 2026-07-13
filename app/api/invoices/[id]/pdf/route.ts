@@ -3,7 +3,7 @@ import Invoice from '@/database/invoice.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import InvoicePDF from '@/lib/pdf/InvoicePDF';
-import { renderToBuffer } from '@react-pdf/renderer';
+import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import React from 'react';
@@ -51,11 +51,10 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   };
 
   const buffer = await renderToBuffer(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.createElement(InvoicePDF, {
       invoice: invoiceData,
       client: clientData,
-    }) as unknown as React.ReactElement<any>,
+    }) as unknown as React.ReactElement<DocumentProps>,
   );
 
   const filename = `factura-${invoice.invoiceNumber.toLowerCase()}-${clientDoc.name.replace(/\s+/g, '-').toLowerCase()}.pdf`;
