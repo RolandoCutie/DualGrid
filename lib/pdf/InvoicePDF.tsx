@@ -1,4 +1,4 @@
-import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 
 Font.register({ family: 'Helvetica', fonts: [] });
 
@@ -327,6 +327,7 @@ export interface InvoicePDFProps {
     phone?: string;
     businessName?: string;
   };
+  logoBase64?: string;
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -362,7 +363,7 @@ function today() {
   });
 }
 
-export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
+export default function InvoicePDF({ invoice, client, logoBase64 }: InvoicePDFProps) {
   const isPaid = invoice.status === 'paid';
   const isOverdue =
     invoice.status === 'overdue' ||
@@ -376,11 +377,22 @@ export default function InvoicePDF({ invoice, client }: InvoicePDFProps) {
         {/* ── HEADER ── */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Text style={styles.logoMark}>
-              {'Dual'}
-              <Text style={styles.logoDot}>{'Grid'}</Text>
-            </Text>
-            <Text style={styles.logoTagline}>{'Diseño con propósito · Código con precisión'}</Text>
+            {logoBase64 ? (
+              <Image
+                src={logoBase64}
+                style={{ maxWidth: 120, maxHeight: 48, objectFit: 'contain' }}
+              />
+            ) : (
+              <>
+                <Text style={styles.logoMark}>
+                  {'Dual'}
+                  <Text style={styles.logoDot}>{'Grid'}</Text>
+                </Text>
+                <Text style={styles.logoTagline}>
+                  {'Diseño con propósito · Código con precisión'}
+                </Text>
+              </>
+            )}
           </View>
           <View style={styles.headerRight}>
             <View>

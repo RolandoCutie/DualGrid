@@ -16,7 +16,10 @@ interface InvoiceItem {
 interface ContractOption {
   _id: string;
   clientId: string;
+  clientName: string;
   planName: string;
+  status: string;
+  totalAmount: number;
 }
 
 interface InvoiceFormProps {
@@ -78,6 +81,7 @@ export default function InvoiceForm({
 
   const [clientId, setClientId] = useState(defaultValues?.clientId ?? '');
   const [contractId, setContractId] = useState(defaultValues?.contractId ?? '');
+  const [contractSearch, setContractSearch] = useState('');
   const [status, setStatus] = useState(defaultValues?.status ?? 'draft');
   const [taxRate, setTaxRate] = useState(String(defaultValues?.taxRate ?? '0'));
   const [issueDate, setIssueDate] = useState(toDateInput(defaultValues?.issueDate) || todayStr());
@@ -156,6 +160,7 @@ export default function InvoiceForm({
           onChange={(e) => {
             setClientId(e.target.value);
             setContractId('');
+            setContractSearch('');
           }}
           options={clientOptions}
           required
@@ -163,16 +168,99 @@ export default function InvoiceForm({
         {(() => {
           const clientContracts = contracts.filter((c) => c.clientId === clientId);
           if (!clientId || clientContracts.length === 0) return null;
+          const filteredContracts = contractSearch
+            ? clientContracts.filter(
+                (c) =>
+                  c.planName.toLowerCase().includes(contractSearch.toLowerCase()) ||
+                  c.clientName.toLowerCase().includes(contractSearch.toLowerCase()),
+              )
+            : clientContracts;
+          const selected = clientContracts.find((c) => c._id === contractId);
           return (
-            <Select
-              label="Asociar a contrato (opcional)"
-              value={contractId}
-              onChange={(e) => setContractId(e.target.value)}
-              options={[
-                { value: '', label: 'Sin contrato asociado' },
-                ...clientContracts.map((c) => ({ value: c._id, label: c.planName })),
-              ]}
-            />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-card-foreground">
+                Asociar a contrato (opcional)
+              </label>
+              <input
+                type="text"
+                placeholder="Buscar contrato por nombre, cliente…"
+                value={contractSearch}
+                onChange={(e) => setContractSearch(e.target.value)}
+                className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
+              />
+              {(contractSearch || contractId) && (
+                <div className="rounded-xl border border-border bg-background divide-y divide-border max-h-64 overflow-y-auto">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setContractId('');
+                      setContractSearch('');
+                    }}
+                    className={`w-full text-left px-3 py-2.5 text-sm text-muted-foreground hover:bg-muted/50 transition-colors ${!contractId ? 'bg-primary/5' : ''}`}
+                  >
+                    Sin contrato asociado
+                  </button>
+                  {filteredContracts.map((c) => (
+                    <button
+                      key={c._id}
+                      type="button"
+                      onClick={() => {
+                        setContractId(c._id);
+                        setContractSearch('');
+                      }}
+                      className={`w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors ${contractId === c._id ? 'bg-primary/10 border-l-2 border-primary' : ''}`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <p className="text-sm font-medium text-card-foreground">{c.planName}</p>
+                          <p className="text-xs text-muted-foreground">Cliente: {c.clientName}</p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-sm font-semibold text-card-foreground">
+                            ${c.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                          </p>
+                          <p
+                            className={`text-xs ${c.status === 'active' ? 'text-green-500' : 'text-amber-500'}`}
+                          >
+                            {c.status === 'active' ? 'Activo' : 'Pendiente'}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                  {filteredContracts.length === 0 && (
+                    <p className="px-3 py-2.5 text-sm text-muted-foreground">Sin resultados</p>
+                  )}
+                </div>
+              )}
+              {selected && !contractSearch && (
+                <div className="rounded-lg border border-primary/40 bg-primary/5 px-3 py-2.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="text-sm font-medium text-card-foreground">
+                        {selected.planName}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Cliente: {selected.clientName}
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-sm font-semibold">
+                        $
+                        {selected.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setContractId('')}
+                        className="text-xs text-muted-foreground hover:text-foreground underline"
+                      >
+                        Quitar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           );
         })()}
         <Select

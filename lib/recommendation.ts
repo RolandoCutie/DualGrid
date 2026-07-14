@@ -14,6 +14,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
     ecommerce_store: 0,
     blog: 0,
     custom: 0,
+    custom_design: 0,
   };
 
   // ─── Business type signals ─────────────────────────────────────────────────
@@ -75,6 +76,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 0,
       blog: 10,
       custom: 0,
+      custom_design: 0,
     },
     '150_300': {
       landing: 30,
@@ -85,6 +87,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 0,
       blog: 20,
       custom: 0,
+      custom_design: 0,
     },
     '300_500': {
       landing: 10,
@@ -95,6 +98,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 5,
       blog: 30,
       custom: 5,
+      custom_design: 5,
     },
     '500_800': {
       landing: 0,
@@ -105,6 +109,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 30,
       blog: 10,
       custom: 10,
+      custom_design: 0,
     },
     '800_1500': {
       landing: 0,
@@ -115,6 +120,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 25,
       blog: 5,
       custom: 40,
+      custom_design: 0,
     },
     over_1500: {
       landing: 0,
@@ -125,6 +131,7 @@ export function recommendPlan(answers: QuestionnaireAnswers): {
       ecommerce_store: 15,
       blog: 0,
       custom: 50,
+      custom_design: 0,
     },
   };
   if (answers.budget && budgetScores[answers.budget]) {

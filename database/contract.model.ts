@@ -63,6 +63,8 @@ const ContractSchema = new Schema<IContractDoc>(
         'hosting_triennial',
         'domain',
         'hosting_domain',
+        // Diseño personalizado
+        'custom_design',
       ],
       required: true,
     },

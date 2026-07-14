@@ -1,5 +1,6 @@
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
+import RevenueChartWrapper from '@/components/admin/RevenueChartWrapper';
 import Client from '@/database/client.model';
 import Contract from '@/database/contract.model';
 import Expense from '@/database/expense.model';
@@ -150,6 +151,35 @@ async function DashboardStats() {
   );
 }
 
+/** Monthly revenue chart — streams independently */
+async function DashboardChart() {
+  await connectDB();
+  const currentYear = new Date().getFullYear();
+  const start = new Date(`${currentYear}-01-01T00:00:00.000Z`);
+  const end = new Date(`${currentYear + 1}-01-01T00:00:00.000Z`);
+
+  const result = await Invoice.aggregate<{ month: number; billed: number; collected: number }>([
+    {
+      $match: {
+        deletedAt: null,
+        issueDate: { $gte: start, $lt: end },
+        status: { $ne: 'cancelled' },
+      },
+    },
+    {
+      $group: {
+        _id: { $month: '$issueDate' },
+        billed: { $sum: '$totalAmount' },
+        collected: { $sum: { $cond: [{ $eq: ['$status', 'paid'] }, '$totalAmount', 0] } },
+      },
+    },
+    { $project: { _id: 0, month: '$_id', billed: 1, collected: 1 } },
+    { $sort: { month: 1 } },
+  ]);
+
+  return <RevenueChartWrapper initialYear={currentYear} initialData={result} />;
+}
+
 /** Skeleton shown while stats are loading */
 function StatsSkeleton() {
   return (
@@ -178,6 +208,17 @@ export default async function AdminDashboard() {
       <Suspense fallback={<StatsSkeleton />}>
         <DashboardStats />
       </Suspense>
+
+      {/* Revenue chart */}
+      <div className="mt-6">
+        <Suspense
+          fallback={
+            <div className="rounded-xl border border-border bg-card p-5 h-[280px] animate-pulse" />
+          }
+        >
+          <DashboardChart />
+        </Suspense>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
         {MENU_ITEMS.map((item) => (

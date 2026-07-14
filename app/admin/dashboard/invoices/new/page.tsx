@@ -17,7 +17,9 @@ export default async function NewInvoicePage() {
 
   const [clients, contracts] = await Promise.all([
     Client.find({}).sort({ name: 1 }).lean(),
-    Contract.find({ status: { $in: ['active', 'pending'] } }).lean(),
+    Contract.find({ status: { $in: ['active', 'pending'] } })
+      .populate('clientId', 'name businessName')
+      .lean(),
   ]);
 
   return (
@@ -33,11 +35,25 @@ export default async function NewInvoicePage() {
           name: c.name,
           businessName: c.businessName ?? undefined,
         }))}
-        contracts={contracts.map((c) => ({
-          _id: c._id.toString(),
-          clientId: c.clientId.toString(),
-          planName: `${PLAN_MAP[c.planId]?.name ?? c.planId} · ${c.status === 'active' ? 'Activo' : 'Pendiente'}`,
-        }))}
+        contracts={contracts.map((c) => {
+          const client = c.clientId as Record<string, unknown>;
+          const clientName = client
+            ? client.businessName
+              ? String(client.businessName)
+              : String(client.name ?? '')
+            : '—';
+          return {
+            _id: c._id.toString(),
+            clientId:
+              typeof c.clientId === 'object' && c.clientId !== null
+                ? ((c.clientId as { _id: unknown })._id?.toString() ?? '')
+                : c.clientId.toString(),
+            clientName,
+            planName: PLAN_MAP[c.planId]?.name ?? c.planId,
+            status: c.status,
+            totalAmount: c.totalAmount,
+          };
+        })}
       />
     </AdminPageLayout>
   );

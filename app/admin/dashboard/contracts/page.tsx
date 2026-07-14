@@ -31,15 +31,38 @@ export default async function ContractsPage() {
       hosting_triennial: 'Hosting Trienal',
       domain: 'Dominio',
       hosting_domain: 'Hosting + Dominio',
+      custom_design: 'Diseño Personalizado',
+    };
+    const PLAN_CATEGORIES: Record<string, string> = {
+      landing: 'Web',
+      portfolio: 'Web',
+      menu_qr: 'Web',
+      restaurant: 'Web',
+      wp_business: 'Web',
+      ecommerce_store: 'Web',
+      blog: 'Web',
+      custom: 'Web',
+      essential: 'Branding',
+      corporate: 'Branding',
+      global: 'Branding',
+      hosting_annual: 'Hosting',
+      hosting_biennial: 'Hosting',
+      hosting_triennial: 'Hosting',
+      domain: 'Dominio',
+      hosting_domain: 'Hosting',
+      custom_design: 'Diseño',
     };
     return {
       _id: String(c._id),
       clientName: client ? String(client.name) : '—',
       clientBusiness: client?.businessName ? String(client.businessName) : null,
       planName: plan?.name || EXTRA_PLAN_NAMES[planId] || planId,
+      planCategory: PLAN_CATEGORIES[planId] || 'Otro',
       totalAmount: Number(c.totalAmount),
       advanceAmount: Number(c.advanceAmount),
+      paidAmount: Number(c.paidAmount ?? 0),
       status: String(c.status),
+      startDate: c.startDate ? String(c.startDate) : null,
       deliveryDate: c.deliveryDate ? String(c.deliveryDate) : null,
     };
   });

@@ -8,7 +8,8 @@ export type PlanId =
   | 'wp_business'
   | 'ecommerce_store'
   | 'blog'
-  | 'custom';
+  | 'custom'
+  | 'custom_design';
 
 /**
  * Represents a single capability entry in a plan's feature matrix.

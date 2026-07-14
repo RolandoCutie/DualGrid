@@ -56,11 +56,16 @@ const HOSTING_PLAN_OPTIONS = [
 
 const PLAN_OPTIONS = [
   { value: '', label: 'Seleccionar plan...' },
-  ...PLANS.map((p) => ({ value: p.id, label: `${p.name} ($${p.price})` })),
+  ...PLANS.filter((p) => p.id !== 'custom_design').map((p) => ({
+    value: p.id,
+    label: `${p.name} ($${p.price})`,
+  })),
   { value: '', label: '─── Branding ───', disabled: true },
   ...BRANDING_PLAN_OPTIONS,
   { value: '', label: '─── Hosting & Dominio ───', disabled: true },
   ...HOSTING_PLAN_OPTIONS,
+  { value: '', label: '─── Diseño Personalizado ───', disabled: true },
+  { value: 'custom_design', label: '🎨 Diseño Personalizado (precio variable)' },
 ];
 
 const STATUS_OPTIONS = [

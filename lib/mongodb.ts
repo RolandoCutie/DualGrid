@@ -1,64 +1,70 @@
 import mongoose from 'mongoose';
 
-// Define the connection cache type
 type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
 };
 
-// Extend the global object to include our mongoose cache
 declare global {
   var mongoose: MongooseCache | undefined;
 }
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// Initialize the cache on the global object to persist across hot reloads in development
 const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 
 if (!global.mongoose) {
   global.mongoose = cached;
 }
 
-/**
- * Establishes a connection to MongoDB using Mongoose.
- * Caches the connection to prevent multiple connections during development hot reloads.
- * @returns Promise resolving to the Mongoose instance
- */
 async function connectDB(): Promise<typeof mongoose> {
-  // Return existing connection only if still alive (readyState 1 = connected)
-  if (cached.conn) {
-    if (mongoose.connection.readyState === 1) {
-      return cached.conn;
-    }
-    // Connection dropped (e.g. Atlas idle timeout) — reset and reconnect
+  // Return healthy cached connection
+  if (cached.conn && mongoose.connection.readyState === 1) {
+    return cached.conn;
+  }
+
+  // Reset stale connection/promise
+  if (cached.conn || (cached.promise && mongoose.connection.readyState !== 2)) {
     cached.conn = null;
     cached.promise = null;
   }
 
-  // Return existing connection promise if one is in progress
-  if (!cached.promise) {
-    // Validate MongoDB URI exists
-    if (!MONGODB_URI) {
-      throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-    }
-    const options = {
-      bufferCommands: false, // Disable Mongoose buffering
-    };
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI is not defined. Add it to .env.local');
+  }
 
-    // Create a new connection promise
-    cached.promise = mongoose.connect(MONGODB_URI!, options).then((mongoose) => {
-      return mongoose;
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, {
+      // Connection pool — reuse across serverless invocations
+      maxPoolSize: 10,
+      minPoolSize: 1,
+      // Prevent hanging forever on DNS/network issues
+      serverSelectionTimeoutMS: 10_000,
+      // Socket-level timeout (Atlas idles after ~30 s on free tier)
+      socketTimeoutMS: 45_000,
+      connectTimeoutMS: 10_000,
+      // Heartbeat keeps idle connections alive
+      heartbeatFrequencyMS: 10_000,
+      // Disable Mongoose command buffering — fail fast instead of hanging
+      bufferCommands: false,
+      // Force IPv4 to avoid DNS SRV resolution issues in some environments
+      family: 4,
     });
   }
 
   try {
-    // Wait for the connection to establish
     cached.conn = await cached.promise;
-  } catch (error) {
-    // Reset promise on error to allow retry
+  } catch (err) {
     cached.promise = null;
-    throw error;
+    cached.conn = null;
+    // Surface a clearer error message for ETIMEOUT / ENOTFOUND
+    const message = err instanceof Error ? err.message : String(err);
+    if (message.includes('ETIMEOUT') || message.includes('querySrv')) {
+      throw new Error(
+        `MongoDB connection timeout. Check your network, Atlas IP whitelist (0.0.0.0/0), and MONGODB_URI. Original: ${message}`,
+      );
+    }
+    throw err;
   }
 
   return cached.conn;
