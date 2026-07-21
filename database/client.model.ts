@@ -1,6 +1,8 @@
 import type { BusinessType } from '@/types';
 import mongoose, { Document, Schema } from 'mongoose';
 
+export type ClientStatus = 'prospect' | 'active' | 'inactive' | 'churned';
+
 export interface IClientDoc extends Document {
   name: string;
   email: string;
@@ -8,6 +10,18 @@ export interface IClientDoc extends Document {
   businessName?: string;
   businessType?: BusinessType;
   notes?: string;
+  // Extended CRM fields
+  status: ClientStatus;
+  website?: string;
+  instagram?: string;
+  facebook?: string;
+  twitter?: string;
+  linkedin?: string;
+  tiktok?: string;
+  youtube?: string;
+  city?: string;
+  country?: string;
+  referralSource?: string;
   deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -24,6 +38,22 @@ const ClientSchema = new Schema<IClientDoc>(
       enum: ['creative', 'restaurant', 'entrepreneur', 'professional', 'ecommerce', 'other'],
     },
     notes: { type: String },
+    // Extended CRM fields
+    status: {
+      type: String,
+      enum: ['prospect', 'active', 'inactive', 'churned'],
+      default: 'prospect',
+    },
+    website: { type: String, trim: true },
+    instagram: { type: String, trim: true },
+    facebook: { type: String, trim: true },
+    twitter: { type: String, trim: true },
+    linkedin: { type: String, trim: true },
+    tiktok: { type: String, trim: true },
+    youtube: { type: String, trim: true },
+    city: { type: String, trim: true },
+    country: { type: String, trim: true },
+    referralSource: { type: String, trim: true },
     deletedAt: { type: Date, default: null },
   },
   { timestamps: true },

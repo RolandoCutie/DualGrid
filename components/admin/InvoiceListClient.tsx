@@ -84,12 +84,29 @@ export default function InvoiceListClient({ invoices }: Props) {
   const [methodFilter, setMethodFilter] = useState('');
   const [monthFilter, setMonthFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
+  const [sortField, setSortField] = useState<'issueDate' | 'dueDate' | null>(null);
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const [rows, setRows] = useState<InvoiceRow[]>(invoices);
   const [updating, setUpdating] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [page, setPage] = useState(1);
   const [confirm, setConfirm] = useState<{ id: string; name: string } | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const handleSort = (field: 'issueDate' | 'dueDate') => {
+    if (sortField === field) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortField(field);
+      setSortDir('desc');
+    }
+    setPage(1);
+  };
+
+  const SortIcon = ({ field }: { field: 'issueDate' | 'dueDate' }) => {
+    if (sortField !== field) return <span className="text-muted-foreground/40 ml-1">↕</span>;
+    return <span className="text-primary ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>;
+  };
 
   const availableYears = useMemo(() => {
     const years = new Set(
@@ -136,7 +153,17 @@ export default function InvoiceListClient({ invoices }: Props) {
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
-  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  const sorted = useMemo(() => {
+    if (!sortField) return filtered;
+    return [...filtered].sort((a, b) => {
+      const aVal = a[sortField] ? new Date(a[sortField]!).getTime() : 0;
+      const bVal = b[sortField] ? new Date(b[sortField]!).getTime() : 0;
+      return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
+    });
+  }, [filtered, sortField, sortDir]);
+
+  const paginated = sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setUpdating(id);
@@ -174,6 +201,8 @@ export default function InvoiceListClient({ invoices }: Props) {
     setMethodFilter('');
     setMonthFilter('');
     setYearFilter('');
+    setSortField(null);
+    setSortDir('desc');
     setPage(1);
   };
 
@@ -320,10 +349,22 @@ export default function InvoiceListClient({ invoices }: Props) {
                 Contrato
               </th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground whitespace-nowrap hidden lg:table-cell">
-                Emisión
+                <button
+                  type="button"
+                  onClick={() => handleSort('issueDate')}
+                  className="flex items-center gap-0.5 hover:text-primary transition-colors cursor-pointer"
+                >
+                  Emisión <SortIcon field="issueDate" />
+                </button>
               </th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground whitespace-nowrap">
-                Vencimiento
+                <button
+                  type="button"
+                  onClick={() => handleSort('dueDate')}
+                  className="flex items-center gap-0.5 hover:text-primary transition-colors cursor-pointer"
+                >
+                  Vencimiento <SortIcon field="dueDate" />
+                </button>
               </th>
               <th className="text-right px-4 py-3 font-semibold text-card-foreground whitespace-nowrap">
                 Monto

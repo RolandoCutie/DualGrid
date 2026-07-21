@@ -53,26 +53,26 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
       id="portafolio"
       className="py-24 bg-muted/20 dark:bg-transparent relative overflow-hidden"
     >
-      {/* Orb 1 — accent (green) top-left */}
+      {/* Green glow — top left */}
       <div
-        className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full pointer-events-none"
+        className="absolute -top-24 -left-24 w-[600px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 65%)',
-          filter: 'blur(70px)',
+          background: 'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
+          filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 2 — primary (cyan) bottom-right */}
+      {/* Cyan glow — bottom right */}
       <div
-        className="absolute -bottom-20 -right-20 w-[450px] h-[450px] rounded-full pointer-events-none"
+        className="absolute -bottom-20 -right-20 w-[550px] h-[450px] rounded-full pointer-events-none"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 65%)',
-          filter: 'blur(65px)',
+          background: 'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
+          filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
+          
+
       {/* Orb 3 — purple center diffuse */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full pointer-events-none"

@@ -18,12 +18,15 @@ app/
 │   └── dashboard/
 │       ├── page.tsx                        # Dashboard: <DashboardStats> async SC wrapped in <Suspense> (streaming) + menu links
 │       ├── clients/page.tsx                # Clients list (soft delete filter)
+│       ├── clients/[id]/page.tsx           # Edit client (includes new CRM fields)
+│       ├── clients/[id]/overview/page.tsx  # Client 360°: contracts, invoices, expenses, questionnaires, profitability
+│       ├── clients/new/page.tsx            # Create client
 │       ├── contracts/page.tsx              # Contracts list (soft delete filter)
 │       ├── expenses/page.tsx               # Expenses list (soft delete filter)
 │       ├── invoices/page.tsx               # Invoices list (soft delete filter)
 │       ├── questionnaires/
 │           ├── page.tsx                    # Questionnaire list with status filter + text search + pagination
-│       │   └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client action, PDF export
+│       │   └── [id]/page.tsx               # Full questionnaire detail: ALL 30+ fields, score breakdown, convert-to-client, AI Prompt Generator, Export (PDF/MD/TXT/JSON/clipboard)
 │       └── branding-questionnaires/
 │           ├── page.tsx                    # Branding questionnaire list + "Nueva Asignación" button
 │           └── [id]/page.tsx               # Branding questionnaire detail: answers, score, notes, PDF export
@@ -69,10 +72,13 @@ components/
 │       ├── Step6Content.tsx      # Photos, texts, extra notes
 │       └── StepResult.tsx        # Recommended plan + ranked alternatives
 ├── admin/
+│   ├── AdminBackButton.tsx
 │   ├── AdminLoginForm.tsx
 │   ├── AdminPageHeader.tsx       # Title + description + optional action button
 │   ├── AdminPageLayout.tsx
 │   ├── AdminBackButton.tsx
+│   ├── AIPromptGenerator.tsx     # Generates Super Prompt for ChatGPT from questionnaire ← NEW
+│   ├── QuestionnaireExportButtons.tsx  # PDF/MD/TXT/JSON/clipboard export ← NEW
 │   ├── ClientForm.tsx / ClientListClient.tsx
 │   ├── ContractForm.tsx / ContractListClient.tsx
 │   ├── InvoiceForm.tsx / InvoiceListClient.tsx

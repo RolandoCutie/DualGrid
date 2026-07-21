@@ -21,6 +21,18 @@ export const ClientCreateSchema = z.object({
     .enum(['creative', 'restaurant', 'entrepreneur', 'professional', 'ecommerce', 'other'])
     .optional(),
   notes: z.string().max(2000).optional(),
+  // Extended CRM fields
+  status: z.enum(['prospect', 'active', 'inactive', 'churned']).optional().default('prospect'),
+  website: z.string().max(300).optional(),
+  instagram: z.string().max(200).optional(),
+  facebook: z.string().max(200).optional(),
+  twitter: z.string().max(200).optional(),
+  linkedin: z.string().max(200).optional(),
+  tiktok: z.string().max(200).optional(),
+  youtube: z.string().max(200).optional(),
+  city: z.string().max(100).optional(),
+  country: z.string().max(100).optional(),
+  referralSource: z.string().max(200).optional(),
 });
 
 export const ClientPatchSchema = ClientCreateSchema.partial();
@@ -118,15 +130,22 @@ export const ExpenseCreateSchema = z.object({
     'hardware',
     'marketing',
     'hosting',
+    'domain',
     'tools',
     'services',
     'taxes',
     'education',
+    'design',
+    'photography',
+    'travel',
+    'ads',
+    'licenses',
     'other',
   ]),
   date: isoDate,
   notes: z.string().max(1000).optional(),
   currency: currencyEnum,
+  clientId: mongoId.optional(),
 });
 
 export const ExpensePatchSchema = ExpenseCreateSchema.partial();

@@ -1,7 +1,9 @@
 import AdminBackButton from '@/components/admin/AdminBackButton';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
+import AIPromptGenerator from '@/components/admin/AIPromptGenerator';
 import ConvertToClientButton from '@/components/admin/ConvertToClientButton';
+import QuestionnaireExportButtons from '@/components/admin/QuestionnaireExportButtons';
 import QuestionnaireStatusForm from '@/components/admin/QuestionnaireStatusForm';
 import Badge from '@/components/ui/Badge';
 import Questionnaire from '@/database/questionnaire.model';
@@ -224,7 +226,7 @@ export default async function QuestionnaireDetailPage({
       />
 
       {/* Status & Plan summary */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
+      <div className="flex flex-wrap items-center gap-3 mb-4">
         <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
         <span className="text-sm text-muted-foreground">Plan recomendado:</span>
         <span className="text-sm font-bold text-primary">{plan?.name || planId}</span>
@@ -236,12 +238,34 @@ export default async function QuestionnaireDetailPage({
             </span>
           </>
         )}
-        <a
-          href={`/api/questionnaires/${id}/pdf`}
-          className="ml-auto inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg border border-primary text-primary bg-background hover:bg-primary/10 transition-colors"
-        >
-          Exportar PDF
-        </a>
+      </div>
+
+      {/* Export buttons */}
+      <div className="mb-6">
+        <QuestionnaireExportButtons
+          questionnaire={{
+            answers: doc.answers as Record<string, unknown>,
+            recommendedPlan: planId,
+            score: doc.score as Record<string, number> | undefined,
+            status: String(doc.status),
+            createdAt: doc.createdAt ? String(doc.createdAt) : undefined,
+          }}
+          clientName={String((doc.answers as Record<string, unknown>).fullName || 'cliente')}
+          planName={plan?.name ?? planId}
+          questionnaireId={id}
+        />
+      </div>
+
+      {/* AI Prompt Generator */}
+      <div className="mb-6">
+        <AIPromptGenerator
+          questionnaire={{
+            answers: doc.answers as Record<string, unknown>,
+            recommendedPlan: planId,
+            score: doc.score as Record<string, number> | undefined,
+          }}
+          planName={plan?.name ?? planId}
+        />
       </div>
 
       {/* Step 1: Contacto */}

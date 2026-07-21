@@ -3,18 +3,27 @@
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
 import { Button } from '@/components/ui/Button';
 import { useLanguage } from '@/components/ui/LanguageProvider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  /** If true, opens the questionnaire wizard immediately on mount (used by ?wizard=open URL) */
+  autoOpen?: boolean;
+}
+
+export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
   const [wizardOpen, setWizardOpen] = useState(false);
   const { t, tArray } = useLanguage();
+
+  useEffect(() => {
+    if (autoOpen) setWizardOpen(true);
+  }, [autoOpen]);
 
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background dark:bg-transparent grain-overlay">
       {/* ── Background: blueprint grid ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="w-full h-full opacity-[0.035]"
+          className="w-full h-full opacity-[0.025]"
           style={{
             backgroundImage:
               'linear-gradient(var(--color-card-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-card-foreground) 1px, transparent 1px)',
@@ -23,28 +32,32 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* ── Background: gradient orbs ── */}
+      {/* ── Background: gradient orbs — neon lamp effect ── */}
+      {/* Cyan glow — top center */}
       <div
-        className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full pointer-events-none"
+        className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 12%, transparent) 0%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(0,217,255,0.18) 0%, transparent 65%)',
+          filter: 'blur(40px)',
         }}
         aria-hidden="true"
       />
+      {/* Green neon lamp — bottom center (main glow like in design) */}
       <div
-        className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.28) 0%, rgba(0,255,157,0.08) 40%, transparent 70%)',
+          filter: 'blur(30px)',
         }}
         aria-hidden="true"
       />
+      {/* Secondary cyan accent — top left */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-30"
+        className="absolute -top-32 -left-24 w-[500px] h-[500px] rounded-full pointer-events-none opacity-50"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 6%, transparent) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0,217,255,0.12) 0%, transparent 65%)',
           filter: 'blur(60px)',
         }}
         aria-hidden="true"

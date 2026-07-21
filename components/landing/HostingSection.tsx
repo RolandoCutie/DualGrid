@@ -69,36 +69,34 @@ export default function HostingSection() {
 
   return (
     <section className="py-20 px-4 relative overflow-hidden bg-muted/10 dark:bg-transparent">
-      {/* Orb 1 — primary (cyan) top-right — tech/server vibe */}
+      {/* Cyan glow — top right (tech/server vibe) */}
       <div
-        className="absolute -top-20 -right-20 w-[550px] h-[550px] rounded-full pointer-events-none"
+        className="absolute -top-20 -right-20 w-[650px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 65%)',
-          filter: 'blur(80px)',
+          background: 'radial-gradient(ellipse at center, rgba(0,217,255,0.22) 0%, transparent 65%)',
+          filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 2 — accent (green) bottom-left */}
+      {/* Green glow — bottom left */}
       <div
-        className="absolute -bottom-24 -left-20 w-[460px] h-[460px] rounded-full pointer-events-none"
+        className="absolute -bottom-24 -left-20 w-[600px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 65%)',
-          filter: 'blur(70px)',
+          background: 'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
+          filter: 'blur(65px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 3 — purple bottom-right soft glow */}
+      {/* Purple subtle glow — bottom right */}
       <div
-        className="absolute bottom-0 right-1/4 w-[320px] h-[320px] rounded-full pointer-events-none"
+        className="absolute bottom-0 right-1/4 w-[350px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--purple) 6%, transparent) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(165,148,249,0.10) 0%, transparent 65%)',
           filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />
+    
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

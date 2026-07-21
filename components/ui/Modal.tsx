@@ -11,6 +11,8 @@ interface ModalProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   closeOnBackdrop?: boolean;
+  /** When true, hides the built-in × button (useful when the content already has its own close control) */
+  hideCloseButton?: boolean;
 }
 
 const sizeClasses = {
@@ -28,6 +30,7 @@ export default function Modal({
   className,
   size = 'lg',
   closeOnBackdrop = true,
+  hideCloseButton = false,
 }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -67,25 +70,27 @@ export default function Modal({
         )}
       >
         {/* Close button */}
-        <button
-          onClick={onClose}
-          aria-label="Cerrar"
-          className="absolute top-4 right-4 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-border transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        {!hideCloseButton && (
+          <button
+            onClick={onClose}
+            aria-label="Cerrar"
+            className="absolute top-4 right-4 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-border transition-colors"
           >
-            <path d="M18 6 6 18M6 6l12 12" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        )}
         {children}
       </div>
     </div>

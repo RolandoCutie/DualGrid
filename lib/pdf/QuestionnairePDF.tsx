@@ -1,4 +1,5 @@
 import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import PDFLogoMark from './PDFLogoMark';
 
 Font.register({ family: 'Helvetica', fonts: [] });
 
@@ -330,10 +331,15 @@ export default function QuestionnairePDF({
         {/* Header */}
         <View style={s.header}>
           <View style={s.headerLeft}>
-            <Text style={s.logoMark}>
-              Dual<Text style={s.logoDot}>.</Text>Grid
-            </Text>
-            <Text style={s.logoTagline}>Design with purpose, code with precision.</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <PDFLogoMark size={34} />
+              <View>
+                <Text style={s.logoMark}>
+                  Dual<Text style={s.logoDot}>.</Text>Grid
+                </Text>
+                <Text style={s.logoTagline}>Design with purpose, code with precision.</Text>
+              </View>
+            </View>
           </View>
           <View style={s.headerRight}>
             <View>

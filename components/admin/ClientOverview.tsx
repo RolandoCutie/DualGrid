@@ -12,10 +12,10 @@ const CONTRACT_STATUS_LABELS: Record<string, string> = {
 
 const CONTRACT_STATUS_COLORS: Record<string, string> = {
   draft: 'bg-muted text-muted-foreground',
-  pending: 'bg-yellow-500/10 text-yellow-600',
-  active: 'bg-blue-500/10 text-blue-600',
-  completed: 'bg-emerald-500/10 text-emerald-600',
-  cancelled: 'bg-red-500/10 text-red-600',
+  pending: 'bg-yellow-500/10 text-yellow-500',
+  active: 'bg-[#00d9ff]/10 text-[#00d9ff]',
+  completed: 'bg-[#00ff9d]/10 text-[#00ff9d]',
+  cancelled: 'bg-red-500/10 text-red-400',
 };
 
 const INVOICE_STATUS_LABELS: Record<string, string> = {
@@ -28,9 +28,9 @@ const INVOICE_STATUS_LABELS: Record<string, string> = {
 
 const INVOICE_STATUS_COLORS: Record<string, string> = {
   draft: 'bg-muted text-muted-foreground',
-  sent: 'bg-blue-500/10 text-blue-600',
-  paid: 'bg-emerald-500/10 text-emerald-600',
-  overdue: 'bg-red-500/10 text-red-600',
+  sent: 'bg-[#00d9ff]/10 text-[#00d9ff]',
+  paid: 'bg-[#00ff9d]/10 text-[#00ff9d]',
+  overdue: 'bg-red-500/10 text-red-400',
   cancelled: 'bg-muted text-muted-foreground',
 };
 
@@ -41,9 +41,23 @@ const WEB_QUESTIONNAIRE_STATUS_LABELS: Record<string, string> = {
 };
 
 const WEB_QUESTIONNAIRE_STATUS_COLORS: Record<string, string> = {
-  new: 'bg-blue-500/10 text-blue-600',
-  reviewed: 'bg-yellow-500/10 text-yellow-600',
-  contacted: 'bg-emerald-500/10 text-emerald-600',
+  new: 'bg-[#00d9ff]/10 text-[#00d9ff]',
+  reviewed: 'bg-yellow-500/10 text-yellow-500',
+  contacted: 'bg-[#00ff9d]/10 text-[#00ff9d]',
+};
+
+const CLIENT_STATUS_LABELS: Record<string, string> = {
+  prospect: 'Prospecto',
+  active: 'Activo',
+  inactive: 'Inactivo',
+  churned: 'Perdido',
+};
+
+const CLIENT_STATUS_COLORS: Record<string, string> = {
+  prospect: 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20',
+  active: 'bg-[#00ff9d]/10 text-[#00ff9d] border border-[#00ff9d]/20',
+  inactive: 'bg-muted text-muted-foreground border border-border',
+  churned: 'bg-red-500/10 text-red-400 border border-red-500/20',
 };
 
 const PLAN_LABELS: Record<string, string> = {
@@ -70,6 +84,24 @@ const BUSINESS_TYPE_LABELS: Record<string, string> = {
   other: 'Otro',
 };
 
+const EXPENSE_CATEGORY_LABELS: Record<string, string> = {
+  software: 'Software',
+  hardware: 'Hardware',
+  marketing: 'Marketing',
+  hosting: 'Hosting',
+  domain: 'Dominio',
+  tools: 'Herramientas',
+  services: 'Servicios',
+  taxes: 'Impuestos',
+  education: 'Educación',
+  design: 'Diseño',
+  photography: 'Fotografía',
+  travel: 'Viajes',
+  ads: 'Publicidad',
+  licenses: 'Licencias',
+  other: 'Otro',
+};
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface ClientData {
@@ -80,6 +112,16 @@ interface ClientData {
   businessName: string | null;
   businessType: string | null;
   notes: string | null;
+  status: string;
+  website: string | null;
+  instagram: string | null;
+  facebook: string | null;
+  twitter: string | null;
+  linkedin: string | null;
+  tiktok: string | null;
+  youtube: string | null;
+  city: string | null;
+  country: string | null;
   createdAt: string;
 }
 
@@ -118,13 +160,30 @@ interface WebQuestionnaireRow {
   createdAt: string;
 }
 
+interface ExpenseRow {
+  id: string;
+  description: string;
+  amount: number;
+  category: string;
+  date: string;
+  notes: string | null;
+  currency: string;
+}
+
 interface Props {
   client: ClientData;
-  summary: { totalContracted: number; totalCollected: number; totalPending: number };
+  summary: {
+    totalContracted: number;
+    totalCollected: number;
+    totalPending: number;
+    totalExpenses: number;
+    netProfit: number;
+  };
   contracts: ContractRow[];
   invoices: InvoiceRow[];
   brandingQuestionnaires: BrandingRow[];
   webQuestionnaires: WebQuestionnaireRow[];
+  expenses: ExpenseRow[];
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -146,67 +205,143 @@ export default function ClientOverview({
   invoices,
   brandingQuestionnaires,
   webQuestionnaires,
+  expenses,
 }: Props) {
+  const socialLinks = [
+    { label: 'Web', href: client.website, icon: '🌐' },
+    {
+      label: 'Instagram',
+      href: client.instagram ? `https://instagram.com/${client.instagram.replace('@', '')}` : null,
+      icon: '📸',
+    },
+    { label: 'Facebook', href: client.facebook, icon: '📘' },
+    { label: 'LinkedIn', href: client.linkedin, icon: '💼' },
+    {
+      label: 'TikTok',
+      href: client.tiktok ? `https://tiktok.com/@${client.tiktok.replace('@', '')}` : null,
+      icon: '🎵',
+    },
+    { label: 'YouTube', href: client.youtube, icon: '▶️' },
+    { label: 'Twitter/X', href: client.twitter, icon: '𝕏' },
+  ].filter((s) => s.href);
+
   return (
     <div className="space-y-8">
       {/* ── Client header ─────────────────────────────────────── */}
       <div className="bg-card border border-border rounded-xl p-6 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-foreground">{client.name}</h1>
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-2xl font-bold text-card-foreground">{client.name}</h1>
+            <span
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${CLIENT_STATUS_COLORS[client.status] ?? CLIENT_STATUS_COLORS.prospect}`}
+            >
+              {CLIENT_STATUS_LABELS[client.status] ?? client.status}
+            </span>
+          </div>
           {client.businessName && (
             <p className="text-sm font-medium text-muted-foreground">{client.businessName}</p>
           )}
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground mt-2">
-            <span>{client.email}</span>
-            {client.phone && <span>{client.phone}</span>}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+            <a href={`mailto:${client.email}`} className="hover:text-primary transition-colors">
+              {client.email}
+            </a>
+            {client.phone && (
+              <a href={`tel:${client.phone}`} className="hover:text-primary transition-colors">
+                {client.phone}
+              </a>
+            )}
+            {(client.city || client.country) && (
+              <span>📍 {[client.city, client.country].filter(Boolean).join(', ')}</span>
+            )}
             {client.businessType && (
               <span className="px-2 py-0.5 rounded-full bg-muted text-xs font-medium">
                 {BUSINESS_TYPE_LABELS[client.businessType] ?? client.businessType}
               </span>
             )}
           </div>
-          {client.notes && (
-            <p className="text-xs text-muted-foreground mt-2 max-w-xl">{client.notes}</p>
+          {/* Social links */}
+          {socialLinks.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-1">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted hover:bg-primary/10 border border-border hover:border-primary/30 text-xs text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <span>{s.icon}</span>
+                  <span>{s.label}</span>
+                </a>
+              ))}
+            </div>
           )}
-          <p className="text-xs text-muted-foreground mt-1">
-            Cliente desde {fmtDate(client.createdAt)}
-          </p>
+          {client.notes && (
+            <p className="text-xs text-muted-foreground mt-1 max-w-xl bg-muted/50 rounded-lg px-3 py-2">
+              {client.notes}
+            </p>
+          )}
+          <p className="text-xs text-muted-foreground">Cliente desde {fmtDate(client.createdAt)}</p>
         </div>
         <Link
           href={`/admin/dashboard/clients/${client.id}`}
-          className="shrink-0 px-4 py-2 text-sm font-medium rounded-lg border border-border text-foreground hover:bg-muted transition-colors"
+          className="shrink-0 px-4 py-2 text-sm font-medium rounded-lg border border-border text-card-foreground hover:bg-muted transition-colors"
         >
           Editar datos
         </Link>
       </div>
 
       {/* ── Financial summary ─────────────────────────────────── */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         <div className="bg-card border border-border rounded-xl p-5 space-y-1">
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
-            Total contratado
+            Contratado
           </p>
-          <p className="text-2xl font-bold text-foreground">{fmt(summary.totalContracted)}</p>
+          <p className="text-2xl font-bold text-card-foreground">{fmt(summary.totalContracted)}</p>
           <p className="text-xs text-muted-foreground">{contracts.length} contrato(s)</p>
         </div>
-        <div className="bg-card border border-emerald-500/20 rounded-xl p-5 space-y-1">
+        <div className="bg-card border border-[#00ff9d]/20 rounded-xl p-5 space-y-1">
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
             Cobrado
           </p>
-          <p className="text-2xl font-bold text-emerald-500">{fmt(summary.totalCollected)}</p>
+          <p className="text-2xl font-bold text-[#00ff9d]">{fmt(summary.totalCollected)}</p>
           <p className="text-xs text-muted-foreground">
-            {invoices.filter((i) => i.status === 'paid').length} factura(s) pagada(s)
+            {invoices.filter((i) => i.status === 'paid').length} factura(s)
           </p>
         </div>
         <div className="bg-card border border-yellow-500/20 rounded-xl p-5 space-y-1">
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
-            Pendiente de cobro
+            Pendiente
           </p>
           <p className="text-2xl font-bold text-yellow-500">{fmt(summary.totalPending)}</p>
           <p className="text-xs text-muted-foreground">
             {invoices.filter((i) => i.status === 'sent' || i.status === 'overdue').length}{' '}
             factura(s)
           </p>
+        </div>
+        <div className="bg-card border border-red-500/20 rounded-xl p-5 space-y-1">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
+            Gastos
+          </p>
+          <p className="text-2xl font-bold text-red-400">{fmt(summary.totalExpenses)}</p>
+          <p className="text-xs text-muted-foreground">{expenses.length} gasto(s)</p>
+        </div>
+        <div
+          className={`bg-card rounded-xl p-5 space-y-1 border ${
+            summary.netProfit >= 0 ? 'border-[#00ff9d]/30' : 'border-red-500/30'
+          }`}
+        >
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
+            Rentabilidad
+          </p>
+          <p
+            className={`text-2xl font-bold ${
+              summary.netProfit >= 0 ? 'text-[#00ff9d]' : 'text-red-400'
+            }`}
+          >
+            {fmt(summary.netProfit)}
+          </p>
+          <p className="text-xs text-muted-foreground">Cobrado − Gastos</p>
         </div>
       </div>
 
@@ -418,6 +553,45 @@ export default function ClientOverview({
                       Ver
                     </Link>
                   </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+
+      {/* ── Expenses ──────────────────────────────────────────── */}
+      <Section
+        title="Gastos del cliente"
+        count={expenses.length}
+        newHref={`/admin/dashboard/expenses/new`}
+        newLabel="+ Nuevo gasto"
+      >
+        {expenses.length === 0 ? (
+          <Empty text="No hay gastos registrados para este cliente." />
+        ) : (
+          <table className="w-full text-sm">
+            <thead className="bg-muted/50">
+              <tr>
+                <th className="text-left px-4 py-3 font-semibold text-card-foreground">
+                  Descripción
+                </th>
+                <th className="text-left px-4 py-3 font-semibold text-card-foreground">
+                  Categoría
+                </th>
+                <th className="text-left px-4 py-3 font-semibold text-card-foreground">Monto</th>
+                <th className="text-left px-4 py-3 font-semibold text-card-foreground">Fecha</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {expenses.map((e) => (
+                <tr key={e.id} className="hover:bg-muted/30 transition-colors">
+                  <td className="px-4 py-3 text-card-foreground">{e.description}</td>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    {EXPENSE_CATEGORY_LABELS[e.category] ?? e.category}
+                  </td>
+                  <td className="px-4 py-3 font-medium text-red-400">{fmt(e.amount)}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{fmtDate(e.date)}</td>
                 </tr>
               ))}
             </tbody>

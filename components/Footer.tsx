@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/components/ui/LanguageProvider';
+import LogoDualGrid from '@/components/ui/LogoDualGrid';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -22,21 +23,8 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-6 py-14">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Brand */}
-            <div className="flex flex-col items-center md:items-start gap-2">
-              <div className="flex items-center gap-2.5">
-                <span
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-md"
-                  style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
-                >
-                  DG
-                </span>
-                <span
-                  className="font-extrabold text-xl text-card-foreground tracking-tight"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  DualGrid
-                </span>
-              </div>
+            <div className="flex flex-col items-center md:items-start gap-3">
+              <LogoDualGrid width={160} />
               <p className="text-sm text-muted-foreground">{t('footer.tagline')}</p>
             </div>
 

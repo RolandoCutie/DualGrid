@@ -208,7 +208,7 @@ export default function BrandingQuizModal({ open, onClose }: BrandingQuizModalPr
   };
 
   return (
-    <Modal open={open} onClose={handleClose} size="lg">
+    <Modal open={open} onClose={handleClose} size="lg" hideCloseButton>
       <div className="p-6 sm:p-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

@@ -11,33 +11,33 @@ export default function WhySection() {
       id="por-que"
       className="py-28 bg-background dark:bg-transparent relative overflow-hidden"
     >
-      {/* Orb 1 — accent (green) top-right */}
+      {/* Green glow — top right (lamp from corner) */}
       <div
-        className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none"
+        className="absolute -top-32 -right-20 w-[650px] h-[500px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 65%)',
-          filter: 'blur(70px)',
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
+          filter: 'blur(50px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 2 — primary (cyan) bottom-left */}
+      {/* Cyan glow — bottom left */}
       <div
-        className="absolute -bottom-32 -left-24 w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute -bottom-32 -left-24 w-[700px] h-[550px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 65%)',
-          filter: 'blur(90px)',
+            'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
+          filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 3 — purple center-top */}
+      {/* Purple glow — center-top subtle accent */}
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[320px] h-[320px] rounded-full pointer-events-none"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[300px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--purple) 7%, transparent) 0%, transparent 70%)',
-          filter: 'blur(55px)',
+            'radial-gradient(ellipse at center, rgba(165,148,249,0.12) 0%, transparent 65%)',
+          filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />

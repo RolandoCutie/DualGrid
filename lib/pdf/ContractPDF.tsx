@@ -1,4 +1,5 @@
 import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import PDFLogoMark from './PDFLogoMark';
 
 Font.register({ family: 'Helvetica', fonts: [] });
 
@@ -408,11 +409,16 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
         {/* ── HEADER ── */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Text style={styles.logoMark}>
-              {'Dual'}
-              <Text style={styles.logoDot}>{'Grid'}</Text>
-            </Text>
-            <Text style={styles.logoTagline}>{'DISEÑO · DESARROLLO · MARCA'}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <PDFLogoMark size={40} />
+              <View>
+                <Text style={styles.logoMark}>
+                  {'Dual'}
+                  <Text style={styles.logoDot}>{'Grid'}</Text>
+                </Text>
+                <Text style={styles.logoTagline}>{'DISEÑO · DESARROLLO · MARCA'}</Text>
+              </View>
+            </View>
           </View>
           <View style={styles.headerRight}>
             <View>
@@ -712,13 +718,18 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
           {/* Header compacto */}
           <View style={styles.header}>
             <View style={styles.headerLeft}>
-              <Text style={styles.logoMark}>
-                {'Dual'}
-                <Text style={styles.logoDot}>{'Grid'}</Text>
-              </Text>
-              <Text style={styles.logoTagline}>
-                {'Diseño con propósito · Código con precisión'}
-              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <PDFLogoMark size={36} />
+                <View>
+                  <Text style={styles.logoMark}>
+                    {'Dual'}
+                    <Text style={styles.logoDot}>{'Grid'}</Text>
+                  </Text>
+                  <Text style={styles.logoTagline}>
+                    {'Diseño con propósito · Código con precisión'}
+                  </Text>
+                </View>
+              </View>
             </View>
             <View style={styles.headerRight}>
               <View>

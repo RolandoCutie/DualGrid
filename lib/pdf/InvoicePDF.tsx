@@ -1,4 +1,5 @@
 import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import PDFLogoMark from './PDFLogoMark';
 
 Font.register({ family: 'Helvetica', fonts: [] });
 
@@ -383,15 +384,18 @@ export default function InvoicePDF({ invoice, client, logoBase64 }: InvoicePDFPr
                 style={{ maxWidth: 120, maxHeight: 48, objectFit: 'contain' }}
               />
             ) : (
-              <>
-                <Text style={styles.logoMark}>
-                  {'Dual'}
-                  <Text style={styles.logoDot}>{'Grid'}</Text>
-                </Text>
-                <Text style={styles.logoTagline}>
-                  {'Diseño con propósito · Código con precisión'}
-                </Text>
-              </>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <PDFLogoMark size={36} />
+                <View>
+                  <Text style={styles.logoMark}>
+                    {'Dual'}
+                    <Text style={styles.logoDot}>{'Grid'}</Text>
+                  </Text>
+                  <Text style={styles.logoTagline}>
+                    {'Diseño con propósito · Código con precisión'}
+                  </Text>
+                </View>
+              </View>
             )}
           </View>
           <View style={styles.headerRight}>

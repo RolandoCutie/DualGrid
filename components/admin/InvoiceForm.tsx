@@ -220,9 +220,25 @@ export default function InvoiceForm({
                             ${c.totalAmount.toLocaleString('en-US', { minimumFractionDigits: 0 })}
                           </p>
                           <p
-                            className={`text-xs ${c.status === 'active' ? 'text-green-500' : 'text-amber-500'}`}
+                            className={`text-xs ${
+                              c.status === 'active'
+                                ? 'text-[#00ff9d]'
+                                : c.status === 'completed'
+                                  ? 'text-muted-foreground'
+                                  : c.status === 'cancelled'
+                                    ? 'text-red-400'
+                                    : 'text-amber-500'
+                            }`}
                           >
-                            {c.status === 'active' ? 'Activo' : 'Pendiente'}
+                            {c.status === 'active'
+                              ? 'Activo'
+                              : c.status === 'completed'
+                                ? 'Completado'
+                                : c.status === 'cancelled'
+                                  ? 'Cancelado'
+                                  : c.status === 'draft'
+                                    ? 'Borrador'
+                                    : 'Pendiente'}
                           </p>
                         </div>
                       </div>

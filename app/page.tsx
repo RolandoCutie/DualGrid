@@ -28,7 +28,13 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ wizard?: string }>;
+}) {
+  const sp = await searchParams;
+  const autoOpenWizard = sp?.wizard === 'open';
   let projects: {
     _id: string;
     name: string;
@@ -59,7 +65,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection autoOpen={autoOpenWizard} />
       <WhySection />
       <PortfolioSection projects={projects} />
       <PlansSection />

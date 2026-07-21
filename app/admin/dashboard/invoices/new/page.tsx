@@ -17,8 +17,9 @@ export default async function NewInvoicePage() {
 
   const [clients, contracts] = await Promise.all([
     Client.find({}).sort({ name: 1 }).lean(),
-    Contract.find({ status: { $in: ['active', 'pending'] } })
+    Contract.find({ deletedAt: null })
       .populate('clientId', 'name businessName')
+      .sort({ createdAt: -1 })
       .lean(),
   ]);
 

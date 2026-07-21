@@ -16,32 +16,32 @@ export default function ProcessSection() {
       id="proceso"
       className="py-28 relative overflow-hidden bg-[linear-gradient(180deg,var(--muted)_0%,var(--background)_100%)] dark:bg-transparent"
     >
-      {/* Orb 1 — primary (cyan) bottom-left */}
+      {/* Cyan glow — bottom left */}
       <div
-        className="absolute -bottom-16 -left-16 w-[500px] h-[500px] pointer-events-none"
+        className="absolute -bottom-16 -left-16 w-[600px] h-[500px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 7%, transparent), transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
+          filter: 'blur(55px)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Green glow — top right */}
+      <div
+        className="absolute -top-24 -right-20 w-[650px] h-[500px] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
           filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
-      {/* Orb 2 — accent (green) top-right */}
+      {/* Purple glow — center right accent */}
       <div
-        className="absolute -top-24 -right-20 w-[520px] h-[520px] pointer-events-none"
+        className="absolute top-1/2 -right-8 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 65%)',
-          filter: 'blur(80px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Orb 3 — purple center-right mid-height */}
-      <div
-        className="absolute top-1/2 -right-8 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--purple) 7%, transparent) 0%, transparent 65%)',
+            'radial-gradient(ellipse at center, rgba(165,148,249,0.12) 0%, transparent 65%)',
           filter: 'blur(50px)',
         }}
         aria-hidden="true"

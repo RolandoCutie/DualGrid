@@ -29,8 +29,9 @@ export default async function EditInvoicePage({
   const [invoice, clients, contracts] = await Promise.all([
     Invoice.findById(id).lean(),
     Client.find({}).sort({ name: 1 }).lean(),
-    Contract.find({ status: { $in: ['active', 'pending'] } })
+    Contract.find({ deletedAt: null })
       .populate('clientId', 'name businessName')
+      .sort({ createdAt: -1 })
       .lean(),
   ]);
 
