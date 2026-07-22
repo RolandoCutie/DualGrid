@@ -1,6 +1,17 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import Image from 'next/image';
+
+// Maps position index to the corresponding SVG icon in /public/assets/icons/porqueus/
+const WHY_ICONS = [
+  '/assets/icons/porqueus/diseno-personalizado.svg',
+  '/assets/icons/porqueus/servicio-integral.svg',
+  '/assets/icons/porqueus/comunicacion-directa.svg',
+  '/assets/icons/porqueus/creamos-lo-que-necesitas.svg',
+  '/assets/icons/porqueus/perfecto-dispositivos.svg',
+  '/assets/icons/porqueus/codigo-limpio.svg',
+];
 
 export default function WhySection() {
   const { locale, t } = useLanguage();
@@ -61,15 +72,25 @@ export default function WhySection() {
               key={item.title}
               className="gradient-border group flex flex-col gap-4 p-7 rounded-2xl border border-border bg-card hover:shadow-xl transition-all duration-300"
             >
-              {/* Icon container with gradient bg */}
+              {/* SVG Icon */}
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
+                className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5"
                 style={{
                   background: `linear-gradient(135deg, color-mix(in srgb, var(--primary) ${i % 2 === 0 ? '15' : '10'}%, transparent), color-mix(in srgb, var(--accent) ${i % 2 === 0 ? '10' : '15'}%, transparent))`,
                   border: `1px solid color-mix(in srgb, var(--primary) 20%, transparent)`,
                 }}
               >
-                {item.emoji}
+                {WHY_ICONS[i] ? (
+                  <Image
+                    src={WHY_ICONS[i]}
+                    alt={item.title}
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <span className="text-2xl">{item.emoji}</span>
+                )}
               </div>
               <h3
                 className="font-bold text-card-foreground text-lg group-hover:text-primary transition-colors duration-200"

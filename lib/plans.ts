@@ -975,26 +975,7 @@ export const PLANS: Plan[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // DISEÑO PERSONALIZADO  ·  precio variable
   // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 'custom_design',
-    name: 'Diseño Personalizado',
-    tagline: 'Trabajos de diseño gráfico y visual',
-    price: 0,
-    currency: 'USD',
-    deliveryDays: 'Variable',
-    features: [
-      'Logotipos y branding',
-      'Identidad corporativa completa',
-      'Flyers, posters y banners',
-      'Diseño para redes sociales',
-      'Packaging y etiquetas',
-      'Presentaciones y material editorial',
-      'Tarjetas, invitaciones y papelería',
-      'Diseño UI/UX y wireframes',
-    ],
-    ctaLabel: 'Cotizar',
-    detailedFeatures: [],
-  },
+  
 ];
 
 export const PLAN_MAP: Record<string, Plan> = Object.fromEntries(PLANS.map((p) => [p.id, p]));

@@ -336,6 +336,8 @@
     "step2_services_label": "What are your main products or services?",
     "step2_services_placeholder": "E.g.:\n• Wedding photography\n• Family portraits\n• Product photography",
     "step2_presence_label": "Current online presence",
+    "step2_audience_label": "Who is your website aimed at?",
+    "step2_audience_placeholder": "E.g.: women aged 25–40, local businesses, international tourists...",
     "step2_business_types": {
       "creative": {
         "label": "Artist / Creative",

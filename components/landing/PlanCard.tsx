@@ -3,7 +3,21 @@
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import type { Plan } from '@/types';
+import Image from 'next/image';
 import { useState } from 'react';
+
+// Map plan ID to its SVG icon in public/assets/icons/planes/
+const PLAN_ICONS: Record<string, string> = {
+  menu_qr: '/assets/icons/planes/menu-qr.svg',
+  landing: '/assets/icons/planes/landing.svg',
+  portfolio: '/assets/icons/planes/portfolio.svg',
+  restaurant: '/assets/icons/planes/restaurante.svg',
+  wp_business: '/assets/icons/planes/sitio-empresarial.svg',
+  ecommerce_store: '/assets/icons/planes/tienda-online.svg',
+  blog: '/assets/icons/planes/blog.svg',
+  custom: '/assets/icons/planes/custom.svg',
+  
+};
 
 interface PlanCardProps {
   plan: Plan;
@@ -45,8 +59,25 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
         </div>
       )}
 
-      {/* Plan name & tagline */}
+      {/* Plan icon + name & tagline */}
       <div className="mb-6">
+        {PLAN_ICONS[plan.id] && (
+          <div
+            className="w-14 h-14 mb-3 rounded-xl flex items-center justify-center p-2.5"
+            style={{
+              background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
+              border: '1px solid color-mix(in srgb, var(--primary) 22%, transparent)',
+            }}
+          >
+            <Image
+              src={PLAN_ICONS[plan.id]}
+              alt={plan.name}
+              width={40}
+              height={40}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        )}
         <h3
           className={cn(
             'text-xl font-extrabold',

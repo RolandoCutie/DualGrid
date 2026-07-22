@@ -15,7 +15,7 @@
     "title_before": "Sitios web que",
     "title_highlight": "convierten",
     "title_after": "visitas en clientes",
-    "subtitle": "Combinamos diseño artístico con ingeniería precisa para crear presencias digitales únicas. Portafolios, restaurantes, landing pages y sistemas personalizados.",
+    "subtitle": "Combinamos diseño con programación para crear presencias digitales únicas. Portafolios, restaurantes, páginas de destino y sistemas personalizados",
     "cta_primary": "Descubrir mi plan ideal",
     "cta_secondary": "Ver planes y precios",
     "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
@@ -23,37 +23,37 @@
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
     "title": "La diferencia DualGrid",
-    "subtitle": "No somos una agencia masiva. Somos un equipo pequeño que trata cada proyecto como si fuera el nuestro.",
+    "subtitle": "No somos una gran agencia. Somos un equipo pequeño que trata cada proyecto como si fuera propio.",
     "items": [
       {
         "emoji": "🎨",
         "title": "Diseño 100% personalizado",
-        "desc": "No usamos plantillas. Cada sitio es único y diseñado desde cero para tu marca."
+        "desc": "Sin plantillas. Cada sitio es único y diseñado desde cero para tu marca."
       },
       {
         "emoji": "⚡",
         "title": "Servicio completo",
-        "desc": "Tú solo apruebas. Nosotros nos encargamos de todo: diseño, código, dominio y hosting."
+        "desc": "Tú solo apruebas. Nosotros nos encargamos de todo: diseño, código, dominio y alojamiento."
       },
       {
         "emoji": "🗣️",
         "title": "Atención en español",
-        "desc": "Comunicación directa, sin barreras. Soporte vía WhatsApp durante todo el proyecto."
+        "desc": "Comunicación clara y fluida. Soporte por WhatsApp durante todo el proyecto."
       },
       {
         "emoji": "🔧",
-        "title": "Desarrollamos lo que necesites",
-        "desc": "Sin límites de funcionalidades. Si lo necesitas, lo construimos."
+        "title": "Creamos lo que necesitas",
+        "desc": "Sin límites de funcionalidades. Si lo necesitas, lo creamos."
       },
       {
         "emoji": "📱",
         "title": "Perfecto en todos los dispositivos",
-        "desc": "Diseño responsive desde el primer boceto. Funciona en móvil, tablet y escritorio."
+        "desc": "Diseño responsivo desde el primer boceto. Funciona en móviles, tabletas y ordenadores."
       },
       {
         "emoji": "🔒",
         "title": "Código limpio y seguro",
-        "desc": "Seguimos mejores prácticas de seguridad y rendimiento en cada proyecto."
+        "desc": "Seguimos las mejores prácticas de seguridad y rendimiento en cada proyecto.."
       }
     ]
   },
@@ -102,8 +102,8 @@
   },
   "plans": {
     "eyebrow": "Planes y precios",
-    "section_title": "Planes de Desarrollo Web",
-    "section_subtitle": "Sitios completos listos para hacer crecer tu negocio — diseño, código, dominio y hosting incluidos.",
+    "section_title": "Soluciones para todo tipo de negocio",
+    "section_subtitle": "Desde landing pages hasta sistemas personalizados. Todos los planes incluyen diseño exclusivo, código limpio y soporte post-lanzamiento.",
     "title": "Soluciones para cada tipo de negocio",
     "subtitle": "Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único, código limpio y soporte post-lanzamiento.",
     "custom_note": "¿No encuentras lo que buscas?",

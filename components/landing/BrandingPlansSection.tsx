@@ -3,6 +3,7 @@
 import BrandingQuizModal from '@/components/landing/BrandingQuizModal';
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import { useState } from 'react';
 
 type BrandingPlanId = 'essential' | 'corporate' | 'global';
@@ -13,12 +14,34 @@ interface BrandingPlan {
   highlighted: boolean;
   deliveryDays: string;
   icon: string;
+  svgIcon: string;
 }
 
 const BRANDING_PLANS: BrandingPlan[] = [
-  { id: 'essential', price: 100, highlighted: false, deliveryDays: '7', icon: '☕' },
-  { id: 'corporate', price: 300, highlighted: true, deliveryDays: '20', icon: '🏢' },
-  { id: 'global', price: 550, highlighted: false, deliveryDays: '60', icon: '🌐' },
+  {
+    id: 'essential',
+    price: 100,
+    highlighted: false,
+    deliveryDays: '7',
+    icon: '☕',
+    svgIcon: '/assets/icons/branding/plan-esencial.svg',
+  },
+  {
+    id: 'corporate',
+    price: 300,
+    highlighted: true,
+    deliveryDays: '20',
+    icon: '🏢',
+    svgIcon: '/assets/icons/branding/plan-corporativo.svg',
+  },
+  {
+    id: 'global',
+    price: 550,
+    highlighted: false,
+    deliveryDays: '60',
+    icon: '🌐',
+    svgIcon: '/assets/icons/branding/plan-global.svg',
+  },
 ];
 
 interface BrandingPlanCardProps {
@@ -87,7 +110,21 @@ function BrandingPlanCard({
       <div className="p-7 sm:p-8 flex flex-col flex-1">
         {/* Icon + Plan name + tagline */}
         <div className="mb-5">
-          <div className="text-3xl mb-3">{plan.icon}</div>
+          <div
+            className="w-14 h-14 mb-3 rounded-xl flex items-center justify-center p-2.5"
+            style={{
+              background: 'color-mix(in srgb, var(--purple) 12%, transparent)',
+              border: '1px solid color-mix(in srgb, var(--purple) 25%, transparent)',
+            }}
+          >
+            <Image
+              src={plan.svgIcon}
+              alt={name}
+              width={40}
+              height={40}
+              className="w-full h-full object-contain"
+            />
+          </div>
           <h3
             className={cn(
               'text-xl font-extrabold mb-1',
@@ -248,7 +285,8 @@ export default function BrandingPlansSection() {
       <div
         className="absolute -top-32 -right-32 w-[700px] h-[550px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(165,148,249,0.22) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse at center, rgba(165,148,249,0.22) 0%, transparent 65%)',
           filter: 'blur(70px)',
         }}
         aria-hidden="true"
@@ -257,12 +295,13 @@ export default function BrandingPlansSection() {
       <div
         className="absolute -bottom-24 -left-16 w-[600px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
           filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
-      
+
       {/* Orb 3 — primary (cyan) center-left diffuse */}
       <div
         className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[340px] h-[340px] rounded-full pointer-events-none"
