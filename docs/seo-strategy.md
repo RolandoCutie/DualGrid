@@ -1,11 +1,11 @@
-# CubaWay – SEO Strategy
+# DualGrid – SEO Strategy
 
 ## Overview
 
-CubaWay implements SEO using **Next.js App Router's built-in Metadata API** — no third-party SEO library. All metadata, sitemaps, robots, structured data, and the dynamic Open Graph image are generated programmatically following Next.js conventions.
+DualGrid implements SEO using **Next.js App Router's built-in Metadata API** — no third-party SEO library. All metadata, sitemaps, robots, structured data, and the dynamic Open Graph image are generated programmatically following Next.js conventions.
 
-**Production domain**: `https://cubaway.co`
-**Env variable**: `NEXT_PUBLIC_BASE_URL=https://cubaway.co`
+**Production domain**: `https://dualgrid.co`
+**Env variable**: `NEXT_PUBLIC_BASE_URL=https://dualgrid.co`
 
 ---
 
@@ -13,11 +13,11 @@ CubaWay implements SEO using **Next.js App Router's built-in Metadata API** — 
 
 ### Title Hierarchy
 
-| Level              | Pattern                                             | Result                                              |
-| ------------------ | --------------------------------------------------- | --------------------------------------------------- |
-| Default (fallback) | `'CubaWay – Car Rental Cuba \| Rent a Car in Cuba'` | Shown when no page title is set                     |
-| Template           | `'%s \| CubaWay'`                                   | Applied to all page-level titles                    |
-| Page override      | `title: 'Rent a Car in Cuba – Browse & Book'`       | → `"Rent a Car in Cuba – Browse & Book \| CubaWay"` |
+| Level              | Pattern                                                      | Result                          |
+| ------------------ | ------------------------------------------------------------ | ------------------------------- | -------------------------------- |
+| Default (fallback) | `'DualGrid – Sitios web que convierten visitas en clientes'` | Shown when no page title is set |
+| Template           | `'%s                                                         | DualGrid'`                      | Applied to all page-level titles |
+| Page override      | `title: 'Portafolio'`                                        | → `"Portafolio                  | DualGrid"`                       |
 
 ### Description Strategy
 
@@ -27,9 +27,8 @@ CubaWay implements SEO using **Next.js App Router's built-in Metadata API** — 
 
 ### Target Keywords
 
-Primary (EN): `car rental cuba`, `rent a car cuba`, `cuba rental car`, `Cuba way`, `CubaWay`, `car hire cuba`
-Secondary (EN): `rent car havana`, `cheap car rental cuba`, `premium car rental cuba`
-Primary (ES): `alquiler de autos cuba`, `renta de carros cuba`, `alquilar auto en cuba`
+Primary (ES): `agencia web`, `desarrollo web`, `sitio web profesional`, `diseño web`
+Primary (EN): `web agency`, `web development`, `professional website`, `web design`
 
 ---
 
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
 
 `getBaseUrl()` reads `NEXT_PUBLIC_BASE_URL` from environment variables, falling back to `http://localhost:3000` in development.
 
-**Production value must be set**: `NEXT_PUBLIC_BASE_URL=https://cubaway.co`
+**Production value must be set**: `NEXT_PUBLIC_BASE_URL=https://dualgrid.co`
 
 ---
 
@@ -64,9 +63,9 @@ openGraph: {
   locale: 'en_US',
   alternateLocale: ['es_ES'],
   url: baseUrl,
-  siteName: 'CubaWay',
-  title: 'CubaWay – Premium Car Rental',
-  description: 'Rent premium vehicles quickly and easily...',
+  siteName: 'DualGrid',
+  title: 'DualGrid – Sitios web que convierten visitas en clientes',
+  description: 'Agencia de desarrollo web...',
   images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: '...', type: 'image/png' }],
 },
 ```
@@ -76,10 +75,8 @@ openGraph: {
 ```typescript
 twitter: {
   card: 'summary_large_image',
-  title: 'CubaWay – Premium Car Rental',
+  title: 'DualGrid – Sitios web que convierten visitas en clientes',
   description: '...',
-  images: ['/opengraph-image'],
-}
 ```
 
 ### Dynamic OG Image
@@ -100,7 +97,7 @@ twitter: {
 
 Three Schema.org types injected globally:
 
-- **Organization**: CubaWay brand identity with logo and social links (Instagram, Facebook).
+- **Organization**: DualGrid brand identity with logo and social links.
 - **WebSite**: site metadata with bilingual language declaration.
 - **AutoRental**: specialized business type (more specific than LocalBusiness) with `areaServed: Cuba` and offer catalog.
 
@@ -167,7 +164,7 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Sitemap: https://cubaway.com/sitemap.xml
+Sitemap: https://dualgrid.co/sitemap.xml
 ```
 
 Admin and API routes are correctly excluded from crawling.
@@ -180,13 +177,13 @@ Set in `app/layout.tsx` metadata:
 
 ```typescript
 icons: {
-  icon: '/icon.png',
-  shortcut: '/icon.png',
-  apple: '/icon.png',
+  icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+  shortcut: '/favicon.svg',
+  apple: '/apple-touch-icon.png',
 }
 ```
 
-**Improvement opportunity**: Add multiple icon sizes and an SVG favicon.
+Favicon configurado via `app/favicon.svg` e `app/icon.svg` (Next.js App Router los toma automáticamente).
 
 ---
 
@@ -194,7 +191,7 @@ icons: {
 
 ### Completed
 
-- [x] Fix `NEXT_PUBLIC_BASE_URL` to `https://cubaway.co`
+- [x] Fix `NEXT_PUBLIC_BASE_URL` to `https://dualgrid.co`
 - [x] Remove fragment URLs from sitemap
 - [x] Add `/faqs` to sitemap
 - [x] Add FAQPage JSON-LD structured data
@@ -207,7 +204,7 @@ icons: {
 
 ### High Priority (Remaining)
 
-1. **Update Vercel env** — set `NEXT_PUBLIC_BASE_URL=https://cubaway.co` in Vercel dashboard
+1. **Update Vercel env** — set `NEXT_PUBLIC_BASE_URL=https://dualgrid.co` in Vercel dashboard
 2. **Google Search Console** — verify ownership and submit sitemap
 3. **Car detail pages** — individual `/cars/[slug]` pages for per-vehicle indexing
 
@@ -220,7 +217,7 @@ icons: {
 
 ### Low Priority
 
-8. **Twitter/X creator handle** — add `creator: '@cubaway'` when social presence exists
+8. **Twitter/X creator handle** — add `creator: '@dualgrid'` when social presence exists
 9. **Article schema** — if a blog section is added in the future
 
 ---

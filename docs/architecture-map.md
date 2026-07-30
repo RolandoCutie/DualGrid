@@ -1,4 +1,4 @@
-# CubaWay – Architecture Map
+# DualGrid – Architecture Map
 
 ## Recent DualGrid Updates
 
@@ -122,10 +122,10 @@ ride4go/                                   ← Repository root
 ├── public/                                ← Static assets (served at root)
 │   ├── sw.js                              ← Service Worker (manually authored)
 │   ├── hero.png                           ← Hero section car image
-│   ├── logo.svg                           ← CubaWay logo
-│   ├── icon.png                           ← App icon (used by manifest, favicon)
-│   ├── cubawayicon.jpg                    ← PWA icon 192×192 / 512×512
-│   ├── cubawayicon-512-maskable.jpg       ← PWA maskable icon 512×512
+│   ├── favicon.svg                        ← App favicon (browser tab)
+│   ├── icon.svg                           ← App icon (meta tags, Next.js App Router)
+│   ├── icon-48x48.png → icon-512x512.png   ← PWA icons generados desde Favicon DualGrid.svg
+│   ├── apple-touch-icon.png               ← iOS home screen icon (180×180)
 │   └── fonts/
 │       ├── SQCQAN+GoodlyBold.cff          ← Custom Goodly Bold font (subset)
 │       └── SQCQAN+GoodlyRegular.cff       ← Custom Goodly Regular font (subset)
@@ -242,7 +242,7 @@ Page Components (app/**/page.tsx)
 
 ## State Management
 
-CubaWay uses **React Context** for global state — no Redux, Zustand, or Jotai.
+DualGrid uses **React Context** for global state — no Redux, Zustand, or Jotai.
 
 | Context            | Provider           | Consumers                                                  |
 | ------------------ | ------------------ | ---------------------------------------------------------- |

@@ -1,4 +1,4 @@
-# Modelado de Base de Datos — CubaWay
+# Modelado de Base de Datos — DualGrid
 
 > Archivo editable. Actualiza los campos, relaciones o notas según evolucione el proyecto.
 

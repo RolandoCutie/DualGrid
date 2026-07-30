@@ -1,10 +1,10 @@
-# CubaWay – PWA Documentation
+# DualGrid – PWA Documentation
 
 ## Overview
 
-CubaWay is configured as a Progressive Web App (PWA) that enables:
+DualGrid is configured as a Progressive Web App (PWA) that enables:
 
-- **Installability**: Users can add CubaWay to their home screen on Android, iOS, and desktop.
+- **Installability**: Users can add DualGrid to their home screen on Android, iOS, and desktop.
 - **Offline support**: Core app shell loads even without a network connection.
 - **Native-like experience**: Standalone display mode, splash screen, notification permissions, and status-bar theming.
 
@@ -43,12 +43,12 @@ In `instrumentation-client.ts`, a `controllerchange` listener on `navigator.serv
 
 Two named caches:
 
-- `cubaway-v12-static` — precached app shell assets installed on SW activation
-- `cubaway-v12-runtime` — runtime-cached responses
+- `dualgrid-v2-static` — precached app shell assets installed on SW activation
+- `dualgrid-v2-runtime` — runtime-cached responses
 
 ### Nuclear Cache Cleanup
 
-The activate handler deletes ALL caches that are not the current version — not just known prefixes. This guarantees complete cleanup of stale Workbox caches, old cubaway-\* versions, and any other leftover storage.
+The activate handler deletes ALL caches that are not the current version — not just known prefixes. This guarantees complete cleanup of stale Workbox caches, old dualgrid-\* versions, and any other leftover storage.
 
 ### Navigation Preload
 
@@ -79,7 +79,7 @@ The SW file also has `Content-Security-Policy: default-src 'self'; script-src 's
 
 ### Version Management
 
-Bump `CACHE_VERSION` in `public/sw.js` after each production deploy. This invalidates the precached assets (logo, icons, offline page). Current version: **`cubaway-v12`**.
+Bump `CACHE_VERSION` in `public/sw.js` after each production deploy. This invalidates the precached assets (logo, icons, offline page). Current version: **`dualgrid-v2`**.
 
 > Next.js JS/CSS chunks in `/_next/static/` are auto-invalidated via content-hash URLs — no version bump needed for those.
 
@@ -95,27 +95,27 @@ Bump `CACHE_VERSION` in `public/sw.js` after each production deploy. This invali
 
 ```typescript
 {
-  id: '/',
-  name: 'CubaWay – Premium Car Rental',
-  short_name: 'CubaWay',
-  description: 'Rent premium vehicles quickly and easily...',
+  id: 'dualgrid',
+  name: 'DualGrid',
+  short_name: 'DualGrid',
+  description: 'Sitios web que convierten visitas en clientes.',
   start_url: '/',
   scope: '/',
   display: 'standalone',
-  display_override: ['standalone'],
+  display_override: ['window-controls-overlay', 'standalone'],
   orientation: 'portrait',
-  background_color: '#ffffff',
-  theme_color: '#8dc63f',
-  categories: ['travel', 'business'],
+  background_color: '#050912',
+  theme_color: '#00d9ff',
+  categories: ['business', 'productivity'],
   prefer_related_applications: false,
   icons: [
-    { src: '/cubawayicon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-    { src: '/cubawayicon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-    { src: '/cubawayicon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+    { src: '/icon-192x192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: '/icon-192x192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+    { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
   ],
   screenshots: [
-    { src: '/opengraph-image', sizes: '1200x630', type: 'image/png', form_factor: 'wide', label: '...' },
-    { src: '/cubawayicon-512.png', sizes: '512x512', type: 'image/png', form_factor: 'narrow', label: '...' },
+    { src: '/opengraph-image', sizes: '1200x630', type: 'image/png', form_factor: 'wide', label: 'DualGrid – Sitios web que convierten' },
   ]
 }
 ```
@@ -166,18 +166,18 @@ The banner only appears in browsers that fire `beforeinstallprompt`.
 
 ## PWA Installability Criteria (Chrome)
 
-| Criterion                                          | CubaWay Status |
-| -------------------------------------------------- | -------------- |
-| Served over HTTPS                                  | ✅             |
-| Has a valid Web App Manifest                       | ✅             |
-| Manifest has `name` or `short_name`                | ✅             |
-| Manifest has `start_url`                           | ✅             |
-| Manifest has `id` field                            | ✅             |
-| Manifest has `display: standalone`                 | ✅             |
-| Manifest has at least one icon ≥ 192×192 (PNG)     | ✅             |
-| Manifest has maskable icon ≥ 512×512               | ✅             |
-| Manifest has screenshot with `form_factor: narrow` | ✅             |
-| Has a registered Service Worker with fetch handler | ✅             |
+| Criterion                                          | DualGrid Status |
+| -------------------------------------------------- | --------------- |
+| Served over HTTPS                                  | ✅              |
+| Has a valid Web App Manifest                       | ✅              |
+| Manifest has `name` or `short_name`                | ✅              |
+| Manifest has `start_url`                           | ✅              |
+| Manifest has `id` field                            | ✅              |
+| Manifest has `display: standalone`                 | ✅              |
+| Manifest has at least one icon ≥ 192×192 (PNG)     | ✅              |
+| Manifest has maskable icon ≥ 512×512               | ✅              |
+| Manifest has screenshot with `form_factor: narrow` | ✅              |
+| Has a registered Service Worker with fetch handler | ✅              |
 
 ---
 
@@ -191,9 +191,9 @@ npm run build && npm run start
 ### Chrome DevTools Checklist
 
 1. **Application → Service Workers**: Status "Activated and running".
-2. **Application → Cache Storage**: Verify `cubaway-v11-static` and `cubaway-v11-runtime`.
+2. **Application → Cache Storage**: Verify `dualgrid-v2-static` and `dualgrid-v2-runtime`.
 3. **Application → Manifest**: All fields valid, no installability warnings.
-4. **Elements → Head**: `<meta name="theme-color" content="#8dc63f">` present.
+4. **Elements → Head**: `<meta name="theme-color" content="#00d9ff">` present.
 5. **Network → Offline**: Reload → page loads from cache.
 
 ---
