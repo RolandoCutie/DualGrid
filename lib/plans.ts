@@ -122,7 +122,7 @@ export const PLANS: Plan[] = [
     id: 'landing',
     name: 'Landing Express',
     tagline: 'Presencia profesional rápida',
-    price: 200,
+    price: 250,
     currency: 'USD',
     deliveryDays: '8-10',
     features: [
@@ -317,7 +317,7 @@ export const PLANS: Plan[] = [
     id: 'portfolio',
     name: 'Portafolio Pro',
     tagline: 'Tu trabajo en su mejor expresión',
-    price: 400,
+    price: 450,
     currency: 'USD',
     deliveryDays: '15-20',
     highlighted: true,
@@ -975,7 +975,7 @@ export const PLANS: Plan[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // DISEÑO PERSONALIZADO  ·  precio variable
   // ─────────────────────────────────────────────────────────────────────────
-  
+
 ];
 
 export const PLAN_MAP: Record<string, Plan> = Object.fromEntries(PLANS.map((p) => [p.id, p]));

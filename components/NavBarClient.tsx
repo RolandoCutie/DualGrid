@@ -169,48 +169,59 @@ export default function NavBarClient() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - fullscreen overlay */}
       {menuOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-xl border-b border-border/60 px-6 py-5 flex flex-col gap-4">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => scrollTo(link.href)}
-              className="text-sm font-semibold text-card-foreground py-2 text-left cursor-pointer hover:text-primary transition-colors"
-            >
-              {t(link.labelKey)}
-            </button>
-          ))}
-          <div className="flex items-center gap-3 pt-1">
-            <LanguageToggle />
+        <div className="md:hidden fixed inset-0 top-[72px] bg-card/95 backdrop-blur-xl z-30 overflow-y-auto">
+          <div className="px-6 py-8 flex flex-col gap-6 h-full min-h-[calc(100vh-72px)]">
+            {/* Links - centered */}
+            <div className="flex flex-col items-center gap-4">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-lg font-semibold text-card-foreground py-2 cursor-pointer hover:text-primary transition-colors"
+                >
+                  {t(link.labelKey)}
+                </button>
+              ))}
+            </div>
+
+            {/* Language toggle - centered */}
+            <div className="flex justify-center pt-4 border-t border-border/40">
+              <LanguageToggle />
+            </div>
+
+            {/* Auth buttons - centered */}
+            <div className="flex flex-col gap-3 mt-auto pb-4">
+              {isAdmin ? (
+                <>
+                  <Link
+                    href="/admin/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full py-3 rounded-xl border border-border text-primary text-sm font-semibold text-center hover:bg-accent/50 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="w-full py-3 rounded-xl border border-destructive/60 text-destructive text-sm font-semibold text-center cursor-pointer hover:bg-destructive/10 transition-colors"
+                  >
+                    Cerrar sesión
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => scrollTo('#planes')}
+                  className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
+                >
+                  {t('nav.cta')}
+                </button>
+              )}
+            </div>
           </div>
-          {isAdmin ? (
-            <>
-              <Link
-                href="/admin/dashboard"
-                onClick={() => setMenuOpen(false)}
-                className="w-full py-3 rounded-xl border border-border text-primary text-sm font-semibold text-center hover:bg-accent/50 transition-colors"
-              >
-                Dashboard
-              </Link>
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  handleLogout();
-                }}
-                className="w-full py-3 rounded-xl border border-destructive/60 text-destructive text-sm font-semibold text-center cursor-pointer hover:bg-destructive/10 transition-colors"
-              >
-                Cerrar sesión
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={() => scrollTo('#planes')}
-              className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
-            >
-              {t('nav.cta')}
-            </button>
-          )}
         </div>
       )}
     </header>

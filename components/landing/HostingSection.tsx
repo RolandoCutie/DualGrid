@@ -14,7 +14,7 @@ interface HostingPlan {
   perYear?: boolean;
   highlighted?: boolean;
   features: string[];
-  badge?: string;
+  badgeKey?: string;
 }
 
 const HOSTING_PLANS: HostingPlan[] = [
@@ -22,7 +22,7 @@ const HOSTING_PLANS: HostingPlan[] = [
     id: 'annual',
     labelKey: 'annual',
     price: 120,
-    features: ['10 GB NVMe', 'SSL gratuito', 'Backups diarios', 'CDN global', 'Soporte WhatsApp'],
+    features: ['feature_nvme', 'feature_ssl', 'feature_backup', 'feature_cdn', 'feature_whatsapp'],
   },
   {
     id: 'biennial',
@@ -30,14 +30,14 @@ const HOSTING_PLANS: HostingPlan[] = [
     price: 110,
     perYear: true,
     highlighted: true,
-    badge: 'Recomendado',
+    badgeKey: 'badge_recommended',
     features: [
-      '10 GB NVMe',
-      'SSL gratuito',
-      'Backups diarios',
-      'CDN global',
-      'Soporte WhatsApp',
-      'Monitoreo 24/7',
+      'feature_nvme',
+      'feature_ssl',
+      'feature_backup',
+      'feature_cdn',
+      'feature_whatsapp',
+      'feature_monitoring',
     ],
   },
   {
@@ -46,13 +46,13 @@ const HOSTING_PLANS: HostingPlan[] = [
     price: 100,
     perYear: true,
     features: [
-      '10 GB NVMe',
-      'SSL gratuito',
-      'Backups diarios',
-      'CDN global',
-      'Soporte WhatsApp',
-      'Monitoreo 24/7',
-      'Mejor precio/año',
+      'feature_nvme',
+      'feature_ssl',
+      'feature_backup',
+      'feature_cdn',
+      'feature_whatsapp',
+      'feature_monitoring',
+      'feature_best_price',
     ],
   },
 ];
@@ -73,7 +73,8 @@ export default function HostingSection() {
       <div
         className="absolute -top-20 -right-20 w-[650px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,217,255,0.22) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse at center, rgba(0,217,255,0.22) 0%, transparent 65%)',
           filter: 'blur(60px)',
         }}
         aria-hidden="true"
@@ -82,7 +83,8 @@ export default function HostingSection() {
       <div
         className="absolute -bottom-24 -left-20 w-[600px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
           filter: 'blur(65px)',
         }}
         aria-hidden="true"
@@ -91,12 +93,13 @@ export default function HostingSection() {
       <div
         className="absolute bottom-0 right-1/4 w-[350px] h-[300px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(165,148,249,0.10) 0%, transparent 65%)',
+          background:
+            'radial-gradient(ellipse at center, rgba(165,148,249,0.10) 0%, transparent 65%)',
           filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />
-    
+
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -139,9 +142,9 @@ export default function HostingSection() {
                 plan.highlighted ? 'border-primary shadow-md shadow-primary/10' : 'border-border',
               )}
             >
-              {plan.badge && (
+              {plan.badgeKey && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
-                  {plan.badge}
+                  {t(`hosting.${plan.badgeKey}`)}
                 </span>
               )}
 
@@ -162,7 +165,7 @@ export default function HostingSection() {
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-card-foreground">
                     <span className="text-primary text-base">✓</span>
-                    {f}
+                    {t(`hosting.${f}`)}
                   </li>
                 ))}
               </ul>

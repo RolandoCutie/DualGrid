@@ -21,9 +21,9 @@ export default function Footer() {
 
       <div className="bg-card">
         <div className="max-w-6xl mx-auto px-6 py-14">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-8">
             {/* Brand */}
-            <div className="flex flex-col items-center md:items-start gap-3">
+            <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
               <LogoDualGrid width={160} />
               <p className="text-sm text-muted-foreground">{t('footer.tagline')}</p>
             </div>

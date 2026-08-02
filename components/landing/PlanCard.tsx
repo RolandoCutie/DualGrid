@@ -47,9 +47,9 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
     >
       {/* Popular badge */}
       {plan.highlighted && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
           <span
-            className="px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white shadow-lg"
+            className="inline-block px-3 sm:px-5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-lg whitespace-nowrap"
             style={{
               background: 'linear-gradient(135deg, var(--primary), var(--accent))',
             }}
