@@ -175,7 +175,7 @@ function ProjectCard({
                 {project.images.map((_, i) => (
                   <button
                     key={i}
-                    aria-label={`Imagen ${i + 1}`}
+                    aria-label={t('portfolio.image_aria').replace('{n}', String(i + 1))}
                     onClick={() => setImgIdx(i)}
                     className={`w-1.5 h-1.5 rounded-full transition-colors ${
                       i === imgIdx ? 'bg-white' : 'bg-white/50'

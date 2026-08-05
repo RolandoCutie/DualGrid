@@ -1,4 +1,5 @@
 import LogoDualGrid from '@/components/ui/LogoDualGrid';
+import BackHomeLink from '@/components/questionnaire/BackHomeLink';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -18,12 +19,7 @@ export default function QuestionnaireLayout({ children }: { children: React.Reac
           <Link href="/" className="flex items-center" aria-label="DualGrid Studio">
             <LogoDualGrid width={130} />
           </Link>
-          <Link
-            href="/"
-            className="text-sm text-muted-foreground hover:text-card-foreground transition-colors"
-          >
-            ← Volver al inicio
-          </Link>
+          <BackHomeLink />
         </div>
       </header>
 

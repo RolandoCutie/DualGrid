@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -32,6 +33,7 @@ export default function Modal({
   closeOnBackdrop = true,
   hideCloseButton = false,
 }: ModalProps) {
+  const { t } = useLanguage();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function Modal({
         {!hideCloseButton && (
           <button
             onClick={onClose}
-            aria-label="Cerrar"
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-border transition-colors"
           >
             <svg

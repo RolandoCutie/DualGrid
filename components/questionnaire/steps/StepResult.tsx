@@ -177,7 +177,9 @@ export default function StepResult({
           className="text-2xl font-extrabold text-card-foreground"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
-          {firstName ? `¡${firstName}, encontramos tu plan!` : '¡Encontramos tu plan ideal!'}
+          {firstName
+            ? t('questionnaire.result_found_name').replace('{name}', firstName)
+            : t('questionnaire.result_found')}
         </h3>
         <p className="text-muted-foreground mt-1 text-sm">{t('questionnaire.result_subtitle')}</p>
       </div>

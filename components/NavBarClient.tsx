@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function LanguageToggle() {
-  const { locale, setLocale } = useLanguage();
+  const { locale, setLocale, t } = useLanguage();
   return (
     <div
       role="tablist"
-      aria-label="Language selector"
+      aria-label={t('nav.language_selector')}
       className="relative flex h-8 w-[72px] items-center rounded-full bg-muted/80 p-0.5 border border-border"
     >
       <div
@@ -118,13 +118,13 @@ export default function NavBarClient() {
                 href="/admin/dashboard"
                 className="text-sm font-medium text-muted-foreground hover:text-card-foreground transition-colors"
               >
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 rounded-xl border border-border text-sm font-semibold text-muted-foreground hover:text-destructive hover:border-destructive transition-colors cursor-pointer"
               >
-                Cerrar sesión
+                {t('nav.logout')}
               </button>
             </>
           ) : (
@@ -141,7 +141,7 @@ export default function NavBarClient() {
         <button
           className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-border/80 text-card-foreground hover:border-primary/40 transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menú"
+          aria-label={t('nav.menu')}
         >
           {menuOpen ? (
             <svg
@@ -200,7 +200,7 @@ export default function NavBarClient() {
                     onClick={() => setMenuOpen(false)}
                     className="w-full py-3 rounded-xl border border-border text-primary text-sm font-semibold text-center hover:bg-accent/50 transition-colors"
                   >
-                    Dashboard
+                    {t('nav.dashboard')}
                   </Link>
                   <button
                     onClick={() => {
@@ -209,7 +209,7 @@ export default function NavBarClient() {
                     }}
                     className="w-full py-3 rounded-xl border border-destructive/60 text-destructive text-sm font-semibold text-center cursor-pointer hover:bg-destructive/10 transition-colors"
                   >
-                    Cerrar sesión
+                    {t('nav.logout')}
                   </button>
                 </>
               ) : (
