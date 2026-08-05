@@ -49,8 +49,8 @@ const COMMON_REVISION_INTRO = (n: number) =>
 (a) DEFINICIÓN DE REVISIÓN: Se entiende por "ronda de revisión" el conjunto de ajustes estéticos, textuales o funcionales menores solicitados por el Cliente sobre trabajo ya entregado, siempre que dichos ajustes no alteren el alcance, la estructura, las funcionalidades ni los objetivos originalmente acordados en este contrato.
 (b) CANAL OBLIGATORIO: Todas las solicitudes de revisión deberán enviarse por escrito al correo electrónico oficial de DualGrid en un único mensaje consolidado. Los comentarios enviados por WhatsApp, llamada telefónica u otros canales informales no serán considerados válidos ni computados como rondas formales de revisión hasta que sean confirmados por escrito.
 (c) PLAZO PARA REVISIONES: Cada ronda de revisión debe enviarse dentro de los 5 días hábiles siguientes a la recepción de la entrega parcial o final correspondiente. Si el Cliente no envía su revisión en dicho plazo, la entrega se considerará aprobada y se avanzará a la siguiente etapa o se dará por finalizado el proyecto.
-(d) QUÉ INCLUYE UNA REVISIÓN: Una ronda de revisión puede incluir cambios de texto, colores, tipografías o imágenes; ajustes de alineación, espaciado o disposición visual; y correcciones de contenido sobre secciones ya diseñadas.
-(e) QUÉ NO INCLUYE UNA REVISIÓN (CAMBIO DE ALCANCE): No se considerará revisión, sino cambio de alcance, cualquier solicitud que implique: agregar páginas, secciones o funcionalidades no acordadas originalmente; cambiar la estructura o arquitectura del sitio después de aprobada; rediseñar desde cero una sección ya aprobada; modificar el concepto visual general una vez aprobada la propuesta de diseño; integrar servicios de terceros no mencionados en este contrato; o cualquier trabajo que requiera más de 2 horas adicionales de desarrollo.
+(d) QUÉ INCLUYE UNA REVISIÓN: Se consideran correcciones incluidas en una ronda de revisión: (i) errores de funcionamiento sobre lo ya entregado; (ii) ajustes de estilo, color, tipografía, alineación, espaciado o disposición visual sobre secciones ya aprobadas; y (iii) ajustes de texto o imágenes sobre contenidos que el propio Cliente haya entregado. Una ronda puede agrupar tantas correcciones como el Cliente consolide en un único envío, siempre que todas se refieran a la misma entrega y no alteren el alcance.
+(e) QUÉ NO INCLUYE UNA REVISIÓN (NUEVO REQUERIMIENTO): No se considerará corrección, sino nuevo requerimiento (cambio de alcance), cualquier solicitud que implique: agregar páginas, secciones o funcionalidades no acordadas originalmente; agregar o rediseñar portadas, mapas, formularios, botones o componentes no previstos en este contrato; cambiar la estructura o arquitectura del sitio después de aprobada; rediseñar desde cero una sección ya aprobada; modificar el concepto visual general una vez aprobada la propuesta de diseño; integrar servicios de terceros no mencionados en este contrato; o cualquier trabajo que requiera más de 2 horas adicionales de desarrollo. El hecho de que el Cliente considere que una solicitud "forma parte del trabajo terminado" no la convierte en corrección: solo lo expresamente incluido en este contrato forma parte del trabajo terminado.
 (f) RONDAS INCLUIDAS: Este contrato incluye un máximo de ${n} ronda${n === 1 ? '' : 's'} de revisión${n === 1 ? '' : 'es'}. Las rondas no utilizadas no se acumulan, no se transfieren a otros proyectos ni generan derecho a compensación económica.
 (g) RONDAS ADICIONALES: Cada ronda de revisión adicional fuera de las incluidas tiene un costo de USD $50, pagaderos antes de que DualGrid comience a trabajar en dicha ronda. La no recepción del pago suspende la obligación de DualGrid de procesar la revisión.
 (h) RESOLUCIÓN DE DISPUTAS SOBRE ALCANCE: En caso de discrepancia sobre si una solicitud constituye una revisión o un cambio de alcance, la decisión corresponde a DualGrid. En ningún caso DualGrid estará obligado a realizar trabajo en disputa antes de acordar su naturaleza y precio por escrito.`;
@@ -95,6 +95,36 @@ const COMMON_WARRANTY = `GARANTÍA POST-ENTREGA: DualGrid garantiza el correcto 
 
 const COMMON_PROJECT_SPECIFICATION = `ESPECIFICACIÓN DEL PROYECTO: El alcance exacto del proyecto está definido por los servicios y elementos explícitamente enumerados en este contrato. Cualquier característica, sección, integración o funcionalidad no mencionada explícitamente en este documento no está incluida en el precio acordado y constituirá un cambio de alcance sujeto al proceso descrito en la cláusula correspondiente. En caso de duda sobre si algo está incluido, prevalece lo escrito en este contrato.`;
 
+const COMMON_CONTENT_SEPARATION = `ALCANCE: DISEÑO WEB VERSUS CONTENIDOS:
+(a) Este contrato cubre el diseño y desarrollo web (estructura, programación, interfaz, estética y funcionalidad). No incluye la producción de contenidos: redacción o reescritura de textos, traducciones, corrección ortotipográfica profunda, fotografía, ilustración, búsqueda o selección de imágenes, ni el diseño de material gráfico (portadas, mapas, banners, flyers, etc.).
+(b) EL CLIENTE PROVEE LOS CONTENIDOS DEFINITIVOS: El Cliente entregará los textos finales, las imágenes en alta resolución y el resto de materiales, organizados y listos para uso web, conforme a la cláusula de materiales. DualGrid integra esos materiales tal como se le entregan y no asume la corrección de ortografía de los textos, la búsqueda de fotografías "adecuadas" ni la creación de contenido faltante.
+(c) TRABAJO TERMINADO: Un proyecto no puede considerarse "trabajo terminado" en tanto el Cliente no haya provisto los contenidos definitivos. Sin embargo, la demora del Cliente en entregarlos no amplía el alcance del contrato ni convierte en correcciones las solicitudes de contenidos que debió proveer.
+(d) EXCEPCIÓN (SERVICIOS ADICIONALES): Si el Cliente desea contratar servicios de redacción, corrección, traducción, fotografía o diseño de material gráfico, se acordarán por escrito como servicios adicionales y se cotizarán por separado. Sin ese acuerdo escrito, no están incluidos en el precio.
+(e) CALIDAD DE MATERIALES: La calidad visual final del sitio depende directamente de la calidad de los materiales provistos. DualGrid no responde por un resultado inferior si los materiales entregados son de baja resolución, desorganizados o no aptos para uso web.`;
+
+const COMMON_CHANGE_REQUEST = `PROCESO FORMAL DE SOLICITUDES DE CAMBIO:
+(a) FORMULARIO DE SOLICITUDES: Toda solicitud de revisión o de cambio se canalizará mediante el Formulario de Solicitud de Cambios anexo a este contrato (o, en su defecto, un correo electrónico que cumpla sus mismos requisitos), indicando: la entrega a la que se refiere, la sección afectada, la descripción precisa del cambio y si, a juicio del Cliente, se trata de una corrección o de un nuevo requerimiento.
+(b) CONSOLIDACIÓN OBLIGATORIA: El Cliente consolidará todos sus comentarios sobre una entrega en un único envío por ronda. Los comentarios parciales o fragmentados no se procesarán de forma aislada: se computarán dentro de la misma ronda contando desde el primer envío y solo se atenderán una vez consolidados.
+(c) CIERRE DE RONDA: Cada ronda de revisión se cierra con la entrega de los ajustes por parte de DualGrid. La siguiente ronda exige un nuevo envío consolidado. No existe revisión indefinida, acumulativa ni automática.
+(d) DISCREPANCIAS: Si el Cliente clasifica como corrección una solicitud que DualGrid considere nuevo requerimiento, se seguirá el procedimiento previsto en la cláusula de resolución de disputas sobre alcance.`;
+
+const COMMON_ACCEPTANCE = `FASE DE PRUEBAS Y ACEPTACIÓN FINAL:
+(a) FASE DE PRUEBAS: Antes de la entrega final, el Cliente dispondrá de un período de pruebas para verificar que el sitio funciona según lo especificado en este contrato y que la última ronda de revisiones fue implementada correctamente.
+(b) ACEPTACIÓN: El proyecto se entenderá terminado y aceptado cuando el Cliente lo apruebe por escrito (correo de aceptación) o, en ausencia de observaciones, conforme a la cláusula de aprobación tácita. A partir de la aceptación cesa la fase de desarrollo.
+(c) POST-LANZAMIENTO: Cualquier modificación, añadido o ajuste solicitado después de la aceptación final —incluso los aparentemente menores— se considerará mantenimiento post-lanzamiento y se cotizará y facturará por hora según la tarifa vigente de DualGrid o bajo la tarifa pactada por escrito, salvo que se trate de un bug cubierto por la garantía post-entrega.
+(d) La garantía post-entrega cubre exclusivamente el correcto funcionamiento de lo entregado, y no la implementación de cambios ni nuevas peticiones, aunque estas deriven de preferencias o contenidos que el Cliente no definió durante el desarrollo.`;
+
+const COMMON_GOOD_FAITH = `PRIORIDAD DE TRABAJO Y BUENA FE SIN PRECEDENTE:
+(a) PRIORIDAD: DualGrid se reserva el derecho de organizar su propia carga de trabajo y de priorizar proyectos, hitos y clientes según su planificación interna. Los trabajos adicionales o cambios de alcance se atenderán conforme a disponibilidad y únicamente tras la formalización del encargo y el pago correspondiente.
+(b) BUENA FE SIN PRECEDENTE: La realización ocasional de trabajos adicionales de buena fe (por ejemplo, una portada o un mapa no pactados) es una cortesía excepcional. No sienta precedente, no amplía el alcance de este contrato, no obliga a DualGrid a repetirla, no constituye renuncia al cobro de servicios futuros ni modifica esta cláusula.
+(c) La inclusión de un trabajo de buena fe en la entrega no obliga a DualGrid a mantenerlo, actualizarlo ni darle soporte más allá del plazo o alcance acordados.`;
+
+const COMMON_SELF_MANAGEMENT = `AUTOGESTIÓN, MANUALES Y CONTENIDOS DINÁMICOS:
+(a) CAPACITACIÓN BÁSICA: DualGrid entregará al Cliente un manual de uso básico y/o una sesión de capacitación (según lo indicado en el plan contratado) para que gestione de forma autónoma las secciones autoadministrables del sitio (panel de administración, galerías, publicaciones, productos, menú, etc.).
+(b) ACTUALIZACIÓN DE CONTENIDOS DINÁMICOS: Una vez entregado el proyecto, la actualización de contenidos dinámicos (publicaciones, productos, precios, platos, imágenes, promociones, etc.) es responsabilidad exclusiva del Cliente, quien dispone de las herramientas necesarias para realizarla sin asistencia técnica.
+(c) EDICIONES SIMPLES: Las ediciones que el Cliente pueda realizar por sí mismo según el manual (agregar imágenes a la galería, publicar, modificar precios) no serán realizadas por DualGrid. Si el Cliente solicita que DualGrid las ejecute de todos modos, se facturarán como trabajo adicional conforme a las tarifas vigentes.
+(d) MANTENIMIENTO CONTRATADO: Si el Cliente desea que DualGrid gestione o actualice contenidos por su cuenta, podrá contratar un plan de mantenimiento mensual, cuyas condiciones y tarifas se pactarán por escrito en un documento aparte.`;
+
 function buildTerms(planName: string, revisions: number, extra: string[] = []): string {
   return [
     `CONTRATO DE PRESTACIÓN DE SERVICIOS DIGITALES — ${planName.toUpperCase()}`,
@@ -103,15 +133,25 @@ function buildTerms(planName: string, revisions: number, extra: string[] = []): 
     '',
     COMMON_PROJECT_SPECIFICATION,
     '',
+    COMMON_CONTENT_SEPARATION,
+    '',
     COMMON_PAYMENT_CLAUSE,
     '',
     COMMON_REVISION_INTRO(revisions),
+    '',
+    COMMON_CHANGE_REQUEST,
     '',
     COMMON_DELIVERY_CLAUSE,
     '',
     COMMON_CONTENT_CLAUSE,
     '',
     COMMON_SCOPE_CHANGES,
+    '',
+    COMMON_GOOD_FAITH,
+    '',
+    COMMON_ACCEPTANCE,
+    '',
+    COMMON_SELF_MANAGEMENT,
     '',
     COMMON_OFFICIAL_COMMUNICATIONS,
     '',
