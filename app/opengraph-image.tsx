@@ -92,45 +92,29 @@ export default function Image() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             {/* Logo + Brand */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              {/* Logo: Interlocked circles */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '60px',
-                  height: '60px',
-                  position: 'relative',
-                }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 57.55 57.55"
+                width="62"
+                height="62"
+                style={{ display: 'flex', alignItems: 'center' }}
               >
-                {/* Outer background */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%',
-                    background: `rgba(0,217,255,0.1)`,
-                    border: `2px solid ${CYAN}`,
-                  }}
+
+                <path
+                  fill="#00d9ff"
+                  d="M18.72 38.49v9.62H9.14C-2.54 48.11-2.54 29.0 9.14 29h9.58v9.55H9.14c-5.28 0-9.55 4.3-9.55 9.58s4.27 9.55 9.55 9.55c.16 0 .34 0 .49-.03h9.09v-9.53h9.55v19.11H9.14C-1.42 67.23-10 58.68-10 48.11s8.57-19.14 19.14-19.14h9.58v9.55z"
                 />
-                {/* Inner accent */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    border: `2px solid ${GREEN}`,
-                    opacity: 0.8,
-                  }}
+
+                <path
+                  fill="#00ff9d"
+                  d="M28.27 19.02V-.09h19.14c10.56 0 19.14 8.55 19.14 19.11s-8.57 19.14-19.14 19.14h-9.58v-9.55h9.58c5.28 0 9.55-4.3 9.55-9.58s-4.27-9.55-9.55-9.55c-.16 0-.34 0-.49.03h-9.09v9.53h-9.55z"
                 />
-              </div>
+              </svg>
               {/* Brand text */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <div style={{ fontSize: '36px', fontWeight: 900, color: TEXT }}>
-                  <span style={{ color: CYAN }}>Dual</span>
-                  <span style={{ color: GREEN }}>Grid</span>
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: '36px', fontWeight: 900, color: TEXT }}>
+                  <span style={{ color: GREEN }}>Dual</span>
+                  <span style={{ color: CYAN }}>Grid</span>
                 </div>
                 <div
                   style={{
@@ -168,7 +152,7 @@ export default function Image() {
                 }}
               />
               <span style={{ color: CYAN, fontSize: '14px', fontWeight: 700 }}>
-                dualgrid.studio
+                dualgrid.io
               </span>
             </div>
           </div>
@@ -200,7 +184,7 @@ export default function Image() {
             </div>
 
             {/* Headline */}
-            <div style={{ lineHeight: 1.1 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
               <h1
                 style={{
                   fontSize: '68px',
