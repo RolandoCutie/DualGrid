@@ -331,7 +331,13 @@ export default function BrandingPlansSection() {
             className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black shadow-md hover:shadow-lg hover:opacity-90 transition-all duration-200 cursor-pointer"
             style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
           >
-            <span>🎨</span>
+            <Image
+              src="/assets/icons/branding/test-rapido.svg"
+              alt=""
+              width={18}
+              height={18}
+              className="w-4 h-4 object-contain"
+            />
             {t('branding_plans.cta_quiz')}
           </button>
         </div>

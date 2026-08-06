@@ -3,6 +3,7 @@
 import HostingLeadModal from '@/components/landing/HostingLeadModal';
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import { useState } from 'react';
 
 type HostingPlanId = 'annual' | 'biennial' | 'triennial' | 'domain_only' | 'hosting_domain';
@@ -16,6 +17,14 @@ interface HostingPlan {
   features: string[];
   badgeKey?: string;
 }
+
+// Maps feature index to its SVG icon in /public/assets/icons/hosting/
+const HOSTING_FEATURES = [
+  { icon: '/assets/icons/hosting/nvme.svg', labelKey: 'feat_speed' },
+  { icon: '/assets/icons/hosting/ssl.svg', labelKey: 'feat_security' },
+  { icon: '/assets/icons/hosting/backups.svg', labelKey: 'feat_backup' },
+  { icon: '/assets/icons/hosting/cdn.svg', labelKey: 'feat_cdn' },
+];
 
 const HOSTING_PLANS: HostingPlan[] = [
   {
@@ -116,18 +125,13 @@ export default function HostingSection() {
 
         {/* Features strip */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12">
-          {[
-            { icon: '⚡', label: t('hosting.feat_speed') },
-            { icon: '🛡️', label: t('hosting.feat_security') },
-            { icon: '💾', label: t('hosting.feat_backup') },
-            { icon: '🌍', label: t('hosting.feat_cdn') },
-          ].map((f) => (
+          {HOSTING_FEATURES.map((f) => (
             <div
-              key={f.label}
+              key={f.labelKey}
               className="flex items-center gap-2 bg-card border border-border rounded-xl px-4 py-3"
             >
-              <span className="text-xl">{f.icon}</span>
-              <span className="text-xs font-medium text-card-foreground">{f.label}</span>
+              <Image src={f.icon} alt="" width={20} height={20} className="w-5 h-5 object-contain" />
+              <span className="text-xs font-medium text-card-foreground">{t(`hosting.${f.labelKey}`)}</span>
             </div>
           ))}
         </div>
@@ -189,7 +193,13 @@ export default function HostingSection() {
         <div className="rounded-2xl border border-border bg-card p-6 flex flex-col sm:flex-row sm:items-center gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">🌐</span>
+              <Image
+                src="/assets/icons/hosting/dominio.svg"
+                alt=""
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain shrink-0"
+              />
               <h3 className="text-base font-bold text-card-foreground">
                 {t('hosting.domain_title')}
               </h3>
