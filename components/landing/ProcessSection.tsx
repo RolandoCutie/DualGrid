@@ -1,6 +1,17 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import Image from 'next/image';
+
+// Maps position index to the corresponding SVG icon in /public/assets/icons/proceso/
+const PROCESS_ICONS = [
+  '/assets/icons/proceso/descubrimiento.svg',
+  '/assets/icons/proceso/propuesta.svg',
+  '/assets/icons/proceso/diseno.svg',
+  '/assets/icons/proceso/desarrollo.svg',
+  '/assets/icons/proceso/lanzamiento.svg',
+  '/assets/icons/proceso/soporte.svg',
+];
 
 export default function ProcessSection() {
   const { locale, t } = useLanguage();
@@ -79,14 +90,24 @@ export default function ProcessSection() {
 
               <div className="flex items-start gap-4 relative z-10">
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 p-2"
                   style={{
                     background:
                       'linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, transparent), color-mix(in srgb, var(--accent) 10%, transparent))',
                     border: '1px solid color-mix(in srgb, var(--primary) 20%, transparent)',
                   }}
                 >
-                  {step.icon}
+                  {PROCESS_ICONS[i] ? (
+                    <Image
+                      src={PROCESS_ICONS[i]}
+                      alt={step.title}
+                      width={28}
+                      height={28}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-xl">{step.icon}</span>
+                  )}
                 </div>
                 <div>
                   <h3

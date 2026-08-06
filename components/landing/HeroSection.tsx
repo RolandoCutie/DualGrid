@@ -3,7 +3,16 @@
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
 import { Button } from '@/components/ui/Button';
 import { useLanguage } from '@/components/ui/LanguageProvider';
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useState } from 'react';
+
+
+const HERO_TRUST_ICONS = [
+  '/assets/icons/hero/entrega-rapida.svg',
+  '/assets/icons/hero/codigo-limpio.svg',
+  '/assets/icons/hero/responsive.svg',
+  '/assets/icons/hero/diseno-unico.svg',
+];
 
 interface HeroSectionProps {
   /** If true, opens the questionnaire wizard immediately on mount (used by ?wizard=open URL) */
@@ -12,11 +21,13 @@ interface HeroSectionProps {
 
 export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
   const [wizardOpen, setWizardOpen] = useState(false);
+  const [prevAutoOpen, setPrevAutoOpen] = useState<boolean | null>(null);
   const { t, tArray } = useLanguage();
 
-  useEffect(() => {
+  if (prevAutoOpen !== autoOpen) {
+    setPrevAutoOpen(autoOpen);
     if (autoOpen) setWizardOpen(true);
-  }, [autoOpen]);
+  }
 
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background dark:bg-transparent grain-overlay">
@@ -122,19 +133,12 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
 
           {/* Trust indicators */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {(
-              [
-                { icon: '⚡', key: 0 },
-                { icon: '🔒', key: 1 },
-                { icon: '📱', key: 2 },
-                { icon: '🎨', key: 3 },
-              ] as const
-            ).map(({ icon, key }) => (
+            {HERO_TRUST_ICONS.map((src, key) => (
               <div
                 key={key}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/70 text-sm text-muted-foreground shadow-sm"
               >
-                <span className="text-base">{icon}</span>
+                <Image src={src} alt="" width={16} height={16} className="w-4 h-4 object-contain" />
                 <span>{tArray('hero.trust')[key]}</span>
               </div>
             ))}

@@ -4,21 +4,23 @@ import LanguageProvider from '@/components/ui/LanguageProvider';
 import ThemeProvider from '@/components/ui/ThemeProvider';
 import { getBaseUrl } from '@/lib/base-url';
 import type { Metadata, Viewport } from 'next';
-import { Inter, Syne } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 
 const baseUrl = getBaseUrl();
 
-const inter = Inter({
+const inter = localFont({
   variable: '--font-inter',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  weight: '100 900',
+  src: '../fonts/inter-latin-wght-normal.woff2',
 });
 
-const syne = Syne({
+const syne = localFont({
   variable: '--font-syne',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  weight: '400 800',
+  src: '../fonts/syne-latin-wght-normal.woff2',
 });
 
 const jsonLd = {
