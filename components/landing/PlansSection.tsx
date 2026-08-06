@@ -1,6 +1,8 @@
 'use client';
 
 import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
+import SectionHeading from '@/components/landing/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { PLANS } from '@/lib/plans';
 import type { Plan, PlanId } from '@/types';
@@ -42,64 +44,25 @@ export default function PlansSection() {
   };
 
   return (
-    <section
-      id="planes"
-      className="py-24 bg-background dark:bg-transparent relative overflow-hidden"
-    >
-      {/* Orb 1 — primary arch top-center (arch of light) */}
-      <div
-        className="absolute -top-48 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse, color-mix(in srgb, var(--primary) 7%, transparent) 0%, transparent 65%)',
-          filter: 'blur(120px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Orb 2 — accent (green) bottom-right */}
-      <div
-        className="absolute -bottom-16 -right-16 w-[420px] h-[420px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--accent) 9%, transparent) 0%, transparent 65%)',
-          filter: 'blur(65px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Orb 3 — purple top-left */}
-      <div
-        className="absolute -top-8 -left-8 w-[280px] h-[280px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--purple) 8%, transparent) 0%, transparent 65%)',
-          filter: 'blur(45px)',
-        }}
-        aria-hidden="true"
-      />
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <div className="section-badge mx-auto mb-4">{t('plans.eyebrow')}</div>
-          <h2
-            className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            {t('plans.section_title')}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            {t('plans.section_subtitle')}
-          </p>
-        </div>
+    <section id="planes" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          eyebrow={t('plans.eyebrow')}
+          title={t('plans.section_title')}
+          subtitle={t('plans.section_subtitle')}
+        />
 
         {/* Plans grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {translatedPlans.map((plan) => (
-            <PlanCard key={plan.id} plan={plan} onSelect={handleSelectPlan} />
+            <Reveal key={plan.id} className="h-full">
+              <PlanCard plan={plan} onSelect={handleSelectPlan} />
+            </Reveal>
           ))}
         </div>
 
         {/* Custom note */}
-        <div className="mt-12 text-center p-6 rounded-2xl border border-dashed border-border">
+        <div className="mt-12 text-center p-6 rounded-2xl border border-dashed border-border bg-card/40 backdrop-blur-sm">
           <p className="text-muted-foreground text-sm">
             {t('plans.custom_note')}{' '}
             <button

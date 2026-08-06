@@ -30,20 +30,8 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
   }
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-background dark:bg-transparent grain-overlay">
-      {/* ── Background: blueprint grid ── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="w-full h-full opacity-[0.025]"
-          style={{
-            backgroundImage:
-              'linear-gradient(var(--color-card-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-card-foreground) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-      </div>
-
-      {/* ── Background: gradient orbs — neon lamp effect ── */}
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-transparent grain-overlay">
+      {/* ── Background: neon gradient orbs ── */}
       {/* Cyan glow — top center */}
       <div
         className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full pointer-events-none"
@@ -54,7 +42,7 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
         }}
         aria-hidden="true"
       />
-      {/* Green neon lamp — bottom center (main glow like in design) */}
+      {/* Green neon lamp — bottom center */}
       <div
         className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
         style={{
@@ -89,7 +77,7 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             {t('hero.title_before')}{' '}
-            <span className="text-gradient">{t('hero.title_highlight')}</span>{' '}
+            <span className="text-gradient-animated">{t('hero.title_highlight')}</span>{' '}
             {t('hero.title_after')}
           </h1>
 
@@ -131,17 +119,27 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
             </Button>
           </div>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {HERO_TRUST_ICONS.map((src, key) => (
-              <div
-                key={key}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/70 text-sm text-muted-foreground shadow-sm"
-              >
-                <Image src={src} alt="" width={16} height={16} className="w-4 h-4 object-contain" />
-                <span>{tArray('hero.trust')[key]}</span>
-              </div>
-            ))}
+          {/* Trust indicators — infinite marquee */}
+          <div
+            className="marquee w-full max-w-2xl overflow-hidden"
+            style={{
+              maskImage:
+                'linear-gradient(90deg, transparent, black 12%, black 88%, transparent)',
+              WebkitMaskImage:
+                'linear-gradient(90deg, transparent, black 12%, black 88%, transparent)',
+            }}
+          >
+            <div className="marquee-track gap-3 pr-3">
+              {[...HERO_TRUST_ICONS, ...HERO_TRUST_ICONS].map((src, key) => (
+                <div
+                  key={key}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 border border-border/70 text-sm text-muted-foreground shadow-sm backdrop-blur-sm whitespace-nowrap"
+                >
+                  <Image src={src} alt="" width={16} height={16} className="w-4 h-4 object-contain" />
+                  <span>{tArray('hero.trust')[key % HERO_TRUST_ICONS.length]}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

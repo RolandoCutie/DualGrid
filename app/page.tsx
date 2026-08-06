@@ -1,4 +1,6 @@
+import AuroraBackground from '@/components/landing/AuroraBackground';
 import BrandingPlansSection from '@/components/landing/BrandingPlansSection';
+import ClosingCTA from '@/components/landing/ClosingCTA';
 import HeroSection from '@/components/landing/HeroSection';
 import HostingSection from '@/components/landing/HostingSection';
 import PlansSection from '@/components/landing/PlansSection';
@@ -64,14 +66,18 @@ export default async function HomePage({
   }
 
   return (
-    <>
-      <HeroSection autoOpen={autoOpenWizard} />
-      <WhySection />
-      <PortfolioSection projects={projects} />
-      <PlansSection />
-      <BrandingPlansSection />
-      <HostingSection />
-      <ProcessSection />
-    </>
+    <div className="relative">
+      <AuroraBackground />
+      <div className="relative z-10">
+        <HeroSection autoOpen={autoOpenWizard} />
+        <WhySection />
+        <PortfolioSection projects={projects} />
+        <PlansSection />
+        <BrandingPlansSection />
+        <HostingSection />
+        <ProcessSection />
+        <ClosingCTA />
+      </div>
+    </div>
   );
 }

@@ -25,7 +25,12 @@
     "subtitle": "We combine artistic design with precise engineering to create unique digital presences. Portfolios, restaurants, landing pages and custom systems.",
     "cta_primary": "Find my ideal plan",
     "cta_secondary": "See plans & pricing",
-    "trust": ["Fast delivery", "Clean & secure code", "100% responsive", "Unique design"]
+    "trust": [
+      "Fast delivery",
+      "Clean & secure code",
+      "100% responsive",
+      "Unique design"
+    ]
   },
   "why": {
     "eyebrow": "Why choose us?",
@@ -298,7 +303,14 @@
     "step": "Step",
     "of": "of",
     "back_home": "← Back to home",
-    "step_labels": ["Contact", "Business", "Goals", "Budget", "Style", "Content"],
+    "step_labels": [
+      "Contact",
+      "Business",
+      "Goals",
+      "Budget",
+      "Style",
+      "Content"
+    ],
     "btn_next": "Next →",
     "btn_back": "Back",
     "btn_submit": "Send inquiry →",
@@ -830,5 +842,13 @@
     "plan_global_includes_4": "Complete Visual Identity Manual with graphic standards for large-scale production",
     "plan_global_includes_5": "Visual Universe: patterns, textures, or custom iconography that complements the brand",
     "plan_global_includes_6": "Brand Applications to choose 10 pieces: stationery, social media, packaging, merchandising, signage, and more"
+  },
+  "final_cta": {
+    "eyebrow": "Ready to start?",
+    "title": "Let's build your digital presence",
+    "subtitle": "Tell us about your project and we'll recommend the perfect plan for your business in minutes.",
+    "primary": "Discover my ideal plan",
+    "secondary": "See plans and pricing",
+    "note": "Reply within 24h · No commitment"
   }
 }

@@ -1,6 +1,8 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import SectionHeading from '@/components/landing/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 
 // Maps position index to the corresponding SVG icon in /public/assets/icons/porqueus/
@@ -18,96 +20,50 @@ export default function WhySection() {
   const items = DICTS[locale].why.items as Array<{ emoji: string; title: string; desc: string }>;
 
   return (
-    <section
-      id="por-que"
-      className="py-28 bg-background dark:bg-transparent relative overflow-hidden"
-    >
-      {/* Green glow — top right (lamp from corner) */}
-      <div
-        className="absolute -top-32 -right-20 w-[650px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
-          filter: 'blur(50px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Cyan glow — bottom left */}
-      <div
-        className="absolute -bottom-32 -left-24 w-[700px] h-[550px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
-          filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Purple glow — center-top subtle accent */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[300px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(165,148,249,0.12) 0%, transparent 65%)',
-          filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
-
+    <section id="por-que" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <div className="section-badge mx-auto mb-4">{t('why.eyebrow')}</div>
-          <h2
-            className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            {t('why.title')}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">{t('why.subtitle')}</p>
-        </div>
+        <SectionHeading
+          eyebrow={t('why.eyebrow')}
+          title={t('why.title')}
+          subtitle={t('why.subtitle')}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item, i) => (
-            <div
-              key={item.title}
-              className="gradient-border group flex flex-col gap-4 p-7 rounded-2xl border border-border bg-card hover:shadow-xl transition-all duration-300"
-            >
-              {/* SVG Icon */}
-              <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5"
-                style={{
-                  background: `linear-gradient(135deg, color-mix(in srgb, var(--primary) ${i % 2 === 0 ? '15' : '10'}%, transparent), color-mix(in srgb, var(--accent) ${i % 2 === 0 ? '10' : '15'}%, transparent))`,
-                  border: `1px solid color-mix(in srgb, var(--primary) 20%, transparent)`,
-                }}
-              >
-                {WHY_ICONS[i] ? (
-                  <Image
-                    src={WHY_ICONS[i]}
-                    alt={item.title}
-                    width={36}
-                    height={36}
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <span className="text-2xl">{item.emoji}</span>
-                )}
-              </div>
-              <h3
-                className="font-bold text-card-foreground text-lg group-hover:text-primary transition-colors duration-200"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
-                {item.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+            <Reveal key={item.title} className="h-full">
+              <div className="gradient-border group flex flex-col gap-4 p-7 rounded-2xl border border-border bg-card h-full">
+                {/* SVG Icon */}
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5"
+                  style={{
+                    background: `linear-gradient(135deg, color-mix(in srgb, var(--primary) ${i % 2 === 0 ? '15' : '10'}%, transparent), color-mix(in srgb, var(--accent) ${i % 2 === 0 ? '10' : '15'}%, transparent))`,
+                    border: `1px solid color-mix(in srgb, var(--primary) 20%, transparent)`,
+                  }}
+                >
+                  {WHY_ICONS[i] ? (
+                    <Image
+                      src={WHY_ICONS[i]}
+                      alt={item.title}
+                      width={36}
+                      height={36}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-2xl">{item.emoji}</span>
+                  )}
+                </div>
+                <h3
+                  className="font-bold text-card-foreground text-lg"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
 
-              {/* Bottom accent line */}
-              <div
-                className="h-0.5 w-0 group-hover:w-full rounded-full transition-all duration-500 mt-auto"
-                style={{
-                  background: 'linear-gradient(90deg, var(--primary), var(--accent))',
-                }}
-              />
-            </div>
+                {/* Bottom accent line — neutral, fills with gradient on hover */}
+                <div className="reveal-line h-0.5 w-full rounded-full mt-auto" />
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

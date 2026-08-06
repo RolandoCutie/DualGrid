@@ -25,7 +25,12 @@
     "subtitle": "Combinamos diseño con programación para crear presencias digitales únicas. Portafolios, restaurantes, páginas de destino y sistemas personalizados",
     "cta_primary": "Descubrir mi plan ideal",
     "cta_secondary": "Ver planes y precios",
-    "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
+    "trust": [
+      "Entrega rápida",
+      "Código limpio y seguro",
+      "100% responsive",
+      "Diseño único"
+    ]
   },
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
@@ -298,7 +303,14 @@
     "step": "Paso",
     "of": "de",
     "back_home": "← Volver al inicio",
-    "step_labels": ["Contacto", "Negocio", "Objetivos", "Presupuesto", "Estilo", "Contenido"],
+    "step_labels": [
+      "Contacto",
+      "Negocio",
+      "Objetivos",
+      "Presupuesto",
+      "Estilo",
+      "Contenido"
+    ],
     "btn_next": "Siguiente →",
     "btn_back": "Anterior",
     "btn_submit": "Enviar consulta →",
@@ -830,5 +842,13 @@
     "plan_global_includes_4": "Manual de Identidad Visual Completo con normas gráficas para producción a gran escala",
     "plan_global_includes_5": "Universo Visual: patrones, texturas o iconografía propia que complementa la marca",
     "plan_global_includes_6": "Aplicaciones de Marca a elegir 10 piezas: papelería, redes sociales, packaging, merchandising, señalética y más"
+  },
+  "final_cta": {
+    "eyebrow": "¿Listo para empezar?",
+    "title": "Construyamos tu presencia digital",
+    "subtitle": "Cuéntanos tu proyecto y te recomendamos el plan ideal para tu negocio en minutos.",
+    "primary": "Descubrir mi plan ideal",
+    "secondary": "Ver planes y precios",
+    "note": "Respuesta en menos de 24h · Sin compromiso"
   }
 }

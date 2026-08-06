@@ -1,6 +1,8 @@
 'use client';
 
 import { useLanguage } from '@/components/ui/LanguageProvider';
+import SectionHeading from '@/components/landing/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 
@@ -49,51 +51,13 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   };
 
   return (
-    <section
-      id="portafolio"
-      className="py-24 bg-muted/20 dark:bg-transparent relative overflow-hidden"
-    >
-      {/* Green glow — top left */}
-      <div
-        className="absolute -top-24 -left-24 w-[600px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
-          filter: 'blur(55px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Cyan glow — bottom right */}
-      <div
-        className="absolute -bottom-20 -right-20 w-[550px] h-[450px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
-          filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
-          
-
-      {/* Orb 3 — purple center diffuse */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--purple) 5%, transparent) 0%, transparent 70%)',
-          filter: 'blur(100px)',
-        }}
-        aria-hidden="true"
-      />
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-            {t('portfolio.eyebrow')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-card-foreground mt-2 mb-4">
-            {t('portfolio.title')}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">{t('portfolio.subtitle')}</p>
-        </div>
+    <section id="portafolio" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          eyebrow={t('portfolio.eyebrow')}
+          title={t('portfolio.title')}
+          subtitle={t('portfolio.subtitle')}
+        />
 
         {/* Filter pills — by project category (user-friendly) */}
         {availableCategories.length > 0 && (
@@ -130,12 +94,13 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => (
-              <ProjectCard
-                key={project._id}
-                project={project}
-                t={t}
-                categoryLabel={categoryLabel}
-              />
+              <Reveal key={project._id} className="h-full">
+                <ProjectCard
+                  project={project}
+                  t={t}
+                  categoryLabel={categoryLabel}
+                />
+              </Reveal>
             ))}
           </div>
         )}
@@ -157,7 +122,7 @@ function ProjectCard({
   const hasImages = project.images.length > 0;
 
   return (
-    <article className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all duration-200">
+    <article className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 card-elevate h-full transition-all duration-200">
       {/* Image */}
       <div className="relative w-full aspect-video bg-muted overflow-hidden">
         {hasImages ? (

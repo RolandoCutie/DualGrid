@@ -1,6 +1,8 @@
 'use client';
 
 import BrandingQuizModal from '@/components/landing/BrandingQuizModal';
+import SectionHeading from '@/components/landing/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -80,7 +82,7 @@ function BrandingPlanCard({
   return (
     <div
       className={cn(
-        'relative flex flex-col rounded-2xl transition-all duration-300',
+        'relative flex flex-col rounded-2xl transition-all duration-300 h-full',
         plan.highlighted ? 'plan-card-highlight shadow-2xl scale-[1.03]' : 'hover:shadow-xl',
       )}
       style={
@@ -277,62 +279,44 @@ export default function BrandingPlansSection() {
   const bp = DICTS[locale].branding_plans as Record<string, string | string[]>;
 
   return (
-    <section
-      id="branding"
-      className="py-24 bg-muted/30 dark:bg-transparent relative overflow-hidden"
-    >
+    <section id="branding" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
       {/* Purple glow — top right (branding palette) */}
       <div
-        className="absolute -top-32 -right-32 w-[700px] h-[550px] rounded-full pointer-events-none"
+        className="absolute -top-32 -right-32 w-[500px] h-[420px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(165,148,249,0.22) 0%, transparent 65%)',
-          filter: 'blur(70px)',
+            'radial-gradient(ellipse at center, rgba(165,148,249,0.16) 0%, transparent 65%)',
+          filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
       {/* Green glow — bottom left */}
       <div
-        className="absolute -bottom-24 -left-16 w-[600px] h-[500px] rounded-full pointer-events-none"
+        className="absolute -bottom-24 -left-16 w-[450px] h-[380px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0,255,157,0.20) 0%, transparent 65%)',
-          filter: 'blur(60px)',
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.14) 0%, transparent 65%)',
+          filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />
 
-      {/* Orb 3 — primary (cyan) center-left diffuse */}
-      <div
-        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[340px] h-[340px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, color-mix(in srgb, var(--primary) 5%, transparent) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-        aria-hidden="true"
-      />
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <div className="section-badge mx-auto mb-4">{t('branding_plans.eyebrow')}</div>
-          <h2
-            className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            {t('branding_plans.section_title')}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            {t('branding_plans.section_subtitle')}
-          </p>
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          eyebrow={t('branding_plans.eyebrow')}
+          title={t('branding_plans.section_title')}
+          subtitle={t('branding_plans.section_subtitle')}
+        />
 
+        {/* Quiz CTA */}
+        <Reveal className="mb-14 text-center">
           <button
             onClick={() => setWizardOpen(true)}
-            className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black shadow-md hover:shadow-lg hover:opacity-90 transition-all duration-200 cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black shadow-md hover:shadow-lg hover:opacity-90 transition-all duration-200 cursor-pointer animate-pulse-glow"
             style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
           >
             <Image
-              src="/assets/icons/branding/test-rapido.svg"
+              src="/assets/icons/branding/test-rapido-dark.svg"
               alt=""
               width={18}
               height={18}
@@ -340,7 +324,7 @@ export default function BrandingPlansSection() {
             />
             {t('branding_plans.cta_quiz')}
           </button>
-        </div>
+        </Reveal>
 
         {/* Plans grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
@@ -352,39 +336,42 @@ export default function BrandingPlansSection() {
             const ctaLabel = bp[`${plan.id}_cta`] as string;
 
             return (
-              <BrandingPlanCard
-                key={plan.id}
-                plan={plan}
-                name={name}
-                tagline={tagline}
-                targetText={targetText}
-                features={features}
-                ctaLabel={ctaLabel}
-                seeLabel={t('branding_plans.see_features')}
-                hideLabel={t('branding_plans.hide_features')}
-                fromLabel={t('branding_plans.from')}
-                popularLabel={t('branding_plans.popular')}
-                deliveryLabel={t('plans.delivery')}
-                daysLabel={t('plans.days')}
-                onCta={() => setWizardOpen(true)}
-              />
+              <Reveal key={plan.id} className="h-full">
+                <BrandingPlanCard
+                  plan={plan}
+                  name={name}
+                  tagline={tagline}
+                  targetText={targetText}
+                  features={features}
+                  ctaLabel={ctaLabel}
+                  seeLabel={t('branding_plans.see_features')}
+                  hideLabel={t('branding_plans.hide_features')}
+                  fromLabel={t('branding_plans.from')}
+                  popularLabel={t('branding_plans.popular')}
+                  deliveryLabel={t('plans.delivery')}
+                  daysLabel={t('plans.days')}
+                  onCta={() => setWizardOpen(true)}
+                />
+              </Reveal>
             );
           })}
         </div>
 
         {/* Custom note */}
-        <div className="mt-12 text-center p-6 rounded-2xl border border-dashed border-border">
-          <p className="text-muted-foreground text-sm">
-            {t('branding_plans.custom_note')}{' '}
-            <button
-              onClick={() => setWizardOpen(true)}
-              className="text-primary font-semibold hover:underline cursor-pointer"
-            >
-              {t('branding_plans.custom_link')}
-            </button>{' '}
-            {t('branding_plans.custom_suffix')}
-          </p>
-        </div>
+        <Reveal className="mt-12">
+          <div className="text-center p-6 rounded-2xl border border-dashed border-border bg-card/40 backdrop-blur-sm">
+            <p className="text-muted-foreground text-sm">
+              {t('branding_plans.custom_note')}{' '}
+              <button
+                onClick={() => setWizardOpen(true)}
+                className="text-primary font-semibold hover:underline cursor-pointer"
+              >
+                {t('branding_plans.custom_link')}
+              </button>{' '}
+              {t('branding_plans.custom_suffix')}
+            </p>
+          </div>
+        </Reveal>
       </div>
 
       <BrandingQuizModal open={wizardOpen} onClose={() => setWizardOpen(false)} />

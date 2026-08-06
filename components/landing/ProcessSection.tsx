@@ -1,6 +1,8 @@
 'use client';
 
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import SectionHeading from '@/components/landing/SectionHeading';
+import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 
 // Maps position index to the corresponding SVG icon in /public/assets/icons/proceso/
@@ -23,103 +25,84 @@ export default function ProcessSection() {
   }>;
 
   return (
-    <section
-      id="proceso"
-      className="py-28 relative overflow-hidden bg-[linear-gradient(180deg,var(--muted)_0%,var(--background)_100%)] dark:bg-transparent"
-    >
+    <section id="proceso" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
       {/* Cyan glow — bottom left */}
       <div
-        className="absolute -bottom-16 -left-16 w-[600px] h-[500px] pointer-events-none"
+        className="absolute -bottom-16 -left-16 w-[550px] h-[450px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0,217,255,0.20) 0%, transparent 65%)',
+            'radial-gradient(ellipse at center, rgba(0,217,255,0.14) 0%, transparent 65%)',
           filter: 'blur(55px)',
         }}
         aria-hidden="true"
       />
       {/* Green glow — top right */}
       <div
-        className="absolute -top-24 -right-20 w-[650px] h-[500px] pointer-events-none"
+        className="absolute -top-24 -right-20 w-[600px] h-[460px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0,255,157,0.22) 0%, transparent 65%)',
+            'radial-gradient(ellipse at center, rgba(0,255,157,0.14) 0%, transparent 65%)',
           filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Purple glow — center right accent */}
-      <div
-        className="absolute top-1/2 -right-8 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(165,148,249,0.12) 0%, transparent 65%)',
-          filter: 'blur(50px)',
         }}
         aria-hidden="true"
       />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="section-badge mx-auto mb-4">{t('process.eyebrow')}</div>
-          <h2
-            className="text-3xl sm:text-5xl font-extrabold text-card-foreground mt-2 mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            {t('process.title')}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">{t('process.subtitle')}</p>
-        </div>
+        <SectionHeading
+          eyebrow={t('process.eyebrow')}
+          title={t('process.title')}
+          subtitle={t('process.subtitle')}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {steps.map((step, i) => (
-            <div
-              key={step.number}
-              className="relative group bg-card border border-border rounded-2xl p-7 hover:border-primary/30 hover:shadow-xl transition-all duration-300"
-            >
-              {/* Step number as large ghost text */}
-              <div
-                className="absolute -top-3 -right-1 text-7xl font-black select-none pointer-events-none leading-none"
-                style={{
-                  color: `color-mix(in srgb, var(--primary) ${10 - i}%, transparent)`,
-                  fontFamily: 'var(--font-heading)',
-                }}
-                aria-hidden="true"
-              >
-                {step.number}
-              </div>
-
-              <div className="flex items-start gap-4 relative z-10">
+            <Reveal key={step.number} className="h-full">
+              <div className="relative group bg-card border border-border rounded-2xl p-7 hover:border-primary/30 hover:shadow-xl card-elevate transition-all duration-300 h-full">
+                {/* Step number as large ghost text */}
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 p-2"
+                  className="absolute -top-3 -right-1 text-7xl font-black select-none pointer-events-none leading-none"
                   style={{
-                    background:
-                      'linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, transparent), color-mix(in srgb, var(--accent) 10%, transparent))',
-                    border: '1px solid color-mix(in srgb, var(--primary) 20%, transparent)',
+                    color: `color-mix(in srgb, var(--primary) ${10 - i}%, transparent)`,
+                    fontFamily: 'var(--font-heading)',
                   }}
+                  aria-hidden="true"
                 >
-                  {PROCESS_ICONS[i] ? (
-                    <Image
-                      src={PROCESS_ICONS[i]}
-                      alt={step.title}
-                      width={28}
-                      height={28}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <span className="text-xl">{step.icon}</span>
-                  )}
+                  {step.number}
                 </div>
-                <div>
-                  <h3
-                    className="text-base font-bold text-card-foreground group-hover:text-primary transition-colors duration-200"
-                    style={{ fontFamily: 'var(--font-heading)' }}
+
+                <div className="flex items-start gap-4 relative z-10">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 p-2"
+                    style={{
+                      background:
+                        'linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, transparent), color-mix(in srgb, var(--accent) 10%, transparent))',
+                      border: '1px solid color-mix(in srgb, var(--primary) 20%, transparent)',
+                    }}
                   >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{step.desc}</p>
+                    {PROCESS_ICONS[i] ? (
+                      <Image
+                        src={PROCESS_ICONS[i]}
+                        alt={step.title}
+                        width={28}
+                        height={28}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <span className="text-xl">{step.icon}</span>
+                    )}
+                  </div>
+                  <div>
+                    <h3
+                      className="text-base font-bold text-card-foreground group-hover:text-primary transition-colors duration-200"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{step.desc}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
