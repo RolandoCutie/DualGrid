@@ -50,9 +50,10 @@ export default function NavBarClient() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const NAV_LINKS = [
-    { href: '#por-que', labelKey: 'nav.why' },
     { href: '#portafolio', labelKey: 'nav.portfolio' },
     { href: '#planes', labelKey: 'nav.plans' },
+    { href: '#branding', labelKey: 'nav.branding' },
+    { href: '#hosting', labelKey: 'nav.hosting' },
     { href: '#proceso', labelKey: 'nav.process' },
   ];
 

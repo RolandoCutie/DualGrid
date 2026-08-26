@@ -10,6 +10,10 @@ export interface IProjectDoc extends Document {
   link?: string;
   featured: boolean;
   order: number;
+  problem?: string;
+  solution?: string;
+  result?: string;
+  clientType?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,6 +29,10 @@ const ProjectSchema = new Schema<IProjectDoc>(
     link: { type: String, trim: true },
     featured: { type: Boolean, default: false },
     order: { type: Number, default: 0 },
+    problem: { type: String, trim: true },
+    solution: { type: String, trim: true },
+    result: { type: String, trim: true },
+    clientType: { type: String, trim: true },
   },
   { timestamps: true },
 );

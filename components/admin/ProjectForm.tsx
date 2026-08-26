@@ -15,6 +15,9 @@ const CATEGORY_OPTIONS = [
   { value: 'blog', label: 'Blog' },
   { value: 'corporate', label: 'Sitio Empresarial' },
   { value: 'menu_qr', label: 'Menú QR' },
+  { value: 'branding', label: 'Branding' },
+  { value: 'graphic_design', label: 'Diseño Gráfico' },
+  { value: 'product_photo', label: 'Fotografía de Producto' },
   { value: 'custom', label: 'Proyecto Personalizado' },
 ];
 
@@ -23,11 +26,15 @@ interface ProjectFormData {
   slug: string;
   description: string;
   category: string;
-  technologies: string; // comma-separated in UI
-  images: string; // comma-separated in UI
+  technologies: string;
+  images: string;
   link: string;
   featured: boolean;
   order: string;
+  problem: string;
+  solution: string;
+  result: string;
+  clientType: string;
 }
 
 interface ProjectFormProps {
@@ -58,6 +65,10 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
     link: defaultValues?.link ?? '',
     featured: defaultValues?.featured ?? false,
     order: String(defaultValues?.order ?? 0),
+    problem: defaultValues?.problem ?? '',
+    solution: defaultValues?.solution ?? '',
+    result: defaultValues?.result ?? '',
+    clientType: defaultValues?.clientType ?? '',
   });
 
   const set =
@@ -96,6 +107,10 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
       link: form.link,
       featured: form.featured,
       order: Number(form.order) || 0,
+      problem: form.problem || undefined,
+      solution: form.solution || undefined,
+      result: form.result || undefined,
+      clientType: form.clientType || undefined,
     };
 
     try {
@@ -169,6 +184,44 @@ export default function ProjectForm({ defaultValues, projectId }: ProjectFormPro
         type="url"
         placeholder="https://ejemplo.com"
       />
+
+      <hr className="border-border my-1" />
+      <p className="text-sm font-semibold text-card-foreground">
+        Case Study (opcional — mejora el portfolio público)
+      </p>
+
+      <Input
+        label="Tipo de cliente / sector"
+        value={form.clientType}
+        onChange={set('clientType')}
+        placeholder="Ej: Restaurante en Miami, Emprendedor de moda"
+        hint="Se muestra debajo del nombre del proyecto."
+      />
+      <Textarea
+        label="Problema que resolvimos"
+        value={form.problem}
+        onChange={set('problem')}
+        rows={2}
+        placeholder="Ej: No tenían presencia online y perdían clientes frente a competidores con web."
+      />
+      <Textarea
+        label="Solución aplicada"
+        value={form.solution}
+        onChange={set('solution')}
+        rows={2}
+        placeholder="Ej: Sitio web con menú digital QR, reservas online y SEO local."
+      />
+      <Textarea
+        label="Resultado obtenido"
+        value={form.result}
+        onChange={set('result')}
+        rows={2}
+        placeholder="Ej: Lanzado en 10 días. Primer cliente online en la primera semana."
+        hint="Este campo aparece resaltado en la tarjeta del portfolio."
+      />
+
+      <hr className="border-border my-1" />
+
       <div className="flex items-center gap-3">
         <input
           id="featured"

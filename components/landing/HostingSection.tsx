@@ -2,8 +2,8 @@
 
 import HostingLeadModal from '@/components/landing/HostingLeadModal';
 import SectionHeading from '@/components/landing/SectionHeading';
-import Reveal from '@/components/ui/Reveal';
 import { useLanguage } from '@/components/ui/LanguageProvider';
+import Reveal from '@/components/ui/Reveal';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -79,7 +79,7 @@ export default function HostingSection() {
   };
 
   return (
-    <section className="relative py-24 sm:py-32 px-4 overflow-hidden bg-transparent">
+    <section id="hosting" className="relative py-24 sm:py-32 px-4 overflow-hidden bg-transparent">
       {/* Cyan glow — top right (tech/server vibe) */}
       <div
         className="absolute -top-20 -right-20 w-[600px] h-[460px] rounded-full pointer-events-none"
@@ -113,8 +113,16 @@ export default function HostingSection() {
           {HOSTING_FEATURES.map((f) => (
             <Reveal key={f.labelKey}>
               <div className="flex items-center gap-2 bg-card border border-border rounded-xl px-4 py-3">
-                <Image src={f.icon} alt="" width={20} height={20} className="w-5 h-5 object-contain" />
-                <span className="text-xs font-medium text-card-foreground">{t(`hosting.${f.labelKey}`)}</span>
+                <Image
+                  src={f.icon}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-xs font-medium text-card-foreground">
+                  {t(`hosting.${f.labelKey}`)}
+                </span>
               </div>
             </Reveal>
           ))}
@@ -145,7 +153,9 @@ export default function HostingSection() {
                     {plan.perYear ? `USD/${t('hosting.per_year')}` : `USD/${t('hosting.per_year')}`}
                   </span>
                   {plan.perYear && (
-                    <p className="text-xs text-muted-foreground mt-1">{t('hosting.billed_multi')}</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {t('hosting.billed_multi')}
+                    </p>
                   )}
                 </div>
 

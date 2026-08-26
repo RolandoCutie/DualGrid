@@ -2,7 +2,7 @@
 
 ## What the project does
 
-**DualGrid** is a full-stack web development agency platform. It presents DualGrid's services publicly via a professional landing page and provides an internal admin panel to manage clients, contracts, invoices, and questionnaire responses.
+**DualGrid** is a full-stack **bilingual (EN/ES) digital studio platform**. It presents DualGrid's three service lines publicly — web development, visual identity/branding, and managed hosting — via a professional landing page, and provides an internal admin panel to manage clients, contracts, invoices, and questionnaire responses.
 
 ---
 

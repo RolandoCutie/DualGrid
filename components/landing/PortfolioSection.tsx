@@ -1,7 +1,7 @@
 'use client';
 
-import { useLanguage } from '@/components/ui/LanguageProvider';
 import SectionHeading from '@/components/landing/SectionHeading';
+import { useLanguage } from '@/components/ui/LanguageProvider';
 import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
@@ -15,6 +15,10 @@ interface Project {
   images: string[];
   link?: string;
   featured: boolean;
+  problem?: string;
+  solution?: string;
+  result?: string;
+  clientType?: string;
 }
 
 interface PortfolioSectionProps {
@@ -95,11 +99,7 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => (
               <Reveal key={project._id} className="h-full">
-                <ProjectCard
-                  project={project}
-                  t={t}
-                  categoryLabel={categoryLabel}
-                />
+                <ProjectCard project={project} t={t} categoryLabel={categoryLabel} />
               </Reveal>
             ))}
           </div>
@@ -120,6 +120,7 @@ function ProjectCard({
 }) {
   const [imgIdx, setImgIdx] = useState(0);
   const hasImages = project.images.length > 0;
+  const hasCaseStudy = project.problem || project.solution || project.result;
 
   return (
     <article className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 card-elevate h-full transition-all duration-200">
@@ -131,6 +132,7 @@ function ProjectCard({
               src={project.images[imgIdx]}
               alt={project.name}
               fill
+              unoptimized
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -164,17 +166,42 @@ function ProjectCard({
 
       {/* Content */}
       <div className="flex flex-col gap-3 p-5 flex-1">
+        {/* Category badge */}
+        {project.category && (
+          <span className="self-start text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/8 text-primary border border-primary/20">
+            {categoryLabel(project.category)}
+          </span>
+        )}
+
         <h3 className="font-bold text-card-foreground text-base leading-tight">{project.name}</h3>
+
+        {project.clientType && (
+          <p className="text-xs text-muted-foreground -mt-1">{project.clientType}</p>
+        )}
+
         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
           {project.description}
         </p>
 
-        {/* Category badge */}
-        {project.category && (
-          <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
-            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/8 text-primary border border-primary/20">
-              {categoryLabel(project.category)}
-            </span>
+        {/* Case study pills — only shown if any field is filled */}
+        {hasCaseStudy && (
+          <div className="flex flex-col gap-1.5 mt-1">
+            {project.problem && (
+              <div className="flex gap-2 text-xs">
+                <span className="font-semibold text-muted-foreground shrink-0">
+                  {t('portfolio.problem_label')}:
+                </span>
+                <span className="text-muted-foreground line-clamp-2">{project.problem}</span>
+              </div>
+            )}
+            {project.result && (
+              <div className="flex gap-2 text-xs">
+                <span className="font-semibold text-accent shrink-0">
+                  {t('portfolio.result_label')}:
+                </span>
+                <span className="text-muted-foreground line-clamp-2">{project.result}</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -184,7 +211,7 @@ function ProjectCard({
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
           >
             {t('portfolio.visit_site')}
             <svg

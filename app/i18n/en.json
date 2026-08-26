@@ -5,9 +5,11 @@
   },
   "nav": {
     "why": "Why us?",
-    "plans": "Plans",
-    "process": "Process",
     "portfolio": "Portfolio",
+    "plans": "Web Dev",
+    "branding": "Branding",
+    "hosting": "Hosting",
+    "process": "Process",
     "cta": "Start a project",
     "dashboard": "Dashboard",
     "logout": "Log out",
@@ -18,44 +20,41 @@
     "close": "Close"
   },
   "hero": {
-    "eyebrow": "Web development agency",
-    "title_before": "Websites that",
-    "title_highlight": "convert",
-    "title_after": "visitors into clients",
-    "subtitle": "We combine artistic design with precise engineering to create unique digital presences. Portfolios, restaurants, landing pages and custom systems.",
-    "cta_primary": "Find my ideal plan",
-    "cta_secondary": "See plans & pricing",
-    "trust": [
-      "Fast delivery",
-      "Clean & secure code",
-      "100% responsive",
-      "Unique design"
-    ]
+    "eyebrow": "Digital design & development studio",
+    "title_before": "We turn ideas into",
+    "title_highlight": "digital brands",
+    "title_after": "that generate clients.",
+    "subtitle": "We combine design and engineering to create unique digital presences: websites, brand identities, online stores and custom systems.",
+    "cta_primary": "I need a web presence",
+    "cta_secondary": "See services & pricing",
+    "cta_branding": "I need a brand",
+    "time_estimate": "~3 min · No commitment",
+    "trust": ["Fast delivery", "Clean & secure code", "100% responsive", "Unique design"]
   },
   "why": {
     "eyebrow": "Why choose us?",
     "title": "The DualGrid difference",
-    "subtitle": "We're not a large agency. We're a small team that treats every project as if it were our own.",
+    "subtitle": "We're not a large agency. We're a small team that treats every project — web or branding — as if it were our own.",
     "items": [
       {
         "emoji": "🎨",
         "title": "100% custom design",
-        "desc": "No templates. Every site is unique and designed from scratch for your brand."
+        "desc": "No templates. Every website and brand identity is designed from scratch for your business."
       },
       {
         "emoji": "⚡",
         "title": "Full service",
-        "desc": "You just approve. We handle everything: design, code, domain and hosting."
+        "desc": "You just approve. We handle design, code, branding, domain and hosting."
       },
       {
         "emoji": "🗣️",
         "title": "Direct communication",
-        "desc": "Clear, barrier-free communication. WhatsApp support throughout the project."
+        "desc": "Clear, barrier-free communication. WhatsApp support throughout the project, no middlemen."
       },
       {
         "emoji": "🔧",
-        "title": "We build what you need",
-        "desc": "No feature limits. If you need it, we build it."
+        "title": "Web & branding in one place",
+        "desc": "We create your visual identity and website with brand coherence — no need to juggle separate teams."
       },
       {
         "emoji": "📱",
@@ -72,7 +71,7 @@
   "process": {
     "eyebrow": "How we work",
     "title": "Clear process, predictable results",
-    "subtitle": "We follow a proven workflow that guarantees quality and transparency at every stage.",
+    "subtitle": "The same proven workflow for websites, brand identities and custom projects. Quality and transparency at every stage.",
     "steps": [
       {
         "number": "01",
@@ -113,7 +112,7 @@
     ]
   },
   "plans": {
-    "eyebrow": "Plans & pricing",
+    "eyebrow": "Web development",
     "section_title": "Web Development Plans",
     "section_subtitle": "All-inclusive sites built to grow your business — design, code, domain and hosting.",
     "title": "Solutions for every type of business",
@@ -303,14 +302,7 @@
     "step": "Step",
     "of": "of",
     "back_home": "← Back to home",
-    "step_labels": [
-      "Contact",
-      "Business",
-      "Goals",
-      "Budget",
-      "Style",
-      "Content"
-    ],
+    "step_labels": ["Contact", "Business", "Goals", "Budget", "Style", "Content"],
     "btn_next": "Next →",
     "btn_back": "Back",
     "btn_submit": "Send inquiry →",
@@ -610,7 +602,15 @@
   },
   "footer": {
     "tagline": "Design with purpose, code with precision.",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "follow_us": "Follow us",
+    "contact_us": "Contact",
+    "whatsapp_cta": "Write to us on WhatsApp",
+    "links_title": "Services",
+    "link_web": "Web Development",
+    "link_branding": "Branding",
+    "link_hosting": "Hosting",
+    "link_portfolio": "Portfolio"
   },
   "error": {
     "somethingWentWrong": "Something went wrong",
@@ -631,12 +631,15 @@
   "portfolio": {
     "eyebrow": "Our work",
     "title": "Projects we've built",
-    "subtitle": "Real sites we've designed and developed for clients. Every project is custom, unique, and delivered on time.",
+    "subtitle": "Websites, brand identities and digital projects created for real clients. Every project is custom, unique, and delivered on time.",
     "filter_all": "All",
     "visit_site": "Visit site",
     "technologies": "Technologies",
     "image_aria": "Image {n}",
     "no_projects": "No projects yet. Check back soon!",
+    "problem_label": "Problem",
+    "solution_label": "Solution",
+    "result_label": "Result",
     "categories": {
       "landing": "Landing Page",
       "ecommerce": "Online Store",
@@ -645,7 +648,10 @@
       "blog": "Blog",
       "corporate": "Corporate Website",
       "menu_qr": "QR Menu",
-      "custom": "Custom Project"
+      "custom": "Custom Project",
+      "branding": "Branding",
+      "graphic_design": "Graphic Design",
+      "product_photo": "Photography"
     }
   },
   "hosting": {
@@ -847,8 +853,52 @@
     "eyebrow": "Ready to start?",
     "title": "Let's build your digital presence",
     "subtitle": "Tell us about your project and we'll recommend the perfect plan for your business in minutes.",
-    "primary": "Discover my ideal plan",
-    "secondary": "See plans and pricing",
+    "primary": "Discover what I need",
+    "secondary": "See services and pricing",
+    "whatsapp": "Contact on WhatsApp",
     "note": "Reply within 24h · No commitment"
+  },
+  "services_overview": {
+    "eyebrow": "Our services",
+    "title": "Everything you need to grow online",
+    "subtitle": "Design, development and infrastructure. One team, real results.",
+    "web_title": "Web Development",
+    "web_desc": "Custom websites: landing pages, portfolios, online stores, restaurants and digital platforms. No templates, no shortcuts.",
+    "web_cta": "See web plans",
+    "brand_title": "Visual Identity & Design",
+    "brand_desc": "Logo, color palette, typography and brand manual. Also: graphic design, promotional materials and product photography.",
+    "brand_cta": "See branding plans",
+    "hosting_title": "Managed Hosting",
+    "hosting_desc": "NVMe infrastructure, SSL, daily backups, global CDN and domain. We manage everything so you don't have to worry.",
+    "hosting_cta": "See hosting"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "A small team with big results",
+    "subtitle": "We work with few clients at a time to give real attention, not automated responses.",
+    "description": "DualGrid was born from the conviction that design and technology, well applied, can transform any business. We are a specialized digital studio: we design identities, build websites and manage infrastructure — with the care of a small team and the precision of engineers.",
+    "value_1_icon": "🎯",
+    "value_1_title": "Focus and real attention",
+    "value_1_desc": "We take on few projects at a time so each client gets full attention, not a junior employee's work.",
+    "value_2_icon": "✦",
+    "value_2_title": "No middlemen",
+    "value_2_desc": "The team that designs and codes your project is the same one you talk to. No account managers, no lost requirements.",
+    "value_3_icon": "📊",
+    "value_3_title": "Results-driven design",
+    "value_3_desc": "Every visual decision is justified by its commercial impact. We don't make pretty sites. We make sites that generate clients."
+  },
+  "testimonials": {
+    "eyebrow": "What our clients say",
+    "title": "Projects that speak for themselves",
+    "subtitle": "Real collaborations with businesses that wanted to grow digitally."
+  },
+  "contact": {
+    "eyebrow": "Let's talk",
+    "title": "Have a project in mind?",
+    "subtitle": "Write to us directly. We respond in less than 24 hours, no endless forms.",
+    "whatsapp_cta": "Write on WhatsApp",
+    "email_cta": "Send us an email",
+    "or": "or",
+    "note": "No commitment · Reply within 24h"
   }
 }
