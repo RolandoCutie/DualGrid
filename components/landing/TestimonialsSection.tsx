@@ -30,7 +30,10 @@ export default function TestimonialsSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+    <section
+      id="testimonios"
+      className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       {/* Ambient glows */}
       <div
         className="absolute -top-20 right-1/4 w-[500px] h-[400px] rounded-full pointer-events-none"

@@ -198,6 +198,19 @@ h6 {
 .glow-accent {
   box-shadow: 0 0 40px -8px color-mix(in srgb, var(--accent) 55%, transparent);
 }
+.glow-purple {
+  box-shadow: 0 0 40px -8px color-mix(in srgb, var(--purple) 55%, transparent);
+}
+.card-glow-primary:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
+    0 0 42px -10px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+.card-glow-purple:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--purple) 30%, transparent),
+    0 0 42px -10px color-mix(in srgb, var(--purple) 50%, transparent);
+}
 
 /* ─── Grain texture overlay ─── */
 .grain-overlay {

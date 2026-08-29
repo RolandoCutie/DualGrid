@@ -20,16 +20,27 @@
     "close": "Cerrar"
   },
   "hero": {
-    "eyebrow": "Estudio de diseño y desarrollo digital",
+    "eyebrow": "Agencia de diseño y desarrollo digital",
     "title_before": "Convertimos ideas en",
     "title_highlight": "marcas digitales",
     "title_after": "que generan clientes.",
     "subtitle": "Combinamos diseño y programación para crear presencias digitales únicas: webs, identidades de marca, tiendas online y sistemas personalizados.",
     "cta_primary": "Necesito presencia digital",
+    "cta_primary_sub": "Webs · tiendas · landing pages",
     "cta_secondary": "Ver servicios y precios",
     "cta_branding": "Necesito una marca",
+    "cta_branding_sub": "Logos · branding · identidad visual",
     "time_estimate": "~3 min · Sin compromiso",
-    "trust": ["Entrega rápida", "Código limpio y seguro", "100% responsive", "Diseño único"]
+    "trust": [
+      "Diseño web",
+      "Identidad visual",
+      "Desarrollo web",
+      "Diseño de logotipos",
+      "UX / UI",
+      "Landing pages",
+      "Hosting gestionado",
+      "Branding estratégico"
+    ]
   },
   "why": {
     "eyebrow": "¿Por qué elegirnos?",
@@ -70,8 +81,8 @@
   },
   "process": {
     "eyebrow": "Cómo trabajamos",
-    "title": "Proceso claro, resultados predecibles",
-    "subtitle": "El mismo proceso probado para webs, identidades de marca y proyectos personalizados. Calidad y transparencia en cada etapa.",
+    "title": "Un proceso claro para cada proyecto",
+    "subtitle": "El mismo flujo de trabajo para webs, identidades de marca y proyectos personalizados. Sabemos dónde vamos desde el primer día.",
     "steps": [
       {
         "number": "01",
@@ -89,32 +100,32 @@
         "number": "03",
         "icon": "🎨",
         "title": "Diseño",
-        "desc": "Creamos wireframes y mockups para tu aprobación. 2 rondas de revisión."
+        "desc": "Wireframes y mockups para web, o propuestas visuales de identidad. 2 rondas de revisión incluidas."
       },
       {
         "number": "04",
         "icon": "⚙️",
         "title": "Desarrollo",
-        "desc": "Programamos el sitio con código limpio, responsive y optimizado."
+        "desc": "Programamos el sitio o refinamos los archivos de identidad. Rigor técnico y atención al detalle en cada paso."
       },
       {
         "number": "05",
         "icon": "🚀",
-        "title": "Lanzamiento",
-        "desc": "Configuramos dominio, hosting y publicamos. Entregamos todos los accesos."
+        "title": "Entrega",
+        "desc": "Publicamos tu web con dominio y hosting listo, o entregamos los archivos finales de tu marca con manual incluido."
       },
       {
         "number": "06",
         "icon": "🛡️",
         "title": "Soporte",
-        "desc": "30 días de garantía para corrección de errores técnicos post-lanzamiento."
+        "desc": "30 días de garantía para ajustes técnicos o refinamientos post-entrega del proyecto."
       }
     ]
   },
   "plans": {
     "eyebrow": "Desarrollo web",
-    "section_title": "Planes de desarrollo web",
-    "section_subtitle": "Sitios web a medida para todo tipo de negocio. Diseño exclusivo, código limpio y soporte post-lanzamiento.",
+    "section_title": "Soluciones para todo tipo de negocio",
+    "section_subtitle": "Desde landing pages hasta sistemas personalizados. Todos los planes incluyen diseño exclusivo, código limpio y soporte post-lanzamiento.",
     "title": "Soluciones para cada tipo de negocio",
     "subtitle": "Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único, código limpio y soporte post-lanzamiento.",
     "custom_note": "¿No encuentras lo que buscas?",
@@ -601,7 +612,7 @@
     "result_found_name": "¡{name}, encontramos tu plan!"
   },
   "footer": {
-    "tagline": "Diseño con propósito, código con precisión.",
+    "tagline": "Diseño con criterio. Código con precisión.",
     "rights": "Todos los derechos reservados.",
     "follow_us": "Síguenos",
     "contact_us": "Contacto",
@@ -610,7 +621,10 @@
     "link_web": "Desarrollo Web",
     "link_branding": "Branding",
     "link_hosting": "Hosting",
-    "link_portfolio": "Portafolio"
+    "link_portfolio": "Portfolio",
+    "enlaces_title": "Te puede interesar",
+    "link_about": "Quiénes somos",
+    "link_testimonials": "Testimonios"
   },
   "error": {
     "somethingWentWrong": "Algo salió mal",
@@ -773,8 +787,10 @@
     "submit_button": "Solicitar propuesta",
     "success_title": "¡Muchas gracias\\!",
     "success_message": "Tu solicitud ha sido enviada. Te contactaremos pronto con una propuesta personalizada.",
-    "back_button": "Volver",
+    "back_button": "Anterior",
     "next_button": "Siguiente",
+    "step_label": "Paso",
+    "step_of": "de",
     "quiz_title": "Identifica tu plan de branding",
     "quiz_subtitle": "Responde 4 preguntas simples para que te recomendemos el plan perfecto"
   },
@@ -786,7 +802,7 @@
     "subtitle": "Responde 4 preguntas rápidas y te diremos exactamente qué plan de identidad visual necesita tu negocio."
   },
   "branding_wizard": {
-    "step_label": "Pregunta",
+    "step_label": "Paso",
     "of": "de",
     "back": "← Atrás",
     "next": "Siguiente →",
@@ -850,26 +866,26 @@
     "plan_global_includes_6": "Aplicaciones de Marca a elegir 10 piezas: papelería, redes sociales, packaging, merchandising, señalética y más"
   },
   "final_cta": {
-    "eyebrow": "¿Listo para empezar?",
-    "title": "Construyamos tu presencia digital",
-    "subtitle": "Cuéntanos tu proyecto y te recomendamos el plan ideal para tu negocio en minutos.",
-    "primary": "Descubrir qué necesito",
+    "eyebrow": "Hablemos",
+    "title": "¿Listo para construir algo que valga la pena?",
+    "subtitle": "Cuéntanos tu proyecto. Sin formularios eternos ni compromisos inmediatos. Solo una buena conversación sobre lo que quieres construir.",
+    "primary": "Hablemos de tu proyecto",
     "secondary": "Ver servicios y precios",
     "whatsapp": "Contactar por WhatsApp",
     "note": "Respuesta en menos de 24h · Sin compromiso"
   },
   "services_overview": {
-    "eyebrow": "Nuestros servicios",
-    "title": "Todo lo que necesitas para crecer online",
-    "subtitle": "Diseño, desarrollo e infraestructura. Un solo equipo, resultados reales.",
+    "eyebrow": "Qué hacemos",
+    "title": "Diseño, desarrollo y estrategia digital",
+    "subtitle": "Todo lo que necesitas para construir una presencia digital que realmente represente tu negocio.",
     "web_title": "Desarrollo Web",
-    "web_desc": "Sitios web a medida: landing pages, portfolios, tiendas online, restaurantes y plataformas digitales. Sin plantillas, sin atajos.",
+    "web_desc": "Sitios web hechos a medida: landing pages, portfolios, tiendas online, restaurantes y plataformas digitales. Sin plantillas, sin atajos.",
     "web_cta": "Ver planes web",
-    "brand_title": "Identidad Visual & Diseño",
-    "brand_desc": "Logo, paleta de colores, tipografía y manual de marca. También: diseño gráfico, piezas publicitarias y fotografía de producto.",
+    "brand_title": "Identidad Visual & Branding",
+    "brand_desc": "Logos, paletas de color, tipografía y manual de marca. También: diseño gráfico, piezas publicitarias y fotografía de producto.",
     "brand_cta": "Ver planes de branding",
     "hosting_title": "Hosting Gestionado",
-    "hosting_desc": "Infraestructura NVMe, SSL, backups diarios, CDN global y dominio. Gestionamos todo para que no te preocupes.",
+    "hosting_desc": "Infraestructura NVMe, SSL, backups diarios, CDN global y dominio. Lo gestionamos todo para que tú te concentres en tu negocio.",
     "hosting_cta": "Ver hosting"
   },
   "about": {

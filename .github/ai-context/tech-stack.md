@@ -64,6 +64,12 @@ Defined in `app/globals.css`:
 
 Dark mode uses a cinematic multi-layer gradient background (base linear gradient + radial cyan/green glows) applied globally on `body`, and landing sections switch to transparent in dark mode so the global effect remains visible.
 
+Additional landing UI utilities in `app/globals.css`:
+
+- `glow-primary`, `glow-accent`, `glow-purple` — persistent glow for highlighted cards.
+- `card-glow-primary`, `card-glow-purple` — hover-only outer border illumination for pricing cards.
+- `gradient-border` + `reveal-line` — hover accent treatment used by informational cards like services/about/why.
+
 ## Key Utility Functions
 
 | Function                     | File                           | Purpose                                                                                        |

@@ -20,21 +20,32 @@
     "close": "Close"
   },
   "hero": {
-    "eyebrow": "Digital design & development studio",
-    "title_before": "We turn ideas into",
-    "title_highlight": "digital brands",
-    "title_after": "that generate clients.",
-    "subtitle": "We combine design and engineering to create unique digital presences: websites, brand identities, online stores and custom systems.",
-    "cta_primary": "I need a web presence",
-    "cta_secondary": "See services & pricing",
-    "cta_branding": "I need a brand",
+    "eyebrow": "Digital design & development agency",
+    "title_before": "Where design",
+    "title_highlight": "and technology",
+    "title_after": "build your brand.",
+    "subtitle": "A team made up of a designer and an engineer. Visual identities, websites and digital experiences — with purposeful design and precise code.",
+    "cta_primary": "Let's talk about your project",
+    "cta_primary_sub": "Webs · stores · landing pages",
+    "cta_secondary": "See our work",
+    "cta_branding": "I want a visual identity",
+    "cta_branding_sub": "Logos · branding · visual identity",
     "time_estimate": "~3 min · No commitment",
-    "trust": ["Fast delivery", "Clean & secure code", "100% responsive", "Unique design"]
+    "trust": [
+      "Web design",
+      "Visual identity",
+      "Web development",
+      "Logo design",
+      "UX / UI",
+      "Landing pages",
+      "Managed hosting",
+      "Brand strategy"
+    ]
   },
   "why": {
-    "eyebrow": "Why choose us?",
-    "title": "The DualGrid difference",
-    "subtitle": "We're not a large agency. We're a small team that treats every project — web or branding — as if it were our own.",
+    "eyebrow": "Why choose us",
+    "title": "Design and technology under the same roof",
+    "subtitle": "You don't hire a designer and a developer separately. Here, both work together on your project from the very first sketch.",
     "items": [
       {
         "emoji": "🎨",
@@ -89,25 +100,25 @@
         "number": "03",
         "icon": "🎨",
         "title": "Design",
-        "desc": "We create wireframes and mockups for your approval. 2 revision rounds."
+        "desc": "Wireframes and mockups for web projects, or visual identity proposals for branding work. 2 revision rounds included."
       },
       {
         "number": "04",
         "icon": "⚙️",
         "title": "Development",
-        "desc": "We code the site with clean, responsive and optimized code."
+        "desc": "We build the website or refine the final identity files. Technical rigor and attention to detail in every step."
       },
       {
         "number": "05",
         "icon": "🚀",
-        "title": "Launch",
-        "desc": "We configure domain, hosting and publish. We hand over all credentials."
+        "title": "Delivery",
+        "desc": "We launch your website with domain and hosting ready, or deliver the final brand assets with the corresponding usage guide."
       },
       {
         "number": "06",
         "icon": "🛡️",
         "title": "Support",
-        "desc": "30-day guarantee for technical bug fixes after launch."
+        "desc": "30-day guarantee for technical adjustments or post-delivery refinements after the project is handed over."
       }
     ]
   },
@@ -601,7 +612,7 @@
     "result_found_name": "Great news, {name}, we found your plan!"
   },
   "footer": {
-    "tagline": "Design with purpose, code with precision.",
+    "tagline": "Design with purpose. Code with precision.",
     "rights": "All rights reserved.",
     "follow_us": "Follow us",
     "contact_us": "Contact",
@@ -610,7 +621,10 @@
     "link_web": "Web Development",
     "link_branding": "Branding",
     "link_hosting": "Hosting",
-    "link_portfolio": "Portfolio"
+    "link_portfolio": "Portfolio",
+    "enlaces_title": "You may like",
+    "link_about": "About us",
+    "link_testimonials": "Testimonials"
   },
   "error": {
     "somethingWentWrong": "Something went wrong",
@@ -775,6 +789,8 @@
     "success_message": "Your request has been sent. We'll contact you soon with a personalized proposal.",
     "back_button": "Back",
     "next_button": "Next",
+    "step_label": "Step",
+    "step_of": "of",
     "quiz_title": "Find your branding plan",
     "quiz_subtitle": "Answer 4 simple questions to get a plan recommendation tailored to you"
   },
@@ -786,7 +802,7 @@
     "subtitle": "Answer 4 quick questions and we'll tell you exactly which visual identity plan your business needs."
   },
   "branding_wizard": {
-    "step_label": "Question",
+    "step_label": "Step",
     "of": "of",
     "back": "← Back",
     "next": "Next →",
@@ -850,10 +866,10 @@
     "plan_global_includes_6": "Brand Applications to choose 10 pieces: stationery, social media, packaging, merchandising, signage, and more"
   },
   "final_cta": {
-    "eyebrow": "Ready to start?",
-    "title": "Let's build your digital presence",
-    "subtitle": "Tell us about your project and we'll recommend the perfect plan for your business in minutes.",
-    "primary": "Discover what I need",
+    "eyebrow": "Let's talk",
+    "title": "Ready to build something worth building?",
+    "subtitle": "Tell us about your project. No long forms, no immediate commitments. Just a good conversation about what you want to create.",
+    "primary": "Let's talk about your project",
     "secondary": "See services and pricing",
     "whatsapp": "Contact on WhatsApp",
     "note": "Reply within 24h · No commitment"
@@ -874,18 +890,18 @@
   },
   "about": {
     "eyebrow": "About us",
-    "title": "A small team with big results",
-    "subtitle": "We work with few clients at a time to give real attention, not automated responses.",
-    "description": "DualGrid was born from the conviction that design and technology, well applied, can transform any business. We are a specialized digital studio: we design identities, build websites and manage infrastructure — with the care of a small team and the precision of engineers.",
+    "title": "Two disciplines. One team.",
+    "subtitle": "Design with purpose. Code with precision. The advantage of having both worlds in a single project.",
+    "description": "DualGrid was born from uniting two worlds that rarely truly work together: design and engineering. She brings visual direction, aesthetic judgment and brand identity. He brings technical architecture, clean code and product logic. Together, we cover a project from start to finish.",
     "value_1_icon": "🎯",
-    "value_1_title": "Focus and real attention",
-    "value_1_desc": "We take on few projects at a time so each client gets full attention, not a junior employee's work.",
+    "value_1_title": "Design with purpose",
+    "value_1_desc": "Every visual decision has a reason. We don’t make things pretty for the sake of it — we design to communicate, persuade and position your brand.",
     "value_2_icon": "✦",
-    "value_2_title": "No middlemen",
-    "value_2_desc": "The team that designs and codes your project is the same one you talk to. No account managers, no lost requirements.",
+    "value_2_title": "Development with judgment",
+    "value_2_desc": "The code is clean, scalable and built to last. No shortcuts that turn into problems down the road.",
     "value_3_icon": "📊",
-    "value_3_title": "Results-driven design",
-    "value_3_desc": "Every visual decision is justified by its commercial impact. We don't make pretty sites. We make sites that generate clients."
+    "value_3_title": "One project, one team",
+    "value_3_desc": "The designer and the developer share every project. No handoff misunderstandings. No \"that’s not what I was told\"."
   },
   "testimonials": {
     "eyebrow": "What our clients say",

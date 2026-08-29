@@ -18,16 +18,23 @@ import type { Metadata } from 'next';
 const baseUrl = getBaseUrl();
 
 export const metadata: Metadata = {
-  title: 'DualGrid — Estudio digital | Diseño web, Branding e Identidad Visual',
+  title: 'DualGrid — Agencia de diseño y desarrollo digital',
   description:
-    'Estudio digital especializado en sitios web a medida, identidad visual y hosting gestionado. Diseño personalizado, código limpio y comunicación directa en español.',
+    'Agencia de diseño y desarrollo digital. Creamos sitios web, identidades de marca y soluciones digitales con diseño con criterio y código con precisión. Cuba · USA · España.',
   alternates: { canonical: baseUrl },
   openGraph: {
-    title: 'DualGrid — Estudio digital | Diseño web, Branding e Identidad Visual',
+    title: 'DualGrid — Agencia de diseño y desarrollo digital',
     description:
-      'Diseñamos marcas, construimos webs y gestionamos hosting. Un estudio digital completo para negocios que quieren crecer online.',
+      'Diseño y tecnología bajo el mismo techo. Sitios web, branding, identidades visuales y hosting gestionado.',
     url: baseUrl,
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'DualGrid Studio' }],
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'DualGrid — Agencia de diseño y desarrollo digital',
+      },
+    ],
   },
 };
 

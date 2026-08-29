@@ -11,7 +11,12 @@ const QUICK_LINKS = [
   { href: '#planes', labelKey: 'footer.link_web' },
   { href: '#branding', labelKey: 'footer.link_branding' },
   { href: '#hosting', labelKey: 'footer.link_hosting' },
+];
+
+const INTEREST_LINKS = [
   { href: '#portafolio', labelKey: 'footer.link_portfolio' },
+  { href: '#nosotros', labelKey: 'footer.link_about' },
+  { href: '#testimonios', labelKey: 'footer.link_testimonials' },
 ];
 
 export default function Footer() {
@@ -26,7 +31,6 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-border">
-      {/* Top gradient line */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
@@ -38,17 +42,15 @@ export default function Footer() {
 
       <div className="bg-card">
         <div className="max-w-6xl mx-auto px-6 py-14">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             {/* Brand */}
-            <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
+            <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left">
               <LogoDualGrid width={160} />
               <p className="text-sm text-muted-foreground max-w-xs">{t('footer.tagline')}</p>
-              {/* Social icons */}
               <div className="flex items-center gap-3 mt-2">
                 <span className="text-xs text-muted-foreground font-medium">
                   {t('footer.follow_us')}:
                 </span>
-                {/* Instagram */}
                 <a
                   href={INSTAGRAM_URL}
                   target="_blank"
@@ -71,7 +73,6 @@ export default function Footer() {
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                   </svg>
                 </a>
-                {/* Facebook */}
                 <a
                   href={FACEBOOK_URL}
                   target="_blank"
@@ -95,8 +96,8 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Quick links */}
-            <div className="flex flex-col items-center md:items-start gap-2">
+            {/* Services */}
+            <div className="flex flex-col items-center sm:items-start gap-2">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                 {t('footer.links_title')}
               </p>
@@ -111,8 +112,24 @@ export default function Footer() {
               ))}
             </div>
 
+            {/* Interest links */}
+            <div className="flex flex-col items-center sm:items-start gap-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
+                {t('footer.enlaces_title')}
+              </p>
+              {INTEREST_LINKS.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-sm text-muted-foreground hover:text-card-foreground transition-colors cursor-pointer"
+                >
+                  {t(link.labelKey)}
+                </button>
+              ))}
+            </div>
+
             {/* Contact */}
-            <div className="flex flex-col items-center md:items-start gap-3">
+            <div className="flex flex-col items-center sm:items-start gap-3">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                 {t('footer.contact_us')}
               </p>
@@ -138,7 +155,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Bottom bar */}
           <div className="pt-6 border-t border-border/40">
             <p className="text-xs text-muted-foreground text-center">
               © {year} DualGrid · {t('footer.rights')}

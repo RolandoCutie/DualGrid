@@ -55,7 +55,10 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
   };
 
   return (
-    <section id="portafolio" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+    <section
+      id="portafolio"
+      className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <SectionHeading
           eyebrow={t('portfolio.eyebrow')}

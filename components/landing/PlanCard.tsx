@@ -16,7 +16,6 @@ const PLAN_ICONS: Record<string, string> = {
   ecommerce_store: '/assets/icons/planes/tienda-online.svg',
   blog: '/assets/icons/planes/blog.svg',
   custom: '/assets/icons/planes/custom.svg',
-  
 };
 
 interface PlanCardProps {
@@ -34,7 +33,7 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
         'relative flex flex-col rounded-2xl border-2 p-7 sm:p-8 transition-all duration-300 h-full',
         plan.highlighted
           ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-primary'
-          : 'border-border bg-card hover:border-primary/30 hover:shadow-lg',
+          : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-primary',
       )}
       style={
         plan.highlighted

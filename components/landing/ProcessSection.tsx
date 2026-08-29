@@ -1,7 +1,7 @@
 'use client';
 
-import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import SectionHeading from '@/components/landing/SectionHeading';
+import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 
@@ -25,7 +25,10 @@ export default function ProcessSection() {
   }>;
 
   return (
-    <section id="proceso" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+    <section
+      id="proceso"
+      className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       {/* Cyan glow — bottom left */}
       <div
         className="absolute -bottom-16 -left-16 w-[550px] h-[450px] pointer-events-none"
@@ -98,7 +101,9 @@ export default function ProcessSection() {
                     >
                       {step.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{step.desc}</p>
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                      {step.desc}
+                    </p>
                   </div>
                 </div>
               </div>

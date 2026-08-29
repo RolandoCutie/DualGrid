@@ -1,9 +1,9 @@
 'use client';
 
-import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
 import SectionHeading from '@/components/landing/SectionHeading';
-import Reveal from '@/components/ui/Reveal';
+import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard';
 import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
+import Reveal from '@/components/ui/Reveal';
 import { PLANS } from '@/lib/plans';
 import type { Plan, PlanId } from '@/types';
 import { useState } from 'react';
@@ -44,7 +44,10 @@ export default function PlansSection() {
   };
 
   return (
-    <section id="planes" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+    <section
+      id="planes"
+      className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <SectionHeading
           eyebrow={t('plans.eyebrow')}

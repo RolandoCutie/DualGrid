@@ -51,10 +51,10 @@ export default function NavBarClient() {
 
   const NAV_LINKS = [
     { href: '#portafolio', labelKey: 'nav.portfolio' },
+    { href: '#proceso', labelKey: 'nav.process' },
     { href: '#planes', labelKey: 'nav.plans' },
     { href: '#branding', labelKey: 'nav.branding' },
     { href: '#hosting', labelKey: 'nav.hosting' },
-    { href: '#proceso', labelKey: 'nav.process' },
   ];
 
   useEffect(() => {
@@ -86,10 +86,10 @@ export default function NavBarClient() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-40 transition-all duration-500',
+        'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
         scrolled
           ? 'bg-card/80 backdrop-blur-xl border-b border-border/60 shadow-[0_1px_20px_-5px_rgba(0,0,0,0.12)]'
-          : 'bg-transparent',
+          : 'bg-transparent border-b border-transparent backdrop-blur-none shadow-none',
       )}
     >
       <nav className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">

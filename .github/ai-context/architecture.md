@@ -141,3 +141,5 @@ hooks/                      # (reserved for custom hooks)
 - All admin routes call `requireAdminSession()` before rendering.
 - All admin API routes validate `isAdminSessionTokenValid(token)` before any logic.
 - Plan recommendation is a pure scoring function — no AI/ML, simple weight-based rules.
+- All anchored landing sections use `scroll-mt-*` classes so `scrollIntoView()` does not hide headings behind the sticky navbar.
+- Web, branding, and hosting pricing cards now share the same structural language: 2px border shell, top badge, icon block, price divider, CTA placement, collapsible details, and outer glow on hover.

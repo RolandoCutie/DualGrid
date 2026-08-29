@@ -79,7 +79,10 @@ export default function HostingSection() {
   };
 
   return (
-    <section id="hosting" className="relative py-24 sm:py-32 px-4 overflow-hidden bg-transparent">
+    <section
+      id="hosting"
+      className="relative py-24 sm:py-32 px-4 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       {/* Cyan glow — top right (tech/server vibe) */}
       <div
         className="absolute -top-20 -right-20 w-[600px] h-[460px] rounded-full pointer-events-none"
@@ -128,54 +131,160 @@ export default function HostingSection() {
           ))}
         </div>
 
-        {/* Hosting plan cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+        {/* Hosting plan cards — same visual design as web plan cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 mt-2">
           {HOSTING_PLANS.map((plan) => (
             <Reveal key={plan.id} className="h-full">
               <div
                 className={cn(
-                  'relative rounded-2xl border bg-card p-6 flex flex-col transition-shadow hover:shadow-lg h-full',
-                  plan.highlighted ? 'border-primary shadow-md shadow-primary/10' : 'border-border',
+                  'relative flex flex-col rounded-2xl border-2 p-7 sm:p-8 transition-all duration-300 h-full',
+                  plan.highlighted
+                    ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-primary'
+                    : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-primary',
                 )}
+                style={
+                  plan.highlighted
+                    ? {
+                        background: `linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, var(--primary), var(--accent)) border-box`,
+                        border: '2px solid transparent',
+                      }
+                    : undefined
+                }
               >
+                {/* Popular badge */}
                 {plan.badgeKey && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
-                    {t(`hosting.${plan.badgeKey}`)}
-                  </span>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                    <span
+                      className="inline-block px-3 sm:px-5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-lg whitespace-nowrap"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                      }}
+                    >
+                      {t(`hosting.${plan.badgeKey}`)}
+                    </span>
+                  </div>
                 )}
 
-                <p className="text-xs font-bold tracking-widest text-primary uppercase mb-1">
-                  {t(`hosting.plan_${plan.labelKey}`)}
-                </p>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-foreground">${plan.price}</span>
-                  <span className="text-muted-foreground text-sm ml-1">
-                    {plan.perYear ? `USD/${t('hosting.per_year')}` : `USD/${t('hosting.per_year')}`}
-                  </span>
+                {/* Icon + name + tagline */}
+                <div className="mb-6">
+                  <div
+                    className="w-14 h-14 mb-3 rounded-xl flex items-center justify-center p-2.5"
+                    style={{
+                      background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--primary) 22%, transparent)',
+                    }}
+                  >
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ color: 'var(--primary)' }}
+                      aria-hidden="true"
+                    >
+                      <rect x="2" y="2" width="20" height="8" rx="2" />
+                      <rect x="2" y="14" width="20" height="8" rx="2" />
+                      <circle cx="7" cy="6" r="1" fill="currentColor" stroke="none" />
+                      <circle cx="7" cy="18" r="1" fill="currentColor" stroke="none" />
+                    </svg>
+                  </div>
+                  <h3
+                    className={cn(
+                      'text-xl font-extrabold',
+                      plan.highlighted ? 'text-gradient' : 'text-card-foreground',
+                    )}
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                  >
+                    {t(`hosting.plan_${plan.labelKey}`)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    {plan.perYear
+                      ? t('hosting.billed_multi')
+                      : `$${plan.price} USD / ${t('hosting.per_year')}`}
+                  </p>
+                </div>
+
+                {/* Price */}
+                <div className="mb-6 pb-6 border-b border-border">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-sm text-muted-foreground">{t('plans.from')}</span>
+                    <span
+                      className={cn(
+                        'text-5xl font-extrabold tracking-tight',
+                        plan.highlighted ? 'text-gradient' : 'text-card-foreground',
+                      )}
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      ${plan.price}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {plan.perYear ? `USD/${t('hosting.per_year')}` : 'USD'}
+                    </span>
+                  </div>
                   {plan.perYear && (
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        className="text-accent shrink-0"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
                       {t('hosting.billed_multi')}
                     </p>
                   )}
                 </div>
 
-                <ul className="space-y-2 mb-6 flex-1">
+                {/* Feature list */}
+                <ul className="space-y-2.5 mb-6 flex-1">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-card-foreground">
-                      <span className="text-primary text-base">✓</span>
+                    <li key={f} className="flex items-center gap-3 text-sm text-card-foreground">
+                      <span
+                        className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
+                        style={{
+                          background:
+                            'linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, transparent), color-mix(in srgb, var(--accent) 15%, transparent))',
+                        }}
+                      >
+                        <svg
+                          className="w-2.5 h-2.5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          style={{ color: 'var(--primary)' }}
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
                       {t(`hosting.${f}`)}
                     </li>
                   ))}
                 </ul>
 
+                {/* CTA */}
                 <button
                   onClick={() => openModal(plan.id)}
                   className={cn(
-                    'w-full py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer',
+                    'w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 cursor-pointer',
                     plan.highlighted
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                      : 'border border-border text-card-foreground hover:bg-muted/50',
+                      ? 'text-white shadow-md hover:shadow-lg hover:opacity-90'
+                      : 'border-2 border-border text-card-foreground hover:border-primary/50 hover:text-primary',
                   )}
+                  style={
+                    plan.highlighted
+                      ? { background: 'linear-gradient(135deg, var(--primary), var(--accent))' }
+                      : undefined
+                  }
                 >
                   {t('hosting.cta')}
                 </button>
@@ -186,54 +295,77 @@ export default function HostingSection() {
 
         {/* Domain add-on card */}
         <Reveal>
-          <div className="rounded-2xl border border-border bg-card p-6 flex flex-col sm:flex-row sm:items-center gap-6">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <Image
-                  src="/assets/icons/hosting/dominio.svg"
-                  alt=""
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain shrink-0"
-                />
-                <h3 className="text-base font-bold text-card-foreground">
-                  {t('hosting.domain_title')}
-                </h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {t('hosting.domain_desc')}
-              </p>
-              <div className="flex flex-wrap gap-2 mt-3">
-                {['.com', '.net', '.org', '.io', '.es', '.co'].map((ext) => (
-                  <span
-                    key={ext}
-                    className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-muted-foreground"
+          <div className="relative rounded-2xl border-2 border-border bg-card p-7 sm:p-8 transition-all duration-300 card-glow-primary hover:border-primary/30 hover:shadow-lg">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.9fr] gap-8 items-start">
+              <div>
+                <div className="mb-6">
+                  <div
+                    className="w-14 h-14 mb-3 rounded-xl flex items-center justify-center p-2.5"
+                    style={{
+                      background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--primary) 22%, transparent)',
+                    }}
                   >
-                    {ext}
-                  </span>
-                ))}
+                    <Image
+                      src="/assets/icons/hosting/dominio.svg"
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-contain shrink-0"
+                    />
+                  </div>
+                  <h3
+                    className="text-xl font-extrabold text-card-foreground"
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                  >
+                    {t('hosting.domain_title')}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mt-1 leading-relaxed">
+                    {t('hosting.domain_desc')}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['.com', '.net', '.org', '.io', '.es', '.co'].map((ext) => (
+                    <span
+                      key={ext}
+                      className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-muted-foreground"
+                    >
+                      {ext}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center gap-3 shrink-0">
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground">{t('hosting.domain_from')}</p>
-                <span className="text-3xl font-bold text-foreground">$15</span>
-                <span className="text-muted-foreground text-sm ml-1">
-                  USD/{t('hosting.per_year')}
-                </span>
+              <div className="flex flex-col h-full">
+                <div className="mb-6 pb-6 border-b border-border text-left lg:text-center">
+                  <p className="text-sm text-muted-foreground">{t('hosting.domain_from')}</p>
+                  <div className="flex items-baseline gap-1 lg:justify-center mt-1">
+                    <span
+                      className="text-5xl font-extrabold tracking-tight text-card-foreground"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      $15
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      USD/{t('hosting.per_year')}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3 mt-auto">
+                  <button
+                    onClick={() => openModal('domain_only')}
+                    className="w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 cursor-pointer border-2 border-border text-card-foreground hover:border-primary/50 hover:text-primary"
+                  >
+                    {t('hosting.domain_cta')}
+                  </button>
+                  <button
+                    onClick={() => openModal('hosting_domain')}
+                    className="w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 cursor-pointer text-white shadow-md hover:shadow-lg hover:opacity-90"
+                    style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
+                  >
+                    {t('hosting.hosting_domain_cta')}
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={() => openModal('domain_only')}
-                className="px-6 py-2 rounded-xl border border-primary text-primary text-sm font-semibold hover:bg-primary/10 transition-colors cursor-pointer"
-              >
-                {t('hosting.domain_cta')}
-              </button>
-              <button
-                onClick={() => openModal('hosting_domain')}
-                className="px-6 py-2 rounded-xl bg-primary/10 text-primary text-xs font-semibold hover:bg-primary/20 transition-colors cursor-pointer"
-              >
-                {t('hosting.hosting_domain_cta')}
-              </button>
             </div>
           </div>
         </Reveal>

@@ -147,10 +147,16 @@ export default function BrandingQuizModal({ open, onClose }: BrandingQuizModalPr
           <div className="space-y-8">
             {/* Header */}
             <div>
-              <span className="text-sm font-semibold text-primary uppercase tracking-wide">
-                {currentQuestion.block}
-              </span>
-              <h2 className="text-3xl font-bold mt-2 text-card-foreground">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold text-primary uppercase tracking-widest">
+                  {t('branding_quiz.step_label')} {step + 1} {t('branding_quiz.step_of')}{' '}
+                  {questionIds.length}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {step + 1}/{questionIds.length}
+                </span>
+              </div>
+              <h2 className="text-2xl font-bold text-card-foreground leading-snug">
                 {currentQuestion.title}
               </h2>
             </div>

@@ -31,7 +31,14 @@ const jsonLd = {
       '@id': `${baseUrl}/#organization`,
       name: 'DualGrid',
       url: baseUrl,
-      description: 'Web development agency. Sitios web que convierten visitas en clientes.',
+      description:
+        'Agencia de diseño y desarrollo digital. Creamos sitios web, identidades de marca y experiencias digitales con diseño con criterio y código con precisión.',
+      sameAs: [],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        availableLanguage: ['Spanish', 'English'],
+      },
     },
     {
       '@type': 'WebSite',
@@ -41,23 +48,62 @@ const jsonLd = {
       publisher: { '@id': `${baseUrl}/#organization` },
       inLanguage: ['es', 'en'],
     },
+    {
+      '@type': 'Service',
+      '@id': `${baseUrl}/#service-web`,
+      name: 'Desarrollo Web',
+      provider: { '@id': `${baseUrl}/#organization` },
+      serviceType: 'Web Development',
+      description:
+        'Sitios web a medida: landing pages, portfolios, tiendas online, restaurantes y sistemas digitales.',
+      areaServed: ['Cuba', 'United States', 'Spain'],
+    },
+    {
+      '@type': 'Service',
+      '@id': `${baseUrl}/#service-branding`,
+      name: 'Identidad Visual y Branding',
+      provider: { '@id': `${baseUrl}/#organization` },
+      serviceType: 'Graphic Design',
+      description:
+        'Diseño de logotipos, identidad visual corporativa, manual de marca y sistemas gráficos.',
+      areaServed: ['Cuba', 'United States', 'Spain'],
+    },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'DualGrid – Sitios web que convierten visitas en clientes',
+    default: 'DualGrid — Agencia de diseño y desarrollo digital',
     template: '%s | DualGrid',
   },
   description:
-    'Agencia de desarrollo web. Portafolios, restaurantes, landing pages y sistemas personalizados.',
+    'Agencia de diseño y desarrollo digital formada por una diseñadora y un ingeniero. Creamos sitios web, identidades de marca y soluciones digitales con diseño con criterio y código con precisión.',
+  keywords: [
+    'diseño web',
+    'desarrollo web',
+    'branding',
+    'identidad visual',
+    'agencia digital',
+    'diseño de logotipos',
+    'landing page',
+    'tienda online',
+    'Cuba',
+    'Estados Unidos',
+    'España',
+  ],
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     url: baseUrl,
     siteName: 'DualGrid',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DualGrid — Agencia de diseño y desarrollo digital',
+    description:
+      'Diseño y tecnología bajo el mismo techo. Sitios web, identidades de marca y soluciones digitales.',
   },
   manifest: '/manifest.webmanifest',
 };

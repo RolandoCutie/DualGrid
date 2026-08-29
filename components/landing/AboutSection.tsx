@@ -66,7 +66,10 @@ export default function AboutSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="nosotros" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
+    <section
+      id="nosotros"
+      className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+    >
       {/* Ambient glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
