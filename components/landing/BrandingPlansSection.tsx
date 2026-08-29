@@ -84,13 +84,13 @@ function BrandingPlanCard({
       className={cn(
         'relative flex flex-col rounded-2xl border-2 p-7 sm:p-8 transition-all duration-300 h-full',
         plan.highlighted
-          ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-purple'
-          : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-purple',
+          ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-primary'
+          : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-primary',
       )}
       style={
         plan.highlighted
           ? {
-              background: `linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, var(--purple), var(--primary)) border-box`,
+              background: `linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, var(--primary), var(--accent)) border-box`,
               border: '2px solid transparent',
             }
           : undefined
@@ -101,7 +101,7 @@ function BrandingPlanCard({
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
           <span
             className="inline-block px-3 sm:px-5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-lg whitespace-nowrap"
-            style={{ background: 'linear-gradient(135deg, var(--purple), var(--primary))' }}
+            style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
           >
             {popularLabel}
           </span>
@@ -113,8 +113,8 @@ function BrandingPlanCard({
         <div
           className="w-14 h-14 mb-3 rounded-xl flex items-center justify-center p-2.5"
           style={{
-            background: 'color-mix(in srgb, var(--purple) 12%, transparent)',
-            border: '1px solid color-mix(in srgb, var(--purple) 22%, transparent)',
+            background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
+            border: '1px solid color-mix(in srgb, var(--primary) 22%, transparent)',
           }}
         >
           <Image
@@ -174,7 +174,7 @@ function BrandingPlanCard({
         <div className="flex items-start gap-3 text-sm text-card-foreground leading-relaxed">
           <span
             className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-            style={{ border: '2px solid var(--purple)', color: 'var(--purple)' }}
+            style={{ border: '2px solid var(--primary)', color: 'var(--primary)' }}
           >
             <svg
               width="10"
@@ -202,7 +202,7 @@ function BrandingPlanCard({
         )}
         style={
           plan.highlighted
-            ? { background: 'linear-gradient(135deg, var(--purple), var(--primary))' }
+            ? { background: 'linear-gradient(135deg, var(--primary), var(--accent))' }
             : undefined
         }
       >
@@ -251,7 +251,7 @@ function BrandingPlanCard({
                 className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
                 style={{
                   background:
-                    'linear-gradient(135deg, color-mix(in srgb, var(--purple) 20%, transparent), color-mix(in srgb, var(--primary) 15%, transparent))',
+                    'linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--accent) 15%, transparent))',
                 }}
               >
                 <svg
@@ -260,7 +260,7 @@ function BrandingPlanCard({
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="3"
-                  style={{ color: 'var(--purple)' }}
+                  style={{ color: 'var(--primary)' }}
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>

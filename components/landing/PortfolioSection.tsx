@@ -233,6 +233,8 @@ function ProjectCard({
             </svg>
           </a>
         )}
+
+        <div className="reveal-line h-0.5 w-full rounded-full mt-4" />
       </div>
     </article>
   );

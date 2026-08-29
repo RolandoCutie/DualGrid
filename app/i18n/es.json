@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "DualGrid",
-    "tagline": "Sitios web que convierten visitas en clientes"
+    "tagline": "Diseño y tecnología para marcas que quieren verse bien y funcionar mejor"
   },
   "nav": {
     "why": "¿Por qué?",
@@ -10,7 +10,7 @@
     "branding": "Branding",
     "hosting": "Hosting",
     "process": "Proceso",
-    "cta": "Comenzar proyecto",
+    "cta": "Hablemos",
     "dashboard": "Panel de control",
     "logout": "Cerrar sesión",
     "language_selector": "Selector de idioma",
@@ -24,11 +24,11 @@
     "title_before": "Convertimos ideas en",
     "title_highlight": "marcas digitales",
     "title_after": "que generan clientes.",
-    "subtitle": "Combinamos diseño y programación para crear presencias digitales únicas: webs, identidades de marca, tiendas online y sistemas personalizados.",
-    "cta_primary": "Necesito presencia digital",
+    "subtitle": "Combinamos diseño y programación para crear marcas, sitios web y experiencias digitales con criterio, cercanía y dedicación real.",
+    "cta_primary": "Quiero una web profesional",
     "cta_primary_sub": "Webs · tiendas · landing pages",
-    "cta_secondary": "Ver servicios y precios",
-    "cta_branding": "Necesito una marca",
+    "cta_secondary": "Ver nuestro trabajo",
+    "cta_branding": "Quiero una identidad visual",
     "cta_branding_sub": "Logos · branding · identidad visual",
     "time_estimate": "~3 min · Sin compromiso",
     "trust": [
@@ -43,9 +43,9 @@
     ]
   },
   "why": {
-    "eyebrow": "¿Por qué elegirnos?",
-    "title": "La diferencia DualGrid",
-    "subtitle": "No somos una gran agencia. Somos un equipo pequeño que trata cada proyecto — web o branding — como si fuera propio.",
+    "eyebrow": "Por qué trabajar con nosotros",
+    "title": "Diseño y desarrollo pensados juntos",
+    "subtitle": "No somos una gran corporación y tampoco queremos parecerlo. Somos un equipo pequeño que mezcla sensibilidad visual y criterio técnico en cada decisión.",
     "items": [
       {
         "emoji": "🎨",
@@ -124,8 +124,8 @@
   },
   "plans": {
     "eyebrow": "Desarrollo web",
-    "section_title": "Soluciones para todo tipo de negocio",
-    "section_subtitle": "Desde landing pages hasta sistemas personalizados. Todos los planes incluyen diseño exclusivo, código limpio y soporte post-lanzamiento.",
+    "section_title": "Planes web para negocios que quieren hacerlo bien",
+    "section_subtitle": "Desde landing pages hasta soluciones a medida. Cada plan combina diseño personalizado, implementación sólida y acompañamiento real.",
     "title": "Soluciones para cada tipo de negocio",
     "subtitle": "Desde landing pages hasta sistemas personalizados. Cada plan incluye diseño único, código limpio y soporte post-lanzamiento.",
     "custom_note": "¿No encuentras lo que buscas?",
@@ -141,8 +141,8 @@
   },
   "branding_plans": {
     "eyebrow": "Identidad visual",
-    "section_title": "Planes de Branding e Identidad Visual",
-    "section_subtitle": "Una identidad de marca poderosa que te hace inolvidable. Desde un logo de arranque hasta un sistema de identidad corporativa completo.",
+    "section_title": "Planes de branding e identidad visual",
+    "section_subtitle": "Desde un logo bien resuelto hasta un sistema visual completo. Diseñamos marcas que se ven coherentes, profesionales y fáciles de usar.",
     "title": "Encuentra el plan de identidad de marca ideal",
     "subtitle": "¿No sabes qué plan te encaja? Responde 4 preguntas y obtén tu recomendación personalizada en segundos.",
     "cta_quiz": "Descubrir mi plan con un test rápido",
@@ -612,7 +612,7 @@
     "result_found_name": "¡{name}, encontramos tu plan!"
   },
   "footer": {
-    "tagline": "Diseño con criterio. Código con precisión.",
+    "tagline": "Un equipo pequeño. Diseño con criterio. Código con precisión.",
     "rights": "Todos los derechos reservados.",
     "follow_us": "Síguenos",
     "contact_us": "Contacto",
@@ -671,7 +671,7 @@
   "hosting": {
     "eyebrow": "Hosting & Dominio",
     "title": "Infraestructura web profesional con gestión integral",
-    "subtitle": "Tu sitio web merece hosting rápido, seguro y gestionado. Nos encargamos de todo: velocidad, backups, SSL y soporte directo por WhatsApp.",
+    "subtitle": "Nos ocupamos del lado técnico para que tu web esté rápida, estable y bien cuidada sin que tengas que perseguir proveedores.",
     "feat_speed": "NVMe ultra-rápido",
     "feat_security": "SSL + protección",
     "feat_backup": "Backups diarios",
@@ -867,8 +867,8 @@
   },
   "final_cta": {
     "eyebrow": "Hablemos",
-    "title": "¿Listo para construir algo que valga la pena?",
-    "subtitle": "Cuéntanos tu proyecto. Sin formularios eternos ni compromisos inmediatos. Solo una buena conversación sobre lo que quieres construir.",
+    "title": "Si ya sabes lo que quieres construir, conversemos.",
+    "subtitle": "Y si todavía lo estás aterrizando, también. Estamos para ayudarte a darle forma con diseño, criterio y buena ejecución.",
     "primary": "Hablemos de tu proyecto",
     "secondary": "Ver servicios y precios",
     "whatsapp": "Contactar por WhatsApp",
@@ -876,32 +876,32 @@
   },
   "services_overview": {
     "eyebrow": "Qué hacemos",
-    "title": "Diseño, desarrollo y estrategia digital",
-    "subtitle": "Todo lo que necesitas para construir una presencia digital que realmente represente tu negocio.",
+    "title": "Diseño y desarrollo digital, trabajados en serio",
+    "subtitle": "Creamos marcas, sitios web y el soporte técnico que las mantiene vivas. Siempre desde un equipo pequeño y muy implicado.",
     "web_title": "Desarrollo Web",
-    "web_desc": "Sitios web hechos a medida: landing pages, portfolios, tiendas online, restaurantes y plataformas digitales. Sin plantillas, sin atajos.",
+    "web_desc": "Diseñamos y desarrollamos webs a medida para negocios que necesitan verse bien, cargar rápido y convertir mejor.",
     "web_cta": "Ver planes web",
     "brand_title": "Identidad Visual & Branding",
-    "brand_desc": "Logos, paletas de color, tipografía y manual de marca. También: diseño gráfico, piezas publicitarias y fotografía de producto.",
+    "brand_desc": "Creamos identidades visuales, logotipos y sistemas gráficos coherentes, profesionales y fáciles de aplicar en el día a día.",
     "brand_cta": "Ver planes de branding",
     "hosting_title": "Hosting Gestionado",
-    "hosting_desc": "Infraestructura NVMe, SSL, backups diarios, CDN global y dominio. Lo gestionamos todo para que tú te concentres en tu negocio.",
+    "hosting_desc": "Nos encargamos del lado técnico para que tu web esté estable, segura y bien mantenida sin complicarte con proveedores.",
     "hosting_cta": "Ver hosting"
   },
   "about": {
-    "eyebrow": "Sobre nosotros",
-    "title": "Un equipo pequeño con resultados grandes",
-    "subtitle": "Trabajamos con pocos clientes a la vez para dar atención real, no automatizada.",
-    "description": "DualGrid nació de la convicción de que el diseño y la tecnología, bien aplicados, pueden transformar cualquier negocio. Somos un estudio digital especializado: diseñamos identidades, construimos webs y gestionamos infraestructura — con el cuidado de un equipo pequeño y la precisión de ingenieros.",
+    "eyebrow": "Quiénes somos",
+    "title": "Una diseñadora. Un ingeniero. Un mismo proyecto.",
+    "subtitle": "No somos una gran corporación. Somos un equipo pequeño que se implica de verdad en cada trabajo.",
+    "description": "DualGrid nace de unir sensibilidad visual y criterio técnico. Ella se encarga del diseño, la identidad y la dirección visual. Él de la arquitectura, el desarrollo y la implementación. Preferimos trabajar con pocos proyectos a la vez para darles el tiempo, el cuidado y la dedicación que merecen.",
     "value_1_icon": "🎯",
-    "value_1_title": "Enfoque y atención real",
-    "value_1_desc": "Tomamos pocos proyectos a la vez para que cada cliente reciba atención completa, no la de un empleado junior.",
+    "value_1_title": "Diseño con intención",
+    "value_1_desc": "Cada decisión visual tiene un porqué. Diseñamos para que tu marca se vea bien, pero también para que se entienda y se recuerde.",
     "value_2_icon": "✦",
-    "value_2_title": "Sin intermediarios",
-    "value_2_desc": "El equipo que diseña y programa tu proyecto es el mismo que te atiende. Sin traductores de requisitos.",
+    "value_2_title": "Tecnología bien resuelta",
+    "value_2_desc": "No hacemos código para salir del paso. Construimos soluciones limpias, sólidas y pensadas para durar.",
     "value_3_icon": "📊",
-    "value_3_title": "Diseño orientado a resultados",
-    "value_3_desc": "Cada decisión visual está justificada por su impacto comercial. No hacemos sitios bonitos. Hacemos sitios que generan clientes."
+    "value_3_title": "Cuidado real en cada entrega",
+    "value_3_desc": "Nos implicamos de verdad en cada proyecto. Menos volumen, más dedicación y mejores decisiones de principio a fin."
   },
   "testimonials": {
     "eyebrow": "Lo que dicen nuestros clientes",

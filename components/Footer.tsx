@@ -41,10 +41,10 @@ export default function Footer() {
       />
 
       <div className="bg-card">
-        <div className="max-w-6xl mx-auto px-6 py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10">
             {/* Brand */}
-            <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left">
+            <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left max-w-[280px] mx-auto sm:mx-0">
               <LogoDualGrid width={160} />
               <p className="text-sm text-muted-foreground max-w-xs">{t('footer.tagline')}</p>
               <div className="flex items-center gap-3 mt-2">
@@ -97,7 +97,7 @@ export default function Footer() {
             </div>
 
             {/* Services */}
-            <div className="flex flex-col items-center sm:items-start gap-2">
+            <div className="flex flex-col items-center sm:items-start gap-2 text-center sm:text-left">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                 {t('footer.links_title')}
               </p>
@@ -113,7 +113,7 @@ export default function Footer() {
             </div>
 
             {/* Interest links */}
-            <div className="flex flex-col items-center sm:items-start gap-2">
+            <div className="flex flex-col items-center sm:items-start gap-2 text-center sm:text-left">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                 {t('footer.enlaces_title')}
               </p>
@@ -129,7 +129,7 @@ export default function Footer() {
             </div>
 
             {/* Contact */}
-            <div className="flex flex-col items-center sm:items-start gap-3">
+            <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
                 {t('footer.contact_us')}
               </p>

@@ -81,7 +81,7 @@ export default function HostingSection() {
   return (
     <section
       id="hosting"
-      className="relative py-24 sm:py-32 px-4 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
+      className="relative py-24 sm:py-32 px-5 sm:px-6 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
     >
       {/* Cyan glow — top right (tech/server vibe) */}
       <div
@@ -112,7 +112,7 @@ export default function HostingSection() {
         />
 
         {/* Features strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 sm:mb-12">
           {HOSTING_FEATURES.map((f) => (
             <Reveal key={f.labelKey}>
               <div className="flex items-center gap-2 bg-card border border-border rounded-xl px-4 py-3">
@@ -132,7 +132,7 @@ export default function HostingSection() {
         </div>
 
         {/* Hosting plan cards — same visual design as web plan cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-8 mt-2">
           {HOSTING_PLANS.map((plan) => (
             <Reveal key={plan.id} className="h-full">
               <div

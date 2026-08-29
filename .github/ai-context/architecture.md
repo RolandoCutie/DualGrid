@@ -143,3 +143,4 @@ hooks/                      # (reserved for custom hooks)
 - Plan recommendation is a pure scoring function — no AI/ML, simple weight-based rules.
 - All anchored landing sections use `scroll-mt-*` classes so `scrollIntoView()` does not hide headings behind the sticky navbar.
 - Web, branding, and hosting pricing cards now share the same structural language: 2px border shell, top badge, icon block, price divider, CTA placement, collapsible details, and outer glow on hover.
+- Informational sections (`HeroSection`, `AboutSection`, `ServicesOverview`) now reuse local SVG assets from `public/assets/icons/*` wherever possible so iconography stays visually consistent with the pricing cards and the rest of the landing.

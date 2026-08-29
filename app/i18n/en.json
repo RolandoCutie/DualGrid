@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "DualGrid",
-    "tagline": "Websites that convert visitors into clients"
+    "tagline": "Design and technology for brands that want to look sharp and work better"
   },
   "nav": {
     "why": "Why us?",
@@ -10,7 +10,7 @@
     "branding": "Branding",
     "hosting": "Hosting",
     "process": "Process",
-    "cta": "Start a project",
+    "cta": "Let's talk",
     "dashboard": "Dashboard",
     "logout": "Log out",
     "language_selector": "Language selector",
@@ -24,8 +24,8 @@
     "title_before": "Where design",
     "title_highlight": "and technology",
     "title_after": "build your brand.",
-    "subtitle": "A team made up of a designer and an engineer. Visual identities, websites and digital experiences — with purposeful design and precise code.",
-    "cta_primary": "Let's talk about your project",
+    "subtitle": "We combine design and programming to create unique digital presences. We build brands, websites, and digital experiences with discernment, a personal touch, and genuine dedication.",
+    "cta_primary": "I want a professional website",
     "cta_primary_sub": "Webs · stores · landing pages",
     "cta_secondary": "See our work",
     "cta_branding": "I want a visual identity",
@@ -43,9 +43,9 @@
     ]
   },
   "why": {
-    "eyebrow": "Why choose us",
-    "title": "Design and technology under the same roof",
-    "subtitle": "You don't hire a designer and a developer separately. Here, both work together on your project from the very first sketch.",
+    "eyebrow": "Why work with us",
+    "title": "Design and development, thought together",
+    "subtitle": "We are not a big corporation, and we do not want to look like one. We are a small team that combines visual sensitivity and technical judgment in every decision.",
     "items": [
       {
         "emoji": "🎨",
@@ -81,8 +81,8 @@
   },
   "process": {
     "eyebrow": "How we work",
-    "title": "Clear process, predictable results",
-    "subtitle": "The same proven workflow for websites, brand identities and custom projects. Quality and transparency at every stage.",
+    "title": "A clear process for every project",
+    "subtitle": "The same workflow for websites, brand identities and custom work. Clear decisions, realistic timing and close collaboration throughout.",
     "steps": [
       {
         "number": "01",
@@ -124,8 +124,8 @@
   },
   "plans": {
     "eyebrow": "Web development",
-    "section_title": "Web Development Plans",
-    "section_subtitle": "All-inclusive sites built to grow your business — design, code, domain and hosting.",
+    "section_title": "Web plans for businesses that want to do it properly",
+    "section_subtitle": "From landing pages to custom solutions. Every plan combines custom design, solid implementation and real support.",
     "title": "Solutions for every type of business",
     "subtitle": "From landing pages to custom systems. Every plan includes unique design, clean code and post-launch support.",
     "custom_note": "Can't find what you're looking for?",
@@ -141,8 +141,8 @@
   },
   "branding_plans": {
     "eyebrow": "Visual identity",
-    "section_title": "Branding & Visual Identity Plans",
-    "section_subtitle": "A strong brand identity that makes you unforgettable. From a quick-start logo to a full corporate identity system.",
+    "section_title": "Branding & visual identity plans",
+    "section_subtitle": "From a well-crafted logo to a complete visual system. We design brands that feel coherent, professional and easy to use.",
     "title": "Find the right brand identity plan",
     "subtitle": "Not sure which plan fits you? Take the 4-question test and get your personalized recommendation in seconds.",
     "cta_quiz": "Find my plan with a quick test",
@@ -612,7 +612,7 @@
     "result_found_name": "Great news, {name}, we found your plan!"
   },
   "footer": {
-    "tagline": "Design with purpose. Code with precision.",
+    "tagline": "A small team. Thoughtful design. Precise code.",
     "rights": "All rights reserved.",
     "follow_us": "Follow us",
     "contact_us": "Contact",
@@ -671,7 +671,7 @@
   "hosting": {
     "eyebrow": "Hosting & Domain",
     "title": "Professional web infrastructure with full management",
-    "subtitle": "Your website deserves fast, secure, fully managed hosting. We handle everything: speed, backups, SSL, and direct WhatsApp support.",
+    "subtitle": "We take care of the technical side so your website stays fast, stable and well maintained without vendor headaches.",
     "feat_speed": "Ultra-fast NVMe",
     "feat_security": "SSL + protection",
     "feat_backup": "Daily backups",
@@ -867,41 +867,41 @@
   },
   "final_cta": {
     "eyebrow": "Let's talk",
-    "title": "Ready to build something worth building?",
-    "subtitle": "Tell us about your project. No long forms, no immediate commitments. Just a good conversation about what you want to create.",
+    "title": "If you already know what you want to build, let’s talk.",
+    "subtitle": "And if you are still shaping it, that works too. We can help you turn it into something clear, well designed and well built.",
     "primary": "Let's talk about your project",
     "secondary": "See services and pricing",
     "whatsapp": "Contact on WhatsApp",
     "note": "Reply within 24h · No commitment"
   },
   "services_overview": {
-    "eyebrow": "Our services",
-    "title": "Everything you need to grow online",
-    "subtitle": "Design, development and infrastructure. One team, real results.",
+    "eyebrow": "What we do",
+    "title": "Design and digital development, taken seriously",
+    "subtitle": "We create brands, websites and the technical support that keeps them alive. Always from a small team that is deeply involved.",
     "web_title": "Web Development",
-    "web_desc": "Custom websites: landing pages, portfolios, online stores, restaurants and digital platforms. No templates, no shortcuts.",
+    "web_desc": "We design and build custom websites for businesses that need to look sharp, load fast and convert better.",
     "web_cta": "See web plans",
-    "brand_title": "Visual Identity & Design",
-    "brand_desc": "Logo, color palette, typography and brand manual. Also: graphic design, promotional materials and product photography.",
+    "brand_title": "Visual Identity & Branding",
+    "brand_desc": "We create visual identities, logos and graphic systems that are coherent, professional and easy to apply day to day.",
     "brand_cta": "See branding plans",
     "hosting_title": "Managed Hosting",
-    "hosting_desc": "NVMe infrastructure, SSL, daily backups, global CDN and domain. We manage everything so you don't have to worry.",
+    "hosting_desc": "We handle the technical side so your website stays stable, secure and properly maintained without extra complexity for you.",
     "hosting_cta": "See hosting"
   },
   "about": {
     "eyebrow": "About us",
-    "title": "Two disciplines. One team.",
-    "subtitle": "Design with purpose. Code with precision. The advantage of having both worlds in a single project.",
-    "description": "DualGrid was born from uniting two worlds that rarely truly work together: design and engineering. She brings visual direction, aesthetic judgment and brand identity. He brings technical architecture, clean code and product logic. Together, we cover a project from start to finish.",
+    "title": "One designer. One engineer. One shared standard.",
+    "subtitle": "We are not a large corporation. We are a small team that gets genuinely involved in every piece of work.",
+    "description": "DualGrid brings together visual sensitivity and technical judgment. She leads design, identity and visual direction. He handles architecture, development and implementation. We take on fewer projects on purpose so we can give each one the time, care and dedication it deserves.",
     "value_1_icon": "🎯",
-    "value_1_title": "Design with purpose",
-    "value_1_desc": "Every visual decision has a reason. We don’t make things pretty for the sake of it — we design to communicate, persuade and position your brand.",
+    "value_1_title": "Design with intention",
+    "value_1_desc": "Every visual decision has a reason. We design so your brand looks good, but also so it feels clear and memorable.",
     "value_2_icon": "✦",
-    "value_2_title": "Development with judgment",
-    "value_2_desc": "The code is clean, scalable and built to last. No shortcuts that turn into problems down the road.",
+    "value_2_title": "Technology done properly",
+    "value_2_desc": "We do not write code just to get something out the door. We build clean, solid solutions made to last.",
     "value_3_icon": "📊",
-    "value_3_title": "One project, one team",
-    "value_3_desc": "The designer and the developer share every project. No handoff misunderstandings. No \"that’s not what I was told\"."
+    "value_3_title": "Real care in every delivery",
+    "value_3_desc": "We get truly involved in each project. Less volume, more dedication, and better decisions from start to finish."
   },
   "testimonials": {
     "eyebrow": "What our clients say",
