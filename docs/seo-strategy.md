@@ -72,7 +72,8 @@ Global metadata lives in `app/layout.tsx` and uses:
 - File: `app/opengraph-image.tsx`
 - Renderer: `ImageResponse` from `next/og`
 - Size: `1200 × 630`
-- Direction: dark neon background, branded glows, premium panel layout and a professional, high-trust positioning.
+- Direction: dark neon background, editorial split layout, restrained premium panels and a high-trust positioning aligned with the landing page voice.
+- Composition rule: keep a single clear headline hierarchy and a small number of support panels; the OG image should feel calmer and more elegant than a full page hero, not like a screenshot of multiple sections combined.
 
 The site currently uses one high-quality brand-led OG image across the public experience.
 
