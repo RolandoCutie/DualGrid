@@ -6,17 +6,9 @@ import Reveal from '@/components/ui/Reveal';
 
 // Real client testimonials
 const TESTIMONIALS = [
+
   {
     id: 1,
-    quote:
-      'DualGrid transformó completamente mi presencia digital. Tenía dos necesidades muy distintas — un sitio para mis tours en Cuba y visibilidad para mis artículos científicos — y lograron unificar todo con un diseño coherente y profesional. La experiencia fue impecable.',
-    author: 'Nils Navarro',
-    role: 'Fotógrafo, guía de tours y divulgador científico',
-    initial: 'N',
-    color: 'var(--primary)',
-  },
-  {
-    id: 2,
     quote:
       'Gracias a DualGrid, Cubaway tiene ahora un sitio que realmente vende. Mis clientes pueden ver la flotilla, filtrar por especificaciones y contactarme por WhatsApp en segundos. Las reservas aumentaron notablemente desde el lanzamiento.',
     author: 'Yandy Dopico',

@@ -434,11 +434,11 @@ export default function Image() {
                 DualGrid
               </div>
               <div style={{ color: TEXT, fontSize: '30px', fontWeight: 800, lineHeight: 1.1 }}>
-                Diseno sobrio. Ejecucion seria. Soporte real.
+                Diseño sobrio. Ejecución seria. Soporte real.
               </div>
               <div style={{ color: MUTED, fontSize: '15px', lineHeight: 1.6 }}>
-                Una presencia digital pensada para ordenar tu mensaje, elevar tu imagen y dar mas
-                seguridad desde la primera impresion.
+                Una presencia digital pensada para ordenar tu mensaje, elevar tu imagen y dar más
+                seguridad desde la primera impresión.
               </div>
             </div>
 
