@@ -45,17 +45,17 @@ export default function TestimonialsSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('testimonials.eyebrow')}
           title={t('testimonials.title')}
           subtitle={t('testimonials.subtitle')}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-5xl mx-auto">
           {TESTIMONIALS.map((item) => (
             <Reveal key={item.id} className="h-full">
-              <figure className="flex flex-col rounded-2xl border border-border bg-card p-7 h-full gap-5">
+              <figure className="gradient-border card-elevate group flex flex-col rounded-2xl border border-border bg-card p-6 sm:p-7 h-full gap-5 transition-all duration-300">
                 {/* Stars */}
                 <div className="flex gap-0.5" aria-label="5 estrellas">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -73,7 +73,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 <blockquote className="text-sm text-muted-foreground leading-relaxed flex-1 italic">
-                  "{item.quote}"
+                  &ldquo;{item.quote}&rdquo;
                 </blockquote>
 
                 <figcaption className="flex items-center gap-3">

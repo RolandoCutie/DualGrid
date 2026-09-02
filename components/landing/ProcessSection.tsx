@@ -50,7 +50,7 @@ export default function ProcessSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('process.eyebrow')}
           title={t('process.title')}
@@ -60,7 +60,7 @@ export default function ProcessSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {steps.map((step, i) => (
             <Reveal key={step.number} className="h-full">
-              <div className="gradient-border relative group bg-card border border-border rounded-2xl p-7 hover:border-primary/30 hover:shadow-xl card-elevate transition-all duration-300 h-full">
+              <div className="gradient-border relative group bg-card border border-border rounded-2xl p-6 sm:p-7 hover:border-primary/30 hover:shadow-xl card-elevate transition-all duration-300 h-full">
                 {/* Step number as large ghost text */}
                 <div
                   className="absolute -top-3 -right-1 text-7xl font-black select-none pointer-events-none leading-none"

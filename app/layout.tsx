@@ -32,7 +32,7 @@ const jsonLd = {
       name: 'DualGrid',
       url: baseUrl,
       description:
-        'Agencia de diseño y desarrollo digital. Creamos sitios web, identidades de marca y experiencias digitales con diseño con criterio y código con precisión.',
+        'DualGrid crea identidades visuales, sitios web y sistemas digitales con criterio, oficio y una ejecución sólida para negocios que quieren comunicar mejor y crecer con confianza.',
       sameAs: [],
       contactPoint: {
         '@type': 'ContactPoint',
@@ -74,11 +74,11 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'DualGrid — Agencia de diseño y desarrollo digital',
+    default: 'DualGrid — Diseño web, branding y desarrollo digital',
     template: '%s | DualGrid',
   },
   description:
-    'Agencia de diseño y desarrollo digital formada por una diseñadora y un ingeniero. Creamos sitios web, identidades de marca y soluciones digitales con diseño con criterio y código con precisión.',
+    'DualGrid crea identidades visuales, sitios web y sistemas digitales con criterio, oficio y una ejecución sólida para negocios que quieren comunicar mejor y crecer con confianza.',
   keywords: [
     'diseño web',
     'desarrollo web',
@@ -101,9 +101,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DualGrid — Agencia de diseño y desarrollo digital',
+    title: 'DualGrid — Diseño web, branding y desarrollo digital',
     description:
-      'Diseño y tecnología bajo el mismo techo. Sitios web, identidades de marca y soluciones digitales.',
+      'Diseño web, branding y desarrollo digital con criterio, oficio y una ejecución sólida para negocios que quieren comunicar mejor.',
   },
   manifest: '/manifest.webmanifest',
 };

@@ -7,7 +7,7 @@
 // Next.js JS/CSS chunks in /_next/static/ are auto-invalidated via
 // content-hash URLs — no version bump needed for those.
 
-const CACHE_VERSION = 'dualgrid-v2';
+const CACHE_VERSION = 'dualgrid-v3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

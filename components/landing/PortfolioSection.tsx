@@ -59,7 +59,7 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
       id="portafolio"
       className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
     >
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('portfolio.eyebrow')}
           title={t('portfolio.title')}
@@ -99,7 +99,7 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
         {filtered.length === 0 ? (
           <p className="text-center text-muted-foreground py-16">{t('portfolio.no_projects')}</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {filtered.map((project) => (
               <Reveal key={project._id} className="h-full">
                 <ProjectCard project={project} t={t} categoryLabel={categoryLabel} />
@@ -126,7 +126,7 @@ function ProjectCard({
   const hasCaseStudy = project.problem || project.solution || project.result;
 
   return (
-    <article className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 card-elevate h-full transition-all duration-200">
+    <article className="gradient-border group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/30 card-elevate h-full transition-all duration-200">
       {/* Image */}
       <div className="relative w-full aspect-video bg-muted overflow-hidden">
         {hasImages ? (

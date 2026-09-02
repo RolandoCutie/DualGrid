@@ -1,7 +1,7 @@
 'use client';
 
-import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import SectionHeading from '@/components/landing/SectionHeading';
+import { DICTS, useLanguage } from '@/components/ui/LanguageProvider';
 import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
 
@@ -21,7 +21,7 @@ export default function WhySection() {
 
   return (
     <section id="por-que" className="relative py-24 sm:py-32 overflow-hidden bg-transparent">
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('why.eyebrow')}
           title={t('why.title')}
@@ -31,7 +31,7 @@ export default function WhySection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item, i) => (
             <Reveal key={item.title} className="h-full">
-              <div className="gradient-border group flex flex-col gap-4 p-7 rounded-2xl border border-border bg-card h-full">
+              <div className="gradient-border group flex flex-col gap-4 p-6 sm:p-7 rounded-2xl border border-border bg-card h-full">
                 {/* SVG Icon */}
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5"

@@ -41,7 +41,7 @@ export default function AboutSection() {
 
         {/* Description */}
         <Reveal>
-          <p className="text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-14 text-lg">
+          <p className="text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-12 sm:mb-14 text-base sm:text-lg">
             {t('about.description')}
           </p>
         </Reveal>
@@ -50,7 +50,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {VALUE_KEYS.map((key, i) => (
             <Reveal key={key} className="h-full">
-              <div className="gradient-border group flex flex-col gap-4 p-7 rounded-2xl border border-border bg-card h-full">
+              <div className="gradient-border group flex flex-col gap-4 p-6 sm:p-7 rounded-2xl border border-border bg-card h-full">
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 p-2.5"
                   style={{

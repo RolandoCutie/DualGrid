@@ -82,10 +82,10 @@ function BrandingPlanCard({
   return (
     <div
       className={cn(
-        'relative flex flex-col rounded-2xl border-2 p-7 sm:p-8 transition-all duration-300 h-full',
+        'relative flex flex-col rounded-2xl p-7 sm:p-8 transition-all duration-300 h-full',
         plan.highlighted
-          ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-primary'
-          : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-primary',
+          ? 'border-2 border-transparent bg-card shadow-2xl scale-[1.03] glow-primary card-glow-primary'
+          : 'gradient-border bg-card hover:shadow-lg card-glow-primary',
       )}
       style={
         plan.highlighted
@@ -306,7 +306,7 @@ export default function BrandingPlansSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('branding_plans.eyebrow')}
           title={t('branding_plans.section_title')}
@@ -314,7 +314,7 @@ export default function BrandingPlansSection() {
         />
 
         {/* Quiz CTA */}
-        <Reveal className="mb-14 text-center">
+        <Reveal className="mb-12 sm:mb-14 text-center">
           <button
             onClick={() => setWizardOpen(true)}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black shadow-md hover:shadow-lg hover:opacity-90 transition-all duration-200 cursor-pointer animate-pulse-glow"
@@ -332,7 +332,7 @@ export default function BrandingPlansSection() {
         </Reveal>
 
         {/* Plans grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
           {BRANDING_PLANS.map((plan) => {
             const features = bp[`${plan.id}_features`] as string[];
             const name = bp[`${plan.id}_name`] as string;
@@ -364,7 +364,7 @@ export default function BrandingPlansSection() {
 
         {/* Custom note */}
         <Reveal className="mt-12">
-          <div className="text-center p-6 rounded-2xl border border-dashed border-border bg-card/40 backdrop-blur-sm">
+          <div className="gradient-border text-center p-5 sm:p-6 rounded-[4rem] border border-dashed border-border bg-card/40 backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
             <p className="text-muted-foreground text-sm">
               {t('branding_plans.custom_note')}{' '}
               <button

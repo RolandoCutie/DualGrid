@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "DualGrid",
-    "tagline": "Design and technology for brands that want to look sharp and work better"
+    "tagline": "Web design, branding and digital development for businesses that want clearer communication and a stronger presence"
   },
   "nav": {
     "why": "Why us?",
@@ -21,10 +21,10 @@
   },
   "hero": {
     "eyebrow": "Digital design & development agency",
-    "title_before": "Where design",
-    "title_highlight": "and technology",
-    "title_after": "build your brand.",
-    "subtitle": "We combine design and programming to create unique digital presences. We build brands, websites, and digital experiences with discernment, a personal touch, and genuine dedication.",
+    "title_before": "Design, branding and web",
+    "title_highlight": "built to help",
+    "title_after": "your business grow.",
+    "subtitle": "At DualGrid, we combine design with development to create visual identities, websites and digital systems with care, craft and real attention to detail.",
     "cta_primary": "I want a professional website",
     "cta_primary_sub": "Webs · stores · landing pages",
     "cta_secondary": "See our work",
@@ -43,46 +43,46 @@
     ]
   },
   "why": {
-    "eyebrow": "Why work with us",
+    "eyebrow": "Why work with us?",
     "title": "Design and development, thought together",
-    "subtitle": "We are not a big corporation, and we do not want to look like one. We are a small team that combines visual sensitivity and technical judgment in every decision.",
+    "subtitle": "We work with seriousness, visual sensitivity and technical judgment so every brand and website communicates better, inspires trust and feels well resolved from start to finish.",
     "items": [
       {
         "emoji": "🎨",
         "title": "100% custom design",
-        "desc": "No templates. Every website and brand identity is designed from scratch for your business."
+        "desc": "No generic templates. Every website and visual identity is designed from scratch around what your business needs to communicate and sell."
       },
       {
         "emoji": "⚡",
         "title": "Full service",
-        "desc": "You just approve. We handle design, code, branding, domain and hosting."
+        "desc": "We handle design, development, branding, domain setup and hosting so you do not have to coordinate multiple providers."
       },
       {
         "emoji": "🗣️",
         "title": "Direct communication",
-        "desc": "Clear, barrier-free communication. WhatsApp support throughout the project, no middlemen."
+        "desc": "You work directly with us from start to finish. Clear communication, quick replies and no unnecessary middlemen."
       },
       {
         "emoji": "🔧",
         "title": "Web & branding in one place",
-        "desc": "We create your visual identity and website with brand coherence — no need to juggle separate teams."
+        "desc": "We design your brand and your website under the same visual direction, so everything feels coherent, professional and well resolved."
       },
       {
         "emoji": "📱",
         "title": "Perfect on all devices",
-        "desc": "Responsive design from the first sketch. Works on mobile, tablet and desktop."
+        "desc": "Your website is designed to look good and work smoothly on mobile, tablet and desktop from the very beginning."
       },
       {
         "emoji": "🔒",
         "title": "Clean and secure code",
-        "desc": "We follow security and performance best practices on every project."
+        "desc": "We build with performance, structure and security in mind so your project stays reliable now and easier to maintain later."
       }
     ]
   },
   "process": {
     "eyebrow": "How we work",
     "title": "A clear process for every project",
-    "subtitle": "The same workflow for websites, brand identities and custom work. Clear decisions, realistic timing and close collaboration throughout.",
+    "subtitle": "We follow a clear process from the start so you know what will be done, how long it may take and what kind of result to expect.",
     "steps": [
       {
         "number": "01",
@@ -124,13 +124,13 @@
   },
   "plans": {
     "eyebrow": "Web development",
-    "section_title": "Web plans for businesses that want to do it properly",
-    "section_subtitle": "From landing pages to custom solutions. Every plan combines custom design, solid implementation and real support.",
+    "section_title": "Webs plans for every type of business."  ,
+    "section_subtitle": "From a clear landing page to more complete solutions. Every plan combines custom design, solid technical execution and real support.",
     "title": "Solutions for every type of business",
     "subtitle": "From landing pages to custom systems. Every plan includes unique design, clean code and post-launch support.",
-    "custom_note": "Can't find what you're looking for?",
+    "custom_note": "Need something more specific?",
     "custom_link": "Complete the questionnaire",
-    "custom_suffix": "and we'll prepare a tailored proposal for you.",
+    "custom_suffix": "and we'll prepare a proposal built around what you actually need.",
     "select": "Select plan",
     "popular": "Most popular",
     "delivery": "Delivery in",
@@ -141,22 +141,22 @@
   },
   "branding_plans": {
     "eyebrow": "Visual identity",
-    "section_title": "Branding & visual identity plans",
-    "section_subtitle": "From a well-crafted logo to a complete visual system. We design brands that feel coherent, professional and easy to use.",
-    "title": "Find the right brand identity plan",
-    "subtitle": "Not sure which plan fits you? Take the 4-question test and get your personalized recommendation in seconds.",
-    "cta_quiz": "Find my plan with a quick test",
-    "custom_note": "Still not sure?",
+    "section_title": "Branding and visual identity plans.",
+    "section_subtitle": "A powerful brand identity that makes you unforgettable. From a starting logo to a complete corporate identity system.",
+    "title": "Find the visual identity plan that fits your business best",
+    "subtitle": "If you are not sure what level you need, answer a few questions and we will point you toward the right option for your stage.",
+    "cta_quiz": "Find my ideal plan",
+    "custom_note": "Still unsure?",
     "custom_link": "Take the identity test",
-    "custom_suffix": "and we'll tell you exactly what you need.",
+    "custom_suffix": "and we'll help you understand what level of branding makes sense for you right now.",
     "popular": "Most popular",
     "from": "From",
     "essential_name": "Essential Plan",
-    "essential_tagline": "Basic identity to launch with confidence.",
+    "essential_tagline": "The visual base to start well.",
     "corporate_name": "Corporate Plan",
-    "corporate_tagline": "A complete and strategic visual universe.",
+    "corporate_tagline": "A stronger, more coherent brand.",
     "global_name": "Global Plan",
-    "global_tagline": "Brand architecture for global-scale projects.",
+    "global_tagline": "A visual system for more complex brands.",
     "essential_features": [
       "1 conceptual proposal + 1 round of minor adjustments (color or typography).",
       "Main version + adaptive variants.",
@@ -186,14 +186,14 @@
     "global_cta": "Start now",
     "see_features": "See all features",
     "hide_features": "Hide features",
-    "essential_target": "Ideal for: Entrepreneurs and small local projects that need professional visual foundations without unnecessary complexity.",
-    "corporate_target": "Ideal for: SMEs and brands that want to position strongly, differentiate from competitors, and expand their reach.",
-    "global_target": "Ideal for: Consolidated companies, corporations, or umbrella brands managing multiple subdivisions, independent products, or complex initiatives."
+    "essential_target": "Ideal for: early-stage brands that need a clear, usable and professional identity from the beginning.",
+    "corporate_target": "Ideal for: growing brands that want to stand out better and bring more order to their visual communication.",
+    "global_target": "Ideal for: established businesses or umbrella brands that need structure, consistency and visual control."
   },
   "plans_data": {
     "landing": {
       "name": "Landing Express",
-      "tagline": "Fast professional presence",
+      "tagline": "Quick professional presence",
       "features": [
         "Custom one-page professional design",
         "Fully responsive for mobile, tablet & desktop",
@@ -203,7 +203,7 @@
         "Google Analytics included to track your visitors"
       ],
       "ctaLabel": "Get started",
-      "target": "Ideal for: Entrepreneurs, freelancers, coaches or local businesses that need a professional page fast to attract clients and project credibility."
+      "target": "Ideal for: entrepreneurs, freelancers, coaches or local businesses that need a quick professional page to attract clients and project credibility."
     },
     "menu_qr": {
       "name": "Digital QR Menu",
@@ -217,11 +217,11 @@
         "Works on any phone — no app download needed"
       ],
       "ctaLabel": "Get started",
-      "target": "Ideal for: Restaurants, cafés, bars, food trucks and any food business that wants to digitize their menu and speed up table service."
+      "target": "Ideal for: restaurants, cafés, bars and any food business that wants to digitalize their menu and streamline table service."
     },
     "portfolio": {
       "name": "Portfolio Pro",
-      "tagline": "Your work at its best",
+      "tagline": "Your work in its best expression",
       "features": [
         "Elegant design with animations and ultra-fast loading",
         "Project gallery with categories and filters for easy browsing",
@@ -231,7 +231,7 @@
         "Optimized for sharing on social media with custom preview image"
       ],
       "ctaLabel": "Get started",
-      "target": "Ideal for: Designers, photographers, architects and illustrators who need to showcase their work impressively to attract higher-caliber clients."
+      "target": "Ideal for: designers, photographers, architects and illustrators who need to showcase their work in an impactful way to attract higher-level clients."
     },
     "restaurant": {
       "name": "Restaurant Pro",
@@ -287,7 +287,7 @@
         "Simple editor to publish new content without technical help"
       ],
       "ctaLabel": "Get started",
-      "target": "Ideal for: Writers, journalists, educators and content creators who want to build an audience and become a trusted voice in their niche."
+      "target": "Ideal for: writers, journalists, educators and content creators who want to build an audience and establish themselves as authorities in their field."
     },
     "custom": {
       "name": "Custom System",
@@ -612,7 +612,7 @@
     "result_found_name": "Great news, {name}, we found your plan!"
   },
   "footer": {
-    "tagline": "A small team. Thoughtful design. Precise code.",
+    "tagline": "Craft, judgment and dedication in every delivery.",
     "rights": "All rights reserved.",
     "follow_us": "Follow us",
     "contact_us": "Contact",
@@ -644,8 +644,8 @@
   },
   "portfolio": {
     "eyebrow": "Our work",
-    "title": "Projects we've built",
-    "subtitle": "Websites, brand identities and digital projects created for real clients. Every project is custom, unique, and delivered on time.",
+    "title": "Real work for real businesses",
+    "subtitle": "A selection of websites, visual identities and digital projects built with strategic thinking, careful design and solid execution.",
     "filter_all": "All",
     "visit_site": "Visit site",
     "technologies": "Technologies",
@@ -670,8 +670,8 @@
   },
   "hosting": {
     "eyebrow": "Hosting & Domain",
-    "title": "Professional web infrastructure with full management",
-    "subtitle": "We take care of the technical side so your website stays fast, stable and well maintained without vendor headaches.",
+    "title": "Hosting and domain setup with full technical management",
+    "subtitle": "We handle performance, stability and the technical layer so your website runs properly without wasting your time on providers or setup issues.",
     "feat_speed": "Ultra-fast NVMe",
     "feat_security": "SSL + protection",
     "feat_backup": "Daily backups",
@@ -755,7 +755,7 @@
     "plan_essential_name": "Grid Essential",
     "plan_essential_price": "$100 USD",
     "plan_essential_delivery": "20 to 30 business days",
-    "plan_essential_desc": "Perfect for entrepreneurs and small local businesses that need to start fast with a professional image.",
+    "plan_essential_desc": "Ideal for brands that need to start with a clear, professional and well-resolved identity from the beginning.",
     "plan_essential_includes_1": "Custom logo designed from scratch",
     "plan_essential_includes_2": "Brand color palette (HEX, RGB, CMYK)",
     "plan_essential_includes_3": "Primary and secondary corporate typography",
@@ -796,7 +796,7 @@
   },
   "branding_page": {
     "completed_title": "You've already completed this questionnaire!",
-    "completed_body": "Your answers have been received. DualGrid Studio will be in touch with you soon.",
+    "completed_body": "Your answers have been received. DualGrid will be in touch with you soon.",
     "eyebrow": "🧭 Brand Identity Test",
     "title": "Discover Your Ideal Branding Plan",
     "subtitle": "Answer 4 quick questions and we'll tell you exactly which visual identity plan your business needs."
@@ -837,7 +837,7 @@
     "plan_essential_name": "ESSENTIAL PLAN",
     "plan_essential_price": "$100 USD",
     "plan_essential_delivery": "20 to 30 business days",
-    "plan_essential_desc": "Ideal for individual entrepreneurs or small local businesses that need to start fast with a professional image. Builds the minimum required visual elements to exist in the market.",
+    "plan_essential_desc": "Ideal for brands that need to start with a clear, professional and well-resolved identity. It builds the visual foundation needed to present themselves with coherence from the start.",
     "plan_essential_includes_1": "1 strong conceptual proposal + 1 round of minor adjustments (color, typography)",
     "plan_essential_includes_2": "Logo variants: horizontal, vertical, and icon version for social media",
     "plan_essential_includes_3": "Color palette (HEX, RGB, and CMYK codes)",
@@ -867,8 +867,8 @@
   },
   "final_cta": {
     "eyebrow": "Let's talk",
-    "title": "If you already know what you want to build, let’s talk.",
-    "subtitle": "And if you are still shaping it, that works too. We can help you turn it into something clear, well designed and well built.",
+    "title": "If you already have an idea, we can help turn it into something clear and well built.",
+    "subtitle": "And if you are still shaping it, we can help with that too. We help clarify the message, focus the offer and build a digital presence with sound judgment.",
     "primary": "Let's talk about your project",
     "secondary": "See services and pricing",
     "whatsapp": "Contact on WhatsApp",
@@ -876,42 +876,42 @@
   },
   "services_overview": {
     "eyebrow": "What we do",
-    "title": "Design and digital development, taken seriously",
-    "subtitle": "We create brands, websites and the technical support that keeps them alive. Always from a small team that is deeply involved.",
+    "title": "Design, branding and digital development for businesses that want to grow better",
+    "subtitle": "We create brands, websites and technical support through a rigorous, close-working process focused on results people can actually feel.",
     "web_title": "Web Development",
-    "web_desc": "We design and build custom websites for businesses that need to look sharp, load fast and convert better.",
+    "web_desc": "We design and build custom websites for businesses that need to inspire trust, load fast and turn visits into real opportunities.",
     "web_cta": "See web plans",
     "brand_title": "Visual Identity & Branding",
-    "brand_desc": "We create visual identities, logos and graphic systems that are coherent, professional and easy to apply day to day.",
+    "brand_desc": "We create visual identities, logos and graphic systems that help your business look more solid, more recognizable and more professional.",
     "brand_cta": "See branding plans",
     "hosting_title": "Managed Hosting",
-    "hosting_desc": "We handle the technical side so your website stays stable, secure and properly maintained without extra complexity for you.",
+    "hosting_desc": "We manage the technical side so your website stays stable, secure and properly maintained without adding extra complexity to your day.",
     "hosting_cta": "See hosting"
   },
   "about": {
     "eyebrow": "About us",
-    "title": "One designer. One engineer. One shared standard.",
-    "subtitle": "We are not a large corporation. We are a small team that gets genuinely involved in every piece of work.",
-    "description": "DualGrid brings together visual sensitivity and technical judgment. She leads design, identity and visual direction. He handles architecture, development and implementation. We take on fewer projects on purpose so we can give each one the time, care and dedication it deserves.",
+    "title": "Thoughtful work for brands that want to do things properly.",
+    "subtitle": "We believe in an honest, demanding and carefully executed way of working, where every visual and technical decision responds to a real goal.",
+    "description": "At DualGrid, we bring strategy, design and development together to build digital identities and experiences that are clear, coherent and built to last. We approach every project with attention, craft and commitment, because a strong digital presence is never improvised.",
     "value_1_icon": "🎯",
     "value_1_title": "Design with intention",
-    "value_1_desc": "Every visual decision has a reason. We design so your brand looks good, but also so it feels clear and memorable.",
+    "value_1_desc": "Every visual decision answers a real goal. We design so your brand not only looks good, but also feels clear, recognizable and easier to trust.",
     "value_2_icon": "✦",
     "value_2_title": "Technology done properly",
-    "value_2_desc": "We do not write code just to get something out the door. We build clean, solid solutions made to last.",
+    "value_2_desc": "We do not improvise solutions. We build clean, solid websites and systems that can support your business as it grows.",
     "value_3_icon": "📊",
     "value_3_title": "Real care in every delivery",
-    "value_3_desc": "We get truly involved in each project. Less volume, more dedication, and better decisions from start to finish."
+    "value_3_desc": "We approach every delivery with real attention, follow-through and commitment, so the final result lives up to what your business actually needs."
   },
   "testimonials": {
     "eyebrow": "What our clients say",
-    "title": "Projects that speak for themselves",
-    "subtitle": "Real collaborations with businesses that wanted to grow digitally."
+    "title": "Results you can see in real projects",
+    "subtitle": "Real collaborations with businesses that needed a stronger presence, clearer communication and a more professional digital image."
   },
   "contact": {
     "eyebrow": "Let's talk",
     "title": "Have a project in mind?",
-    "subtitle": "Write to us directly. We respond in less than 24 hours, no endless forms.",
+    "subtitle": "Write to us directly and tell us what you need. We reply in under 24 hours, without endless forms or unnecessary back and forth.",
     "whatsapp_cta": "Write on WhatsApp",
     "email_cta": "Send us an email",
     "or": "or",

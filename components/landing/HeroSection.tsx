@@ -81,7 +81,7 @@ export default function HeroSection({ autoOpen = false }: HeroSectionProps) {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10 sm:mb-12 text-balance">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl leading-relaxed mb-10 sm:mb-12 text-balance">
             {t('hero.subtitle')}
           </p>
 

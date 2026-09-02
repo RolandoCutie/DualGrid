@@ -5,7 +5,8 @@ export default function manifest(): MetadataRoute.Manifest {
     id: 'dualgrid',
     name: 'DualGrid',
     short_name: 'DualGrid',
-    description: 'Sitios web que convierten visitas en clientes.',
+    description:
+      'Diseño web, branding y desarrollo digital para negocios que quieren verse mejor y vender con más claridad.',
     start_url: '/',
     scope: '/',
     display: 'standalone',
@@ -85,7 +86,7 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: '1200x630',
         type: 'image/png',
         form_factor: 'wide',
-        label: 'DualGrid – Sitios web que convierten',
+        label: 'DualGrid – Diseño web, branding y desarrollo digital',
       },
     ],
   };

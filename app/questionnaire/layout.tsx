@@ -1,5 +1,5 @@
-import LogoDualGrid from '@/components/ui/LogoDualGrid';
 import BackHomeLink from '@/components/questionnaire/BackHomeLink';
+import LogoDualGrid from '@/components/ui/LogoDualGrid';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -16,7 +16,7 @@ export default function QuestionnaireLayout({ children }: { children: React.Reac
       {/* Minimal top bar */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-card/80 backdrop-blur-xl border-b border-border/60">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center" aria-label="DualGrid Studio">
+          <Link href="/" className="flex items-center" aria-label="DualGrid">
             <LogoDualGrid width={130} />
           </Link>
           <BackHomeLink />

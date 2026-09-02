@@ -48,7 +48,7 @@ export default function PlansSection() {
       id="planes"
       className="relative py-24 sm:py-32 overflow-hidden bg-transparent scroll-mt-28 lg:scroll-mt-32"
     >
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 relative z-10">
         <SectionHeading
           eyebrow={t('plans.eyebrow')}
           title={t('plans.section_title')}
@@ -56,7 +56,7 @@ export default function PlansSection() {
         />
 
         {/* Plans grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {translatedPlans.map((plan) => (
             <Reveal key={plan.id} className="h-full">
               <PlanCard plan={plan} onSelect={handleSelectPlan} />
@@ -65,7 +65,7 @@ export default function PlansSection() {
         </div>
 
         {/* Custom note */}
-        <div className="mt-12 text-center p-6 rounded-2xl border border-dashed border-border bg-card/40 backdrop-blur-sm">
+        <div className="gradient-border mt-12 text-center p-5 sm:p-6 rounded-2xl border border-dashed border-border bg-card/40 backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
           <p className="text-muted-foreground text-sm">
             {t('plans.custom_note')}{' '}
             <button

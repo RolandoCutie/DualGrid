@@ -142,5 +142,6 @@ hooks/                      # (reserved for custom hooks)
 - All admin API routes validate `isAdminSessionTokenValid(token)` before any logic.
 - Plan recommendation is a pure scoring function — no AI/ML, simple weight-based rules.
 - All anchored landing sections use `scroll-mt-*` classes so `scrollIntoView()` does not hide headings behind the sticky navbar.
-- Web, branding, and hosting pricing cards now share the same structural language: 2px border shell, top badge, icon block, price divider, CTA placement, collapsible details, and outer glow on hover.
+- Web, branding, and hosting pricing cards now share the same structural language: top badge, icon block, price divider, CTA placement, collapsible details, and outer glow on hover.
+- Landing cards now use a unified hover treatment with `gradient-border` (border-only neon ring, no background fill) and a softer `rounded-[4rem]` radius for principal card surfaces, with compact supporting cards using slightly smaller radii where needed.
 - Informational sections (`HeroSection`, `AboutSection`, `ServicesOverview`) now reuse local SVG assets from `public/assets/icons/*` wherever possible so iconography stays visually consistent with the pricing cards and the rest of the landing.

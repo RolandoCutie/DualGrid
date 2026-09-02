@@ -6,8 +6,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Test de Identidad Visual | DualGrid Studio',
-  description: 'Descubre el plan de branding ideal para tu proyecto en 4 preguntas.',
+  title: 'Test de Identidad Visual | DualGrid',
+  description: 'Descubre qué nivel de identidad visual necesita tu marca en 4 preguntas.',
   robots: { index: false, follow: false },
 };
 

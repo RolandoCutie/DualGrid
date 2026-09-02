@@ -39,9 +39,7 @@ const HOSTING_PLANS: HostingPlan[] = [
     id: 'biennial',
     labelKey: 'biennial',
     price: 110,
-    perYear: true,
-    highlighted: true,
-    badgeKey: 'badge_recommended',
+
     features: [
       'feature_nvme',
       'feature_ssl',
@@ -56,6 +54,8 @@ const HOSTING_PLANS: HostingPlan[] = [
     labelKey: 'triennial',
     price: 100,
     perYear: true,
+    highlighted: true,
+    badgeKey: 'badge_recommended',
     features: [
       'feature_nvme',
       'feature_ssl',
@@ -115,7 +115,7 @@ export default function HostingSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 sm:mb-12">
           {HOSTING_FEATURES.map((f) => (
             <Reveal key={f.labelKey}>
-              <div className="flex items-center gap-2 bg-card border border-border rounded-xl px-4 py-3">
+              <div className="flex items-center gap-2 bg-card border border-border rounded-2xl px-4 py-3">
                 <Image
                   src={f.icon}
                   alt=""
@@ -137,10 +137,10 @@ export default function HostingSection() {
             <Reveal key={plan.id} className="h-full">
               <div
                 className={cn(
-                  'relative flex flex-col rounded-2xl border-2 p-7 sm:p-8 transition-all duration-300 h-full',
+                  'relative flex flex-col rounded-2xl p-7 sm:p-8 transition-all duration-300 h-full',
                   plan.highlighted
-                    ? 'border-transparent bg-card shadow-2xl scale-[1.03] glow-primary'
-                    : 'border-border bg-card hover:border-primary/30 hover:shadow-lg card-glow-primary',
+                    ? 'border-2 border-transparent bg-card shadow-2xl scale-[1.03] glow-primary card-glow-primary'
+                    : 'gradient-border bg-card hover:shadow-lg card-glow-primary',
                 )}
                 style={
                   plan.highlighted
@@ -295,7 +295,7 @@ export default function HostingSection() {
 
         {/* Domain add-on card */}
         <Reveal>
-          <div className="relative rounded-2xl border-2 border-border bg-card p-7 sm:p-8 transition-all duration-300 card-glow-primary hover:border-primary/30 hover:shadow-lg">
+          <div className="gradient-border relative rounded-[4rem] border border-border bg-card p-7 sm:p-8 transition-all duration-300 card-glow-primary hover:border-primary/30 hover:shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.9fr] gap-8 items-start">
               <div>
                 <div className="mb-6">
