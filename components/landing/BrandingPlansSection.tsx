@@ -82,7 +82,7 @@ function BrandingPlanCard({
   return (
     <div
       className={cn(
-        'relative flex flex-col rounded-2xl p-7 sm:p-8 transition-all duration-300 h-full',
+        'relative flex flex-col rounded-2xl p-7 sm:p-8 transition-all duration-300 h-full border border-border',
         plan.highlighted
           ? 'border-2 border-transparent bg-card shadow-2xl scale-[1.03] glow-primary card-glow-primary'
           : 'gradient-border bg-card hover:shadow-lg card-glow-primary',
