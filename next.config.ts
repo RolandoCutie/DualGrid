@@ -20,7 +20,9 @@ const nextConfig: NextConfig = {
   },
   reactCompiler: true,
 
-  turbopack: {}, // Experimental TurboPack support
+  turbopack: {
+    root: __dirname,
+  },
   async headers() {
     return [
       {
