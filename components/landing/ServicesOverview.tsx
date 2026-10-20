@@ -4,6 +4,7 @@ import SectionHeading from '@/components/landing/SectionHeading';
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import Reveal from '@/components/ui/Reveal';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 
 const SERVICE_ICONS = [
   '/assets/icons/planes/sitio-empresarial.svg',
@@ -34,9 +35,16 @@ const SERVICE_IDS = ['web', 'brand', 'hosting'] as const;
 
 export default function ServicesOverview() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const scrollTo = (id: string) => {
+    if (pathname === '/services') {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    router.push(`/services#${id}`);
+  };
 
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden bg-transparent">

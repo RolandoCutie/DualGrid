@@ -1,15 +1,10 @@
 import AboutSection from '@/components/landing/AboutSection';
 import AuroraBackground from '@/components/landing/AuroraBackground';
-import BrandingPlansSection from '@/components/landing/BrandingPlansSection';
 import ClosingCTA from '@/components/landing/ClosingCTA';
 import HeroSection from '@/components/landing/HeroSection';
-import HostingSection from '@/components/landing/HostingSection';
-import PlansSection from '@/components/landing/PlansSection';
 import PortfolioSection from '@/components/landing/PortfolioSection';
-import ProcessSection from '@/components/landing/ProcessSection';
 import ServicesOverview from '@/components/landing/ServicesOverview';
 import TestimonialsSection from '@/components/landing/TestimonialsSection';
-import WhySection from '@/components/landing/WhySection';
 import Project from '@/database/project.model';
 import { getBaseUrl } from '@/lib/base-url';
 import connectDB from '@/lib/mongodb';
@@ -89,13 +84,8 @@ export default async function HomePage({
       <div className="relative z-10">
         <HeroSection autoOpen={autoOpenWizard} />
         <ServicesOverview />
-        <PortfolioSection projects={projects} />
-        <WhySection />
-        <ProcessSection />
-        <PlansSection />
-        <BrandingPlansSection />
-        <HostingSection />
         <AboutSection />
+        <PortfolioSection projects={projects} />
         <TestimonialsSection />
         <ClosingCTA />
       </div>

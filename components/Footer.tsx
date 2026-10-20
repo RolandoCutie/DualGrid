@@ -2,32 +2,34 @@
 
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import LogoDualGrid from '@/components/ui/LogoDualGrid';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const WHATSAPP_NUM = process.env.NEXT_PUBLIC_WHATSAPP_PHONE ?? '';
 const INSTAGRAM_URL = process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? '#';
 const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL ?? '#';
 
 const QUICK_LINKS = [
-  { href: '#planes', labelKey: 'footer.link_web' },
-  { href: '#branding', labelKey: 'footer.link_branding' },
-  { href: '#hosting', labelKey: 'footer.link_hosting' },
+  { href: '/services#planes', labelKey: 'footer.link_web' },
+  { href: '/services#branding', labelKey: 'footer.link_branding' },
+  { href: '/services#hosting', labelKey: 'footer.link_hosting' },
 ];
 
 const INTEREST_LINKS = [
-  { href: '#portafolio', labelKey: 'footer.link_portfolio' },
-  { href: '#nosotros', labelKey: 'footer.link_about' },
-  { href: '#testimonios', labelKey: 'footer.link_testimonials' },
+  { href: '/#portafolio', labelKey: 'footer.link_portfolio' },
+  { href: '/about', labelKey: 'footer.link_about' },
+  { href: '/about#testimonios', labelKey: 'footer.link_testimonials' },
 ];
 
 export default function Footer() {
   const { t } = useLanguage();
+  const pathname = usePathname();
   const year = new Date().getFullYear();
   const waLink = WHATSAPP_NUM ? `https://wa.me/${WHATSAPP_NUM.replace(/\D/g, '')}` : '#';
 
-  const scrollTo = (href: string) => {
-    const id = href.replace('#', '');
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  if (pathname.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="relative overflow-hidden border-t border-border">
@@ -102,13 +104,13 @@ export default function Footer() {
                 {t('footer.links_title')}
               </p>
               {QUICK_LINKS.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollTo(link.href)}
                   className="text-sm text-muted-foreground hover:text-card-foreground transition-colors cursor-pointer"
+                  href={link.href}
                 >
                   {t(link.labelKey)}
-                </button>
+                </Link>
               ))}
             </div>
 
@@ -118,13 +120,13 @@ export default function Footer() {
                 {t('footer.enlaces_title')}
               </p>
               {INTEREST_LINKS.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollTo(link.href)}
                   className="text-sm text-muted-foreground hover:text-card-foreground transition-colors cursor-pointer"
+                  href={link.href}
                 >
                   {t(link.labelKey)}
-                </button>
+                </Link>
               ))}
             </div>
 

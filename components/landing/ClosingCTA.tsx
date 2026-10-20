@@ -4,13 +4,24 @@ import QuestionnaireWizard from '@/components/questionnaire/QuestionnaireWizard'
 import { Button } from '@/components/ui/Button';
 import { useLanguage } from '@/components/ui/LanguageProvider';
 import Reveal from '@/components/ui/Reveal';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const WHATSAPP_NUM = process.env.NEXT_PUBLIC_WHATSAPP_PHONE ?? '';
 
 export default function ClosingCTA() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
   const [wizardOpen, setWizardOpen] = useState(false);
+
+  const goToServicesPlans = () => {
+    if (pathname === '/services') {
+      document.getElementById('planes')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    router.push('/services#planes');
+  };
 
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
@@ -101,9 +112,7 @@ export default function ClosingCTA() {
                   <Button
                     size="xl"
                     variant="outline"
-                    onClick={() =>
-                      document.getElementById('planes')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                    onClick={goToServicesPlans}
                     className="border-border/70 hover:border-primary/50 hover:text-primary"
                   >
                     {t('final_cta.secondary')}

@@ -4,7 +4,7 @@ import { useLanguage } from '@/components/ui/LanguageProvider';
 import LogoDualGrid from '@/components/ui/LogoDualGrid';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function LanguageToggle() {
@@ -45,30 +45,32 @@ function LanguageToggle() {
 export default function NavBarClient() {
   const { t } = useLanguage();
   const router = useRouter();
+  const pathname = usePathname();
+  const isAdminArea = pathname.startsWith('/admin');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const NAV_LINKS = [
-    { href: '#portafolio', labelKey: 'nav.portfolio' },
-    { href: '#proceso', labelKey: 'nav.process' },
-    { href: '#planes', labelKey: 'nav.plans' },
-    { href: '#branding', labelKey: 'nav.branding' },
-    { href: '#hosting', labelKey: 'nav.hosting' },
+    { href: '/#portafolio', labelKey: 'nav.portfolio' },
+    { href: '/services', labelKey: 'nav.services' },
+    { href: '/about', labelKey: 'nav.about' },
   ];
 
   useEffect(() => {
+    if (isAdminArea) return;
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isAdminArea]);
 
   useEffect(() => {
+    if (isAdminArea) return;
     fetch('/api/admin/session')
       .then((r) => r.json())
       .then((data) => setIsAdmin(!!data.authenticated))
       .catch(() => setIsAdmin(false));
-  }, []);
+  }, [isAdminArea]);
 
   const handleLogout = async () => {
     await fetch('/api/admin/logout', { method: 'POST' });
@@ -77,11 +79,15 @@ export default function NavBarClient() {
     router.refresh();
   };
 
-  const scrollTo = (href: string) => {
-    const id = href.replace('#', '');
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setMenuOpen(false);
+  const isActiveLink = (href: string) => {
+    const [basePath] = href.split('#');
+    const targetPath = basePath || '/';
+    return pathname === targetPath;
   };
+
+  if (isAdminArea) {
+    return null;
+  }
 
   return (
     <header
@@ -104,13 +110,18 @@ export default function NavBarClient() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => scrollTo(link.href)}
-              className="text-sm font-medium text-muted-foreground hover:text-card-foreground underline-grow transition-colors cursor-pointer"
+              href={link.href}
+              className={cn(
+                'text-sm font-medium underline-grow transition-colors cursor-pointer',
+                isActiveLink(link.href)
+                  ? 'text-card-foreground'
+                  : 'text-muted-foreground hover:text-card-foreground',
+              )}
             >
               {t(link.labelKey)}
-            </button>
+            </Link>
           ))}
           <LanguageToggle />
           {isAdmin ? (
@@ -129,12 +140,12 @@ export default function NavBarClient() {
               </button>
             </>
           ) : (
-            <button
-              onClick={() => scrollTo('#planes')}
+            <Link
+              href="/services#planes"
               className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-[0_0_20px_-4px_var(--primary)] cursor-pointer"
             >
               {t('nav.cta')}
-            </button>
+            </Link>
           )}
         </div>
 
@@ -177,13 +188,14 @@ export default function NavBarClient() {
             {/* Links - centered */}
             <div className="flex flex-col items-center gap-4">
               {NAV_LINKS.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollTo(link.href)}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
                   className="text-lg font-semibold text-card-foreground py-2 cursor-pointer hover:text-primary transition-colors"
                 >
                   {t(link.labelKey)}
-                </button>
+                </Link>
               ))}
             </div>
 
@@ -214,12 +226,13 @@ export default function NavBarClient() {
                   </button>
                 </>
               ) : (
-                <button
-                  onClick={() => scrollTo('#planes')}
+                <Link
+                  href="/services#planes"
+                  onClick={() => setMenuOpen(false)}
                   className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold text-center cursor-pointer hover:bg-primary/90 transition-colors"
                 >
                   {t('nav.cta')}
-                </button>
+                </Link>
               )}
             </div>
           </div>

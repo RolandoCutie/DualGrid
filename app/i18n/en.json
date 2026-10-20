@@ -6,6 +6,8 @@
   "nav": {
     "why": "Why us?",
     "portfolio": "Portfolio",
+    "services": "Services",
+    "about": "About",
     "plans": "Web Dev",
     "branding": "Branding",
     "hosting": "Hosting",
@@ -124,7 +126,7 @@
   },
   "plans": {
     "eyebrow": "Web development",
-    "section_title": "Webs plans for every type of business."  ,
+    "section_title": "Webs plans for every type of business.",
     "section_subtitle": "From a clear landing page to more complete solutions. Every plan combines custom design, solid technical execution and real support.",
     "title": "Solutions for every type of business",
     "subtitle": "From landing pages to custom systems. Every plan includes unique design, clean code and post-launch support.",
