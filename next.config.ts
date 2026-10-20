@@ -1,13 +1,6 @@
 import type { NextConfig } from 'next';
-import path from 'path';
 
 const nextConfig: NextConfig = {
-  webpack: (config) => {
-    // Ensure tailwindcss always resolves from this project's node_modules,
-    // even when webpack's context is a parent directory.
-    config.resolve.modules = [path.resolve(__dirname, 'node_modules'), 'node_modules'];
-    return config;
-  },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
@@ -19,42 +12,6 @@ const nextConfig: NextConfig = {
     ],
   },
   reactCompiler: true,
-
-  turbopack: {
-    root: __dirname,
-  },
-  async headers() {
-    return [
-      {
-        // API routes must never be cached — responses contain live data.
-        source: '/api/(.*)',
-        headers: [{ key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' }],
-      },
-      {
-        // Security headers for all routes
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-        ],
-      },
-      {
-        // Service worker must never be cached by the browser HTTP cache.
-        // If it were, the browser would serve the old SW and never detect updates.
-        source: '/sw.js',
-        headers: [
-          { key: 'Content-Type', value: 'application/javascript; charset=utf-8' },
-          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
-          { key: 'Service-Worker-Allowed', value: '/' },
-          { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self'" },
-        ],
-      },
-    ];
-  },
-  async rewrites() {
-    return [];
-  },
 };
 
 export default nextConfig;
