@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import HostingLead from '@/database/hosting-lead.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';

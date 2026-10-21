@@ -8,6 +8,8 @@ import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = { title: 'Editar gasto' };
 
 export default async function EditExpensePage({ params }: { params: Promise<{ id: string }> }) {

@@ -11,6 +11,8 @@ import { requireAdminSession } from '@/lib/require-admin-session';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 const MENU_ITEMS = [
   {
     title: 'Clientes',

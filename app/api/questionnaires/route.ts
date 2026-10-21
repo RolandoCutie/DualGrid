@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Questionnaire from '@/database/questionnaire.model';
 import connectDB from '@/lib/mongodb';
 import { QuestionnaireSubmitSchema } from '@/lib/schemas';

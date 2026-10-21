@@ -8,6 +8,8 @@ import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = { title: 'Facturas' };
 
 export default async function InvoicesPage() {

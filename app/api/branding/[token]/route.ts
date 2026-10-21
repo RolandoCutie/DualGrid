@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import type { IBrandingAnswers } from '@/database/branding-questionnaire.model';
 import BrandingQuestionnaire from '@/database/branding-questionnaire.model';
 import { calcBrandingScore } from '@/lib/branding-recommendation';

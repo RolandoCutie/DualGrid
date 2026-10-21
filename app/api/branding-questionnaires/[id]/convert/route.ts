@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import BrandingQuestionnaire from '@/database/branding-questionnaire.model';
 import Client from '@/database/client.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';

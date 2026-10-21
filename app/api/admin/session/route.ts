@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ADMIN_SESSION_COOKIE, isAdminSessionTokenValid } from '@/lib/admin-auth';
 import { NextRequest, NextResponse } from 'next/server';
 

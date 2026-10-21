@@ -5,6 +5,8 @@ import connectDB from '@/lib/mongodb';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Test de Identidad Visual | DualGrid',
   description: 'Descubre qué nivel de identidad visual necesita tu marca en 4 preguntas.',

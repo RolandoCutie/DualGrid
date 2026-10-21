@@ -9,6 +9,8 @@ import mongoose from 'mongoose';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = { title: 'Editar proyecto' };
 
 export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ADMIN_SESSION_COOKIE } from '@/lib/admin-auth';
 import { NextResponse } from 'next/server';
 

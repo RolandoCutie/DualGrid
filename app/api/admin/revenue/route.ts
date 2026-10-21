@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Invoice from '@/database/invoice.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';

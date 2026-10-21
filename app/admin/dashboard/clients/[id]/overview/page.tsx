@@ -12,6 +12,8 @@ import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = { title: 'Perfil de cliente' };
 
 export default async function ClientOverviewPage({ params }: { params: Promise<{ id: string }> }) {

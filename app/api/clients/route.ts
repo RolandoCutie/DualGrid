@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Client from '@/database/client.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';

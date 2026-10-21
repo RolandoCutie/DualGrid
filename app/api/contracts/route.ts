@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Contract from '@/database/contract.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
