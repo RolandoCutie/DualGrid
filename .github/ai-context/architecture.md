@@ -22,7 +22,7 @@ app/
 │       ├── clients/[id]/overview/page.tsx  # Client 360°: contracts, invoices, expenses, questionnaires, profitability
 │       ├── clients/new/page.tsx            # Create client
 │       ├── contracts/page.tsx              # Contracts list (soft delete filter)
-│       ├── hosting-services/page.tsx       # Active/pending hosting contracts with renewal control
+│       ├── hosting-services/page.tsx       # Active/pending/completed hosting contracts (incl. legacy plan IDs) with renewal control
 │       ├── hosting-leads/page.tsx          # Hosting/domain leads from landing
 │       ├── expenses/page.tsx               # Expenses list (soft delete filter)
 │       ├── invoices/page.tsx               # Invoices list (soft delete filter)

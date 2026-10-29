@@ -45,7 +45,7 @@
 19. GET list endpoints support pagination via `?page=&limit=` query params. Default limit: 50. Max: 100.
 20. `Contract.paidAmount` is auto-synced from paid invoices via a `post('save')` hook on the Invoice model.
 21. **Recurring services**: Contracts can be marked `isRecurring: true` with `renewalDate`, `renewalPeriodMonths`, and `renewalNotificationDays`. A Vercel Cron Job (`/api/cron/check-renewals`) runs daily at 9 AM and sends an email to `dualgrid.studio@gmail.com` via Resend when a renewal is approaching. Requires `RESEND_API_KEY` and `CRON_SECRET` env vars.
-22. Admin has a dedicated panel at `/admin/dashboard/hosting-services` for active/pending hosting contracts, with filters by renewal state, quick renewal date updates, and one-click renewal by configured period.
+22. Admin has a dedicated panel at `/admin/dashboard/hosting-services` for active/pending/completed hosting contracts (including legacy hosting plan IDs), with filters by renewal state, quick renewal date updates, and one-click renewal by configured period.
 
 ---
 

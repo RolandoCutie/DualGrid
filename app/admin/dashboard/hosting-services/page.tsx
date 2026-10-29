@@ -6,9 +6,11 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import Contract from '@/database/contract.model';
 import {
-  HOSTING_PLAN_IDS,
+  HOSTING_PLAN_QUERY_IDS,
   getContractPlanCategory,
   getContractPlanName,
+  isHostingOrDomainContractPlan,
+  normalizeContractPlanId,
 } from '@/lib/contract-plan-metadata';
 import connectDB from '@/lib/mongodb';
 import { requireAdminSession } from '@/lib/require-admin-session';
@@ -19,6 +21,9 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'Hostings activos' };
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
+const HOSTING_SERVICE_STATUSES = ['active', 'pending', 'completed'] as const;
+const HOSTING_KEYWORD_REGEX =
+  /(hosting|domain|dominio|triennial|trienal|biennial|bianual|annual|anual)/i;
 
 function toDateOnly(value: unknown): string | null {
   if (!value) return null;
@@ -58,47 +63,64 @@ export default async function HostingServicesPage() {
 
   const rawContracts = await Contract.find({
     deletedAt: null,
-    planId: { $in: [...HOSTING_PLAN_IDS] },
-    status: { $in: ['active', 'pending'] },
+    status: { $in: [...HOSTING_SERVICE_STATUSES] },
+    $or: [
+      { planId: { $in: [...HOSTING_PLAN_QUERY_IDS] } },
+      { planId: { $regex: HOSTING_KEYWORD_REGEX.source, $options: 'i' } },
+      { 'services.name': { $regex: HOSTING_KEYWORD_REGEX.source, $options: 'i' } },
+    ],
   })
     .populate('clientId', 'name businessName')
     .sort({ renewalDate: 1, createdAt: -1 })
     .lean();
 
-  const services: HostingServiceRow[] = rawContracts.map((contract: Record<string, unknown>) => {
-    const client = contract.clientId as Record<string, unknown> | null;
-    const planId = String(contract.planId);
+  const services: HostingServiceRow[] = rawContracts
+    .filter((contract: Record<string, unknown>) => {
+      const rawPlanId = String(contract.planId ?? '');
+      if (isHostingOrDomainContractPlan(rawPlanId)) return true;
 
-    const renewalPeriodRaw = contract.renewalPeriodMonths;
-    const renewalPeriodMonths =
-      typeof renewalPeriodRaw === 'number'
-        ? renewalPeriodRaw
-        : renewalPeriodRaw
-          ? Number(renewalPeriodRaw)
-          : null;
+      const serviceRows = Array.isArray(contract.services) ? contract.services : [];
+      return serviceRows.some((service) => {
+        if (!service || typeof service !== 'object') return false;
+        const serviceName = (service as { name?: unknown }).name;
+        return typeof serviceName === 'string' && HOSTING_KEYWORD_REGEX.test(serviceName);
+      });
+    })
+    .map((contract: Record<string, unknown>) => {
+      const client = contract.clientId as Record<string, unknown> | null;
+      const rawPlanId = String(contract.planId ?? '');
+      const planId = normalizeContractPlanId(rawPlanId);
 
-    const notificationDaysRaw = contract.renewalNotificationDays;
-    const renewalNotificationDays =
-      typeof notificationDaysRaw === 'number'
-        ? notificationDaysRaw
-        : Number(notificationDaysRaw ?? 30) || 30;
+      const renewalPeriodRaw = contract.renewalPeriodMonths;
+      const renewalPeriodMonths =
+        typeof renewalPeriodRaw === 'number'
+          ? renewalPeriodRaw
+          : renewalPeriodRaw
+            ? Number(renewalPeriodRaw)
+            : null;
 
-    return {
-      _id: String(contract._id),
-      clientName: client?.name ? String(client.name) : '—',
-      clientBusiness: client?.businessName ? String(client.businessName) : null,
-      planId,
-      planName: getContractPlanName(planId),
-      totalAmount: Number(contract.totalAmount ?? 0),
-      paidAmount: Number(contract.paidAmount ?? 0),
-      status: String(contract.status),
-      startDate: toDateOnly(contract.startDate),
-      isRecurring: Boolean(contract.isRecurring),
-      renewalDate: toDateOnly(contract.renewalDate),
-      renewalPeriodMonths,
-      renewalNotificationDays,
-    };
-  });
+      const notificationDaysRaw = contract.renewalNotificationDays;
+      const renewalNotificationDays =
+        typeof notificationDaysRaw === 'number'
+          ? notificationDaysRaw
+          : Number(notificationDaysRaw ?? 30) || 30;
+
+      return {
+        _id: String(contract._id),
+        clientName: client?.name ? String(client.name) : '—',
+        clientBusiness: client?.businessName ? String(client.businessName) : null,
+        planId,
+        planName: getContractPlanName(rawPlanId),
+        totalAmount: Number(contract.totalAmount ?? 0),
+        paidAmount: Number(contract.paidAmount ?? 0),
+        status: String(contract.status),
+        startDate: toDateOnly(contract.startDate),
+        isRecurring: Boolean(contract.isRecurring),
+        renewalDate: toDateOnly(contract.renewalDate),
+        renewalPeriodMonths,
+        renewalNotificationDays,
+      };
+    });
 
   const stats = services.reduce(
     (acc, service) => {
@@ -121,6 +143,7 @@ export default async function HostingServicesPage() {
       <AdminPageHeader
         title="Hostings activos"
         description={`${services.length} servicios · ${stats.soon} por vencer · ${stats.expired} vencidos`}
+        action={{ label: 'Nuevo contrato de hosting', href: '/admin/dashboard/contracts/new' }}
       />
 
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-6">
@@ -157,7 +180,11 @@ export default async function HostingServicesPage() {
         Esta vista muestra contratos de categoría{' '}
         <strong className="text-card-foreground">{getContractPlanCategory('hosting_annual')}</strong>{' '}
         y <strong className="text-card-foreground">{getContractPlanCategory('domain')}</strong> con
-        estado activo o pendiente para controlar renovaciones sin perder vencimientos.
+        estado activo, pendiente o completado para controlar renovaciones sin perder vencimientos.
+        <span className="block mt-1">
+          Para agregar nuevos hostings, crea un contrato desde{' '}
+          <strong className="text-card-foreground">Contratos → Nuevo contrato</strong>.
+        </span>
       </div>
 
       <HostingServiceListClient services={services} />
