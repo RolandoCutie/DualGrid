@@ -11,6 +11,10 @@
 - Added export buttons in admin detail views:
   - `/app/admin/dashboard/questionnaires/[id]/page.tsx`
   - `/app/admin/dashboard/branding-questionnaires/[id]/page.tsx`
+- Added hosting operations panel for recurring services:
+  - `/app/admin/dashboard/hosting-services/page.tsx`
+  - `/components/admin/HostingServiceListClient.tsx`
+  - `/lib/contract-plan-metadata.ts`
 
 ## Full Folder Structure
 

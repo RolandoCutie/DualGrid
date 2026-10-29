@@ -22,6 +22,8 @@ app/
 │       ├── clients/[id]/overview/page.tsx  # Client 360°: contracts, invoices, expenses, questionnaires, profitability
 │       ├── clients/new/page.tsx            # Create client
 │       ├── contracts/page.tsx              # Contracts list (soft delete filter)
+│       ├── hosting-services/page.tsx       # Active/pending hosting contracts with renewal control
+│       ├── hosting-leads/page.tsx          # Hosting/domain leads from landing
 │       ├── expenses/page.tsx               # Expenses list (soft delete filter)
 │       ├── invoices/page.tsx               # Invoices list (soft delete filter)
 │       ├── questionnaires/
@@ -81,6 +83,8 @@ components/
 │   ├── QuestionnaireExportButtons.tsx  # PDF/MD/TXT/JSON/clipboard export ← NEW
 │   ├── ClientForm.tsx / ClientListClient.tsx
 │   ├── ContractForm.tsx / ContractListClient.tsx
+│   ├── HostingServiceListClient.tsx # Hosting renewals dashboard (status + renewal quick actions)
+│   ├── HostingLeadListClient.tsx
 │   ├── InvoiceForm.tsx / InvoiceListClient.tsx
 │   ├── ExpenseForm.tsx           # Create/edit expense form ← NEW
 │   ├── ExpenseListClient.tsx     # Expense table with delete + category filter ← NEW

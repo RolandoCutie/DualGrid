@@ -64,11 +64,18 @@ const MENU_ITEMS = [
     color: 'text-pink-500',
   },
   {
-    title: 'Hosting & Dominio',
+    title: 'Hostings activos',
+    description: 'Controla renovaciones, vencimientos y estado de hostings activos.',
+    href: '/admin/dashboard/hosting-services',
+    emoji: '🗂️',
+    color: 'text-cyan-500',
+  },
+  {
+    title: 'Leads de Hosting',
     description: 'Solicitudes de hosting y dominio desde la landing.',
     href: '/admin/dashboard/hosting-leads',
     emoji: '🖥️',
-    color: 'text-cyan-500',
+    color: 'text-sky-500',
   },
 ];
 

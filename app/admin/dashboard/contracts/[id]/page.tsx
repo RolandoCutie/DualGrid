@@ -85,6 +85,10 @@ export default async function EditContractPage({
           excludedItems: (contract.excludedItems as string[] | undefined) ?? [],
           contractTerms: (contract.contractTerms as string | undefined) ?? '',
           notes: contract.notes ?? '',
+          isRecurring: Boolean(contract.isRecurring),
+          renewalDate: contract.renewalDate ? contract.renewalDate.toISOString() : undefined,
+          renewalPeriodMonths: contract.renewalPeriodMonths ?? undefined,
+          renewalNotificationDays: contract.renewalNotificationDays ?? undefined,
         }}
       />
     </AdminPageLayout>

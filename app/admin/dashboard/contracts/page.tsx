@@ -3,8 +3,8 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import ContractListClient, { type ContractRow } from '@/components/admin/ContractListClient';
 import Contract from '@/database/contract.model';
+import { getContractPlanCategory, getContractPlanName } from '@/lib/contract-plan-metadata';
 import connectDB from '@/lib/mongodb';
-import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import type { Metadata } from 'next';
 
@@ -23,43 +23,12 @@ export default async function ContractsPage() {
   const rows: ContractRow[] = contracts.map((c: Record<string, unknown>) => {
     const client = c.clientId as Record<string, unknown> | null;
     const planId = String(c.planId);
-    const plan = PLAN_MAP[planId];
-    const EXTRA_PLAN_NAMES: Record<string, string> = {
-      essential: 'Branding Essential',
-      corporate: 'Branding Corporate',
-      global: 'Branding Global',
-      hosting_annual: 'Hosting Anual',
-      hosting_biennial: 'Hosting Bianual',
-      hosting_triennial: 'Hosting Trienal',
-      domain: 'Dominio',
-      hosting_domain: 'Hosting + Dominio',
-      custom_design: 'Diseño Personalizado',
-    };
-    const PLAN_CATEGORIES: Record<string, string> = {
-      landing: 'Web',
-      portfolio: 'Web',
-      menu_qr: 'Web',
-      restaurant: 'Web',
-      wp_business: 'Web',
-      ecommerce_store: 'Web',
-      blog: 'Web',
-      custom: 'Web',
-      essential: 'Branding',
-      corporate: 'Branding',
-      global: 'Branding',
-      hosting_annual: 'Hosting',
-      hosting_biennial: 'Hosting',
-      hosting_triennial: 'Hosting',
-      domain: 'Dominio',
-      hosting_domain: 'Hosting',
-      custom_design: 'Diseño',
-    };
     return {
       _id: String(c._id),
       clientName: client ? String(client.name) : '—',
       clientBusiness: client?.businessName ? String(client.businessName) : null,
-      planName: plan?.name || EXTRA_PLAN_NAMES[planId] || planId,
-      planCategory: PLAN_CATEGORIES[planId] || 'Otro',
+      planName: getContractPlanName(planId),
+      planCategory: getContractPlanCategory(planId),
       totalAmount: Number(c.totalAmount),
       advanceAmount: Number(c.advanceAmount),
       paidAmount: Number(c.paidAmount ?? 0),
