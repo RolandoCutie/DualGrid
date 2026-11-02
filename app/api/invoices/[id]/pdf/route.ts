@@ -9,6 +9,7 @@ import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { existsSync } from 'fs';
 import { readFile } from 'fs/promises';
 import { cookies } from 'next/headers';
+import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 import { join } from 'path';
 import React from 'react';
@@ -21,6 +22,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 
   const { id } = await params;
+  if (!mongoose.isValidObjectId(id)) {
+    return NextResponse.json({ error: 'Invalid invoice id' }, { status: 400 });
+  }
 
   try {
     await connectDB();
@@ -89,7 +93,12 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Error desconocido';
     console.error('[PDF Invoice]', message);
-    if (message.includes('timeout') || message.includes('ETIMEOUT')) {
+    const normalized = message.toLowerCase();
+    if (
+      normalized.includes('timeout') ||
+      normalized.includes('etimeout') ||
+      normalized.includes('server selection timed out')
+    ) {
       return NextResponse.json(
         { error: 'Tiempo de espera agotado al conectar con la base de datos. Intenta de nuevo.' },
         { status: 503 },

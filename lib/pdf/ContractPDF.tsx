@@ -465,7 +465,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
                 <Text style={styles.partyName}>{'DualGrid Studio'}</Text>
                 <Text style={styles.partySub}>{'Agencia de diseño y desarrollo web'}</Text>
                 <Text style={styles.partyLine}>{'dualgrid.studio@gmail.com'}</Text>
-                <Text style={styles.partyLine}>{'dualgrid.dev'}</Text>
+                <Text style={styles.partyLine}>{'dualgrid.io'}</Text>
               </View>
             </View>
             <View style={styles.col}>
@@ -703,7 +703,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
           <View style={styles.footerAccent} />
           <View style={styles.footerBottom}>
             <Text style={styles.footerLogo}>{'DualGrid'}</Text>
-            <Text style={styles.footerContact}>{'dualgrid.studio@gmail.com  ·  dualgrid.dev'}</Text>
+            <Text style={styles.footerContact}>{'dualgrid.studio@gmail.com  ·  dualgrid.io'}</Text>
             <Text
               style={styles.footerPage}
               render={({ pageNumber, totalPages }) => 'Página ' + pageNumber + ' de ' + totalPages}
@@ -811,7 +811,7 @@ export default function ContractPDF({ contract, client, planName }: ContractPDFP
             <View style={styles.footerBottom}>
               <Text style={styles.footerLogo}>{'DualGrid'}</Text>
               <Text style={styles.footerContact}>
-                {'dualgrid.studio@gmail.com  ·  dualgrid.dev'}
+                {'dualgrid.studio@gmail.com  ·  dualgrid.io'}
               </Text>
               <Text
                 style={styles.footerPage}

@@ -133,7 +133,7 @@ function buildRenewalHtml(d: RenewalNotificationData): string {
           <td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 36px;">
             <p style="margin:0;font-size:11px;color:#94a3b8;line-height:1.6;">
               Este correo fue enviado automáticamente por el sistema de DualGrid.<br>
-              dualgrid.studio@gmail.com · dualgrid.dev
+              dualgrid.studio@gmail.com · dualgrid.io
             </p>
           </td>
         </tr>

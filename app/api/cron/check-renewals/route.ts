@@ -107,7 +107,7 @@ export async function GET(req: NextRequest) {
         ? `${clientData.name} (${clientData.businessName})`
         : (clientData?.name ?? 'Cliente desconocido');
 
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://dualgrid.dev';
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://dualgrid.io';
       const adminUrl = `${baseUrl}/admin/dashboard/contracts/${String(contract._id)}`;
 
       const sent = await sendRenewalNotification({

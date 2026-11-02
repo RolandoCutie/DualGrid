@@ -8,6 +8,7 @@ import Invoice from '@/database/invoice.model';
 import connectDB from '@/lib/mongodb';
 import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
+import mongoose from 'mongoose';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -26,12 +27,18 @@ export default async function EditInvoicePage({
   await requireAdminSession('/admin/dashboard/invoices');
   const { id } = await params;
   const { back } = await searchParams;
+
+  if (!mongoose.isValidObjectId(id)) notFound();
+
   await connectDB();
 
   const [invoice, clients, contracts] = await Promise.all([
-    Invoice.findById(id).lean(),
-    Client.find({}).sort({ name: 1 }).lean(),
+    Invoice.findById(id)
+      .select('invoiceNumber clientId contractId status items taxRate issueDate dueDate notes')
+      .lean(),
+    Client.find({ deletedAt: null }).select('name businessName').sort({ name: 1 }).lean(),
     Contract.find({ deletedAt: null })
+      .select('clientId planId status totalAmount')
       .populate('clientId', 'name businessName')
       .sort({ createdAt: -1 })
       .lean(),

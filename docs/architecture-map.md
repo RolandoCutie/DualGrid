@@ -25,6 +25,7 @@
   - `/app/api/admin/search/route.ts`
   - `/components/admin/AdminGlobalSearchBar.tsx`
   - `/components/admin/AdminPageHeader.tsx`
+  - Includes route prefetch on search results for faster navigation from the dropdown
 - Added smart dashboard alerts for overdue invoices, upcoming renewals and pending tasks:
   - `/app/admin/dashboard/page.tsx`
 

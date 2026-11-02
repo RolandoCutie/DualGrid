@@ -2,7 +2,7 @@ export const SITE_NAME = 'DualGrid';
 
 export const AUTHOR = {
   name: 'DualGrid',
-  email: 'hola@dualgrid.dev',
+  email: 'dualgrid.studio@gmail.com',
 };
 
 export const DEFAULT_SEO = {

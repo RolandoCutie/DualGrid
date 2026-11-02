@@ -38,6 +38,7 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
   const [tooltip, setTooltip] = useState<{ month: number; x: number; y: number } | null>(null);
 
   const maxVal = Math.max(...data.flatMap((d) => [d.billed, d.collected]), 1);
+  const chartTextColor = '#111827';
 
   const W = 720;
   const H = 220;
@@ -55,16 +56,16 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
   const hovered = tooltip ? data.find((d) => d.month === tooltip.month) : null;
 
   return (
-    <div className="admin-density-section rounded-xl border border-border bg-card p-5">
+    <div className="admin-density-section rounded-xl border border-border bg-card p-5 text-black">
       <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
         <div>
           <h3 className="text-sm font-semibold text-card-foreground">Ingresos mensuales</h3>
-          <p className="text-xs text-muted-foreground">Facturado vs Cobrado</p>
+          <p className="text-xs text-slate-700">Facturado vs Cobrado</p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => onYearChange(year - 1)}
-            className="p-1.5 rounded-lg border border-border hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground"
+            className="p-1.5 rounded-lg border border-border hover:bg-muted/50 transition-colors text-slate-700 hover:text-black"
             aria-label="Año anterior"
           >
             ←
@@ -75,13 +76,13 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
           <button
             onClick={() => onYearChange(year + 1)}
             disabled={year >= new Date().getFullYear() + 1}
-            className="p-1.5 rounded-lg border border-border hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground disabled:opacity-40"
+            className="p-1.5 rounded-lg border border-border hover:bg-muted/50 transition-colors text-slate-700 hover:text-black disabled:opacity-40"
             aria-label="Año siguiente"
           >
             →
           </button>
         </div>
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="flex items-center gap-3 text-xs text-slate-700">
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-2.5 h-2.5 rounded-sm bg-primary/40" />
             Facturado
@@ -111,8 +112,8 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
                   y1={y}
                   x2={W - PADDING.right}
                   y2={y}
-                  stroke="currentColor"
-                  strokeOpacity={0.08}
+                  stroke={chartTextColor}
+                  strokeOpacity={0.14}
                   strokeWidth={1}
                 />
                 <text
@@ -121,8 +122,8 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
                   textAnchor="end"
                   dominantBaseline="middle"
                   fontSize={9}
-                  fill="currentColor"
-                  opacity={0.45}
+                  fill={chartTextColor}
+                  opacity={0.8}
                 >
                   {fmt(val)}
                 </text>
@@ -185,8 +186,8 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
                   y={PADDING.top + chartH + 14}
                   textAnchor="middle"
                   fontSize={9}
-                  fill="currentColor"
-                  opacity={0.55}
+                  fill={chartTextColor}
+                  opacity={0.9}
                 >
                   {MONTH_LABELS[idx]}
                 </text>
@@ -216,23 +217,23 @@ export default function RevenueBarChart({ data, year, onYearChange }: Props) {
                     y={tooltip.y + 13}
                     fontSize={10}
                     fontWeight="600"
-                    fill="currentColor"
+                    fill={chartTextColor}
                   >
                     {MONTH_LABELS[hovered.month - 1]} {year}
                   </text>
-                  <text x={tx} y={tooltip.y + 27} fontSize={9} fill="currentColor" opacity={0.6}>
+                  <text x={tx} y={tooltip.y + 27} fontSize={9} fill={chartTextColor} opacity={0.75}>
                     Facturado:
                   </text>
                   <text
                     x={tx + 55}
                     y={tooltip.y + 27}
                     fontSize={9}
-                    fill="currentColor"
+                    fill={chartTextColor}
                     fontWeight="600"
                   >
                     {fmt(hovered.billed)}
                   </text>
-                  <text x={tx} y={tooltip.y + 41} fontSize={9} fill="currentColor" opacity={0.6}>
+                  <text x={tx} y={tooltip.y + 41} fontSize={9} fill={chartTextColor} opacity={0.75}>
                     Cobrado:
                   </text>
                   <text

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -29,12 +30,14 @@ const SEARCH_GROUPS: Array<{ key: SearchGroupKey; label: string }> = [
 ];
 
 export default function AdminGlobalSearchBar() {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [payload, setPayload] = useState<SearchPayload | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefetchedHrefsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -97,6 +100,21 @@ export default function AdminGlobalSearchBar() {
     return SEARCH_GROUPS.reduce((sum, group) => sum + (payload.results[group.key]?.length ?? 0), 0);
   }, [payload]);
 
+  const resultHrefs = useMemo(() => {
+    if (!payload) return [];
+    return SEARCH_GROUPS.flatMap((group) =>
+      (payload.results[group.key] ?? []).map((item) => item.href),
+    );
+  }, [payload]);
+
+  useEffect(() => {
+    for (const href of resultHrefs) {
+      if (prefetchedHrefsRef.current.has(href)) continue;
+      router.prefetch(href);
+      prefetchedHrefsRef.current.add(href);
+    }
+  }, [resultHrefs, router]);
+
   const shouldShowPanel = isOpen && query.trim().length >= MIN_QUERY_LENGTH;
 
   return (
@@ -152,7 +170,14 @@ export default function AdminGlobalSearchBar() {
                           <Link
                             key={`${group.key}-${item.id}`}
                             href={item.href}
-                            onClick={() => setIsOpen(false)}
+                            prefetch
+                            onMouseEnter={() => router.prefetch(item.href)}
+                            onFocus={() => router.prefetch(item.href)}
+                            onClick={() => {
+                              setIsOpen(false);
+                              setQuery('');
+                              setPayload(null);
+                            }}
                             className="block rounded-lg px-2.5 py-2 transition-colors hover:bg-muted/70"
                           >
                             <p className="text-sm font-medium text-card-foreground">{item.title}</p>
