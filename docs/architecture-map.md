@@ -15,6 +15,18 @@
   - `/app/admin/dashboard/hosting-services/page.tsx`
   - `/components/admin/HostingServiceListClient.tsx`
   - `/lib/contract-plan-metadata.ts`
+- Added admin-wide density mode (comfortable/compact) for tables, card paddings and dashboard spacing:
+  - `/components/admin/AdminTableDensityToggle.tsx`
+  - `/app/admin/layout.tsx`
+  - `/app/globals.css`
+  - `/components/admin/AdminPageLayout.tsx`
+  - `/app/admin/dashboard/page.tsx`
+- Added global admin search across clients, contracts, invoices and expenses:
+  - `/app/api/admin/search/route.ts`
+  - `/components/admin/AdminGlobalSearchBar.tsx`
+  - `/components/admin/AdminPageHeader.tsx`
+- Added smart dashboard alerts for overdue invoices, upcoming renewals and pending tasks:
+  - `/app/admin/dashboard/page.tsx`
 
 ## Full Folder Structure
 

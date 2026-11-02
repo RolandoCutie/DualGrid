@@ -13,7 +13,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   services: 'Servicios externos',
   taxes: 'Impuestos / Tasas',
   education: 'Educación / Cursos',
-  other: 'Otro',
+  other: 'Otro', 
 };
 
 const PAGE_SIZE = 20;
@@ -60,6 +60,8 @@ export default function ExpenseListClient({ expenses }: Props) {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
   const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const visibleStart = filtered.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1;
+  const visibleEnd = Math.min(safePage * PAGE_SIZE, filtered.length);
 
   const totalFiltered = filtered.reduce((sum, e) => sum + e.amount, 0);
 
@@ -75,29 +77,37 @@ export default function ExpenseListClient({ expenses }: Props) {
       />
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-4">
-        <input
-          type="text"
-          placeholder="Buscar por descripción…"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
-        />
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-          className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-        >
-          <option value="">Todas las categorías</option>
-          {Object.entries(CATEGORY_LABELS).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+      <div className="mb-4 rounded-xl border border-border bg-card/70 p-3">
+        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          Filtros de búsqueda
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            placeholder="Buscar por descripción…"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            className="flex-1 rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
+          />
+          <select
+            value={categoryFilter}
+            onChange={(e) => {
+              setCategoryFilter(e.target.value);
+              setPage(1);
+            }}
+            className="rounded-lg border border-border bg-background text-card-foreground text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="">Todas las categorías</option>
+            {Object.entries(CATEGORY_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Summary */}
@@ -117,9 +127,9 @@ export default function ExpenseListClient({ expenses }: Props) {
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-border">
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/60">
             <tr>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">Fecha</th>
               <th className="text-left px-4 py-3 font-semibold text-card-foreground">
@@ -134,12 +144,15 @@ export default function ExpenseListClient({ expenses }: Props) {
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={5} className="text-center py-8 text-muted-foreground">
-                  No hay gastos que coincidan con el filtro.
+                  No hay gastos que coincidan con el filtro. Prueba con otra búsqueda.
                 </td>
               </tr>
             )}
             {paginated.map((e) => (
-              <tr key={e._id} className="hover:bg-muted/30 transition-colors">
+              <tr
+                key={e._id}
+                className="odd:bg-background even:bg-muted/10 hover:bg-primary/5 transition-colors"
+              >
                 <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
                   {new Date(e.date).toLocaleDateString('es')}
                 </td>
@@ -178,7 +191,9 @@ export default function ExpenseListClient({ expenses }: Props) {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">
-          <span>{filtered.length} gastos</span>
+          <span>
+            {visibleStart}-{visibleEnd} de {filtered.length} gastos
+          </span>
           <div className="flex gap-2 items-center">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}

@@ -5,7 +5,7 @@
 
 /* ─────────────────────────────────────────
    NEON CRAFT — DualGrid Design System v3
-   Modo oscuro permanente · Paleta oficial
+   Sitio público en modo oscuro · Admin con vista de confort
    #00D9FF · #00FF9D · #2B303A · #253C78 · #A594F9
 ───────────────────────────────────────── */
 
@@ -98,6 +98,127 @@
   --gradient-end: #00ff9d;
   --bg-glow-1: radial-gradient(ellipse 100% 60% at 50% 0%, #00d9ff20 0%, transparent 65%);
   --bg-glow-2: radial-gradient(ellipse 80% 70% at 50% 110%, #00ff9d30 0%, transparent 60%);
+}
+
+/* ─── Admin comfort theme: lower contrast, calmer palette ─── */
+.admin-theme {
+  color-scheme: light;
+
+  --background: #e8edf5;
+  --foreground: #172235;
+  --card: #f4f7fc;
+  --card-foreground: #172235;
+  --popover: #f7f9fd;
+  --popover-foreground: #172235;
+  --primary: #2f5cc8;
+  --primary-opaced: #2f5cc823;
+  --primary-foreground: #ffffff;
+  --secondary: #d7e1f0;
+  --secondary-foreground: #243b72;
+  --muted: #e1e8f3;
+  --muted-foreground: #55657d;
+  --accent: #0f8f88;
+  --accent-foreground: #052927;
+  --purple: #7065d8;
+  --destructive: #c73737;
+  --border: #c6d1e0;
+  --input: #eef3fa;
+  --ring: #2f5cc8;
+  --surface: #f4f7fc;
+  --surface-modal: #f7f9fd;
+  --gradient-start: #2f5cc8;
+  --gradient-end: #0f8f88;
+  --bg-glow-1: none;
+  --bg-glow-2: none;
+
+  background-color: var(--background);
+  background-image:
+    radial-gradient(120% 95% at 50% -20%, #cddbf0 0%, transparent 58%),
+    radial-gradient(90% 80% at 100% 100%, #d7efe9 0%, transparent 60%),
+    linear-gradient(180deg, #edf2f9 0%, #e8edf5 100%);
+}
+
+.admin-theme .admin-page-shell {
+  padding: 2.5rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .admin-theme .admin-page-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-theme .admin-page-shell {
+    padding-inline: 2rem;
+  }
+}
+
+.admin-theme .admin-density-grid {
+  gap: 1rem !important;
+}
+
+.admin-theme .admin-density-section-offset {
+  margin-top: 1.5rem !important;
+}
+
+.admin-theme .admin-density-card {
+  padding: 1rem !important;
+}
+
+.admin-theme .admin-density-card-lg {
+  padding: 1.25rem !important;
+}
+
+.admin-theme .admin-density-section {
+  padding: 1.25rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-page-shell {
+  padding-block: 1.75rem;
+  padding-inline: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  html[data-admin-density='compact'] .admin-theme .admin-page-shell {
+    padding-inline: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  html[data-admin-density='compact'] .admin-theme .admin-page-shell {
+    padding-inline: 1.25rem;
+  }
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-density-grid {
+  gap: 0.75rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-density-section-offset {
+  margin-top: 1rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-density-card {
+  padding: 0.72rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-density-card-lg {
+  padding: 0.95rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme .admin-density-section {
+  padding: 1rem !important;
+}
+
+html[data-admin-density='compact'] .admin-theme table {
+  font-size: 0.775rem;
+  line-height: 1.05rem;
+}
+
+html[data-admin-density='compact'] .admin-theme table :is(th, td):not([colspan]) {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
 }
 
 @theme inline {

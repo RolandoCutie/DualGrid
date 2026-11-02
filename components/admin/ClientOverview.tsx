@@ -13,9 +13,9 @@ const CONTRACT_STATUS_LABELS: Record<string, string> = {
 const CONTRACT_STATUS_COLORS: Record<string, string> = {
   draft: 'bg-muted text-muted-foreground',
   pending: 'bg-yellow-500/10 text-yellow-500',
-  active: 'bg-[#00d9ff]/10 text-[#00d9ff]',
-  completed: 'bg-[#00ff9d]/10 text-[#00ff9d]',
-  cancelled: 'bg-red-500/10 text-red-400',
+  active: 'bg-primary/10 text-primary',
+  completed: 'bg-accent/10 text-accent',
+  cancelled: 'bg-destructive/10 text-destructive',
 };
 
 const INVOICE_STATUS_LABELS: Record<string, string> = {
@@ -28,9 +28,9 @@ const INVOICE_STATUS_LABELS: Record<string, string> = {
 
 const INVOICE_STATUS_COLORS: Record<string, string> = {
   draft: 'bg-muted text-muted-foreground',
-  sent: 'bg-[#00d9ff]/10 text-[#00d9ff]',
-  paid: 'bg-[#00ff9d]/10 text-[#00ff9d]',
-  overdue: 'bg-red-500/10 text-red-400',
+  sent: 'bg-primary/10 text-primary',
+  paid: 'bg-accent/10 text-accent',
+  overdue: 'bg-destructive/10 text-destructive',
   cancelled: 'bg-muted text-muted-foreground',
 };
 
@@ -41,9 +41,9 @@ const WEB_QUESTIONNAIRE_STATUS_LABELS: Record<string, string> = {
 };
 
 const WEB_QUESTIONNAIRE_STATUS_COLORS: Record<string, string> = {
-  new: 'bg-[#00d9ff]/10 text-[#00d9ff]',
+  new: 'bg-primary/10 text-primary',
   reviewed: 'bg-yellow-500/10 text-yellow-500',
-  contacted: 'bg-[#00ff9d]/10 text-[#00ff9d]',
+  contacted: 'bg-accent/10 text-accent',
 };
 
 const CLIENT_STATUS_LABELS: Record<string, string> = {
@@ -55,9 +55,9 @@ const CLIENT_STATUS_LABELS: Record<string, string> = {
 
 const CLIENT_STATUS_COLORS: Record<string, string> = {
   prospect: 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20',
-  active: 'bg-[#00ff9d]/10 text-[#00ff9d] border border-[#00ff9d]/20',
+  active: 'bg-accent/10 text-accent border border-accent/20',
   inactive: 'bg-muted text-muted-foreground border border-border',
-  churned: 'bg-red-500/10 text-red-400 border border-red-500/20',
+  churned: 'bg-destructive/10 text-destructive border border-destructive/20',
 };
 
 const PLAN_LABELS: Record<string, string> = {
@@ -300,11 +300,11 @@ export default function ClientOverview({
           <p className="text-2xl font-bold text-card-foreground">{fmt(summary.totalContracted)}</p>
           <p className="text-xs text-muted-foreground">{contracts.length} contrato(s)</p>
         </div>
-        <div className="bg-card border border-[#00ff9d]/20 rounded-xl p-5 space-y-1">
+        <div className="bg-card border border-accent/25 rounded-xl p-5 space-y-1">
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
             Cobrado
           </p>
-          <p className="text-2xl font-bold text-[#00ff9d]">{fmt(summary.totalCollected)}</p>
+          <p className="text-2xl font-bold text-accent">{fmt(summary.totalCollected)}</p>
           <p className="text-xs text-muted-foreground">
             {invoices.filter((i) => i.status === 'paid').length} factura(s)
           </p>
@@ -323,12 +323,12 @@ export default function ClientOverview({
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
             Gastos
           </p>
-          <p className="text-2xl font-bold text-red-400">{fmt(summary.totalExpenses)}</p>
+          <p className="text-2xl font-bold text-destructive">{fmt(summary.totalExpenses)}</p>
           <p className="text-xs text-muted-foreground">{expenses.length} gasto(s)</p>
         </div>
         <div
           className={`bg-card rounded-xl p-5 space-y-1 border ${
-            summary.netProfit >= 0 ? 'border-[#00ff9d]/30' : 'border-red-500/30'
+            summary.netProfit >= 0 ? 'border-accent/30' : 'border-destructive/30'
           }`}
         >
           <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
@@ -336,7 +336,7 @@ export default function ClientOverview({
           </p>
           <p
             className={`text-2xl font-bold ${
-              summary.netProfit >= 0 ? 'text-[#00ff9d]' : 'text-red-400'
+              summary.netProfit >= 0 ? 'text-accent' : 'text-destructive'
             }`}
           >
             {fmt(summary.netProfit)}
@@ -379,7 +379,7 @@ export default function ClientOverview({
                     />
                   </td>
                   <td className="px-4 py-3 text-card-foreground">{fmt(c.totalAmount)}</td>
-                  <td className="px-4 py-3 text-emerald-500">{fmt(c.paidAmount)}</td>
+                  <td className="px-4 py-3 text-accent">{fmt(c.paidAmount)}</td>
                   <td className="px-4 py-3 text-muted-foreground">{fmtDate(c.deliveryDate)}</td>
                   <td className="px-4 py-3 text-right">
                     <Link
@@ -590,7 +590,7 @@ export default function ClientOverview({
                   <td className="px-4 py-3 text-muted-foreground">
                     {EXPENSE_CATEGORY_LABELS[e.category] ?? e.category}
                   </td>
-                  <td className="px-4 py-3 font-medium text-red-400">{fmt(e.amount)}</td>
+                  <td className="px-4 py-3 font-medium text-destructive">{fmt(e.amount)}</td>
                   <td className="px-4 py-3 text-muted-foreground">{fmtDate(e.date)}</td>
                 </tr>
               ))}

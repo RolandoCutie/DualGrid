@@ -257,7 +257,7 @@ export default function ContractForm({ clients, contractId, defaultValues }: Con
         {(planId && planId.startsWith('hosting')) ||
         planId === 'domain' ||
         planId === 'hosting_domain' ? (
-          <div className="sm:col-span-2 -mt-2 px-3 py-2 rounded-lg bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800 text-xs text-cyan-700 dark:text-cyan-300">
+          <div className="sm:col-span-2 -mt-2 px-3 py-2 rounded-lg bg-primary/10 border border-primary/30 text-xs text-muted-foreground">
             🔄 <strong>Servicio recurrente.</strong> Se ha marcado automáticamente como recurrente
             con la fecha y período de renovación correspondiente. Revisa la sección &quot;Servicio
             recurrente&quot; al final del formulario.

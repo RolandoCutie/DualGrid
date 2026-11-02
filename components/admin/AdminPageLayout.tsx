@@ -10,7 +10,7 @@ export default function AdminPageLayout({ children, maxWidth = '7xl' }: AdminPag
 
   return (
     <div className="min-h-screen bg-background">
-      <div className={`${maxWidthClass} mx-auto px-4 sm:px-6 lg:px-8 py-10`}>{children}</div>
+      <div className={`${maxWidthClass} mx-auto admin-page-shell`}>{children}</div>
     </div>
   );
 }

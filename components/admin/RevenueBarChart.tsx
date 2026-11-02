@@ -11,7 +11,6 @@ export interface MonthlyRevenue {
 interface Props {
   data: MonthlyRevenue[];
   year: number;
-  availableYears: number[];
   onYearChange: (y: number) => void;
 }
 
@@ -35,7 +34,7 @@ function fmt(n: number) {
   return '$' + n.toFixed(0);
 }
 
-export default function RevenueBarChart({ data, year, availableYears, onYearChange }: Props) {
+export default function RevenueBarChart({ data, year, onYearChange }: Props) {
   const [tooltip, setTooltip] = useState<{ month: number; x: number; y: number } | null>(null);
 
   const maxVal = Math.max(...data.flatMap((d) => [d.billed, d.collected]), 1);
@@ -56,7 +55,7 @@ export default function RevenueBarChart({ data, year, availableYears, onYearChan
   const hovered = tooltip ? data.find((d) => d.month === tooltip.month) : null;
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div className="admin-density-section rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
         <div>
           <h3 className="text-sm font-semibold text-card-foreground">Ingresos mensuales</h3>
@@ -147,10 +146,7 @@ export default function RevenueBarChart({ data, year, availableYears, onYearChan
             return (
               <g
                 key={idx}
-                onMouseEnter={(e) => {
-                  const rect = (e.currentTarget as SVGElement)
-                    .closest('svg')!
-                    .getBoundingClientRect();
+                onMouseEnter={() => {
                   setTooltip({ month: monthNum, x: centerX, y: PADDING.top });
                 }}
                 style={{ cursor: 'pointer' }}

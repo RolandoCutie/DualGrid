@@ -194,11 +194,11 @@ export default function AIPromptGenerator({ questionnaire, planName }: Props) {
   };
 
   return (
-    <div className="bg-card border border-[#a594f9]/20 rounded-xl p-6 space-y-4">
+    <div className="bg-card border border-primary/20 rounded-xl p-6 space-y-4">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-[#a594f9]/10 border border-[#a594f9]/20 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
           <svg
-            className="w-5 h-5 text-[#a594f9]"
+            className="w-5 h-5 text-primary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

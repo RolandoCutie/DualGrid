@@ -222,11 +222,11 @@ export default function InvoiceForm({
                           <p
                             className={`text-xs ${
                               c.status === 'active'
-                                ? 'text-[#00ff9d]'
+                                ? 'text-accent'
                                 : c.status === 'completed'
                                   ? 'text-muted-foreground'
                                   : c.status === 'cancelled'
-                                    ? 'text-red-400'
+                                    ? 'text-destructive'
                                     : 'text-amber-500'
                             }`}
                           >

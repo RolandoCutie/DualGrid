@@ -1,7 +1,7 @@
 'use client';
 
 import RevenueBarChart, { type MonthlyRevenue } from '@/components/admin/RevenueBarChart';
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface Props {
   initialYear: number;
@@ -10,23 +10,44 @@ interface Props {
 
 export default function RevenueChartWrapper({ initialYear, initialData }: Props) {
   const [year, setYear] = useState(initialYear);
-  const [data, setData] = useState<MonthlyRevenue[]>(initialData);
+  const [fetchedData, setFetchedData] = useState<MonthlyRevenue[]>([]);
   const [loading, setLoading] = useState(false);
+  const requestSequence = useRef(0);
 
-  useEffect(() => {
-    if (year === initialYear) {
-      setData(initialData);
+  const handleYearChange = async (nextYear: number) => {
+    if (nextYear === year) return;
+    setYear(nextYear);
+
+    if (nextYear === initialYear) {
+      setLoading(false);
       return;
     }
-    setLoading(true);
-    fetch(`/api/admin/revenue?year=${year}`)
-      .then((r) => r.json())
-      .then((d: MonthlyRevenue[]) => setData(d))
-      .catch(() => setData([]))
-      .finally(() => setLoading(false));
-  }, [year, initialYear, initialData]);
 
-  const availableYears = Array.from({ length: 60 }, (_, i) => 2026 + i);
+    const currentRequest = ++requestSequence.current;
+    setLoading(true);
+
+    try {
+      const res = await fetch(`/api/admin/revenue?year=${nextYear}`, { cache: 'no-store' });
+      if (!res.ok) {
+        throw new Error(`Failed to fetch revenue for year ${nextYear}: ${res.status}`);
+      }
+
+      const nextData = (await res.json()) as MonthlyRevenue[];
+      if (requestSequence.current === currentRequest) {
+        setFetchedData(nextData);
+      }
+    } catch {
+      if (requestSequence.current === currentRequest) {
+        setFetchedData([]);
+      }
+    } finally {
+      if (requestSequence.current === currentRequest) {
+        setLoading(false);
+      }
+    }
+  };
+
+  const data = year === initialYear ? initialData : fetchedData;
 
   return (
     <div
@@ -34,12 +55,7 @@ export default function RevenueChartWrapper({ initialYear, initialData }: Props)
         loading ? 'opacity-60 pointer-events-none transition-opacity' : 'transition-opacity'
       }
     >
-      <RevenueBarChart
-        data={data}
-        year={year}
-        availableYears={availableYears}
-        onYearChange={setYear}
-      />
+      <RevenueBarChart data={data} year={year} onYearChange={handleYearChange} />
     </div>
   );
 }

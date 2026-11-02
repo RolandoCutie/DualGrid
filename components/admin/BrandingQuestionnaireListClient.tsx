@@ -162,7 +162,7 @@ export default function BrandingQuestionnaireListClient({
                 <button
                   onClick={() => openWhatsApp(row.token, row.clientName)}
                   title="Enviar por WhatsApp"
-                  className="px-3 py-1.5 text-xs font-medium rounded-lg border border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-background hover:bg-emerald-500/10 transition-colors"
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg border border-emerald-500 text-emerald-600 bg-background hover:bg-emerald-500/10 transition-colors"
                 >
                   WhatsApp
                 </button>
