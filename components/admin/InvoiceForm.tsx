@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
+import { PLAN_MAP } from '@/lib/plans';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface InvoiceItem {
   description: string;
@@ -24,7 +25,6 @@ interface ContractOption {
 
 interface InvoiceFormProps {
   clients: Array<{ _id: string; name: string; businessName?: string }>;
-  contracts?: ContractOption[];
   invoiceId?: string;
   defaultValues?: {
     clientId?: string;
@@ -61,15 +61,13 @@ function in30Days() {
   return d.toISOString().split('T')[0];
 }
 
-export default function InvoiceForm({
-  clients,
-  contracts = [],
-  invoiceId,
-  defaultValues,
-}: InvoiceFormProps) {
+export default function InvoiceForm({ clients, invoiceId, defaultValues }: InvoiceFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [contracts, setContracts] = useState<ContractOption[]>([]);
+  const [contractsLoading, setContractsLoading] = useState(false);
+  const [contractsError, setContractsError] = useState('');
 
   const clientOptions = [
     { value: '', label: 'Seleccionar cliente...' },
@@ -92,6 +90,63 @@ export default function InvoiceForm({
       ? defaultValues.items
       : [{ description: '', quantity: '1', unitPrice: '' }],
   );
+
+  useEffect(() => {
+    if (!clientId) {
+      setContracts([]);
+      setContractsError('');
+      return;
+    }
+
+    const controller = new AbortController();
+    const loadContracts = async () => {
+      setContractsLoading(true);
+      setContractsError('');
+      try {
+        const response = await fetch(
+          `/api/contracts?clientId=${encodeURIComponent(clientId)}&limit=100`,
+          { signal: controller.signal },
+        );
+        const payload = (await response.json()) as {
+          error?: string;
+          data?: Array<{
+            _id: string;
+            clientId: string | { _id: string; name?: string; businessName?: string };
+            planId: string;
+            status: string;
+            totalAmount: number;
+          }>;
+        };
+        if (!response.ok) throw new Error(payload.error ?? 'No se pudieron cargar los contratos.');
+
+        setContracts(
+          (payload.data ?? []).map((contract) => {
+            const client = typeof contract.clientId === 'string' ? null : contract.clientId;
+            return {
+              _id: contract._id,
+              clientId: client?._id ?? (contract.clientId as string),
+              clientName: client?.businessName || client?.name || '—',
+              planName: PLAN_MAP[contract.planId]?.name ?? contract.planId,
+              status: contract.status,
+              totalAmount: contract.totalAmount,
+            };
+          }),
+        );
+      } catch (loadError) {
+        if (!controller.signal.aborted) {
+          setContractsError(
+            loadError instanceof Error ? loadError.message : 'No se pudieron cargar los contratos.',
+          );
+          setContracts([]);
+        }
+      } finally {
+        if (!controller.signal.aborted) setContractsLoading(false);
+      }
+    };
+
+    void loadContracts();
+    return () => controller.abort();
+  }, [clientId]);
 
   const addItem = () => setItems((p) => [...p, { description: '', quantity: '1', unitPrice: '' }]);
   const removeItem = (i: number) => setItems((p) => p.filter((_, idx) => idx !== i));
@@ -123,7 +178,7 @@ export default function InvoiceForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           clientId,
-          contractId: contractId || undefined,
+          contractId: contractId || null,
           status,
           items: parsedItems.filter((it) => it.description),
           subtotal,
@@ -137,8 +192,16 @@ export default function InvoiceForm({
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error ?? 'Error al guardar');
+        const data = (await res.json()) as {
+          error?: string | Array<{ message?: string }>;
+        };
+        const message = Array.isArray(data.error)
+          ? data.error
+              .map((issue) => issue.message)
+              .filter(Boolean)
+              .join(' ')
+          : data.error;
+        throw new Error(message || 'Error al guardar');
       }
 
       router.push('/admin/dashboard/invoices');
@@ -166,8 +229,8 @@ export default function InvoiceForm({
           required
         />
         {(() => {
-          const clientContracts = contracts.filter((c) => c.clientId === clientId);
-          if (!clientId || clientContracts.length === 0) return null;
+          const clientContracts = contracts;
+          if (!clientId) return null;
           const filteredContracts = contractSearch
             ? clientContracts.filter(
                 (c) =>
@@ -248,6 +311,52 @@ export default function InvoiceForm({
                     <p className="px-3 py-2.5 text-sm text-muted-foreground">Sin resultados</p>
                   )}
                 </div>
+              )}
+              {!contractSearch && !contractId && (
+                <div className="rounded-xl border border-border bg-background divide-y divide-border max-h-64 overflow-y-auto">
+                  {contractsLoading && (
+                    <p className="px-3 py-2.5 text-sm text-muted-foreground">
+                      Cargando contratos...
+                    </p>
+                  )}
+                  {!contractsLoading && contractsError && (
+                    <p className="px-3 py-2.5 text-sm text-destructive">{contractsError}</p>
+                  )}
+                  {!contractsLoading && !contractsError && contracts.length === 0 && (
+                    <p className="px-3 py-2.5 text-sm text-muted-foreground">
+                      No hay contratos para este cliente. Puedes continuar sin contrato.
+                    </p>
+                  )}
+                  {!contractsLoading &&
+                    contracts.map((contract) => (
+                      <button
+                        key={contract._id}
+                        type="button"
+                        onClick={() => setContractId(contract._id)}
+                        className="w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <p className="text-sm font-medium text-card-foreground">
+                              {contract.planName}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              Cliente: {contract.clientName}
+                            </p>
+                          </div>
+                          <p className="text-sm font-semibold text-card-foreground">
+                            $
+                            {contract.totalAmount.toLocaleString('en-US', {
+                              minimumFractionDigits: 2,
+                            })}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              )}
+              {contractsError && contractSearch && (
+                <p className="text-sm text-destructive">{contractsError}</p>
               )}
               {selected && !contractSearch && (
                 <div className="rounded-lg border border-primary/40 bg-primary/5 px-3 py-2.5">

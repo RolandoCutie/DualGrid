@@ -138,6 +138,7 @@
     "delivery": "Delivery in",
     "days": "business days",
     "from": "From",
+    "hosting_domain_note": "Hosting and domain are not included in this plan. These services are quoted separately based on your project needs.",
     "see_features": "See all features",
     "hide_features": "Hide features"
   },

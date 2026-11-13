@@ -103,7 +103,7 @@ const InvoiceItemSchema = z.object({
 
 export const InvoiceCreateSchema = z.object({
   clientId: mongoId,
-  contractId: mongoId.optional(),
+  contractId: mongoId.nullable().optional(),
   items: z.array(InvoiceItemSchema).min(1, 'Al menos un ítem es requerido'),
   subtotal: z.number().min(0),
   taxRate: z.number().min(0).max(100).optional().default(0),

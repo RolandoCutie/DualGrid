@@ -119,6 +119,9 @@ export default function PlanCard({ plan, onSelect }: PlanCardProps) {
           </svg>
           {t('plans.delivery')} {plan.deliveryDays} {t('plans.days')}
         </p>
+        <p className="mt-3 rounded-lg border border-border bg-muted/40 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+          {t('plans.hosting_domain_note')}
+        </p>
       </div>
 
       {/* Ideal para — before CTA */}

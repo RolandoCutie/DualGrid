@@ -35,7 +35,7 @@ app/
 └── api/
     ├── admin/login|logout|session/route.ts
     ├── clients/route.ts + [id]/route.ts
-    ├── contracts/route.ts + [id]/route.ts
+    ├── contracts/route.ts + [id]/route.ts  # GET accepts optional clientId filter
     ├── expenses/route.ts + [id]/route.ts   # ← NEW: GET|POST|PATCH|DELETE gastos
     ├── invoices/route.ts + [id]/route.ts
     ├── questionnaires/
@@ -59,7 +59,7 @@ components/
 ├── landing/
 │   ├── HeroSection.tsx     # Hero with CTA that opens QuestionnaireWizard (dark mode transparent section to expose global gradient)
 │   ├── PlansSection.tsx    # Grid of PlanCards (dark mode transparent section)
-│   ├── PlanCard.tsx        # Single web plan card with CTA-first layout + expandable features
+│   ├── PlanCard.tsx        # Single web plan card with CTA-first layout, hosting/domain note + expandable features
 │   ├── ProcessSection.tsx  # 6-step process grid (dark mode transparent section)
 │   └── WhySection.tsx      # 6 differentials grid (dark mode transparent section)
 ├── questionnaire/
@@ -85,7 +85,7 @@ components/
 │   ├── ContractForm.tsx / ContractListClient.tsx
 │   ├── HostingServiceListClient.tsx # Hosting renewals dashboard (status + renewal quick actions)
 │   ├── HostingLeadListClient.tsx
-│   ├── InvoiceForm.tsx / InvoiceListClient.tsx
+│   ├── InvoiceForm.tsx / InvoiceListClient.tsx # Contract options load for selected client
 │   ├── ExpenseForm.tsx           # Create/edit expense form ← NEW
 │   ├── ExpenseListClient.tsx     # Expense table with delete + category filter ← NEW
 │   ├── QuestionnaireListClient.tsx # Client-side list with status filter tabs ← NEW

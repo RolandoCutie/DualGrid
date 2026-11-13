@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import Contract from '@/database/contract.model';
 import { nextSeq } from '@/database/counter.model';
 import Invoice from '@/database/invoice.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
@@ -50,6 +51,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsed.error.issues }, { status: 422 });
     }
     await connectDB();
+    if (parsed.data.contractId) {
+      const contract = await Contract.exists({
+        _id: parsed.data.contractId,
+        clientId: parsed.data.clientId,
+        deletedAt: null,
+      });
+      if (!contract) {
+        return NextResponse.json(
+          { error: 'El contrato no pertenece al cliente seleccionado o ya no está disponible.' },
+          { status: 422 },
+        );
+      }
+    }
     const invoiceNumber = await getNextInvoiceNumber();
     const invoice = await Invoice.create({ ...parsed.data, invoiceNumber });
     return NextResponse.json(invoice, { status: 201 });

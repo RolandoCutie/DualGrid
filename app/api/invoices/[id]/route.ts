@@ -1,11 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import Contract from '@/database/contract.model';
 import Invoice from '@/database/invoice.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import { InvoicePatchSchema } from '@/lib/schemas';
-import { cookies } from 'next/headers';
 import mongoose from 'mongoose';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 async function guard() {
@@ -81,6 +82,26 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     }
 
     await connectDB();
+    const current = await Invoice.findOne({ _id: id, deletedAt: null })
+      .select('clientId contractId')
+      .lean();
+    if (!current) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+
+    const clientId = parsed.data.clientId ?? current.clientId.toString();
+    const contractId =
+      parsed.data.contractId === undefined
+        ? current.contractId?.toString()
+        : parsed.data.contractId;
+    if (contractId) {
+      const contract = await Contract.exists({ _id: contractId, clientId, deletedAt: null });
+      if (!contract) {
+        return NextResponse.json(
+          { error: 'El contrato no pertenece al cliente seleccionado o ya no está disponible.' },
+          { status: 422 },
+        );
+      }
+    }
+
     const updated = await Invoice.findOneAndUpdate(
       { _id: id, deletedAt: null },
       { $set: parsed.data },

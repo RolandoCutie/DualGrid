@@ -8,8 +8,8 @@ import InvoicePDF from '@/lib/pdf/InvoicePDF';
 import { renderToBuffer, type DocumentProps } from '@react-pdf/renderer';
 import { existsSync } from 'fs';
 import { readFile } from 'fs/promises';
-import { cookies } from 'next/headers';
 import mongoose from 'mongoose';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { join } from 'path';
 import React from 'react';
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Error desconocido';
-    console.error('[PDF Invoice]', message);
+    console.error('[PDF Invoice]', err);
     const normalized = message.toLowerCase();
     if (
       normalized.includes('timeout') ||
@@ -104,6 +104,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
         { status: 503 },
       );
     }
-    return NextResponse.json({ error: `Error al generar PDF: ${message}` }, { status: 500 });
+    return NextResponse.json(
+      { error: 'No se pudo generar el PDF de la factura.' },
+      { status: 500 },
+    );
   }
 }

@@ -138,6 +138,7 @@
     "delivery": "Entrega en",
     "days": "días hábiles",
     "from": "Desde",
+    "hosting_domain_note": "El hosting y el dominio no están incluidos en el precio del plan. Estos servicios se cotizan por separado según las necesidades del proyecto.",
     "see_features": "Ver todas las características",
     "hide_features": "Ocultar características"
   },

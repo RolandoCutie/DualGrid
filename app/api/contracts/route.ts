@@ -4,6 +4,7 @@ import Contract from '@/database/contract.model';
 import { isAdminSessionTokenValid } from '@/lib/admin-auth';
 import connectDB from '@/lib/mongodb';
 import { ContractCreateSchema } from '@/lib/schemas';
+import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -15,17 +16,22 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const page = Math.max(1, parseInt(searchParams.get('page') ?? '1', 10));
   const limit = Math.min(100, Math.max(1, parseInt(searchParams.get('limit') ?? '50', 10)));
+  const clientId = searchParams.get('clientId');
+  if (clientId && !mongoose.isValidObjectId(clientId)) {
+    return NextResponse.json({ error: 'Invalid client id' }, { status: 400 });
+  }
   const skip = (page - 1) * limit;
+  const filter = { deletedAt: null, ...(clientId ? { clientId } : {}) };
 
   await connectDB();
   const [contracts, total] = await Promise.all([
-    Contract.find({ deletedAt: null })
+    Contract.find(filter)
       .populate('clientId', 'name email businessName')
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .lean(),
-    Contract.countDocuments({ deletedAt: null }),
+    Contract.countDocuments(filter),
   ]);
   return NextResponse.json({ data: contracts, total, page, limit });
 }

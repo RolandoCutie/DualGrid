@@ -9,6 +9,13 @@ const getAdminUsername = () => process.env.ADMIN_USERNAME?.trim() ?? 'admin';
 const getAdminPassword = () => process.env.ADMIN_PASSWORD?.trim() ?? 'admin123';
 const getSessionSecret = () =>
   process.env.ADMIN_SESSION_SECRET?.trim() ?? 'dev-admin-session-secret';
+const hasProductionAuthConfig = () =>
+  process.env.NODE_ENV !== 'production' ||
+  Boolean(
+    process.env.ADMIN_USERNAME?.trim() &&
+    process.env.ADMIN_PASSWORD?.trim() &&
+    process.env.ADMIN_SESSION_SECRET?.trim(),
+  );
 
 const createSignature = (payload: string) =>
   createHmac('sha256', getSessionSecret()).update(payload).digest('hex');
@@ -38,6 +45,10 @@ export const getAdminLoginPath = () => `/admin/${getAdminSecretPath()}`;
 export const getAdminSessionMaxAge = () => ADMIN_SESSION_MAX_AGE_SECONDS;
 
 export const areAdminCredentialsValid = (username: string, password: string) => {
+  if (!hasProductionAuthConfig()) {
+    return false;
+  }
+
   return safeCompare(username, getAdminUsername()) && safeCompare(password, getAdminPassword());
 };
 
@@ -50,7 +61,7 @@ export const createAdminSessionToken = (username: string) => {
 };
 
 export const isAdminSessionTokenValid = (token?: string) => {
-  if (!token) {
+  if (!token || !hasProductionAuthConfig()) {
     return false;
   }
 

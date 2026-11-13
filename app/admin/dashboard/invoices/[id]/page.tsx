@@ -3,10 +3,8 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
 import InvoiceForm from '@/components/admin/InvoiceForm';
 import Client from '@/database/client.model';
-import Contract from '@/database/contract.model';
 import Invoice from '@/database/invoice.model';
 import connectDB from '@/lib/mongodb';
-import { PLAN_MAP } from '@/lib/plans';
 import { requireAdminSession } from '@/lib/require-admin-session';
 import mongoose from 'mongoose';
 import type { Metadata } from 'next';
@@ -32,16 +30,11 @@ export default async function EditInvoicePage({
 
   await connectDB();
 
-  const [invoice, clients, contracts] = await Promise.all([
-    Invoice.findById(id)
+  const [invoice, clients] = await Promise.all([
+    Invoice.findOne({ _id: id, deletedAt: null })
       .select('invoiceNumber clientId contractId status items taxRate issueDate dueDate notes')
       .lean(),
     Client.find({ deletedAt: null }).select('name businessName').sort({ name: 1 }).lean(),
-    Contract.find({ deletedAt: null })
-      .select('clientId planId status totalAmount')
-      .populate('clientId', 'name businessName')
-      .sort({ createdAt: -1 })
-      .lean(),
   ]);
 
   if (!invoice) notFound();
@@ -77,25 +70,6 @@ export default async function EditInvoicePage({
           name: c.name,
           businessName: c.businessName ?? undefined,
         }))}
-        contracts={contracts.map((c) => {
-          const client = c.clientId as Record<string, unknown>;
-          const clientName = client
-            ? client.businessName
-              ? String(client.businessName)
-              : String(client.name ?? '')
-            : '—';
-          return {
-            _id: c._id.toString(),
-            clientId:
-              typeof c.clientId === 'object' && c.clientId !== null
-                ? ((c.clientId as { _id: unknown })._id?.toString() ?? '')
-                : c.clientId.toString(),
-            clientName,
-            planName: PLAN_MAP[c.planId]?.name ?? c.planId,
-            status: c.status,
-            totalAmount: c.totalAmount,
-          };
-        })}
         defaultValues={{
           clientId: invoice.clientId.toString(),
           contractId: invoice.contractId?.toString() ?? '',

@@ -3,6 +3,7 @@
 import Badge from '@/components/ui/Badge';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Fragment, useMemo, useState } from 'react';
 
 type BadgeVariant = 'secondary' | 'warning' | 'success' | 'primary' | 'error';
@@ -79,6 +80,7 @@ function fmtDate(d: string | null) {
 }
 
 export default function InvoiceListClient({ invoices }: Props) {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [methodFilter, setMethodFilter] = useState('');
@@ -88,6 +90,7 @@ export default function InvoiceListClient({ invoices }: Props) {
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const [rows, setRows] = useState<InvoiceRow[]>(invoices);
   const [updating, setUpdating] = useState<string | null>(null);
+  const [statusError, setStatusError] = useState('');
   const [deleting, setDeleting] = useState(false);
   const [page, setPage] = useState(1);
   const [confirm, setConfirm] = useState<{ id: string; name: string } | null>(null);
@@ -168,17 +171,21 @@ export default function InvoiceListClient({ invoices }: Props) {
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setUpdating(id);
+    setStatusError('');
     try {
       const res = await fetch(`/api/invoices/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
       });
-      if (res.ok) {
-        setRows((prev) =>
-          prev.map((inv) => (inv._id === id ? { ...inv, status: newStatus } : inv)),
-        );
-      }
+      const data = (await res.json()) as { error?: string };
+      if (!res.ok) throw new Error(data.error ?? 'No se pudo actualizar el estado de la factura.');
+      setRows((prev) => prev.map((inv) => (inv._id === id ? { ...inv, status: newStatus } : inv)));
+      router.refresh();
+    } catch (error) {
+      setStatusError(
+        error instanceof Error ? error.message : 'No se pudo actualizar el estado de la factura.',
+      );
     } finally {
       setUpdating(null);
     }
@@ -219,6 +226,12 @@ export default function InvoiceListClient({ invoices }: Props) {
         onConfirm={handleDeleteConfirm}
         onCancel={() => setConfirm(null)}
       />
+
+      {statusError && (
+        <p role="alert" className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">
+          {statusError}
+        </p>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
